@@ -1,0 +1,15 @@
+# desc01.yaml
+# a simple serial production line (figF23) described in details in 02/Ex.1.1
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+---
+wejście
+  nazwa-we
+    z-kim czas-transportu-z-we
+maszyny
+  nazwa-m
+    czas-op czas-op-m
+    z-kim czas-transportu-z-m
+wyjście
+  nazwa-wy
+# eof.
