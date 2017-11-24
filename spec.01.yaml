@@ -1,7 +1,8 @@
-# desc01.yaml
-# a simple serial production line (figF23) described in details in 02/Ex.1.1
+#
+# spec.01.yaml
 # (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
+# this spec is valid for numerical as well as general (text) values
 ---
 input
   name
@@ -12,4 +13,5 @@ production-unit
     connect transport-time
 output
   name
+
 # eof.
