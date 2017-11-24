@@ -3,13 +3,13 @@
 # (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 ---
-wejście
-  nazwa-we
-    z-kim czas-transportu-z-we
-maszyny
-  nazwa-m
-    czas-op czas-op-m
-    z-kim czas-transportu-z-m
-wyjście
-  nazwa-wy
+input
+  name
+    connect transport-time
+production-unit
+  name
+    operation-time time
+    connect transport-time
+output
+  name
 # eof.
