@@ -1,0 +1,23 @@
+#
+# requirements-dev.txt for phoebe project
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+
+-r requirements.txt
+
+flake8>=3.3.0
+pylama>=7.3.3
+pylint>=1.7.1
+#mock>=2.0.0
+#pytest>=3.0.7
+#sphinx>=1.5.5
+
+# prerequisites for development:
+# - virtualenv (sudo pip install virtualenv)
+#
+# virtualenv .venv
+# . .venv/bin/activate
+# ...
+# deactivate
+
+# eof.
