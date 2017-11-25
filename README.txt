@@ -3,7 +3,8 @@
 # (c) 2017 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
 #
 
-2017.11.22 automatyczne modelowanie linii produkcyjnej bazującej na opisie json lub yaml
+2017.11.22
+automatyczne modelowanie linii produkcyjnej bazującej na opisie json lub yaml
 	DONE:
 		a) opis
 			yaml command line validator: https://github.com/adrienverge/yamllint
@@ -15,5 +16,20 @@
 	w pythonie napisać programik, który, na podstawie yaml-a wygeneruje:
 		c) opis "analityczny", typu A0x(k) + A1x(k-1) + ...
 		d) m-plik z poszczególnymi macierzami
+
+2017.11.25
+poszczególne etapy programowania (python)
+	- parsowanie linii poleceń
+	- uruchomienie loga - wpis jakiegoś pliku w katalogu tmp (wówczas na bieżąco można będzie go podglądać)
+	- parsowanie yaml-a
+		- wczytywanie pliku z opisem
+		- wyświetlanie opisu
+		- automatyczne przypisanie wartości zmiennym (także wygenerowanym automatycznie)
+		- wyświetlenie tych zmiennych (do logów?)
+	- generowanie opisu
+		- wyświetlanie poszczególnych danych/zmiennych: wejścia / wyjścia / ilość maszyn / czasy operacji / czasy transportu
+		- opis macierzowy
+			na początek po prostu opis wszystkiego co program potrafi (zmienne / macierze / opis formalny...)
+			a później może podzielę to na różne sekcje
 
 # eof.
