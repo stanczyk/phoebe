@@ -5,10 +5,11 @@
 include ./../../tex/make1.mk
 
 BIN=bin
-SRC=phoebe
+SRC=src
 TST=tests
 CFG=code_audit.cfg
 # BUILD=build .cache dist vcm.egg-info
+# https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
 
 .PHONY: all
 all:
@@ -23,8 +24,8 @@ all:
 clean:
 	$(begin)
 	rm -f $(SRC)/*.pyc
-	rm -f $(TST)/*.pyc
-	rm -rf $(TST)/__pycache__
+	# rm -f $(TST)/*.pyc
+	# rm -rf $(TST)/__pycache__
 	# rm -rf .eggs
 	# for i in $(BUILD) ; do \
 	# 	rm -rf $$i ; \

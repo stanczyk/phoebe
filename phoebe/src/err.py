@@ -11,7 +11,7 @@ in the module:
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # one more then last ERR
-ERR_MAX_NUMBER = 6
+ERR_MAX_NUMBER = 5
 
 
 class Err(object):
@@ -28,8 +28,6 @@ class Err(object):
 		ERR_NO_FILE,  # no file with given file_name
 		ERR_NO_PERMISSION,  # no permission to read file
 		ERR_IO,  # IOError
-		ERR_VCF_READER,
-		# ERR_NO_METAINFO,
 	] = range(ERR_MAX_NUMBER)
 
 	def value_to_name(self, value):
