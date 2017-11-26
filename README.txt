@@ -26,6 +26,7 @@ poszczególne etapy programowania (python)
 		- wyświetlanie opisu
 		- automatyczne przypisanie wartości zmiennym (także wygenerowanym automatycznie)
 		- wyświetlenie tych zmiennych (do logów?)
+		# https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
 	- generowanie opisu
 		- wyświetlanie poszczególnych danych/zmiennych: wejścia / wyjścia / ilość maszyn / czasy operacji / czasy transportu
 		- opis macierzowy
