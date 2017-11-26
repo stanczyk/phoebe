@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-phoebe
+phoebe src
 
 .. moduleauthor:: Jarosław Stańczyk  <jaroslaw.stanczyk@upwr.edu.pl>
 

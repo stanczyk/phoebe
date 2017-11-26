@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 **info.py**
-constant, statics and global variables used by vcf_parser
+phoebe implementation: constant, statics and global variables
 
 in the module:
 
@@ -22,16 +22,14 @@ class Info(object):
 	# used by setup
 	AUTHOR = 'Jaroslaw Stanczyk'
 	AUTHOR_EMAIL = 'jaroslaw.stanczyk@upwr.edu.pl'
-	MODULE_NAME = 'vcm'
-	DESC = MODULE_NAME + ' - wrapper on python vcf (PyVCF) module'
+	NAME = 'phoebe'
+	DESC = NAME + ' - automatic max-plus description generator'
 	LICENSE = 'GNU Affero General Public License v3 or later (AGPLv3+)'
-	# 'Creative Commons Attribution-Noncommercial-Share Alike license'
 	URL = 'http://gen.up.wroc.pl/stanczyk/'
-	# 'https://github.com/stanczyk/vcm'
+	# 'https://github.com/stanczyk/phoebe'
 	VERSION = '0.1'
 
-	# used by vcm
-	NAME = 'vcmcli'
+	# used by phoebe
 	VER = '' + \
 		NAME + \
 		': v.' + \
@@ -43,18 +41,12 @@ class Info(object):
 
 	DOC = '' + \
 		'Usage:' + \
-		'\t' + NAME + ' [-i | --info] [-V | --verbose] [(-m | --metadata)] [-b | --body] <vcf_file>\n' + \
-		'\t' + NAME + ' (-s | --stdin) [-iV]\n' + \
+		'\t' + NAME + ' <desc_file>\n' + \
 		'\t' + NAME + ' -h | --help\n' + \
 		'\t' + NAME + ' -v | --version\n' + \
-		'\n' + \
-		'Options:\n' + \
-		'\t-s, --stdin		VCF data is read from stdin, in other case data are read from <vcf_file>.\n' + \
-		'\t-m, --metadata	shows metadata (header) of the VCF file.\n' + \
-		'\t-h, --help		shows this help message and exit.\n' + \
-		'\t-i, --info		shows: file name, file format, amount of records and samples.\n' + \
-		'\t-v, --version	show version information and exit.\n' + \
-		'\t-V, --verbose	shows program version and exit status.'
+		'\nOptions:\n' + \
+		'\t-h, --help	shows this help message and exit.\n' + \
+		'\t-v, --version	show version information and exit.'
 
 	@staticmethod
 	def dump(data, **kwargs):

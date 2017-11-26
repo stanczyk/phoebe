@@ -6,7 +6,6 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=no-member
 import sys
 
 
@@ -22,3 +21,5 @@ def is_venv():
 
 if __name__ == '__main__':
 	sys.exit(is_venv())
+
+# eof.

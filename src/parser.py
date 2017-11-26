@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 **parser.py**
-python implementation of vcf_parser
+phoebe implementation
 
 in the module:
 
@@ -10,11 +10,9 @@ in the module:
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=missing-docstring, relative-import, bad-continuation
 
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
-import vcf  # http://pyvcf.rtfd.org/
 from err import Err
 from info import Info
 
@@ -83,33 +81,6 @@ class Parser(object):
 		except KeyError:
 			return Err.ERR_VCF_READER
 		return Err.NOOP
-
-	# def write_file(self, data=None):
-	# 	try:
-	# 		f = open(self.file_name, 'w')
-	# 	except (OSError, IOError):
-	# 		return Err.ERR_NO_PERMISSION
-	# 	try:
-	# 		f.write(data)
-	# 		f.close()
-	# 	except (OSError, IOError):
-	# 		os.remove(self.file_name)
-	# 		return Err.ERR_IO
-	# 	return Err.NOOP
-
-	# def tear_down_web(self):
-	# 	self.file_handler.close()
-	# 	os.remove(self.file_name)
-
-	# def main_web(self, file_name=None, data=None):
-	# 	"""interface from web"""
-	# 	err, self.file_handler = self.set_up_web(file_name, data)
-	# 	if not err:
-	# 		# parse file
-	# 		err, self.line = self.parse()
-	# 	# clean up
-	# 	self.tear_down_web()
-	# 	return err, self.line
 
 	def main_cli(self):
 		self.set_up_argv()
@@ -187,22 +158,6 @@ class Parser(object):
 		print self.reader.filters
 		print self.reader.formats
 		print self.reader.samples
-
-	# 	for k in self.reader.infos:
-	# 		print '\t', self.reader.infos[k]
-	# 		print '\t', self.reader.infos[k].id, self.reader.infos[k].desc
-	# 		return self.reader.infos
-
-	# def show_metadata(self):
-	# 	print 'meta-information:'
-	# 	for k, v in self.reader.metadata.items():
-	# 		print '\t%s=%s' % (str(k), str(v))
-
-	# def show_infos(self):
-	# 	print 'meta info:'
-	# 	for k in self.reader.infos:
-	# 		# print '\t', self.reader.infos[k]
-	# 		print '\t', self.reader.infos[k].id, self.reader.infos[k].desc
 
 	@staticmethod
 	def get_version():
