@@ -24,13 +24,19 @@ poszczególne etapy programowania (python)
 	- parsowanie yaml-a
 		- wczytywanie pliku z opisem
 		- wyświetlanie opisu
+
 		- automatyczne przypisanie wartości zmiennym (także wygenerowanym automatycznie)
 		- wyświetlenie tych zmiennych (do logów?)
-		# https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
 	- generowanie opisu
 		- wyświetlanie poszczególnych danych/zmiennych: wejścia / wyjścia / ilość maszyn / czasy operacji / czasy transportu
 		- opis macierzowy
 			na początek po prostu opis wszystkiego co program potrafi (zmienne / macierze / opis formalny...)
 			a później może podzielę to na różne sekcje
+
+	- sprawdzanie, czy opis jest zgodny ze schematem
+		- konieczne, bo nie każdy yaml jest tym, co chciałbym wczytać
+		  https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
+	- uruchomienie testów jednostkowych
+	- testy akceptacyjne?
 
 # eof.

@@ -23,8 +23,8 @@ all:
 clean:
 	$(begin)
 	rm -f $(SRC)/*.pyc
-	# rm -f $(TST)/*.pyc
-	# rm -rf $(TST)/__pycache__
+	rm -f $(TST)/*.pyc
+	rm -rf $(TST)/__pycache__
 	# rm -rf .eggs
 	# for i in $(BUILD) ; do \
 	# 	rm -rf $$i ; \
