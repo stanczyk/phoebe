@@ -8,7 +8,6 @@
 
 if __name__ == '__main__':
 	import src.parser
-	PAR = src.parser.Parser()
-	PAR.main()
+	src.parser.Parser().main()
 
 # eof.
