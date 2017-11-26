@@ -9,7 +9,6 @@ SRC=src
 TST=tests
 CFG=code_audit.cfg
 # BUILD=build .cache dist vcm.egg-info
-# https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
 
 .PHONY: all
 all:
