@@ -13,6 +13,7 @@ in the module:
 
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
+import yaml
 from err import Err
 from inf import Inf
 from yml import Yml
@@ -24,7 +25,7 @@ class Parser(object):
 		self.args = None
 		self.file_name = None
 		self.file_handler = None
-		self.yam = None
+		self.content_yaml = None
 
 	def set_up_argv(self):
 		# parse command line options
@@ -56,8 +57,14 @@ class Parser(object):
 		"""
 		main function of phoebe.
 		"""
-		self.yam = Yml().load(self.file_handler)
-		print Yml().show(self.yam)
+		yam = Yml()
+		try:
+			self.content_yaml = yam.load(self.file_handler)
+		except yaml.YAMLError as exc:
+			print Err().value_to_name(Err.ERR_YAML) + ": " + str(exc)
+			# print(exc)
+			return Err.ERR_YAML
+		print yam.show(self.content_yaml)
 		return Err.NOOP
 
 	def main_cli(self):
