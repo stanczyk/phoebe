@@ -10,7 +10,9 @@
 
 	Copyright 2013--2016 Jarek Stanczyk, e-mail: j.stanczyk@hotmail.com
 """
-import yaml
+# import yaml
+# pip install ruamel.yaml
+from ruamel.yaml import YAML
 
 
 class Yml(object):
@@ -49,10 +51,39 @@ class Yml(object):
 		return self.dump(data)
 
 
+#data = {
+#	input:
+#	[
+#		{
+#			u: {
+#			connect: 1,
+#			tr-time: 2,
+#			}
+#		},
+#	]
+#}
+
+data = {1: {1: [{1: 1, 2: 2}, {1: 1, 2: 2}], 2: 2}, 2: 42}
+
+# yaml_str = """\
+# first_name: Art
+# occupation: Architect  # This is an occupation comment
+# about: Art Vandelay is a fictional character that George invents...
+# """
+
+
 def self_test():
 	"""self tests"""
-	# TODO self_test not implemented yet
-	pass
+	import sys
+
+	yaml = YAML()
+	# data = yaml.load(yaml_str)
+	# data.insert(1, 'last name', 'Vandelay', comment="new key")
+	yaml.dump(data, sys.stdout)
+
+	# yml.explicit_start = True
+	# yml.dump(data, sys.stdout)
+	# yml.indent(sequence=4, offset=2)
 
 
 if __name__ == '__main__':

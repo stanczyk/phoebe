@@ -10,15 +10,15 @@ input
     connect M_1
       tr-time t_{0,1}
 production-unit
-  name M_1
+  - name M_1
     op-time d_1
     connect M_2
       tr-time t_{1,2}
-  name M_2
+  - name M_2
     op-time d_2
     connect M_3
       tr-time t_{2,3}
-  name M_3
+  - name M_3
     op-time d_3
     connect y
       tr-time t_{3,4}
