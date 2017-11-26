@@ -46,6 +46,8 @@ init:
 		. .venv/bin/activate; \
 		pip install -r requirements-dev.txt \
 	)
+	@echo "run: $(white)source .venv/bin/activate$(reset)"
+	@echo "at the end: $(white)deactivate$(reset)"
 	$(end)
 
 .PHONY: is_virtenv

@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 """
-	**./bin/vcmcli**
-	launcher (and wrapper) script for vcf control module.
+	**./bin/phoebe**
+	phoebe launcher (and wrapper)
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 
-
 if __name__ == '__main__':
-	import vcm.parser
-	PAR = vcm.parser.Parser()
+	import src.parser
+	PAR = src.parser.Parser()
 	PAR.main()
 
 # eof.
