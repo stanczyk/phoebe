@@ -64,6 +64,15 @@ class Parser(object):
 			# print(exc)
 			return Err.ERR_YAML
 		print yam.show(self.content_yaml)
+
+		print 'input:'
+		print yam.parse_key(self.content_yaml, 'input', None)
+		print 'prod-unit:'
+		print yam.parse_key(self.content_yaml, 'prod-unit', None)
+		print 'output:'
+		print yam.parse_key(self.content_yaml, 'output', None)
+
+		# https://stackoverflow.com/questions/3545331/how-can-i-get-dictionary-key-as-variable-directly-in-python-not-by-searching-fr
 		return Err.NOOP
 
 	def main_cli(self):
