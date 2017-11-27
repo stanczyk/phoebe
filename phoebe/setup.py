@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 	**setup.py**
-	installer, uninstaller, tarball preparer and test runner for vcm
+	installer, uninstaller, tarball preparer and test runner for phoebe
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 
@@ -17,7 +17,7 @@ from subprocess import call, PIPE
 from distutils.command.build_py import build_py
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
-from vcm.info import Info
+from src.inf import Inf
 
 
 class PyTest(TestCommand):
@@ -50,7 +50,7 @@ class Uninstall(build_py):
 	# pylint: disable=missing-docstring, too-few-public-methods, no-self-use
 
 	def run(self):
-		tmp_file = '/tmp/vcm_install_record_list'
+		tmp_file = '/tmp/phoebe_install_list'
 		call(['python', 'setup.py', 'install', '--record', tmp_file], stdout=PIPE)
 
 		if os.path.exists(tmp_file):
@@ -81,17 +81,17 @@ def run_setup():
 		'python setup.py --help-commands'
 	"""
 	setup(
-		name=Info.MODULE_NAME,
-		version=Info.VERSION,
-		author=Info.AUTHOR,
-		author_email=Info.AUTHOR_EMAIL,
+		name=Inf.NAME,
+		version=Inf.VERSION,
+		author=Inf.AUTHOR,
+		author_email=Inf.AUTHOR_EMAIL,
 		# maintainer
 		# maintainer-email
-		contact=Info.AUTHOR,
-		contact_email=Info.AUTHOR_EMAIL,
-		url=Info.URL,
-		license=Info.LICENSE,
-		description=Info.DESC,
+		contact=Inf.AUTHOR,
+		contact_email=Inf.AUTHOR_EMAIL,
+		url=Inf.URL,
+		license=Inf.LICENSE,
+		description=Inf.DESC,
 		# long_description
 		# platforms
 		classifiers=[
@@ -103,14 +103,12 @@ def run_setup():
 		# provides
 		requires=[
 			'docopt',  # >=0.6.2
-			'pyvcf',  # >=0.6.8
 		],
 		install_requires=[
 			'docopt>=0.6.2',
-			'pyvcf>=0.6.8',
 		],
-		packages=['vcm'],
-		scripts=['bin/vcmcli'],
+		packages=['phoebe'],
+		scripts=['bin/phoebe'],
 		# entry_points={'console_scripts': ['vcf_parser=vcm.command_line:main'], },
 		# dependency_links=['http://github.com/user/repo/tarball/master#egg=package-1.0'],
 		setup_requires=['pytest-runner'],

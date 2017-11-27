@@ -39,4 +39,9 @@ poszczególne etapy programowania (python)
 	- uruchomienie testów jednostkowych
 	- testy akceptacyjne?
 
+2017.11.27
+	uruchamianie poszczególnych testów:
+		z kat. ~/prj/prv/up/max/src/09/phoebe:
+		py.test tests/test_inf.py
+
 # eof.
