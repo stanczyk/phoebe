@@ -10,6 +10,7 @@ pylama>=7.3.3
 pylint>=1.7.1
 mock>=2.0.0
 pytest>=3.0.7
+ruamel.yaml>=0.15.34
 #sphinx>=1.5.5
 
 # prerequisites for development:

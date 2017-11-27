@@ -10,9 +10,8 @@
 
 	Copyright 2013--2016 Jarek Stanczyk, e-mail: j.stanczyk@hotmail.com
 """
-# import yaml
-# pip install ruamel.yaml
-from ruamel.yaml import YAML
+import yaml
+# from ruamel.yaml import YAML
 
 
 class Yml(object):
@@ -30,8 +29,7 @@ class Yml(object):
 
 		:param stream: stream of data to load
 		"""
-		return YAML().load(stream)
-		# return yaml.safe_load(stream)
+		return yaml.safe_load(stream)
 
 	@staticmethod
 	def dump(data, **kwargs):
@@ -41,8 +39,7 @@ class Yml(object):
 		:param data: data to yaml dump
 		:param kwargs: some kwargs dict
 		"""
-		return YAML().dump(data, **kwargs)
-		# return yaml.safe_dump(data, **kwargs)
+		return yaml.safe_dump(data, **kwargs)
 
 	def show(self, data):
 		"""
@@ -119,19 +116,12 @@ data = {
 
 def self_test():
 	"""self tests"""
-	import sys
+	yaml = Yml()
+	print yaml.dump(data)
 
-	# yaml = Yml()
-	# print yaml.dump(data)
-	yaml = YAML()
-	yaml.dump(data, sys.stdout)
-
-	# data = yaml.load(yaml_str)
-	# data.insert(1, 'last name', 'Vandelay', comment="new key")
-
-	# yml.explicit_start = True
-	# yml.dump(data, sys.stdout)
-	# yml.indent(sequence=4, offset=2)
+	# import sys
+	# yaml = YAML()
+	# yaml.dump(data, sys.stdout)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,21 @@
+---
+input:
+- u_1:
+  op-time: t_u_1
+  tr-time: t_{0,1}
+  connect: M_1
+prod-unit:
+- M_1:
+  op-time: d_1
+  tr-time: t_{1,2}
+  connect: M_2
+- M_2:
+  op-time: d_2
+  tr-time: t_{2,3}
+  connect: M_3
+- M_3:
+  op-time: d_3
+  tr-time: t_{3,4}
+  connect: y
+output:
+- y
