@@ -8,10 +8,11 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+# pylint: disable=missing-docstring
 import unittest
+from StringIO import StringIO
 import phoebe.inf
 import mock
-from StringIO import StringIO
 
 INF_ANS = 'Inf.VER:\n\
 phoebe: v.0.1\n\

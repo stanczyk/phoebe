@@ -5,10 +5,11 @@
 include ./../../tex/make1.mk
 
 BIN=bin
-SRC=src
+SRC=phoebe
 TST=tests
 CFG=code_audit.cfg
 BUILD=.cache .eggs phoebe.egg-info dist build
+LSBIN=$(shell ls $(BIN) | sed -e 's:^:./$(BIN)/:')
 
 .PHONY: all
 all:
@@ -17,6 +18,9 @@ all:
 	@echo -n "$(yellow)"
 	@$(MAKE) --no-print-directory list
 	@echo "$(reset)"
+	@echo "other:"
+	@echo "  source .venv/bin/activate"
+	@echo "  deactivate"
 	$(end)
 
 .PHONY: clean
@@ -79,19 +83,26 @@ pylama: is_virtenv
 pylint: is_virtenv
 	$(begin)
 	pylint --rcfile=$(CFG) setup.py
-	@for py in $(lsbin) ; \
-	do \
-		echo "pylint --rcfile=$(CFG) $$py" ; \
-		pylint --rcfile=$(CFG) $$py ; \
-	done
+	@echo $(LSBIN)
+	@for py in $(LSBIN) ; \
+		do \
+			echo "pylint --rcfile=$(CFG) $$py" ; \
+			pylint --rcfile=$(CFG) $$py ; \
+		done
 	pylint --rcfile=$(CFG) $(TST)
 	$(end)
 
-.PHONY: tests
-tests: is_virtenv
+.PHONY: src-test
+src-test: flake8 pylama pylint
+
+.PHONY: unit-tests
+unit-test: is_virtenv
 	$(begin)
 	python setup.py test
 	$(end)
+
+.PHONY: tests
+tests: src-test unit-test
 
 include ./../../tex/make2.mk
 # eof.

@@ -10,9 +10,9 @@
 """
 import os
 import unittest
-import yaml
-import mock
 from StringIO import StringIO
+import mock
+import yaml
 import phoebe.yml
 
 
@@ -28,6 +28,7 @@ class TestYml(unittest.TestCase):
 
 	def test_load(self):
 		""" test method for *load* """
+		# pylint: disable=redundant-unittest-assert
 		# empty file - OK
 		file_name = os.getcwd() + '/tests/samples/f1.yml'
 		with open(file_name, 'r') as tmp:
