@@ -19,6 +19,7 @@ all:
 	@$(MAKE) --no-print-directory list
 	@echo "$(reset)"
 	@echo "other:"
+	@echo "  yamllint ./specs/02.desc2.yml
 	@echo "  source .venv/bin/activate"
 	@echo "  deactivate"
 	@echo "  py.test tests/test_inf.py"
