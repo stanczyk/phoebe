@@ -5,10 +5,9 @@
 	module is a simple wrapper of yaml package
 
 	in the module:
-
 	* *class* **Yml**
 
-	Copyright 2013--2016 Jarek Stanczyk, e-mail: j.stanczyk@hotmail.com
+	Copyright 2013--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # pylint: disable=bad-continuation, redefined-outer-name
 import yaml
