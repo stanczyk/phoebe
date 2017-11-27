@@ -49,6 +49,25 @@ class Yml(object):
 		"""
 		return self.dump(data)
 
+	@staticmethod
+	def parse_key(content, key, default=None):
+		"""
+		smart access to a dictionary with key.
+		if the key is not in the dictionary it returns default value.
+
+		:param dict content: content to parse
+		:param key: key to find appropriate data
+		:param default: default return value
+		"""
+		if not content:
+			return default
+		if not key:
+			return default
+		try:
+			return content[key]
+		except KeyError:
+			return default
+
 
 data = {
 	# input definition
