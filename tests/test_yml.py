@@ -13,13 +13,13 @@ import unittest
 import yaml
 import mock
 from StringIO import StringIO
-import src.yml
+import phoebe.yml
 
 
 class TestYml(unittest.TestCase):
 	""" class for testing *Config* """
 	def setUp(self):
-		self.yml = src.yml.Yml()
+		self.yml = phoebe.yml.Yml()
 		self.cont1 = {'output': ['y_1']}
 		self.cont2 = 'output: [y_1]\n'
 

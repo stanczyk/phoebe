@@ -9,7 +9,7 @@
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import unittest
-import src.inf
+import phoebe.inf
 import mock
 from StringIO import StringIO
 
@@ -36,7 +36,7 @@ class TestInf(unittest.TestCase):
 
 	def test_self_test(self):
 		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:
-			src.inf.self_test()
+			phoebe.inf.self_test()
 			self.assertEqual(fake_stdout.getvalue(), INF_ANS)
 
 

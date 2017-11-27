@@ -8,7 +8,7 @@ BIN=bin
 SRC=src
 TST=tests
 CFG=code_audit.cfg
-BUILD=.cache .eggs phoebe.egg-info
+BUILD=.cache .eggs phoebe.egg-info dist build
 
 .PHONY: all
 all:
