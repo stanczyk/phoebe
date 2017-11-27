@@ -30,7 +30,8 @@ class Yml(object):
 
 		:param stream: stream of data to load
 		"""
-		return yaml.safe_load(stream)
+		return YAML().load(stream)
+		# return yaml.safe_load(stream)
 
 	@staticmethod
 	def dump(data, **kwargs):
@@ -40,7 +41,8 @@ class Yml(object):
 		:param data: data to yaml dump
 		:param kwargs: some kwargs dict
 		"""
-		return yaml.safe_dump(data, **kwargs)
+		return YAML().dump(data, **kwargs)
+		# return yaml.safe_dump(data, **kwargs)
 
 	def show(self, data):
 		"""
@@ -51,35 +53,81 @@ class Yml(object):
 		return self.dump(data)
 
 
-#data = {
-#	input:
-#	[
-#		{
-#			u: {
-#			connect: 1,
-#			tr-time: 2,
-#			}
-#		},
-#	]
-#}
+data = {
+	# input definition
+	'input':
+	[
+		{
+			# input u_1
+			'u_1':
+				{
+					'op-time': 't_u_1',
+					# the time after which the item is delivered to the input, default: 0 (available immediately)
+					# there is no need to define this value if it is equal to the default
 
-data = {1: {1: [{1: 1, 2: 2}, {1: 1, 2: 2}], 2: 2}, 2: 42}
+					'connect': 'M_1',
+					# to which system item (processing unit or output) the input is connected
 
-# yaml_str = """\
-# first_name: Art
-# occupation: Architect  # This is an occupation comment
-# about: Art Vandelay is a fictional character that George invents...
-# """
+					'tr-time': 't_{0,1}'
+					# transport time from input to system item
+				}
+		}
+	],
+
+	# prod-unit definition
+	'prod-unit':
+	[
+		{
+			# production unit M_1
+			'M_1':
+			{
+				'op-time': 'd_1',
+				# operation time on M_1
+
+				'connect': 'M_2',
+				# to which system item (processing unit or output) this processing unit is connected
+
+				'tr-time': 't_{1,2}'
+				# transport time from input to system item
+			}
+		},
+		{
+			'M_2':
+			{
+				'op-time': 'd_2',
+				'connect': 'M_3',
+				'tr-time': 't_{2,3}'
+			}
+		},
+		{
+			'M_3':
+			{
+				'op-time': 'd_3',
+				'connect': 'y',
+				'tr-time': 't_{3,4}'
+			}
+		}
+	],
+
+	# output definition
+	'output':
+	[
+		'y'
+	]
+}
 
 
 def self_test():
 	"""self tests"""
 	import sys
 
+	# yaml = Yml()
+	# print yaml.dump(data)
 	yaml = YAML()
+	yaml.dump(data, sys.stdout)
+
 	# data = yaml.load(yaml_str)
 	# data.insert(1, 'last name', 'Vandelay', comment="new key")
-	yaml.dump(data, sys.stdout)
 
 	# yml.explicit_start = True
 	# yml.dump(data, sys.stdout)

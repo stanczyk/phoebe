@@ -8,7 +8,7 @@ BIN=bin
 SRC=src
 TST=tests
 CFG=code_audit.cfg
-# BUILD=build .cache dist vcm.egg-info
+BUILD=.cache .eggs phoebe.egg-info
 
 .PHONY: all
 all:
@@ -25,11 +25,7 @@ clean:
 	rm -f $(SRC)/*.pyc
 	rm -f $(TST)/*.pyc
 	rm -rf $(TST)/__pycache__
-	# rm -rf .eggs
-	# for i in $(BUILD) ; do \
-	# 	rm -rf $$i ; \
-	# done
-	# rm -rf $(BUILD)
+	rm -rf $(BUILD)
 	$(end)
 
 .PHONY: clean-all
