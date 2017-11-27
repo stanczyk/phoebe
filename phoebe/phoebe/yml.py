@@ -10,6 +10,7 @@
 
 	Copyright 2013--2016 Jarek Stanczyk, e-mail: j.stanczyk@hotmail.com
 """
+# pylint: disable=bad-continuation, redefined-outer-name
 import yaml
 # from ruamel.yaml import YAML
 
@@ -69,7 +70,7 @@ class Yml(object):
 			return default
 
 
-data = {
+DATA = {
 	# input definition
 	'input':
 	[
@@ -136,7 +137,7 @@ data = {
 def self_test():
 	"""self tests"""
 	yaml = Yml()
-	print yaml.dump(data)
+	print yaml.dump(DATA)
 
 	# import sys
 	# yaml = YAML()

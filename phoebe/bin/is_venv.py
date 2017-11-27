@@ -6,6 +6,7 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+# pylint: disable=no-member
 import sys
 
 

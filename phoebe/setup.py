@@ -9,6 +9,7 @@
 	for more details regarding setup and setuptools let's have a look at:
 		https://setuptools.readthedocs.io/en/latest/setuptools.html
 """
+# pylint: disable=no-name-in-module, import-error, bad-continuation
 import errno
 import os
 import sys
@@ -24,6 +25,7 @@ class PyTest(TestCommand):
 	"""
 	PyTest class to run my unit tests
 	"""
+	# pylint: disable=attribute-defined-outside-init
 	# user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
 	def initialize_options(self):
 		TestCommand.initialize_options(self)
@@ -45,6 +47,7 @@ class Uninstall(build_py):
 		python setup.py install --record files.txt
 		cat files.txt | xargs rm -rf
 	"""
+	# pylint: disable=missing-docstring, too-few-public-methods, no-self-use
 	def run(self):
 		tmp = '/tmp/phoebe_install_list'
 		call(['python', 'setup.py', 'install', '--record', tmp], stdout=PIPE)
