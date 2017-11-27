@@ -1,6 +1,6 @@
 #
 # README.txt
-# (c) 2017 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
+# (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 
 2017.11.22
