@@ -4,18 +4,16 @@
 	unit tests for *src/parser.py*
 
 	in the module:
-	* *class* **TestConsole**
+	* *class* **TestParser**
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=missing-docstring, bad-continuation
-
-import os
-from StringIO import StringIO
+# import os
+# from StringIO import StringIO
 import unittest
-import src.parser
-import src.err
-import mock
+# import src.parser
+# import src.err
+# import mock
 
 
 class TestParser(unittest.TestCase):
