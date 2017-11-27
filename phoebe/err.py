@@ -5,7 +5,6 @@
 error messages and values
 
 in the module:
-
 * *class* **Err**
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl

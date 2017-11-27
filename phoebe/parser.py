@@ -5,10 +5,9 @@
 phoebe implementation
 
 in the module:
-
 * *class* **Parser**
 
-	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 
 import sys
@@ -87,10 +86,7 @@ class Parser(object):
 
 	@staticmethod
 	def get_version():
-		return '---\n' + \
-			Inf().VER + '\n' + \
-			'\n' + \
-			Inf().WRITTEN
+		return Inf().VER + '\n' + Inf().WRITTEN
 
 	def epilog(self, err):
 		pass
