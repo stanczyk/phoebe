@@ -21,6 +21,7 @@ all:
 	@echo "other:"
 	@echo "  source .venv/bin/activate"
 	@echo "  deactivate"
+	@echo "  py.test tests/test_inf.py"
 	$(end)
 
 .PHONY: clean

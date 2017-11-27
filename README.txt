@@ -19,28 +19,30 @@ automatyczne modelowanie linii produkcyjnej bazującej na opisie json lub yaml
 
 2017.11.25
 poszczególne etapy programowania (python)
-	- parsowanie linii poleceń
-	- uruchomienie loga - wpis jakiegoś pliku w katalogu tmp (wówczas na bieżąco można będzie go podglądać)
-	- parsowanie yaml-a
-		- wczytywanie pliku z opisem
-		- wyświetlanie opisu
+	DONE:
+		- parsowanie linii poleceń
+		- uruchomienie loga - wpis jakiegoś pliku w katalogu tmp (wówczas na bieżąco można będzie go podglądać)
+		- parsowanie yaml-a
+			- wczytywanie pliku z opisem
+			- wyświetlanie opisu
 
-		- automatyczne przypisanie wartości zmiennym (także wygenerowanym automatycznie)
-		- wyświetlenie tych zmiennych (do logów?)
-	- generowanie opisu
-		- wyświetlanie poszczególnych danych/zmiennych: wejścia / wyjścia / ilość maszyn / czasy operacji / czasy transportu
-		- opis macierzowy
-			na początek po prostu opis wszystkiego co program potrafi (zmienne / macierze / opis formalny...)
-			a później może podzielę to na różne sekcje
+			- automatyczne przypisanie wartości zmiennym (także wygenerowanym automatycznie)
+			- wyświetlenie tych zmiennych (do logów?)
+		- generowanie opisu
+			- wyświetlanie poszczególnych danych/zmiennych: wejścia / wyjścia / ilość maszyn / czasy operacji / czasy transportu
+			- opis macierzowy
+				na początek po prostu opis wszystkiego co program potrafi (zmienne / macierze / opis formalny...)
+				a później może podzielę to na różne sekcje
 
-	- sprawdzanie, czy opis jest zgodny ze schematem
-		- konieczne, bo nie każdy yaml jest tym, co chciałbym wczytać
-		  https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
+	TO-DO:
+		- sprawdzanie, czy opis jest zgodny ze schematem
+			- konieczne, bo nie każdy yaml jest tym, co chciałbym wczytać
+			  https://stackoverflow.com/questions/3262569/validating-a-yaml-document-in-python
+		- testy akceptacyjne?
+
+2017.11.27 DONE
 	- uruchomienie testów jednostkowych
-	- testy akceptacyjne?
-
-2017.11.27
-	uruchamianie poszczególnych testów:
+	- uruchamianie poszczególnych testów:
 		z kat. ~/prj/prv/up/max/src/09/phoebe:
 		py.test tests/test_inf.py
 
