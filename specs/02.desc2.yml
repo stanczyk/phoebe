@@ -1,3 +1,9 @@
+#
+# 02.desc2.yml
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# a simple serial production line (figF23) described in details in 02/Ex.1.1
+---
 input:
 - u_1: {connect: M_1, op-time: t_u_1, tr-time: 't_{0,1}'}
 prod-unit:

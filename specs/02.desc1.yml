@@ -1,3 +1,8 @@
+#
+# 02.desc1.yml
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# a simple serial production line (figF23) described in details in 02/Ex.1.1
 ---
 input:
 - u_1:
