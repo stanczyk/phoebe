@@ -65,26 +65,44 @@ class Parser(object):
 			return Err.ERR_YAML
 		print '== WCZYTANY PLIK: =========='
 		print yam.show(self.content_yaml)
+
 		print '== POSZCZEGÓLNE ELEMENTY1 =='
 		print 'input:'
-		print yam.get_value(self.content_yaml, 'input', None)
+		print yam.get_value(self.content_yaml, 'input')
 		print 'prod-unit:'
-		print yam.get_value(self.content_yaml, 'prod-unit', None)
+		print yam.get_value(self.content_yaml, 'prod-unit')
 		print 'output:'
-		print yam.get_value(self.content_yaml, 'output', None)
+		print yam.get_value(self.content_yaml, 'output')
+
 		print '== POSZCZEGÓLNE ELEMENTY2 =='
 		print 'input:'
-		my_dic = yam.get_value(self.content_yaml, 'input', None)
+		my_dic = yam.get_value(self.content_yaml, 'input')
 		for i in range(0, yam.get_len(my_dic)):
-			print yam.get_key(my_dic[i], None)
+			key = yam.get_key(my_dic[i])
+			print '  ' + key
+			my_internal_dic = yam.get_value(my_dic[i], key)
+			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
+			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
+			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
 		print 'prod-unit:'
 		my_dic = yam.get_value(self.content_yaml, 'prod-unit', None)
 		for i in range(0, yam.get_len(my_dic)):
-			print yam.get_key(my_dic[i], None)
+			key = yam.get_key(my_dic[i])
+			print '  ' + key
+			my_internal_dic = yam.get_value(my_dic[i], key)
+			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
+			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
+			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
 		print 'output:'
 		my_dic = yam.get_value(self.content_yaml, 'output', None)
 		for i in range(0, yam.get_len(my_dic)):
-			print yam.get_key(my_dic[i], None)
+			key = yam.get_key(my_dic[i])
+			print '  ' + key
+			my_internal_dic = yam.get_value(my_dic[i], key)
+			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
+			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
+			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
+
 		print '== KONIEC =================='
 		return Err.NOOP
 
