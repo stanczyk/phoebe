@@ -50,23 +50,50 @@ class Yml(object):
 		return self.dump(data)
 
 	@staticmethod
-	def parse_key(content, key, default=None):
+	def get_value(my_dict, key, default=None):
 		"""
 		smart access to a dictionary with key.
 		if the key is not in the dictionary it returns default value.
 
-		:param dict content: content to parse
+		:param dict my_dict: dictionary to parse
 		:param key: key to find appropriate data
 		:param default: default return value
 		"""
-		if not content:
+		if not my_dict:
 			return default
 		if not key:
 			return default
 		try:
-			return content[key]
+			return my_dict[key]
 		except KeyError:
 			return default
+
+	@staticmethod
+	def get_key(my_dict, default=None):
+		"""
+		:param my_dict:
+		:param default:
+		:return:
+		"""
+		if not my_dict:
+			return default
+		try:
+			for key, _ in my_dict.iteritems():
+				return key
+		except AttributeError:
+			return default
+
+	@staticmethod
+	def get_len(my_dict):
+		"""
+		:param my_dict:
+		:return:
+		"""
+		if not my_dict:
+			return -1
+		if not isinstance(my_dict, dict):
+			return -1
+		return len(my_dict)
 
 
 DATA = {
@@ -89,7 +116,6 @@ DATA = {
 				}
 		}
 	],
-
 	# prod-unit definition
 	'prod-unit':
 	[
@@ -124,7 +150,6 @@ DATA = {
 			}
 		}
 	],
-
 	# output definition
 	'output':
 	[
@@ -137,10 +162,14 @@ def self_test():
 	"""self tests"""
 	yaml = Yml()
 	print yaml.dump(DATA)
-
 	# import sys
 	# yaml = YAML()
 	# yaml.dump(data, sys.stdout)
+	my_dic = yaml.get_value(DATA, 'prod-unit', None)
+	print my_dic
+	print len(my_dic)
+	print my_dic[1]
+	print yaml.get_key(my_dic[1], None)
 
 
 if __name__ == '__main__':
