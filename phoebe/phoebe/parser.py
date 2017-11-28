@@ -20,7 +20,7 @@ from yml import Yml
 
 class Parser(object):
 	"""Parser class"""
-	# pylint: disable=missing-docstring, invalid-name
+	# pylint: disable=missing-docstring, invalid-name, too-many-instance-attributes
 	def __init__(self):
 		self.args = None
 		self.file_name = None
@@ -107,12 +107,13 @@ class Parser(object):
 					vec = self.y
 				vec.append(self.yaml.get_key(my_dic[j]))
 		for i in range(0, len(tmp)):
-			self.x.append('x_' + str(i+1))
+			self.x.append('x_' + str(i + 1))
 		self.print_vector('u(k)', self.u)
 		self.print_vector('x(k)', self.x)
 		self.print_vector('y(k)', self.y)
 
-	def print_vector(self, name, vector):
+	@staticmethod
+	def print_vector(name, vector):
 		print name + ' = [',
 		for i in range(0, len(vector)):
 			print vector[i],
