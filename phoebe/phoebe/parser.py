@@ -63,16 +63,29 @@ class Parser(object):
 			print Err().value_to_name(Err.ERR_YAML) + ": " + str(exc)
 			# print(exc)
 			return Err.ERR_YAML
+		print '== WCZYTANY PLIK: =========='
 		print yam.show(self.content_yaml)
-
+		print '== POSZCZEGÓLNE ELEMENTY1 =='
 		print 'input:'
-		print yam.parse_key(self.content_yaml, 'input', None)
+		print yam.get_value(self.content_yaml, 'input', None)
 		print 'prod-unit:'
-		print yam.parse_key(self.content_yaml, 'prod-unit', None)
+		print yam.get_value(self.content_yaml, 'prod-unit', None)
 		print 'output:'
-		print yam.parse_key(self.content_yaml, 'output', None)
-
-		# https://stackoverflow.com/questions/3545331/how-can-i-get-dictionary-key-as-variable-directly-in-python-not-by-searching-fr
+		print yam.get_value(self.content_yaml, 'output', None)
+		print '== POSZCZEGÓLNE ELEMENTY2 =='
+		print 'input:'
+		my_dic = yam.get_value(self.content_yaml, 'input', None)
+		for i in range(0, yam.get_len(my_dic)):
+			print yam.get_key(my_dic[i], None)
+		print 'prod-unit:'
+		my_dic = yam.get_value(self.content_yaml, 'prod-unit', None)
+		for i in range(0, yam.get_len(my_dic)):
+			print yam.get_key(my_dic[i], None)
+		print 'output:'
+		my_dic = yam.get_value(self.content_yaml, 'output', None)
+		for i in range(0, yam.get_len(my_dic)):
+			print yam.get_key(my_dic[i], None)
+		print '== KONIEC =================='
 		return Err.NOOP
 
 	def main_cli(self):

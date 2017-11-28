@@ -19,7 +19,7 @@ all:
 	@$(MAKE) --no-print-directory list
 	@echo "$(reset)"
 	@echo "other:"
-	@echo "  yamllint ./specs/02.desc2.yml
+	@echo "  yamllint ./specs/02.desc2.yml"
 	@echo "  source .venv/bin/activate"
 	@echo "  deactivate"
 	@echo "  py.test tests/test_inf.py"
@@ -103,8 +103,8 @@ unit-test: is_virtenv
 	python setup.py test
 	$(end)
 
-.PHONY: tests
-tests: src-test unit-test
+.PHONY: test
+test: src-test unit-test
 
 include ./../../tex/make2.mk
 # eof.

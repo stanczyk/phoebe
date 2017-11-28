@@ -20,8 +20,8 @@ class TestYml(unittest.TestCase):
 	""" class for testing *Config* """
 	def setUp(self):
 		self.yml = phoebe.yml.Yml()
-		self.cont1 = {'output': ['y_1']}
-		self.cont2 = 'output: [y_1]\n'
+		self.cont1 = {'output': [{'y_1': {}}]}
+		self.cont2 = 'output:\n- y_1: {}\n'
 
 	def tearDown(self):
 		pass
@@ -63,12 +63,27 @@ class TestYml(unittest.TestCase):
 			print self.yml.show(content)
 			self.assertEqual(fake_stdout.getvalue(), self.cont2 + '\n')
 
-	def test_parse_key(self):
-		""" test method for *parse_key* """
-		self.assertEqual(self.yml.parse_key(self.cont1, 'output', None), ['y_1'])
-		self.assertEqual(self.yml.parse_key(self.cont1, 'log_', None), None)
-		self.assertEqual(self.yml.parse_key(self.cont1, None, None), None)
-		self.assertEqual(self.yml.parse_key(None, None, None), None)
+	def test_get_value(self):
+		""" test method for *get_value* """
+		self.assertEqual(self.yml.get_value(self.cont1, 'output', None), [{'y_1': {}}])
+		self.assertEqual(self.yml.get_value(self.cont1, 'log_', None), None)
+		self.assertEqual(self.yml.get_value(self.cont1, None, None), None)
+		self.assertEqual(self.yml.get_value(None, None, None), None)
+		self.assertEqual(self.yml.get_value(None, None, 'ala'), 'ala')
+
+	def test_get_key(self):
+		""" test method for *get_key* """
+		self.assertEqual(self.yml.get_key(self.cont1), 'output')
+		self.assertEqual(self.yml.get_key(self.yml.get_value(self.cont1, 'output')[0]), 'y_1')
+		self.assertEqual(self.yml.get_key(None), None)
+		self.assertEqual(self.yml.get_key(None, 'ala'), 'ala')
+
+	def test_get_len(self):
+		""" test method for *get_len* """
+		self.assertEqual(self.yml.get_len(self.cont1), 1)
+		self.assertEqual(self.yml.get_len('ala ma asa'), -1)
+		self.assertEqual(self.yml.get_len(''), -1)
+		self.assertEqual(self.yml.get_len(None), -1)
 
 
 if __name__ == "__main__":
