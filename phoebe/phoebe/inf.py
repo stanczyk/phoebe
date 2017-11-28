@@ -41,7 +41,11 @@ class Inf(object):
 
 	DOC = '' + \
 		'Usage:' + \
-		'\t' + NAME + ' <desc_file>\n' + \
+		'\t' + NAME + ' [--file] ' + \
+		'[--details-1] ' + \
+		'[--details-2] ' + \
+		'[--vectors] ' + \
+		'<desc_file>\n' + \
 		'\t' + NAME + ' -h | --help\n' + \
 		'\t' + NAME + ' -v | --version\n' + \
 		'\nOptions:\n' + \

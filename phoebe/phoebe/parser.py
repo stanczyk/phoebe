@@ -9,7 +9,7 @@ in the module:
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=relative-import, missing-docstring
+# pylint: disable=relative-import
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
 import yaml
@@ -20,11 +20,20 @@ from yml import Yml
 
 class Parser(object):
 	"""Parser class"""
+	# pylint: disable=missing-docstring, invalid-name
 	def __init__(self):
 		self.args = None
 		self.file_name = None
 		self.file_handler = None
 		self.content_yaml = None
+		self.yaml = Yml()
+		self.u = []
+		self.x = []
+		self.y = []
+		self.A0 = []
+		self.A1 = []
+		self.B0 = []
+		self.C = []
 
 	def set_up_argv(self):
 		# parse command line options
@@ -52,58 +61,87 @@ class Parser(object):
 			return Err.ERR_IO
 		return Err.NOOP
 
+	def read_file(self):
+		try:
+			self.content_yaml = self.yaml.load(self.file_handler)
+		except yaml.YAMLError as exc:
+			print >> sys.stderr, Err().value_to_name(Err.ERR_YAML) + ": " + str(exc)
+			return Err.ERR_YAML
+		return Err.NOOP
+
+	def show_file_content(self):
+		print '== INPUT FILE =============='
+		print self.yaml.show(self.content_yaml)
+
+	def show_read_details_1(self):
+		print '== READ DETAILS 1 =========='
+		for i in ['input', 'prod-unit', 'output']:
+			print i + ':',
+			print self.yaml.get_value(self.content_yaml, i)
+
+	def show_read_details_2(self):
+		print '== READ DETAILS 2 =========='
+		for i in ['input', 'prod-unit', 'output']:
+			print i + ':'
+			my_dic = self.yaml.get_value(self.content_yaml, i)
+			for j in range(0, self.yaml.get_len(my_dic)):
+				key = self.yaml.get_key(my_dic[j])
+				print '  ' + key
+				my_internal_dic = self.yaml.get_value(my_dic[j], key)
+				print '    op-time: ' + self.yaml.get_value(my_internal_dic, 'op-time', '0')
+				print '    connect: ' + self.yaml.get_value(my_internal_dic, 'connect', 'no')
+				print '    tr-time: ' + self.yaml.get_value(my_internal_dic, 'tr-time', '0')
+
+	def show_vectors(self):
+		print '== VECTORS ================='
+		vec = []
+		tmp = []
+		for i in ['input', 'prod-unit', 'output']:
+			my_dic = self.yaml.get_value(self.content_yaml, i)
+			for j in range(0, self.yaml.get_len(my_dic)):
+				if i == 'input':
+					vec = self.u
+				if i == 'prod-unit':
+					vec = tmp
+				if i == 'output':
+					vec = self.y
+				vec.append(self.yaml.get_key(my_dic[j]))
+		for i in range(0, len(tmp)):
+			self.x.append('x_' + str(i+1))
+		self.print_vector('u(k)', self.u)
+		self.print_vector('x(k)', self.x)
+		self.print_vector('y(k)', self.y)
+
+	def print_vector(self, name, vector):
+		print name + ' = [',
+		for i in range(0, len(vector)):
+			print vector[i],
+		print ']\'' if len(vector) > 1 else ']'
+
+	def matrix_description(self):
+		pass
+
+	def show_matrices(self):
+		print '== MATRICES ================'
+		for i in [self.A0, self.A1, self.B0, self.C]:
+			print i
+
 	def parse(self):
 		"""
 		main function of phoebe.
 		"""
-		yam = Yml()
-		try:
-			self.content_yaml = yam.load(self.file_handler)
-		except yaml.YAMLError as exc:
-			print Err().value_to_name(Err.ERR_YAML) + ": " + str(exc)
-			# print(exc)
-			return Err.ERR_YAML
-		print '== WCZYTANY PLIK: =========='
-		print yam.show(self.content_yaml)
-
-		print '== POSZCZEGÓLNE ELEMENTY1 =='
-		print 'input:'
-		print yam.get_value(self.content_yaml, 'input')
-		print 'prod-unit:'
-		print yam.get_value(self.content_yaml, 'prod-unit')
-		print 'output:'
-		print yam.get_value(self.content_yaml, 'output')
-
-		print '== POSZCZEGÓLNE ELEMENTY2 =='
-		print 'input:'
-		my_dic = yam.get_value(self.content_yaml, 'input')
-		for i in range(0, yam.get_len(my_dic)):
-			key = yam.get_key(my_dic[i])
-			print '  ' + key
-			my_internal_dic = yam.get_value(my_dic[i], key)
-			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
-			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
-			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
-		print 'prod-unit:'
-		my_dic = yam.get_value(self.content_yaml, 'prod-unit', None)
-		for i in range(0, yam.get_len(my_dic)):
-			key = yam.get_key(my_dic[i])
-			print '  ' + key
-			my_internal_dic = yam.get_value(my_dic[i], key)
-			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
-			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
-			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
-		print 'output:'
-		my_dic = yam.get_value(self.content_yaml, 'output', None)
-		for i in range(0, yam.get_len(my_dic)):
-			key = yam.get_key(my_dic[i])
-			print '  ' + key
-			my_internal_dic = yam.get_value(my_dic[i], key)
-			print '    op-time: ' + yam.get_value(my_internal_dic, 'op-time', '0')
-			print '    connect: ' + yam.get_value(my_internal_dic, 'connect', 'no')
-			print '    tr-time: ' + yam.get_value(my_internal_dic, 'tr-time', '0')
-
-		print '== KONIEC =================='
+		if self.read_file():
+			return Err.ERR_IO
+		if self.args['--file']:
+			self.show_file_content()
+		if self.args['--details-1']:
+			self.show_read_details_1()
+		if self.args['--details-2']:
+			self.show_read_details_2()
+		if self.args['--vectors']:
+			self.show_vectors()
+		self.matrix_description()
+		self.show_matrices()
 		return Err.NOOP
 
 	def main_cli(self):

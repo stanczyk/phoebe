@@ -11,4 +11,4 @@ prod-unit:
 - M_2: {connect: M_3, op-time: d_2, tr-time: 't_{2,3}'}
 - M_3: {connect: y, op-time: d_3, tr-time: 't_{3,4}'}
 output:
-- y1: {}
+- y_1: {}
