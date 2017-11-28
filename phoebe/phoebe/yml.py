@@ -91,8 +91,8 @@ class Yml(object):
 		"""
 		if not my_dict:
 			return -1
-		if not isinstance(my_dict, dict):
-			return -1
+		# if not isinstance(my_dict, dict):
+		# if type(my_dict) is dict:
 		return len(my_dict)
 
 

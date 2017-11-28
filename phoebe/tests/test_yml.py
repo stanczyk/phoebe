@@ -70,6 +70,7 @@ class TestYml(unittest.TestCase):
 		self.assertEqual(self.yml.get_value(self.cont1, None, None), None)
 		self.assertEqual(self.yml.get_value(None, None, None), None)
 		self.assertEqual(self.yml.get_value(None, None, 'ala'), 'ala')
+		self.assertEqual(self.yml.get_value({}, 'log_', None), None)
 
 	def test_get_key(self):
 		""" test method for *get_key* """
@@ -81,7 +82,7 @@ class TestYml(unittest.TestCase):
 	def test_get_len(self):
 		""" test method for *get_len* """
 		self.assertEqual(self.yml.get_len(self.cont1), 1)
-		self.assertEqual(self.yml.get_len('ala ma asa'), -1)
+		self.assertEqual(self.yml.get_len('ala ma asa'), 10)
 		self.assertEqual(self.yml.get_len(''), -1)
 		self.assertEqual(self.yml.get_len(None), -1)
 
