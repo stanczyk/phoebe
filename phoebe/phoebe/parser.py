@@ -74,6 +74,20 @@ class Parser(object):
 		print '== INPUT FILE =============='
 		print self.yaml.show(self.content_yaml)
 
+	def data_preparation(self):
+		for i in ['input', 'prod-unit', 'output']:
+			idx = 0
+			print i,
+			my_dic = self.yaml.get_value(self.content_yaml, i)
+			for j in range(0, self.yaml.get_len(my_dic)):
+				key = self.yaml.get_key(my_dic[j])
+				print key
+				my_internal_dic = self.yaml.get_value(my_dic[j], key)
+				print my_internal_dic
+				my_internal_dic['vec_id'] = idx
+				idx += 1
+				print my_internal_dic
+
 	def show_read_details_1(self):
 		print '== READ DETAILS 1 =========='
 		for i in ['input', 'prod-unit', 'output']:
@@ -93,8 +107,7 @@ class Parser(object):
 				print '    connect: ' + self.yaml.get_value(my_internal_dic, 'connect', 'no')
 				print '    tr-time: ' + self.yaml.get_value(my_internal_dic, 'tr-time', '0')
 
-	def show_vectors(self):
-		print '== VECTORS ================='
+	def prepare_vectors(self):
 		vec = []
 		tmp = []
 		for i in ['input', 'prod-unit', 'output']:
@@ -109,6 +122,9 @@ class Parser(object):
 				vec.append(self.yaml.get_key(my_dic[j]))
 		for i in range(0, len(tmp)):
 			self.x.append('x_' + str(i + 1))
+
+	def show_vectors(self):
+		print '== VECTORS ================='
 		self.print_vector('u(k)', self.u)
 		self.print_vector('x(k)', self.x)
 		self.print_vector('y(k)', self.y)
@@ -140,10 +156,14 @@ class Parser(object):
 			self.show_read_details_1()
 		if self.args['--details-2']:
 			self.show_read_details_2()
+		self.prepare_vectors()
 		if self.args['--vectors']:
 			self.show_vectors()
+
+		self.data_preparation()
 		self.matrix_description()
 		self.show_matrices()
+
 		return Err.NOOP
 
 	def main_cli(self):
