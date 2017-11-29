@@ -18,13 +18,17 @@ INF_ANS = 'Inf.VER:\n\
 phoebe: v.0.1\n\
 \n\
 Inf.DOC:\n\
-Usage:\tphoebe <desc_file>\n\
+Usage:\tphoebe [--file] [--details-1] [--details-2] [--vectors] <desc_file>\n\
 \tphoebe -h | --help\n\
 \tphoebe -v | --version\n\
 \n\
 Options:\n\
-\t-h, --help\tshows this help message and exit.\n\
-\t-v, --version\tshow version information and exit.\n'
+\t--file\t\tshow information from desc_file\n\
+\t--details-1\tshow parsed information (1) from desc_file\n\
+\t--details-2\tshow parsed information (2) from desc_file\n\
+\t--vectors\tshow vectors: u(k), x(k) and y(k)\n\
+\t-h, --help\tshows this help message and exit\n\
+\t-v, --version\tshow version information and exit\n'
 
 
 class TestInf(unittest.TestCase):
