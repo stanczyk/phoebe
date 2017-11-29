@@ -49,8 +49,12 @@ class Inf(object):
 		'\t' + NAME + ' -h | --help\n' + \
 		'\t' + NAME + ' -v | --version\n' + \
 		'\nOptions:\n' + \
-		'\t-h, --help	shows this help message and exit.\n' + \
-		'\t-v, --version	show version information and exit.'
+		'\t--file\t\tshow information from desc_file\n' + \
+		'\t--details-1\tshow parsed information (1) from desc_file\n' + \
+		'\t--details-2\tshow parsed information (2) from desc_file\n' + \
+		'\t--vectors\tshow vectors: u(k), x(k) and y(k)\n' + \
+		'\t-h, --help\tshows this help message and exit\n' + \
+		'\t-v, --version\tshow version information and exit'
 
 
 def self_test():

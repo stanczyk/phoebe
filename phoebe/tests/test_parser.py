@@ -22,7 +22,11 @@ class TestParser(unittest.TestCase):
 	def setUp(self):
 		self.par = phoebe.parser.Parser()
 		self.args = {
+			'--details-1': False,
+			'--details-2': False,
+			'--file': False,
 			'--help': False,
+			'--vectors': False,
 			'--version': False,
 			'-h': False,
 			'-v': False,
@@ -34,10 +38,18 @@ class TestParser(unittest.TestCase):
 
 	def test___init__(self):
 		ans = {
-			'content_yaml': None,
-			'file_name': None,
+			'A0': [],
+			'A1': [],
+			'B0': [],
+			'C': [],
 			'args': None,
-			'file_handler': None
+			'content_yaml': None,
+			'file_handler': None,
+			'file_name': None,
+			'u': [],
+			'x': [],
+			'y': [],
+			'yaml': None
 		}
 		phe = phoebe.parser.Parser()
 		self.assertEqual(phe.__dict__, ans)
@@ -58,7 +70,7 @@ class TestParser(unittest.TestCase):
 		mock_docopt.return_value = args
 		with self.assertRaises(SystemExit) as system_exit:
 			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_YAML)
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_IO)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
 	def test_main__file(self, mock_docopt):

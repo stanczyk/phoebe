@@ -26,7 +26,7 @@ class Parser(object):
 		self.file_name = None
 		self.file_handler = None
 		self.content_yaml = None
-		self.yaml = Yml()
+		self.yaml = None
 		self.u = []
 		self.x = []
 		self.y = []
@@ -62,6 +62,7 @@ class Parser(object):
 		return Err.NOOP
 
 	def read_file(self):
+		self.yaml = Yml()
 		try:
 			self.content_yaml = self.yaml.load(self.file_handler)
 		except yaml.YAMLError as exc:
