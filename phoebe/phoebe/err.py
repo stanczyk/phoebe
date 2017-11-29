@@ -55,6 +55,9 @@ class Err(object):
 	# 			return val
 	# 	raise ValueError('Unknown name: %r' % name)
 
+	def get_err_description(self, error_code):
+		return self.value_to_name(error_code)
+
 
 def self_test():
 	"""self test for Err class"""

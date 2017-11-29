@@ -46,4 +46,7 @@ poszczególne etapy programowania (python)
 		z kat. ~/prj/prv/up/max/src/09/phoebe:
 		py.test tests/test_inf.py
 
+2017.11.29
+	- zakładamy, że wszystkie czasy (tr- i op-) są zmiennymi typu str!
+
 # eof.
