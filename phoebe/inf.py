@@ -56,6 +56,9 @@ class Inf(object):
 		'\t-h, --help\tshows this help message and exit\n' + \
 		'\t-v, --version\tshow version information and exit'
 
+	def get_version(self):
+		return self.VER + '\n' + self.WRITTEN
+
 
 def self_test():
 	"""self tests"""
