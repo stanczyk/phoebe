@@ -149,6 +149,50 @@ class Worker(object):
 			print '  {0}(k) \\\\'.format(vector[i])
 		print '\\end{array}\\right]'
 		print '\\end{equation*}\n'
+		print
+
+	def generate_latex_matrix(self, matrix):
+		if matrix == self.A0:
+			tmp1 = 'A'
+			tmp2 = '_0'
+		if matrix == self.A1:
+			tmp1 = 'A'
+			tmp2 = '_1'
+		if matrix == self.B0:
+			tmp1 = 'B'
+			tmp2 = '_0'
+		if matrix == self.C:
+			tmp1 = 'C'
+			tmp2 = ''
+		print '% matrix {0}{1}'.format(tmp1, tmp2)
+		print '\\begin{equation*}'
+		print '\\mathbf{%s}%s = ' % (tmp1, tmp2)
+		print '\\left[\\begin{array}{*{20}c}'
+		for i in range(0, len(matrix)):
+			for j in range(0, len(matrix[i])):
+				if j > 0:
+					print '\t&',
+				if matrix[i][j] == '-':
+					print '\\varepsilon',
+				else:
+					print matrix[i][j],
+			print '\\\\'
+		print '\\end{array}\\right]'
+		print '\\end{equation*}\n'
+		print
+
+	@staticmethod
+	def generate_latex_desc():
+		print '\\begin{align}\\begin{split}'
+		print '% x(k) = A0x(k) + A1x(k-1) + B0u(k)'
+		print '\\mathbf{x}(k) & \\, = \\; ' + \
+			  '\\mathbf{A}_0\\mathbf{x}(k) \\oplus ' + \
+			  '\\mathbf{A}_1\\mathbf{x}(k-1) \\oplus ' + \
+			  '\\mathbf{B}_0\\mathbf{u}(k)\\\\'
+		print '% y(k) = Cx(k)'
+		print '\\mathbf{y}(k) & \\, = \\; \mathbf{Cx}(k) \\\\'
+		print '\\end{split}\\end{align}'
+		print
 
 	@staticmethod
 	def generate_latex_begin():
@@ -169,8 +213,11 @@ class Worker(object):
 
 	def generate_latex(self):
 		self.generate_latex_begin()
+		self.generate_latex_desc()
 		for i in [self.u, self.x, self.y]:
 			self.generate_latex_vector(i)
+		for i in [self.A0, self.A1, self.B0, self.C]:
+			self.generate_latex_matrix(i)
 		self.generate_latex_end()
 
 	def main_work(self):
