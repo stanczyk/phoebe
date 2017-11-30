@@ -50,10 +50,10 @@ class TestInf(unittest.TestCase):
 	def test_get_version(self):
 		self.assertEqual(self.inf.get_version(), INF_VER)
 
-	def test_self_test(self):
-		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:
-			phoebe.inf.self_test()
-			self.assertEqual(fake_stdout.getvalue(), INF_ANS)
+	@mock.patch('sys.stdout', new=StringIO())
+	def test_self_test(self, fake_stdout):
+		phoebe.inf.self_test()
+		self.assertEqual(fake_stdout.getvalue(), INF_ANS)
 
 
 def main():
