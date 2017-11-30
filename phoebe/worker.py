@@ -134,6 +134,45 @@ class Worker(object):
 			print i
 		return Err.NOOP
 
+	def generate_latex_vector(self, vector):
+		if vector == self.u:
+			tmp = 'u'
+		if vector == self.x:
+			tmp = 'x'
+		if vector == self.y:
+			tmp = 'y'
+		print '% vector {0}(k)'.format(tmp)
+		print '\\begin{equation*}'
+		print '\\mathbf{%s}(k) = ' % tmp
+		print '\\left[\\begin{array}{*{20}c}'
+		for i in range(0, len(vector)):
+			print '  {0}(k) \\\\'.format(vector[i])
+		print '\\end{array}\\right]'
+		print '\\end{equation*}\n'
+
+	@staticmethod
+	def generate_latex_begin():
+		print '%'
+		print '% (max, +) system description in latex'
+		print '% (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl'
+		print '%'
+		print '\\documentclass[11pt, a4paper]{article}'
+		print '\\usepackage{amsmath}'
+		print '\\begin{document}'
+		print
+
+	@staticmethod
+	def generate_latex_end():
+		print '\\end{document}'
+		print '% eof'
+		print
+
+	def generate_latex(self):
+		self.generate_latex_begin()
+		for i in [self.u, self.x, self.y]:
+			self.generate_latex_vector(i)
+		self.generate_latex_end()
+
 	def main_work(self):
 		self.prepare_vectors()
 		if self.parser.args['--vectors']:
@@ -142,6 +181,7 @@ class Worker(object):
 		self.matrix_preparation()
 		if self.parser.args['--details-3']:
 			self.show_details_3()
+		self.generate_latex()
 		return Err.NOOP
 
 	def main(self):
