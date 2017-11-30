@@ -46,6 +46,7 @@ class TestParser(unittest.TestCase):
 		self.args = {
 			'--details-1': False,
 			'--details-2': False,
+			'--details-3': False,
 			'--file': False,
 			'--help': False,
 			'--vectors': False,

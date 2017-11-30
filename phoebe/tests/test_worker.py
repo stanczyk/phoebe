@@ -1,29 +1,70 @@
 # -*- coding: utf-8 -*-
 """
 	**test_parser.py**
-	unit tests for *src/parser.py*
+	unit tests for *src/worker.py*
 
 	in the module:
-	* *class* **TestParser**
+	* *class* **TestWorker**
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=missing-docstring, bad-continuation
 import os
 from StringIO import StringIO
 import unittest
-import phoebe.parser
 import phoebe.err
+import phoebe.worker
 import mock
 
+ANS_VEC2 = '\
+== VECTORS =================\n\
+u(k) = [ ]\n\
+x(k) = [ ]\n\
+y(k) = [ y_1 ]\n'
 
-class TestParser(unittest.TestCase):
+ANS_VEC4 = '\
+== VECTORS =================\n\
+u(k) = [ u_1 ]\n\
+x(k) = [ x_1 x_2 x_3 ]\'\n\
+y(k) = [ y_1 ]\n'
+
+ANS_DET2 = '\
+== DETAILS 3 ===============\n\
+{\'y_1\': 0}\n\
+== MATRICES ================\n\
+A0 = A1 = B0 = []\n\
+A0 = A1 = B0 = []\n\
+A0 = A1 = B0 = []\n\
+C  = [[]]\n'
+
+ANS_DET4 = '\
+== DETAILS 3 ===============\n\
+{\'M_3\': 2, \'M_2\': 1, \'u_1\': 0, \'M_1\': 0, \'y_1\': 0}\n\
+== MATRICES ================\n\
+A0 = [[\'-\', \'-\', \'-\'], [\'d_1t_{1,2}\', \'-\', \'-\'], [\'-\', \'d_2t_{2,3}\', \'-\']]\n\
+A1 = [[\'d_1\', \'-\', \'-\'], [\'-\', \'d_2\', \'-\'], [\'-\', \'-\', \'d_3\']]\n\
+B0 = [[\'t_{0,1}\'], [\'-\'], [\'-\']]\n\
+C  = [[\'-\', \'-\', \'d_3t_{3,4}\']]\n'
+
+
+class TestWorker(unittest.TestCase):
 	""" class for testing *Generator* """
 	def setUp(self):
-		self.par = phoebe.parser.Parser()
+		self.worker = phoebe.worker.Worker()
+		self.var = {
+			'A0': [],
+			'A1': [],
+			'B0': [],
+			'C': [],
+			'mapping': {},
+			'parser': None,
+			'u': [],
+			'x': [],
+			'y': []
+		}
 		self.args = {
 			'--details-1': False,
 			'--details-2': False,
+			'--details-3': False,
 			'--file': False,
 			'--help': False,
 			'--vectors': False,
@@ -37,75 +78,55 @@ class TestParser(unittest.TestCase):
 		pass
 
 	def test___init__(self):
-		ans = {
-			'A0': [],
-			'A1': [],
-			'B0': [],
-			'C': [],
-			'args': None,
-			'content_yaml': None,
-			'file_handler': None,
-			'file_name': None,
-			'u': [],
-			'x': [],
-			'y': [],
-			'yaml': None
-		}
-		phe = phoebe.parser.Parser()
-		self.assertEqual(phe.__dict__, ans)
+		self.assertEqual(self.worker.__dict__, self.var)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_main__non_existing_file(self, mock_docopt):
+	def test_get_vectors2(self, mock_docopt):
 		args = self.args
-		args['<desc_file>'] = os.getcwd() + '/tests/samples/non_existing_file'
-		mock_docopt.return_value = args
-		with self.assertRaises(SystemExit) as system_exit:
-			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_FILE)
-
-	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_main__wrong_file(self, mock_docopt):
-		args = self.args
-		args['<desc_file>'] = os.getcwd() + '/tests/samples/f3.yml'
-		mock_docopt.return_value = args
-		with self.assertRaises(SystemExit) as system_exit:
-			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_IO)
-
-	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_main__file(self, mock_docopt):
-		args = self.args
+		args['--vectors'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
-		mock_docopt.return_value = args
-		with self.assertRaises(SystemExit) as system_exit:
-			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
-
-	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_main__no_args(self, mock_docopt):
-		mock_docopt.return_value = self.args
-		with self.assertRaises(SystemExit) as system_exit:
-			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_INPUT_FILE)
-
-	# def test_parse(self):
-	# def test_main_cli(self):
-	# def test_tear_down_cli(self):
-	# def test_get_err_description(self):
-
-	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_version(self, mock_docopt):
-		args = self.args
-		args['-v'] = True
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			with self.assertRaises(SystemExit) as system_exit:
-				self.par.main()
+				self.worker.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
-		self.assertEqual(mock_stdout.getvalue(), self.par.get_version() + '\n')
+		self.assertEqual(mock_stdout.getvalue(), ANS_VEC2)
 
-	# def test_epilog(self, err):
-	# def test_main(self):
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_vectors4(self, mock_docopt):
+		args = self.args
+		args['--vectors'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_VEC4)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details2(self, mock_docopt):
+		args = self.args
+		args['--details-3'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET2)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details4(self, mock_docopt):
+		args = self.args
+		args['--details-3'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET4)
 
 
 def main():
