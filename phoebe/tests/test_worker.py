@@ -88,6 +88,11 @@ class TestParser(unittest.TestCase):
 			self.par.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_INPUT_FILE)
 
+	# def test_parse(self):
+	# def test_main_cli(self):
+	# def test_tear_down_cli(self):
+	# def test_get_err_description(self):
+
 	@mock.patch('phoebe.parser.docopt.docopt')
 	def test_get_version(self, mock_docopt):
 		args = self.args
