@@ -15,6 +15,17 @@ import mock
 import yaml
 import phoebe.yml
 
+YML_ANS = '\
+input:\n\
+- u_1: {connect: M_1, op-time: t_u_1, tr-time: \'t_{0,1}\'}\n\
+output:\n\
+- y_1: {}\n\
+prod-unit:\n\
+- M_1: {connect: M_2, op-time: d_1, tr-time: \'t_{1,2}\'}\n\
+- M_2: {connect: M_3, op-time: d_2, tr-time: \'t_{2,3}\'}\n\
+- M_3: {connect: y_1, op-time: d_3, tr-time: \'t_{3,4}\'}\n\
+\n'
+
 
 class TestYml(unittest.TestCase):
 	""" class for testing *Config* """
@@ -85,6 +96,12 @@ class TestYml(unittest.TestCase):
 		self.assertEqual(self.yml.get_len('ala ma asa'), 10)
 		self.assertEqual(self.yml.get_len(''), -1)
 		self.assertEqual(self.yml.get_len(None), -1)
+
+	def test_self_test(self):
+		""" test method for *self_test* """
+		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:
+			phoebe.yml.self_test()
+			self.assertEqual(fake_stdout.getvalue(), YML_ANS)
 
 
 if __name__ == "__main__":

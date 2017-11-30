@@ -42,26 +42,12 @@ class Err(object):
 				return name
 		raise ValueError('Unknown value: %r' % value)
 
-	# def name_to_value(self, name):
-	# 	"""
-	# 	based on given class, returns the value of a defined name
-
-	# 	:param class_name: class in which value exists
-	# 	:param name: name to convert to value
-	# 	:return: value associated with name
-	# 	"""
-	# 	for nam, val in self.__dict__.iteritems():
-	# 		if nam == name:
-	# 			return val
-	# 	raise ValueError('Unknown name: %r' % name)
-
 	def get_err_description(self, error_code):
 		return self.value_to_name(error_code)
 
 
 def self_test():
 	"""self test for Err class"""
-
 	err = Err()
 	for i in range(ERR_MAX_NUMBER):
 		print '%d: %s' % (i, err.value_to_name(i))

@@ -107,10 +107,8 @@ DATA = {
 					'op-time': 't_u_1',
 					# the time after which the item is delivered to the input, default: 0 (available immediately)
 					# there is no need to define this value if it is equal to the default
-
 					'connect': 'M_1',
 					# to which system item (processing unit or output) the input is connected
-
 					'tr-time': 't_{0,1}'
 					# transport time from input to system item
 				}
@@ -125,10 +123,8 @@ DATA = {
 			{
 				'op-time': 'd_1',
 				# operation time on M_1
-
 				'connect': 'M_2',
 				# to which system item (processing unit or output) this processing unit is connected
-
 				'tr-time': 't_{1,2}'
 				# transport time from input to system item
 			}
@@ -145,7 +141,7 @@ DATA = {
 			'M_3':
 			{
 				'op-time': 'd_3',
-				'connect': 'y',
+				'connect': 'y_1',
 				'tr-time': 't_{3,4}'
 			}
 		}
@@ -153,7 +149,11 @@ DATA = {
 	# output definition
 	'output':
 	[
-		'y'
+		{
+			'y_1':
+				{
+				}
+		}
 	]
 }
 
@@ -162,14 +162,6 @@ def self_test():
 	"""self tests"""
 	yaml = Yml()
 	print yaml.dump(DATA)
-	# import sys
-	# yaml = YAML()
-	# yaml.dump(data, sys.stdout)
-	my_dic = yaml.get_value(DATA, 'prod-unit', None)
-	print my_dic
-	print len(my_dic)
-	print my_dic[1]
-	print yaml.get_key(my_dic[1], None)
 
 
 if __name__ == '__main__':
