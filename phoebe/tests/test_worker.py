@@ -8,6 +8,7 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+# pylint: disable=missing-docstring
 import os
 from StringIO import StringIO
 import unittest
@@ -48,6 +49,7 @@ C  = [[\'-\', \'-\', \'d_3t_{3,4}\']]\n'
 
 class TestWorker(unittest.TestCase):
 	""" class for testing *Generator* """
+	# pylint: disable=bad-continuation, missing-docstring
 	def setUp(self):
 		self.worker = phoebe.worker.Worker()
 		self.var = {
