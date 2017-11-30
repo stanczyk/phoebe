@@ -7,7 +7,7 @@
 """
 
 if __name__ == '__main__':
-	import src.parser
-	src.parser.Parser().main()
+	from src.worker import Worker
+	Worker().main()
 
 # eof.
