@@ -16,6 +16,28 @@ import phoebe.parser
 import phoebe.err
 import mock
 
+ANS_FILE = '\
+== INPUT FILE ==============\n\
+output:\n\
+- y_1: {}\n\
+\n'
+
+ANS_DET1 = '\
+== DETAILS 1 ===============\n\
+input: None\n\
+prod-unit: None\n\
+output: [{\'y_1\': {}}]\n'
+
+ANS_DET2 = '\
+== DETAILS 2 ===============\n\
+input:\n\
+prod-unit:\n\
+output:\n\
+  y_1\n\
+    op-time: --\n\
+    connect: --\n\
+    tr-time: --\n'
+
 
 class TestParser(unittest.TestCase):
 	""" class for testing *Generator* """
@@ -38,17 +60,10 @@ class TestParser(unittest.TestCase):
 
 	def test___init__(self):
 		ans = {
-			'A0': [],
-			'A1': [],
-			'B0': [],
-			'C': [],
 			'args': None,
 			'content_yaml': None,
 			'file_handler': None,
 			'file_name': None,
-			'u': [],
-			'x': [],
-			'y': [],
 			'yaml': None
 		}
 		phe = phoebe.parser.Parser()
@@ -77,9 +92,7 @@ class TestParser(unittest.TestCase):
 		args = self.args
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
 		mock_docopt.return_value = args
-		with self.assertRaises(SystemExit) as system_exit:
-			self.par.main()
-		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(self.par.main(), phoebe.err.Err.NOOP)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
 	def test_main__no_args(self, mock_docopt):
@@ -97,10 +110,37 @@ class TestParser(unittest.TestCase):
 			with self.assertRaises(SystemExit) as system_exit:
 				self.par.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
-		self.assertEqual(mock_stdout.getvalue(), self.par.get_version() + '\n')
+		self.assertEqual(mock_stdout.getvalue(), phoebe.parser.Inf().get_version() + '\n')
 
-	# def test_epilog(self, err):
-	# def test_main(self):
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_file(self, mock_docopt):
+		args = self.args
+		args['--file'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.par.main()
+		self.assertEqual(mock_stdout.getvalue(), ANS_FILE)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details1(self, mock_docopt):
+		args = self.args
+		args['--details-1'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.par.main()
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET1)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details2(self, mock_docopt):
+		args = self.args
+		args['--details-2'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.par.main()
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET2)
 
 
 def main():
