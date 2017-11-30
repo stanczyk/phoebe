@@ -9,6 +9,7 @@ in the module:
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+# pylint: disable=relative-import, missing-docstring
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
 import yaml
@@ -65,7 +66,7 @@ class Parser(object):
 		return Err.NOOP
 
 	def show_read_details_1(self):
-		print '== READ DETAILS 1 =========='
+		print '== DETAILS 1 ==============='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':',
 			print self.yaml.get_value(self.content_yaml, i)
@@ -78,7 +79,7 @@ class Parser(object):
 		return op_time, connect, tr_time
 
 	def show_read_details_2(self):
-		print '== READ DETAILS 2 =========='
+		print '== DETAILS 2 ==============='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':'
 			my_dic = self.yaml.get_value(self.content_yaml, i)
