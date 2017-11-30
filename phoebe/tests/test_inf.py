@@ -19,7 +19,7 @@ Inf.VER:\n\
 phoebe: v.0.1\n\
 \n\
 Inf.DOC:\n\
-Usage:\tphoebe [--file] [--details-1] [--details-2] [--details-3] [--vectors] <desc_file>\n\
+Usage:\tphoebe [--file] [--details-1] [--details-2] [--details-3] [--vectors] [--latex] <desc_file>\n\
 \tphoebe -h | --help\n\
 \tphoebe -v | --version\n\
 \n\
@@ -29,6 +29,7 @@ Options:\n\
 \t--details-2\tshow parsed information (2) from desc_file\n\
 \t--details-3\tshow mapping and parsed matrices\n\
 \t--vectors\tshow vectors: u(k), x(k) and y(k)\n\
+\t--latex\t\tgenerate description for latex, default is matlab description\n\
 \t-h, --help\tshows this help message and exit\n\
 \t-v, --version\tshow version information and exit\n'
 
