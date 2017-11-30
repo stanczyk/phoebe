@@ -32,6 +32,7 @@ class Parser(object):
 			print Inf().get_version()
 			exit(Err.NOOP)
 		self.file_name = self.args['<desc_file>']
+		return Err.NOOP
 
 	def set_up_file_handler(self):
 		if not self.file_name:
@@ -61,12 +62,14 @@ class Parser(object):
 	def show_file_content(self):
 		print '== INPUT FILE =============='
 		print self.yaml.show(self.content_yaml)
+		return Err.NOOP
 
 	def show_read_details_1(self):
 		print '== READ DETAILS 1 =========='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':',
 			print self.yaml.get_value(self.content_yaml, i)
+		return Err.NOOP
 
 	def get_details(self, int_dic):
 		op_time = self.yaml.get_value(int_dic, 'op-time')
@@ -87,6 +90,7 @@ class Parser(object):
 				print '    op-time: ' + (op_time if op_time else '--')
 				print '    connect: ' + (connect if connect else '--')
 				print '    tr-time: ' + (tr_time if tr_time else '--')
+		return Err.NOOP
 
 	def parse(self):
 		if self.read_file():
@@ -110,11 +114,13 @@ class Parser(object):
 	def tear_down_cli(self):
 		if self.file_name:
 			self.file_handler.close()
+		return Err.NOOP
 
 	def main(self):
 		err = self.main_cli()
 		if err:
 			sys.exit(err)
+		return Err.NOOP
 
 
 if __name__ == '__main__':
