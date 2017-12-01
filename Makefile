@@ -106,5 +106,13 @@ unit-test: is_virtenv
 .PHONY: test
 test: src-test unit-test
 
+.PHONY: build
+build:
+	$(begin)
+	cd .. ; \
+		$(MAKE) $@
+	$(end)
+
+
 include ./../../tex/make2.mk
 # eof.
