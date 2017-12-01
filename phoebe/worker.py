@@ -14,6 +14,7 @@ Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 import sys
 from err import Err
 from parser import Parser
+from latex import Lat
 
 
 class Worker(object):
@@ -58,7 +59,7 @@ class Worker(object):
 	def print_vector(name, vector):
 		print name + ' = [',
 		for i in range(0, len(vector)):
-			print vector[i],
+			print '{0}(k)'.format(vector[i]),
 		print ']\'' if len(vector) > 1 else ']'
 		return Err.NOOP
 
@@ -134,91 +135,33 @@ class Worker(object):
 			print i
 		return Err.NOOP
 
-	def generate_latex_vector(self, vector):
-		if vector == self.u:
-			tmp = 'u'
-		if vector == self.x:
-			tmp = 'x'
-		if vector == self.y:
-			tmp = 'y'
-		print '% vector {0}(k)'.format(tmp)
-		print '\\begin{equation*}'
-		print '\\mathbf{%s}(k) = ' % tmp
-		print '\\left[\\begin{array}{*{20}c}'
-		for i in range(0, len(vector)):
-			print '  {0}(k) \\\\'.format(vector[i])
-		print '\\end{array}\\right]'
-		print '\\end{equation*}\n'
-		print
-
-	def generate_latex_matrix(self, matrix):
-		if matrix == self.A0:
-			tmp1 = 'A'
-			tmp2 = '_0'
-		if matrix == self.A1:
-			tmp1 = 'A'
-			tmp2 = '_1'
-		if matrix == self.B0:
-			tmp1 = 'B'
-			tmp2 = '_0'
-		if matrix == self.C:
-			tmp1 = 'C'
-			tmp2 = ''
-		print '% matrix {0}{1}'.format(tmp1, tmp2)
-		print '\\begin{equation*}'
-		print '\\mathbf{%s}%s = ' % (tmp1, tmp2)
-		print '\\left[\\begin{array}{*{20}c}'
-		for i in range(0, len(matrix)):
-			for j in range(0, len(matrix[i])):
-				if j > 0:
-					print '\t&',
-				if matrix[i][j] == '-':
-					print '\\varepsilon',
-				else:
-					print matrix[i][j],
-			print '\\\\'
-		print '\\end{array}\\right]'
-		print '\\end{equation*}\n'
-		print
-
-	@staticmethod
-	def generate_latex_desc():
-		print '\\begin{align}\\begin{split}'
-		print '% x(k) = A0x(k) + A1x(k-1) + B0u(k)'
-		print '\\mathbf{x}(k) & \\, = \\; ' + \
-			  '\\mathbf{A}_0\\mathbf{x}(k) \\oplus ' + \
-			  '\\mathbf{A}_1\\mathbf{x}(k-1) \\oplus ' + \
-			  '\\mathbf{B}_0\\mathbf{u}(k)\\\\'
-		print '% y(k) = Cx(k)'
-		print '\\mathbf{y}(k) & \\, = \\; \mathbf{Cx}(k) \\\\'
-		print '\\end{split}\\end{align}'
-		print
-
-	@staticmethod
-	def generate_latex_begin():
-		print '%'
-		print '% (max, +) system description in latex'
-		print '% (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl'
-		print '%'
-		print '\\documentclass[11pt, a4paper]{article}'
-		print '\\usepackage{amsmath}'
-		print '\\begin{document}'
-		print
-
-	@staticmethod
-	def generate_latex_end():
-		print '\\end{document}'
-		print '% eof'
-		print
-
-	def generate_latex(self):
-		self.generate_latex_begin()
-		self.generate_latex_desc()
+	def latex(self):
+		lat = Lat()
+		lat.begin()
+		lat.equation()
 		for i in [self.u, self.x, self.y]:
-			self.generate_latex_vector(i)
+			if i == self.u:
+				tmp = 'u'
+			if i == self.x:
+				tmp = 'x'
+			if i == self.y:
+				tmp = 'y'
+			lat.vector(tmp, i)
 		for i in [self.A0, self.A1, self.B0, self.C]:
-			self.generate_latex_matrix(i)
-		self.generate_latex_end()
+			if i == self.A0:
+				tmp1 = 'A'
+				tmp2 = '_0'
+			if i == self.A1:
+				tmp1 = 'A'
+				tmp2 = '_1'
+			if i == self.B0:
+				tmp1 = 'B'
+				tmp2 = '_0'
+			if i == self.C:
+				tmp1 = 'C'
+				tmp2 = ''
+			lat.matrix(tmp1, tmp2, i)
+		lat.end()
 
 	def main_work(self):
 		self.prepare_vectors()
@@ -228,7 +171,9 @@ class Worker(object):
 		self.matrix_preparation()
 		if self.parser.args['--details-3']:
 			self.show_details_3()
-		self.generate_latex()
+		if self.parser.args['--latex']:
+			self.latex()
+
 		return Err.NOOP
 
 	def main(self):

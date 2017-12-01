@@ -41,7 +41,7 @@ output:\n\
 
 
 class TestParser(unittest.TestCase):
-	""" class for testing *Generator* """
+	""" class for testing *Parser* """
 	def setUp(self):
 		self.par = phoebe.parser.Parser()
 		self.args = {
@@ -52,6 +52,7 @@ class TestParser(unittest.TestCase):
 			'--help': False,
 			'--vectors': False,
 			'--version': False,
+			'--latex': False,
 			'-h': False,
 			'-v': False,
 			'<desc_file>': None
