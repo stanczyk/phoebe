@@ -32,7 +32,7 @@ pdf-one: $(main)
 .PHONY: build
 build:
 	$(begin)
-	./phoebe/bin/phoebe ./phoebe/bin/02.desc2.yml | tee tmp.tex
+	./phoebe/bin/phoebe --latex ./phoebe/desc2.yml | tee tmp.tex
 	$(MAKE) pdf-one
 	$(end)
 

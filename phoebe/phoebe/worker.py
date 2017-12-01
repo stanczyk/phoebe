@@ -116,7 +116,7 @@ class Worker(object):
 		self.fill_matrix(self.C, prod_unit)
 		return Err.NOOP
 
-	def show_details_3(self):
+	def show_details3(self):
 		print '== DETAILS 3 ==============='
 		print self.mapping
 		self.show_matrices()
@@ -163,16 +163,21 @@ class Worker(object):
 			lat.matrix(tmp1, tmp2, i)
 		lat.end()
 
+	def matlab(self):
+		pass
+
 	def main_work(self):
 		self.prepare_vectors()
 		if self.parser.args['--vectors']:
 			self.show_vectors()
 		self.prepare_mapping()
 		self.matrix_preparation()
-		if self.parser.args['--details-3']:
-			self.show_details_3()
+		if self.parser.args['--details3']:
+			self.show_details3()
 		if self.parser.args['--latex']:
 			self.latex()
+		else:
+			self.matlab()
 
 		return Err.NOOP
 

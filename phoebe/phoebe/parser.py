@@ -65,9 +65,9 @@ class Parser(object):
 		print self.yaml.show(self.content_yaml)
 		return Err.NOOP
 
-	def show_read_details_1(self):
+	def show_details1(self):
 		print '== DETAILS 1 ==============='
-		for i in ['input', 'prod-unit', 'output']:
+		for i in ['input', 'prod-unit', 'output', 'values']:
 			print i + ':',
 			print self.yaml.get_value(self.content_yaml, i)
 		return Err.NOOP
@@ -78,7 +78,7 @@ class Parser(object):
 		tr_time = self.yaml.get_value(int_dic, 'tr-time')
 		return op_time, connect, tr_time
 
-	def show_read_details_2(self):
+	def show_details2(self):
 		print '== DETAILS 2 ==============='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':'
@@ -91,6 +91,22 @@ class Parser(object):
 				print '    op-time: ' + (op_time if op_time else '--')
 				print '    connect: ' + (connect if connect else '--')
 				print '    tr-time: ' + (tr_time if tr_time else '--')
+		i = 'values'
+		my_dic = self.yaml.get_value(self.content_yaml, i)
+		if my_dic:
+			print i + ':'
+			for i in list(my_dic.keys()):
+				print '  ' + str(i) + ': ' + str(my_dic[i])
+		"""
+		print my_dic
+		if my_dic:
+			print i + ':'
+			for j in range(0, self.yaml.get_len(my_dic)):
+				print my_dic[0]
+				#key = self.yaml.get_key(my_dic)
+				#print key
+				#print my_dic[key]
+		"""
 		return Err.NOOP
 
 	def parse(self):
@@ -98,10 +114,10 @@ class Parser(object):
 			return Err.ERR_IO
 		if self.args['--file']:
 			self.show_file_content()
-		if self.args['--details-1']:
-			self.show_read_details_1()
-		if self.args['--details-2']:
-			self.show_read_details_2()
+		if self.args['--details1']:
+			self.show_details1()
+		if self.args['--details2']:
+			self.show_details2()
 		return Err.NOOP
 
 	def main_cli(self):
