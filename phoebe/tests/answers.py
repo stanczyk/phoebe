@@ -58,7 +58,7 @@ prod-unit: None\n\
 output: [{\'y_1\': {}}]\n\
 values: None\n'
 
-ANS_DET1_4 = '\
+ANS_DET = '\
 == DETAILS 1 ===============\n\
 input: [{\'u\': {\'tr-time\': \'t_{0,1}\', \'connect\': \'M_1\'}}]\n\
 prod-unit: [\
@@ -66,7 +66,12 @@ prod-unit: [\
 {\'M_2\': {\'op-time\': \'d_2\', \'tr-time\': \'t_{2,3}\', \'connect\': \'M_3\'}}, \
 {\'M_3\': {\'op-time\': \'d_3\', \'tr-time\': \'t_{3,4}\', \'connect\': \'y\'}}]\n\
 output: [{\'y\': {}}]\n\
-values: None\n'
+values: %(values)s\n'
+
+ANS_DET1_4 = ANS_DET % {'values': None}
+
+ANS_DET1_5 = ANS_DET % {'values': '\
+{\'t_{1,2}\': 2, \'t_{2,3}\': 0, \'d_2\': 2, \'d_3\': 6, \'d_1\': 3, \'t_{0,1}\': 1, \'t_{3,4}\': 1}'}
 
 ANS_DET2_2 = '\
 == DETAILS 2 ===============\n\

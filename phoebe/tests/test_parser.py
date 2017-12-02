@@ -15,11 +15,10 @@ import unittest
 import phoebe.parser
 import phoebe.err
 import mock
-from answers import ANS_FILE, ANS_DET1_2, ANS_DET1_4, ANS_DET2_2, ANS_DET2_4
+from answers import ANS_FILE, ANS_DET1_2, ANS_DET1_4, ANS_DET1_5, ANS_DET2_2, ANS_DET2_4
 
 
 class TestParser(unittest.TestCase):
-	# pylint: disable=bad-continuation
 	""" class for testing *Parser* """
 	def setUp(self):
 		self.par = phoebe.parser.Parser()
@@ -123,6 +122,16 @@ class TestParser(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.par.main()
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET1_4)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details1_5(self, mock_docopt):
+		args = self.args
+		args['--details1'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.par.main()
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET1_5)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
 	def test_get_details2_2(self, mock_docopt):
