@@ -10,6 +10,7 @@ in the module:
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+import time
 
 
 class Inf(object):
@@ -32,7 +33,7 @@ class Inf(object):
 	# used by phoebe
 	VER = '' + \
 		NAME + \
-		': v.' + \
+		' v.' + \
 		VERSION
 	WRITTEN = '' + \
 		'author: ' + AUTHOR + '\n' + \
@@ -62,6 +63,10 @@ class Inf(object):
 
 	def get_version(self):
 		return self.VER + '\n' + self.WRITTEN
+
+	@staticmethod
+	def get_time():
+		return time.strftime("%Y-%m-%d %H:%M:%S %Z", time.localtime())
 
 
 def self_test():

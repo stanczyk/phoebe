@@ -9,7 +9,7 @@
 
 	Copyright 2013--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name, invalid-name
 import yaml
 from yml_data import DANE
 # from ruamel.yaml import YAML
@@ -95,6 +95,13 @@ class Yml(object):
 		# if not isinstance(my_dict, dict):
 		# if type(my_dict) is dict:
 		return len(my_dict)
+
+	@staticmethod
+	def get_matrix_size(matrix):
+		w1 = len(matrix)
+		tmp = matrix[0]
+		w2 = len(tmp)
+		return w1, w2
 
 
 def self_test():

@@ -28,16 +28,17 @@ all:
 .PHONY: clean
 clean:
 	$(begin)
-	rm -f $(SRC)/*.pyc
-	rm -f $(TST)/*.pyc
-	rm -rf $(TST)/__pycache__
-	rm -rf $(BUILD)
+	$(RM) $(SRC)/*.pyc
+	$(RM) $(TST)/*.pyc
+	$(RM) -r $(TST)/__pycache__
+	$(RM) -r $(BUILD)
+	cd .. ; $(RM) tmp.*
 	$(end)
 
 .PHONY: clean-all
 clean-all: clean
 	$(begin)
-	rm -rf .venv
+	$(RM) -r .venv
 	$(end)
 
 .PHONY: init
