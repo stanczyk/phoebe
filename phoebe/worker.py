@@ -14,6 +14,7 @@ import sys
 from err import Err
 from parser import Parser
 from latex import Lat
+from matlab import Mat
 
 
 class Worker(object):
@@ -87,13 +88,13 @@ class Worker(object):
 		for i in range(0, self.parser.yaml.get_len(my_dic)):
 			key = self.parser.yaml.get_key(my_dic[i])
 			op_time, connect, tr_time = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
-			tmp = ''
+			tmp = []
 			if op_time:
-				tmp += op_time
+				tmp.append(op_time)
 			if matrix in [self.A0, self.B0]:
 				if connect and connect[0] != 'y':
 					if tr_time:
-						tmp += tr_time
+						tmp.append(tr_time)
 					j = self.mapping[connect]
 					matrix[j][i] = tmp
 			if matrix in [self.A1]:
@@ -103,10 +104,35 @@ class Worker(object):
 			if matrix in [self.C]:
 				if connect and connect[0] == 'y':
 					if tr_time:
-						tmp += tr_time
+						tmp.append(tr_time)
 					j = self.mapping[connect]
 					matrix[j][i] = tmp
 		return Err.NOOP
+
+	# def fill_matrix(self, matrix, my_dic):
+	# 	for i in range(0, self.parser.yaml.get_len(my_dic)):
+	# 		key = self.parser.yaml.get_key(my_dic[i])
+	# 		op_time, connect, tr_time = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
+	# 		tmp = ''
+	# 		if op_time:
+	# 			tmp += op_time
+	# 		if matrix in [self.A0, self.B0]:
+	# 			if connect and connect[0] != 'y':
+	# 				if tr_time:
+	# 					tmp += tr_time
+	# 				j = self.mapping[connect]
+	# 				matrix[j][i] = tmp
+	# 		if matrix in [self.A1]:
+	# 			if op_time:
+	# 				j = self.mapping[key]
+	# 				matrix[j][i] = tmp
+	# 		if matrix in [self.C]:
+	# 			if connect and connect[0] == 'y':
+	# 				if tr_time:
+	# 					tmp += tr_time
+	# 				j = self.mapping[connect]
+	# 				matrix[j][i] = tmp
+	# 	return Err.NOOP
 
 	def matrix_preparation(self):
 		self.create_matrix(self.B0, self.x, self.u)
@@ -141,11 +167,10 @@ class Worker(object):
 			print i
 		return Err.NOOP
 
-	def latex(self):
+	def description(self, obj):
 		tmp = tmp1 = tmp2 = None
-		lat = Lat()
-		lat.begin()
-		lat.equation()
+		obj.begin()
+		obj.equation()
 		for i in [self.u, self.x, self.y]:
 			if i == self.u:
 				tmp = 'u'
@@ -153,26 +178,30 @@ class Worker(object):
 				tmp = 'x'
 			if i == self.y:
 				tmp = 'y'
-			lat.vector(tmp, i)
+			obj.vector(tmp, i)
+		if obj.__class__.__name__ == 'Mat':
+			obj.input_vec(self.u)
+			obj.start_vec(self.x)
+			obj.values(self.values)
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			if i == self.A0:
 				tmp1 = 'A'
-				tmp2 = '_0'
+				tmp2 = '0'
 			if i == self.A1:
 				tmp1 = 'A'
-				tmp2 = '_1'
+				tmp2 = '1'
 			if i == self.B0:
 				tmp1 = 'B'
-				tmp2 = '_0'
+				tmp2 = '0'
 			if i == self.C:
 				tmp1 = 'C'
 				tmp2 = ''
-			lat.matrix(tmp1, tmp2, i)
-		lat.values(self.values)
-		lat.end()
-
-	def matlab(self):
-		pass
+				if obj.__class__.__name__ == 'Lat':
+					tmp2 = '{}'
+			obj.matrix(tmp1, tmp2, i)
+		if obj.__class__.__name__ == 'Lat':
+			obj.values(self.values)
+		obj.end()
 
 	def main_work(self):
 		self.prepare_vectors()
@@ -183,10 +212,11 @@ class Worker(object):
 		if self.parser.args['--details3']:
 			self.show_details3()
 		if self.parser.args['--latex']:
-			self.latex()
+			lat = Lat()
+			self.description(lat)
 		else:
-			self.matlab()
-
+			mat = Mat()
+			self.description(mat)
 		return Err.NOOP
 
 	def main(self):
