@@ -8,19 +8,12 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=missing-docstring
+# pylint: disable=relative-import, missing-docstring
 import unittest
 from StringIO import StringIO
 import phoebe.err
 import mock
-
-ERR_ANS = '\
-0: NOOP\n\
-1: ERR_NO_INPUT_FILE\n\
-2: ERR_NO_FILE\n\
-3: ERR_NO_PERMISSION\n\
-4: ERR_IO\n\
-5: ERR_YAML\n'
+from answers import ERR_ANS
 
 
 class TesErr(unittest.TestCase):

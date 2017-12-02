@@ -8,23 +8,14 @@
 
 	Copyright 2015--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
+# pylint: disable=relative-import
 import os
 import unittest
 from StringIO import StringIO
 import mock
 import yaml
 import phoebe.yml
-
-YML_ANS = '\
-input:\n\
-- u_1: {connect: M_1, op-time: t_u_1, tr-time: \'t_{0,1}\'}\n\
-output:\n\
-- y_1: {}\n\
-prod-unit:\n\
-- M_1: {connect: M_2, op-time: d_1, tr-time: \'t_{1,2}\'}\n\
-- M_2: {connect: M_3, op-time: d_2, tr-time: \'t_{2,3}\'}\n\
-- M_3: {connect: y_1, op-time: d_3, tr-time: \'t_{3,4}\'}\n\
-\n'
+from answers import YML_ANS
 
 
 class TestYml(unittest.TestCase):

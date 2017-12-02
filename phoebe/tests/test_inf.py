@@ -8,36 +8,12 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=missing-docstring
+# pylint: disable=relative-import, missing-docstring
 import unittest
 from StringIO import StringIO
 import phoebe.inf
 import mock
-
-INF_ANS = '\
-Inf.VER:\n\
-phoebe: v.0.1\n\
-\n\
-Inf.DOC:\n\
-Usage:\tphoebe [--file] [--details-1] [--details-2] [--details-3] [--vectors] [--latex] <desc_file>\n\
-\tphoebe -h | --help\n\
-\tphoebe -v | --version\n\
-\n\
-Options:\n\
-\t--file\t\tshow information from desc_file\n\
-\t--details-1\tshow parsed information (1) from desc_file\n\
-\t--details-2\tshow parsed information (2) from desc_file\n\
-\t--details-3\tshow mapping and parsed matrices\n\
-\t--vectors\tshow vectors: u(k), x(k) and y(k)\n\
-\t--latex\t\tgenerate description for latex, default is matlab description\n\
-\t-h, --help\tshows this help message and exit\n\
-\t-v, --version\tshow version information and exit\n'
-
-INF_VER = '\
-phoebe: v.0.1\n\
-author: Jaroslaw Stanczyk\n\
-e-mail: jaroslaw.stanczyk@upwr.edu.pl\n\
-copyright: (c) 2017 Jaroslaw Stanczyk'
+from answers import INF_ANS, INF_VER
 
 
 class TestInf(unittest.TestCase):
