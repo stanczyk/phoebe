@@ -68,10 +68,11 @@ prod-unit: [\
 output: [{\'y\': {}}]\n\
 values: %(values)s\n'
 
-ANS_DET1_4 = ANS_DET % {'values': None}
+ANS_VALU_5 = '\
+{\'t_{1,2}\': 2, \'t_{2,3}\': 0, \'d_2\': 2, \'d_3\': 6, \'d_1\': 3, \'t_{0,1}\': 1, \'t_{3,4}\': 1}'
 
-ANS_DET1_5 = ANS_DET % {'values': '\
-{\'t_{1,2}\': 2, \'t_{2,3}\': 0, \'d_2\': 2, \'d_3\': 6, \'d_1\': 3, \'t_{0,1}\': 1, \'t_{3,4}\': 1}'}
+ANS_DET1_4 = ANS_DET % {'values': None}
+ANS_DET1_5 = ANS_DET % {'values': ANS_VALU_5}
 
 ANS_DET2_2 = '\
 == DETAILS 2 ===============\n\
@@ -83,7 +84,7 @@ output:\n\
     connect: --\n\
     tr-time: --\n'
 
-ANS_DET2_4 = '\
+ANS_DET2 = '\
 == DETAILS 2 ===============\n\
 input:\n\
   u\n\
@@ -107,7 +108,20 @@ output:\n\
   y\n\
     op-time: --\n\
     connect: --\n\
-    tr-time: --\n'
+    tr-time: --\n\
+%(values)s'
+
+ANS_DET2_4 = ANS_DET2 % {'values': ''}
+
+ANS_DET2_5 = ANS_DET2 % {'values': '\
+values:\n\
+  d_1: 3\n\
+  d_2: 2\n\
+  d_3: 6\n\
+  t_{0,1}: 1\n\
+  t_{1,2}: 2\n\
+  t_{2,3}: 0\n\
+  t_{3,4}: 1\n'}
 
 ANS_VEC2 = '\
 == VECTORS =================\n\
@@ -132,15 +146,18 @@ A0 = A1 = B0 = []\n\
 A0 = A1 = B0 = []\n\
 C  = [[]]\n'
 
-ANS_DET3_4 = '\
+ANS_DET3 = '\
 == DETAILS 3 ===============\n\
 mapping:\n\
 {\'M_3\': 2, \'M_2\': 1, \'M_1\': 0, \'u\': 0, \'y\': 0}\n\
-None\n\
+%(values)s\n\
 == MATRICES ================\n\
 A0 = [[\'-\', \'-\', \'-\'], [\'d_1t_{1,2}\', \'-\', \'-\'], [\'-\', \'d_2t_{2,3}\', \'-\']]\n\
 A1 = [[\'d_1\', \'-\', \'-\'], [\'-\', \'d_2\', \'-\'], [\'-\', \'-\', \'d_3\']]\n\
 B0 = [[\'t_{0,1}\'], [\'-\'], [\'-\']]\n\
 C  = [[\'-\', \'-\', \'d_3t_{3,4}\']]\n'
+
+ANS_DET3_4 = ANS_DET3 % {'values': None}
+ANS_DET3_5 = ANS_DET3 % {'values': ANS_VALU_5}
 
 # end.
