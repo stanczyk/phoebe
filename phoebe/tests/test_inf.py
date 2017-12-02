@@ -8,7 +8,6 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=relative-import, missing-docstring
 import unittest
 from StringIO import StringIO
 import phoebe.inf

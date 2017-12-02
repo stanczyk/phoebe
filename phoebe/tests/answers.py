@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=missing-docstring
 
 ERR_ANS = '\
 0: NOOP\n\
@@ -43,6 +42,7 @@ prod-unit:\n\
 - M_1: {connect: M_2, op-time: d_1, tr-time: \'t_{1,2}\'}\n\
 - M_2: {connect: M_3, op-time: d_2, tr-time: \'t_{2,3}\'}\n\
 - M_3: {connect: y_1, op-time: d_3, tr-time: \'t_{3,4}\'}\n\
+values: {d_1: 3, d_2: 2, d_3: 6, \'t_{0,1}\': 1, \'t_{1,2}\': 2, \'t_{2,3}\': 0, \'t_{3,4}\': 1}\n\
 \n'
 
 ANS_FILE = '\

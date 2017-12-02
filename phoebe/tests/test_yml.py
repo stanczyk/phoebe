@@ -8,7 +8,6 @@
 
 	Copyright 2015--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=relative-import
 import os
 import unittest
 from StringIO import StringIO

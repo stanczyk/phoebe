@@ -10,7 +10,6 @@ in the module:
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # pylama: ignore=C901
-# pylint: disable=relative-import
 import sys
 from err import Err
 from parser import Parser
@@ -19,7 +18,7 @@ from latex import Lat
 
 class Worker(object):
 	"""Worker class"""
-	# pylint: disable=invalid-name, missing-docstring, too-many-instance-attributes
+	# pylint: disable=invalid-name, too-many-instance-attributes
 	def __init__(self):
 		self.parser = None
 		self.u = []

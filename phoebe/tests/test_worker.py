@@ -8,7 +8,6 @@
 
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=relative-import, missing-docstring
 import os
 from StringIO import StringIO
 import unittest
@@ -20,7 +19,6 @@ from answers import ANS_VEC2, ANS_VEC4, ANS_DET3_2, ANS_DET3_4
 
 class TestWorker(unittest.TestCase):
 	""" class for testing *Generator* """
-	# pylint: disable=bad-continuation, missing-docstring
 	def setUp(self):
 		self.worker = phoebe.worker.Worker()
 		self.var = {

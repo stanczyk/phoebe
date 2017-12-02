@@ -15,7 +15,7 @@ ERR_MAX_NUMBER = 6
 
 class Err(object):
 	"""Errors code and description"""
-	# pylint: disable=bad-continuation, too-few-public-methods, missing-docstring
+	# pylint: disable=too-few-public-methods
 
 	def __init__(self):
 		pass
