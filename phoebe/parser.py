@@ -9,7 +9,6 @@ in the module:
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylint: disable=relative-import, missing-docstring
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
 import yaml

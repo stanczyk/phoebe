@@ -13,7 +13,6 @@ Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 
 class Lat(object):
 	"""Lat class"""
-	# pylint: disable=missing-docstring
 	def __init__(self):
 		pass
 

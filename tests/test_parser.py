@@ -9,7 +9,6 @@
 	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # pylama: ignore=E101
-# pylint: disable=relative-import, missing-docstring
 import os
 from StringIO import StringIO
 import unittest
