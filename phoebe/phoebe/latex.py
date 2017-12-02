@@ -23,9 +23,22 @@ class Lat(object):
 			'% (max, +) system description in latex\n' + \
 			'% (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl\n' + \
 			'%\n' + \
-			'\\documentclass[11pt, a4paper]{article}\n' + \
+			'\\documentclass[11pt, a4paper, fleqn]{article}\n' + \
 			'\\usepackage{amsmath}\n' + \
-			'\\begin{document}\n'
+			'\\begin{document}\n' + \
+			'\\section{(max, +) description}\n'
+
+	@staticmethod
+	def equation():
+		print '\\begin{align}\\begin{split}\n' + \
+			'% x(k) = A0x(k) + A1x(k-1) + B0u(k)\n' + \
+			'\\mathbf{x}(k) & \\, = \\; ' + \
+			'\\mathbf{A}_0\\mathbf{x}(k) \\oplus ' + \
+			'\\mathbf{A}_1\\mathbf{x}(k-1) \\oplus ' + \
+			'\\mathbf{B}_0\\mathbf{u}(k)\\\\\n' + \
+			'% y(k) = Cx(k)\n' + \
+			'\\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\\\\n' + \
+			'\\end{split}\\end{align}\n'
 
 	@staticmethod
 	def vector(name, vector):
@@ -57,16 +70,12 @@ class Lat(object):
 		print '\\end{equation*}\n'
 
 	@staticmethod
-	def equation():
-		print '\\begin{align}\\begin{split}\n' + \
-			'% x(k) = A0x(k) + A1x(k-1) + B0u(k)\n' + \
-			'\\mathbf{x}(k) & \\, = \\; ' + \
-			'\\mathbf{A}_0\\mathbf{x}(k) \\oplus ' + \
-			'\\mathbf{A}_1\\mathbf{x}(k-1) \\oplus ' + \
-			'\\mathbf{B}_0\\mathbf{u}(k)\\\\\n' + \
-			'% y(k) = Cx(k)\n' + \
-			'\\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\\\\n' + \
-			'\\end{split}\\end{align}\n'
+	def values(values):
+		if values:
+			print '\\noindent\\\\'
+			for key in sorted(values):
+				print '$%s = %s$\\\\' % (key, values[key])
+			print
 
 	@staticmethod
 	def end():

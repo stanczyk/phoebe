@@ -95,18 +95,8 @@ class Parser(object):
 		my_dic = self.yaml.get_value(self.content_yaml, i)
 		if my_dic:
 			print i + ':'
-			for i in list(my_dic.keys()):
-				print '  ' + str(i) + ': ' + str(my_dic[i])
-		"""
-		print my_dic
-		if my_dic:
-			print i + ':'
-			for j in range(0, self.yaml.get_len(my_dic)):
-				print my_dic[0]
-				#key = self.yaml.get_key(my_dic)
-				#print key
-				#print my_dic[key]
-		"""
+			for key in sorted(my_dic):
+				print '  %s: %s' % (key, my_dic[key])
 		return Err.NOOP
 
 	def parse(self):
