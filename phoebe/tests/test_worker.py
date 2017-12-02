@@ -14,7 +14,7 @@ import unittest
 import phoebe.err
 import phoebe.worker
 import mock
-from answers import ANS_VEC2, ANS_VEC4, ANS_DET3_2, ANS_DET3_4
+from answers import ANS_VEC2, ANS_VEC4, ANS_DET3_2, ANS_DET3_4, ANS_DET3_5
 
 
 class TestWorker(unittest.TestCase):
@@ -100,6 +100,18 @@ class TestWorker(unittest.TestCase):
 				self.worker.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_4)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_details5(self, mock_docopt):
+		args = self.args
+		args['--details3'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_5)
 
 
 def main():
