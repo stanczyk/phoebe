@@ -30,6 +30,7 @@ class Worker(object):
 		self.B0 = []
 		self.C = []
 		self.mapping = {}
+		self.values = None
 
 	def prepare_vectors(self):
 		vec = []
@@ -69,6 +70,10 @@ class Worker(object):
 			for j in range(0, self.parser.yaml.get_len(my_dic)):
 				name = self.parser.yaml.get_key(my_dic[j])
 				self.mapping[name] = j
+		i = 'values'
+		my_dic = self.parser.yaml.get_value(self.parser.content_yaml, i)
+		if my_dic:
+			self.values = my_dic
 		return Err.NOOP
 
 	def create_matrix(self, matrix, v1, v2):
@@ -118,7 +123,9 @@ class Worker(object):
 
 	def show_details3(self):
 		print '== DETAILS 3 ==============='
+		print 'mapping:'
 		print self.mapping
+		print self.values
 		self.show_matrices()
 
 	def show_matrices(self):
@@ -136,6 +143,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def latex(self):
+		tmp = tmp1 = tmp2 = None
 		lat = Lat()
 		lat.begin()
 		lat.equation()
@@ -161,6 +169,7 @@ class Worker(object):
 				tmp1 = 'C'
 				tmp2 = ''
 			lat.matrix(tmp1, tmp2, i)
+		lat.values(self.values)
 		lat.end()
 
 	def matlab(self):
