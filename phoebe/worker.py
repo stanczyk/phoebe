@@ -109,31 +109,6 @@ class Worker(object):
 					matrix[j][i] = tmp
 		return Err.NOOP
 
-	# def fill_matrix(self, matrix, my_dic):
-	# 	for i in range(0, self.parser.yaml.get_len(my_dic)):
-	# 		key = self.parser.yaml.get_key(my_dic[i])
-	# 		op_time, connect, tr_time = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
-	# 		tmp = ''
-	# 		if op_time:
-	# 			tmp += op_time
-	# 		if matrix in [self.A0, self.B0]:
-	# 			if connect and connect[0] != 'y':
-	# 				if tr_time:
-	# 					tmp += tr_time
-	# 				j = self.mapping[connect]
-	# 				matrix[j][i] = tmp
-	# 		if matrix in [self.A1]:
-	# 			if op_time:
-	# 				j = self.mapping[key]
-	# 				matrix[j][i] = tmp
-	# 		if matrix in [self.C]:
-	# 			if connect and connect[0] == 'y':
-	# 				if tr_time:
-	# 					tmp += tr_time
-	# 				j = self.mapping[connect]
-	# 				matrix[j][i] = tmp
-	# 	return Err.NOOP
-
 	def matrix_preparation(self):
 		self.create_matrix(self.B0, self.x, self.u)
 		self.fill_matrix(self.B0, self.parser.yaml.get_value(self.parser.content_yaml, 'input'))
@@ -201,6 +176,8 @@ class Worker(object):
 			obj.matrix(tmp1, tmp2, i)
 		if obj.__class__.__name__ == 'Lat':
 			obj.values(self.values)
+		if obj.__class__.__name__ == 'Mat':
+			obj.adds()
 		obj.end()
 
 	def main_work(self):
