@@ -49,7 +49,7 @@ class Mat(object):
 	def values(self, values):
 		if values:
 			for key in sorted(values):
-				print '%s = %s;' % (self.clean_value(key), values[key])
+				print '%s = %s' % (self.clean_value(key), values[key])
 			print
 
 	@staticmethod
@@ -59,6 +59,23 @@ class Mat(object):
 			print '{0}(k);'.format(vector[i]),
 		print ']\');'
 
+	def get_matrix_value(self, tab):
+		if not tab:
+			return '-'
+		if tab == '-':
+			return tab
+		odp = ''
+		tmp = ''
+		for i in range(0, len(tab)):
+			if len(tab) > 1 and i > 0:
+				odp = 'mp_multi({0}, '.format(tmp)
+			tmp = str(self.clean_value(tab[i]))
+			odp += tmp
+			if len(tab) > 1 and i > 0:
+				odp += ')'
+			tmp = odp
+		return tmp
+
 	def matrix(self, name, idx_name, matrix):
 		print '% matrix {0}{1}'.format(name, idx_name)
 		w1, w2 = self.yam.get_matrix_size(matrix)
@@ -66,32 +83,44 @@ class Mat(object):
 		for i in range(0, w1):
 			for j in range(0, w2):
 				if matrix[i][j] != '-':
-					print '   {0}{1}({2}, {3}) = {4};'.format(name, idx_name, i, j, self.clean_value(matrix[i][j]))
+					print '   {0}{1}({2}, {3}) = {4};'.format(name, idx_name, i+1, j+1, self.get_matrix_value(matrix[i][j]))
 		print
 
-	def input_vec(self, vec):
-		w1, w2 = self.yam.get_matrix_size(vec)
-		print
-		print 'U  = mp_ones({0}, {1});'.format(w1, w2)
+	@staticmethod
+	def input_vec(vec):
+		print 'disp(\'---------------------------------\');\n'
+		print 'disp(\'initial vectors:\');\n'
+		print 'disp(\'\');\n'
+		print 'U  = mp_ones({0}, {1})'.format(len(vec), 1)
 
-	def start_vec(self, vec):
-		w1, w2 = self.yam.get_matrix_size(vec)
-		print 'X0 = mp_zeros({0}, {1});'.format(w1, w2)
+	@staticmethod
+	def start_vec(vec):
+		print 'X0 = mp_zeros({0}, {1})'.format(len(vec), 1)
 		print
 
-	# As = mp_star(A0)
-	# A = mp_multi(As, A1)
-	# B = mp_multi(As, B0)
-	# % number of iterations
-	# K = 12;
-	# X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));
-	# Y(1) = mp_multi(C, X(:, 1));
-	# for i = 2:K
-	# 	X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));
-	# 	Y(i) = mp_multi(C, X(:, i));
-	# end
-	# X
-	# Y
+	@staticmethod
+	def adds():
+		print '' + \
+			'A0\n' + \
+			'A1\n' + \
+			'B0\n' + \
+			'C\n' + \
+			'\n' + \
+			'As = mp_star(A0)\n' + \
+			'A = mp_multi(As, A1)\n' + \
+			'B = mp_multi(As, B0)\n' + \
+			'\n' + \
+			'% number of iterations\n' + \
+			'k = 12;\n' + \
+			'X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n' + \
+			'Y(1) = mp_multi(C, X(:, 1));\n' + \
+			'for i = 2:k\n' + \
+			'    X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));\n' + \
+			'    Y(i) = mp_multi(C, X(:, i));\n' + \
+			'end\n' + \
+			'X\n' + \
+			'Y\n'
+
 
 	@staticmethod
 	def end():
