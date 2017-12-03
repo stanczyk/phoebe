@@ -31,6 +31,11 @@ class TestInf(unittest.TestCase):
 			phoebe.inf.self_test()
 		self.assertEqual(mock_stdout.getvalue(), INF_ANS)
 
+	# @mock.patch('phoebe.inf.time.time')
+	# def test_get_time(self, mock_time):
+	# 	mock_time.return_value = 1512330804.381958
+	# 	self.assertEqual(self.inf.get_time(), '2017-12-03 20:55:02 CET')
+
 
 def main():
 	unittest.main()

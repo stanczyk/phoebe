@@ -10,6 +10,7 @@ in the module:
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import inf
+from err import Err
 
 
 class Lat(object):
@@ -31,6 +32,7 @@ class Lat(object):
 		print '\\begin{document}'
 		print '\\section{(max, +) description}'
 		print
+		return Err.NOOP
 
 	@staticmethod
 	def equation():
@@ -43,6 +45,7 @@ class Lat(object):
 			'% y(k) = Cx(k)\n' + \
 			'\\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\\\\n' + \
 			'\\end{split}\\end{align}\n'
+		return Err.NOOP
 
 	@staticmethod
 	def vector(name, vector):
@@ -54,6 +57,7 @@ class Lat(object):
 			print '  {0}(k) \\\\'.format(vector[i])
 		print '\\end{array}\\right]'
 		print '\\end{equation*}\n'
+		return Err.NOOP
 
 	@staticmethod
 	def matrix(name, idx_name, matrix):
@@ -72,6 +76,7 @@ class Lat(object):
 			print '\\\\'
 		print '\\end{array}\\right]'
 		print '\\end{equation*}\n'
+		return Err.NOOP
 
 	@staticmethod
 	def values(values):
@@ -80,10 +85,12 @@ class Lat(object):
 			for key in sorted(values):
 				print '$%s = %s$\\\\' % (key, values[key])
 			print
+		return Err.NOOP
 
 	@staticmethod
 	def end():
 		print '\\end{document}\n' + \
 			'% eof\n'
+		return Err.NOOP
 
 # eof.

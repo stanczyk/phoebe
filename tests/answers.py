@@ -10,10 +10,10 @@ ERR_ANS = '\
 
 INF_ANS = '\
 Inf.VER:\n\
-phoebe: v.0.1\n\
+phoebe  v.0.1\n\
 \n\
 Inf.DOC:\n\
-Usage:\tphoebe [--file] [--details1] [--details2] [--details3] [--vectors] [--latex] <desc_file>\n\
+Usage:\tphoebe [--file] [--details1] [--details2] [--details3] [--vectors] [--latex | --no-desc] <desc_file>\n\
 \tphoebe -h | --help\n\
 \tphoebe -v | --version\n\
 \n\
@@ -24,11 +24,12 @@ Options:\n\
 \t--details3\tshow mapping and parsed matrices\n\
 \t--vectors\tshow vectors: u(k), x(k) and y(k)\n\
 \t--latex\t\tgenerate description for latex, default is matlab description\n\
+\t--no-desc\tno description generated\n\
 \t-h, --help\tshows this help message and exit\n\
 \t-v, --version\tshow version information and exit\n'
 
 INF_VER = '\
-phoebe: v.0.1\n\
+phoebe  v.0.1\n\
 author: Jaroslaw Stanczyk\n\
 e-mail: jaroslaw.stanczyk@upwr.edu.pl\n\
 copyright: (c) 2017 Jaroslaw Stanczyk'
@@ -152,10 +153,10 @@ mapping:\n\
 {\'M_3\': 2, \'M_2\': 1, \'M_1\': 0, \'u\': 0, \'y\': 0}\n\
 %(values)s\n\
 == MATRICES ================\n\
-A0 = [[\'-\', \'-\', \'-\'], [\'d_1t_{1,2}\', \'-\', \'-\'], [\'-\', \'d_2t_{2,3}\', \'-\']]\n\
-A1 = [[\'d_1\', \'-\', \'-\'], [\'-\', \'d_2\', \'-\'], [\'-\', \'-\', \'d_3\']]\n\
-B0 = [[\'t_{0,1}\'], [\'-\'], [\'-\']]\n\
-C  = [[\'-\', \'-\', \'d_3t_{3,4}\']]\n'
+A0 = [[\'-\', \'-\', \'-\'], [[\'d_1\', \'t_{1,2}\'], \'-\', \'-\'], [\'-\', [\'d_2\', \'t_{2,3}\'], \'-\']]\n\
+A1 = [[[\'d_1\'], \'-\', \'-\'], [\'-\', [\'d_2\'], \'-\'], [\'-\', \'-\', [\'d_3\']]]\n\
+B0 = [[[\'t_{0,1}\']], [\'-\'], [\'-\']]\n\
+C  = [[\'-\', \'-\', [\'d_3\', \'t_{3,4}\']]]\n'
 
 ANS_DET3_4 = ANS_DET3 % {'values': None}
 ANS_DET3_5 = ANS_DET3 % {'values': ANS_VALU_5}

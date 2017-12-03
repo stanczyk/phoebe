@@ -42,6 +42,7 @@ class TestWorker(unittest.TestCase):
 			'--vectors': False,
 			'--version': False,
 			'--latex': False,
+			'--no-desc': True,
 			'-h': False,
 			'-v': False,
 			'<desc_file>': None
