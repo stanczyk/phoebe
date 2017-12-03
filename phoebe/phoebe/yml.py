@@ -98,6 +98,8 @@ class Yml(object):
 
 	@staticmethod
 	def get_matrix_size(matrix):
+		if not matrix:
+			return None, None
 		w1 = len(matrix)
 		tmp = matrix[0]
 		w2 = len(tmp)

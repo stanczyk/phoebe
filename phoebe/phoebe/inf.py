@@ -33,7 +33,7 @@ class Inf(object):
 	# used by phoebe
 	VER = '' + \
 		NAME + \
-		' v.' + \
+		'  v.' + \
 		VERSION
 	WRITTEN = '' + \
 		'author: ' + AUTHOR + '\n' + \
@@ -47,7 +47,7 @@ class Inf(object):
 		'[--details2] ' + \
 		'[--details3] ' + \
 		'[--vectors] ' + \
-		'[--latex] ' + \
+		'[--latex | --no-desc] ' + \
 		'<desc_file>\n' + \
 		'\t' + NAME + ' -h | --help\n' + \
 		'\t' + NAME + ' -v | --version\n' + \
@@ -58,6 +58,7 @@ class Inf(object):
 		'\t--details3\tshow mapping and parsed matrices\n' + \
 		'\t--vectors\tshow vectors: u(k), x(k) and y(k)\n' + \
 		'\t--latex\t\tgenerate description for latex, default is matlab description\n' + \
+		'\t--no-desc\tno description generated\n' + \
 		'\t-h, --help\tshows this help message and exit\n' + \
 		'\t-v, --version\tshow version information and exit'
 

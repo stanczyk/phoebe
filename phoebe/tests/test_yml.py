@@ -87,6 +87,16 @@ class TestYml(unittest.TestCase):
 		self.assertEqual(self.yml.get_len(''), -1)
 		self.assertEqual(self.yml.get_len(None), -1)
 
+	def test_get_matrix_size(self):
+		""" test method for *get_matrix_size* """
+		self.assertEqual(self.yml.get_matrix_size(None), (None, None))
+		self.assertEqual(self.yml.get_matrix_size([]), (None, None))
+		self.assertEqual(self.yml.get_matrix_size(['123']), (1, 3))
+		self.assertEqual(self.yml.get_matrix_size([['-', '-', ['d_3', 't_{3,4}']]]), (1, 3))
+		self.assertEqual(
+			self.yml.get_matrix_size([[['d_1'], '-', '-'], ['-', ['d_2'], '-'], ['-', '-', ['d_3']]]), (3, 3)
+		)
+
 	def test_self_test(self):
 		""" test method for *self_test* """
 		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:

@@ -127,6 +127,7 @@ class Worker(object):
 		print self.mapping
 		print self.values
 		self.show_matrices()
+		return Err.NOOP
 
 	def show_matrices(self):
 		print '== MATRICES ================'
@@ -142,10 +143,8 @@ class Worker(object):
 			print i
 		return Err.NOOP
 
-	def description(self, obj):
-		tmp = tmp1 = tmp2 = None
-		obj.begin()
-		obj.equation()
+	def desc_vector(self, obj):
+		tmp = None
 		for i in [self.u, self.x, self.y]:
 			if i == self.u:
 				tmp = 'u'
@@ -154,10 +153,10 @@ class Worker(object):
 			if i == self.y:
 				tmp = 'y'
 			obj.vector(tmp, i)
-		if obj.__class__.__name__ == 'Mat':
-			obj.input_vec(self.u)
-			obj.start_vec(self.x)
-			obj.values(self.values)
+		return Err.NOOP
+
+	def desc_matrix(self, obj):
+		tmp1 = tmp2 = None
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			if i == self.A0:
 				tmp1 = 'A'
@@ -174,11 +173,23 @@ class Worker(object):
 				if obj.__class__.__name__ == 'Lat':
 					tmp2 = '{}'
 			obj.matrix(tmp1, tmp2, i)
+		return Err.NOOP
+
+	def description(self, obj):
+		obj.begin()
+		obj.equation()
+		self. desc_vector(obj)
+		if obj.__class__.__name__ == 'Mat':
+			obj.input_vec(self.u)
+			obj.start_vec(self.x)
+			obj.values(self.values)
+		self.desc_matrix(obj)
 		if obj.__class__.__name__ == 'Lat':
 			obj.values(self.values)
 		if obj.__class__.__name__ == 'Mat':
 			obj.adds()
 		obj.end()
+		return Err.NOOP
 
 	def main_work(self):
 		self.prepare_vectors()
@@ -188,6 +199,8 @@ class Worker(object):
 		self.matrix_preparation()
 		if self.parser.args['--details3']:
 			self.show_details3()
+		if self.parser.args['--no-desc']:
+			return Err.NOOP
 		if self.parser.args['--latex']:
 			lat = Lat()
 			self.description(lat)
