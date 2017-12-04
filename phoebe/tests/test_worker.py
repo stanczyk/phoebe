@@ -14,7 +14,10 @@ import unittest
 import phoebe.err
 import phoebe.worker
 import mock
-from answers import ANS_VEC2, ANS_VEC4, ANS_DET3_2, ANS_DET3_4, ANS_DET3_5
+from answers import ANS_VEC2, ANS_VEC4,\
+	ANS_DET3_2, ANS_DET3_4, ANS_DET3_5,\
+	ANS_MAT4, ANS_MAT5,\
+	ANS_LAT4
 
 
 class TestWorker(unittest.TestCase):
@@ -113,6 +116,79 @@ class TestWorker(unittest.TestCase):
 				self.worker.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_5)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_desc1(self, mock_docopt):
+		args = self.args
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f1.yml'
+		mock_docopt.return_value = args
+		with self.assertRaises(SystemExit) as system_exit:
+			self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_DATA)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_desc2(self, mock_docopt):
+		args = self.args
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
+		mock_docopt.return_value = args
+		with self.assertRaises(SystemExit) as system_exit:
+			self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_DATA)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_get_desc3(self, mock_docopt):
+		args = self.args
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f3.yml'
+		mock_docopt.return_value = args
+		with self.assertRaises(SystemExit) as system_exit:
+			self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_IO)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	@mock.patch('phoebe.parser.Inf.get_time')
+	def test_get_matlab_desc4(self, mock_time, mock_docopt):
+		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		args = self.args
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_MAT4)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	@mock.patch('phoebe.parser.Inf.get_time')
+	def test_get_matlab_desc5(self, mock_time, mock_docopt):
+		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		args = self.args
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_MAT5)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	@mock.patch('phoebe.parser.Inf.get_time')
+	def test_get_latex_desc4(self, mock_time, mock_docopt):
+		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		args = self.args
+		args['--latex'] = True
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_LAT4)
 
 
 def main():

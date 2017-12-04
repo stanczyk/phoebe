@@ -35,10 +35,10 @@ class Mat(object):
 	@staticmethod
 	def equation():
 		print 'clear\n' + \
-			'disp(\' \');\n' + \
+			'disp(\'\');\n' + \
 			'disp(\'x(k) = A0x(k) + A1x(k-1) + B0u(k)\');\n' + \
 			'disp(\'y(k) =  Cx(k)\');\n' + \
-			'disp(\'---------------------------------\');\n'
+			'disp(\'---------------------------------\');'
 		return Err.NOOP
 
 	@staticmethod
@@ -96,8 +96,8 @@ class Mat(object):
 
 	@staticmethod
 	def input_vec(vec):
-		print 'disp(\'---------------------------------\');\n'
-		print 'disp(\'initial vectors:\');\n'
+		print 'disp(\'---------------------------------\');'
+		print 'disp(\'initial vectors:\');'
 		print 'disp(\'\');\n'
 		print 'U  = mp_ones({0}, {1})'.format(len(vec), 1)
 		return Err.NOOP
