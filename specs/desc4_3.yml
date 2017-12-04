@@ -1,0 +1,28 @@
+#
+# desc4_3.yml
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# finite buffers (figF41) described in details in 04/Ex.1.3
+---
+input:
+- u: {connect: M_1, tr-time: 't_{0,1}'}
+prod-unit:
+- M_1: {connect: X_4, op-time: d_1, tr-time: t_0}
+- M_2: {connect: X_5, op-time: d_2, tr-time: t_0}
+- M_3: {connect: y, op-time: d_3, tr-time: 't_{3,4}'}
+- X_4: {connect: M_2, op-time: t_0, tr-time: 't_{1,2}'}
+- X_5: {connect: X_6, op-time: t_0, tr-time: t_0}
+- X_6: {connect: M_3, op-time: t_0, tr-time: 't_{2,3}'}
+output:
+- y: {}
+values: {
+'t_{0,1}': 1,
+'t_{1,2}': 2,
+'t_{2,3}': 0,
+'t_{3,4}': 1,
+d_1: 3,
+d_2: 2,
+d_3: 6,
+t_0: 0,
+}
+# eof.

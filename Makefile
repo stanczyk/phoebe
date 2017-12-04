@@ -8,6 +8,7 @@ include ./../tex/make1.mk
 # plik główny:
 MAIN=tmp
 STY=$(shell pwd)/../../sty
+DESC=./specs/desc4_3.yml
 
 main = $(MAIN).tex
 
@@ -32,8 +33,14 @@ pdf-one: $(main)
 .PHONY: build
 build:
 	$(begin)
-	./phoebe/bin/phoebe --latex ./phoebe/desc2.yml | tee tmp.tex
+	./phoebe/bin/phoebe --latex $(DESC) | tee tmp.tex
 	$(MAKE) pdf-one
+	$(end)
+
+.PHONY: matlab
+matlab:
+	$(begin)
+	./phoebe/bin/phoebe $(DESC) | tee tmp.m
 	$(end)
 
 include ./../tex/make2.mk
