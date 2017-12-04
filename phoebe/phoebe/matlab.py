@@ -78,8 +78,7 @@ class Mat(object):
 			odp += tmp
 			if len(tab) > 1 and i > 0:
 				odp += ')'
-			tmp = odp
-		return tmp
+		return odp
 
 	def matrix(self, name, idx_name, matrix):
 		print '% matrix {0}{1}'.format(name, idx_name)
