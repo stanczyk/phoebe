@@ -17,7 +17,7 @@ import mock
 from answers import ANS_VEC2, ANS_VEC4,\
 	ANS_DET3_2, ANS_DET3_4, ANS_DET3_5,\
 	ANS_MAT4, ANS_MAT5,\
-	ANS_LAT4
+	ANS_LAT4, ANS_LAT5
 
 
 class TestWorker(unittest.TestCase):
@@ -189,6 +189,21 @@ class TestWorker(unittest.TestCase):
 				self.worker.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
 		self.assertEqual(mock_stdout.getvalue(), ANS_LAT4)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	@mock.patch('phoebe.parser.Inf.get_time')
+	def test_get_latex_desc5(self, mock_time, mock_docopt):
+		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		args = self.args
+		args['--latex'] = True
+		args['--no-desc'] = False
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.worker.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_LAT5)
 
 
 def main():
