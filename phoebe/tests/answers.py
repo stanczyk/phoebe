@@ -245,6 +245,99 @@ t23 = 0\n\
 t34 = 1\n\
 \n')
 
-ANS_LAT4 = ''
+ANS_LAT = '\
+\\documentclass[11pt, a4paper, fleqn]{article}\n\
+\\usepackage{amsmath}\n\
+\\begin{document}\n\
+\\section{(max, +) description}\n\
+\n\
+\\begin{align}\\begin{split}\n\
+% x(k) = A0x(k) + A1x(k-1) + B0u(k)\n\
+\\mathbf{x}(k) & \\, = \\; \
+\\mathbf{A}_0\\mathbf{x}(k) \\oplus \\mathbf{A}_1\\mathbf{x}(k-1) \\oplus \\mathbf{B}_0\\mathbf{u}(k)\\\\\n\
+% y(k) = Cx(k)\n\\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\\\\n\
+\\end{split}\\end{align}\n\
+\n\
+% vector u(k)\n\
+\\begin{equation*}\n\
+\\mathbf{u}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  u(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% vector x(k)\n\
+\\begin{equation*}\n\
+\\mathbf{x}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  x_1(k) \\\\\n\
+  x_2(k) \\\\\n\
+  x_3(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% vector y(k)\n\
+\\begin{equation*}\n\
+\\mathbf{y}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  y(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% matrix A_0\n\
+\\begin{equation*}\n\
+\\mathbf{A}_0 = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\varepsilon \t& \\varepsilon \t& \\varepsilon \\\\\n\
+d_1t_{1,2} \t& \\varepsilon \t& \\varepsilon \\\\\n\
+\\varepsilon \t& d_2t_{2,3} \t& \\varepsilon \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% matrix A_1\n\
+\\begin{equation*}\n\
+\\mathbf{A}_1 = \n\
+\\left[\\begin{array}{*{20}c}\n\
+d_1 \t& \\varepsilon \t& \\varepsilon \\\\\n\
+\\varepsilon \t& d_2 \t& \\varepsilon \\\\\n\
+\\varepsilon \t& \\varepsilon \t& d_3 \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% matrix B_0\n\
+\\begin{equation*}\n\
+\\mathbf{B}_0 = \n\
+\\left[\\begin{array}{*{20}c}\n\
+t_{0,1} \\\\\n\
+\\varepsilon \\\\\n\
+\\varepsilon \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n\
+% matrix C_{}\n\
+\\begin{equation*}\n\
+\\mathbf{C}_{} = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\varepsilon \t& \\varepsilon \t& d_3t_{3,4} \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n'
+
+LAT_END = '\
+\\end{document}\n\
+% eof\n\
+\n'
+
+ANS_LAT4 = DESC_BEGIN + ANS_LAT + LAT_END
+ANS_LAT5 = DESC_BEGIN + ANS_LAT + '\
+\\noindent\\\\\n\
+$d_1 = 3$\\\\\n\
+$d_2 = 2$\\\\\n\
+$d_3 = 6$\\\\\n\
+$t_{0,1} = 1$\\\\\n\
+$t_{1,2} = 2$\\\\\n\
+$t_{2,3} = 0$\\\\\n\
+$t_{3,4} = 1$\\\\\n\
+\n' + LAT_END
 
 # end.
