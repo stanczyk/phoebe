@@ -60,7 +60,17 @@ class Lat(object):
 		return Err.NOOP
 
 	@staticmethod
-	def matrix(name, idx_name, matrix):
+	def get_matrix_value(tab):
+		if not tab:
+			return '-'
+		if tab == '-':
+			return tab
+		odp = ''
+		for i in range(0, len(tab)):
+			odp += str(tab[i])
+		return odp
+
+	def matrix(self, name, idx_name, matrix):
 		print '% matrix {0}_{1}'.format(name, idx_name)
 		print '\\begin{equation*}'
 		print '\\mathbf{%s}_%s = ' % (name, idx_name)
@@ -72,7 +82,7 @@ class Lat(object):
 				if matrix[i][j] == '-':
 					print '\\varepsilon',
 				else:
-					print matrix[i][j],
+					print self.get_matrix_value(matrix[i][j]),
 			print '\\\\'
 		print '\\end{array}\\right]'
 		print '\\end{equation*}\n'
