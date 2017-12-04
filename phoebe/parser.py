@@ -55,7 +55,7 @@ class Parser(object):
 		try:
 			self.content_yaml = self.yaml.load(self.file_handler)
 		except yaml.YAMLError as exc:
-			print >> sys.stderr, Err().value_to_name(Err.ERR_YAML) + ": " + str(exc)
+			print >> sys.stderr, Err().value_to_name(Err.ERR_YAML) + ': ' + str(exc)
 			return Err.ERR_YAML
 		return Err.NOOP
 

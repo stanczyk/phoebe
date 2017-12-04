@@ -191,6 +191,16 @@ class Worker(object):
 		obj.end()
 		return Err.NOOP
 
+	def generatable(self):
+		""" return Err.NOOP if it is possible to generate a description """
+		if not self.u:
+			return Err.ERR_NO_INPUT
+		if not self.y:
+			return Err.ERR_NO_OUTPUT
+		if not self.x:
+			return Err.ERR_NO_STATE_VECT
+		return Err.NOOP
+
 	def main_work(self):
 		self.prepare_vectors()
 		if self.parser.args['--vectors']:
@@ -201,6 +211,10 @@ class Worker(object):
 			self.show_details3()
 		if self.parser.args['--no-desc']:
 			return Err.NOOP
+		ans = self.generatable()
+		if ans:
+			print >> sys.stderr, Err().value_to_name(ans) + ': not enough data to generate description'
+			return Err.ERR_NO_DATA
 		if self.parser.args['--latex']:
 			lat = Lat()
 			self.description(lat)
