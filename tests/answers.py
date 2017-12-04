@@ -117,7 +117,6 @@ output:\n\
 %(values)s'
 
 ANS_DET2_4 = ANS_DET2 % {'values': ''}
-
 ANS_DET2_5 = ANS_DET2 % {'values': '\
 values:\n\
   d_1: 3\n\
