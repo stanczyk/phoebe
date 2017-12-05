@@ -42,10 +42,17 @@ poszczególne etapy programowania (python)
 2017.11.29 DONE
 	- zakładamy, że wszystkie czasy (tr- i op-) są zmiennymi typu str! (obliczenia wykonane zostana w matlabie po wygenerowaniu!)
 
-2017.12.01
+2017.12.01 DONE
 	- opis z poszczególnymi czasami operacji/transportu
 	- opis dla matlaba
 	- sprawdzanie, czy opis jest zgodny ze schematem?
 	- kiedy w pełni funkcjonalna wersja dla serial line?
+
+2017.12.05
+	- sprawdzanie, czy opis jest zgodny ze schematem?
+	- modelowanie braku buforów
+	- modelowanie pętli zwrotnych (czy podawać w którym takcie mają powrócić?)
+	- transport time = 0 by default (jeśli połączone)
+	- połączenie z więcej niż jednym elementem
 
 # eof.
