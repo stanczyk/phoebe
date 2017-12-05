@@ -8,7 +8,7 @@ include ./../tex/make1.mk
 # plik główny:
 MAIN=tmp
 STY=$(shell pwd)/../../sty
-DESC=./specs/desc1_1.yml
+DESC=./specs/desc1_2.yml
 
 main = $(MAIN).tex
 

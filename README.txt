@@ -49,10 +49,12 @@ poszczególne etapy programowania (python)
 	- kiedy w pełni funkcjonalna wersja dla serial line?
 
 2017.12.05
+	- v0.2
+
 	- sprawdzanie, czy opis jest zgodny ze schematem?
 	- modelowanie braku buforów
 	- modelowanie pętli zwrotnych (czy podawać w którym takcie mają powrócić?)
-	- transport time = 0 by default (jeśli połączone)
+	- done - transport time = 0 by default (jeśli połączone)
 	- połączenie z więcej niż jednym elementem
 
 # eof.
