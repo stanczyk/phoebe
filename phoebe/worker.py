@@ -87,7 +87,7 @@ class Worker(object):
 	def fill_matrix(self, matrix, my_dic):
 		for i in range(0, self.parser.yaml.get_len(my_dic)):
 			key = self.parser.yaml.get_key(my_dic[i])
-			op_time, connect, tr_time = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
+			op_time, connect, tr_time, buffers = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
 			tmp = []
 			if op_time:
 				tmp.append(op_time)

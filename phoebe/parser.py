@@ -64,17 +64,21 @@ class Parser(object):
 		print self.yaml.show(self.content_yaml)
 		return Err.NOOP
 
-	def add_default_time(self):
+	def add_defaults(self):
 		for i in ['input', 'prod-unit']:
 			my_dic = self.yaml.get_value(self.content_yaml, i)
 			for j in range(0, self.yaml.get_len(my_dic)):
 				key = self.yaml.get_key(my_dic[j])
 				my_internal_dic = self.yaml.get_value(my_dic[j], key)
-				op_time, _, tr_time = self.get_details(my_internal_dic)
+				op_time, _, tr_time, buffers = self.get_details(my_internal_dic)
 				if not op_time:
 					my_internal_dic['op-time'] = '0'
 				if not tr_time:
 					my_internal_dic['tr-time'] = '0'
+				if buffers is None:
+					my_internal_dic['buffers'] = '-'
+				elif buffers == 0:
+					my_internal_dic['buffers'] = '0'
 		return Err.NOOP
 
 	def show_details1(self):
@@ -88,7 +92,8 @@ class Parser(object):
 		op_time = self.yaml.get_value(int_dic, 'op-time')
 		connect = self.yaml.get_value(int_dic, 'connect')
 		tr_time = self.yaml.get_value(int_dic, 'tr-time')
-		return op_time, connect, tr_time
+		buffers = self.yaml.get_value(int_dic, 'buffers')
+		return op_time, connect, tr_time, buffers
 
 	def show_details2(self):
 		print '== DETAILS 2 ==============='
@@ -99,10 +104,11 @@ class Parser(object):
 				key = self.yaml.get_key(my_dic[j])
 				print '  ' + key
 				int_dic = self.yaml.get_value(my_dic[j], key)
-				op_time, connect, tr_time = self.get_details(int_dic)
+				op_time, connect, tr_time, buffers = self.get_details(int_dic)
 				print '    op-time: ' + (op_time if op_time else '-')
 				print '    connect: ' + (connect if connect else '-')
 				print '    tr-time: ' + (tr_time if tr_time else '-')
+				print '    buffers: ' + (buffers if buffers else '-')
 		i = 'values'
 		my_dic = self.yaml.get_value(self.content_yaml, i)
 		if my_dic:
@@ -116,7 +122,7 @@ class Parser(object):
 			return Err.ERR_IO
 		if self.args['--file']:
 			self.show_file_content()
-		self.add_default_time()
+		self.add_defaults()
 		if self.args['--details1']:
 			self.show_details1()
 		if self.args['--details2']:
