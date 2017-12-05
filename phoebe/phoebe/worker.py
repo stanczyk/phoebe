@@ -109,21 +109,24 @@ class Worker(object):
 					matrix[j][i] = tmp
 		return Err.NOOP
 
-	def optimize_matrix(self, matrix):
+	def matrix_remove_repeated_zeros(self, matrix):
 		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
-		# print w1, w2
 		for i in range(0, w1):
 			for j in range(0, w2):
 				if matrix[i][j] != '-':
-					if len(matrix[i][j]) > 1:
-						tmp = matrix[i][j]
-						# print tmp
-						for k in range(0, len(tmp)):
-							if tmp[k] == '0' and tmp.count(tmp[k]) > 1:
-								tmp[k] = None
-						for k in range(0, tmp.count(None)):
-							tmp.remove(None)
-						# print tmp
+					tmp = matrix[i][j]
+					for k in range(0, len(tmp)):
+						if tmp[k] == '0' and tmp.count(tmp[k]) > 1:
+							tmp[k] = None
+					for k in range(0, tmp.count(None)):
+						tmp.remove(None)
+
+	def matrix_remove_redundant_zeros(self, matrix):
+		pass
+
+	def optimize_matrix(self, matrix):
+		self.matrix_remove_repeated_zeros(matrix)
+		self.matrix_remove_redundant_zeros(matrix)
 
 	def matrix_preparation(self):
 		self.create_matrix(self.B0, self.x, self.u)
