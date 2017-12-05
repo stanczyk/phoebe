@@ -109,6 +109,22 @@ class Worker(object):
 					matrix[j][i] = tmp
 		return Err.NOOP
 
+	def optimize_matrix(self, matrix):
+		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
+		# print w1, w2
+		for i in range(0, w1):
+			for j in range(0, w2):
+				if matrix[i][j] != '-':
+					if len(matrix[i][j]) > 1:
+						tmp = matrix[i][j]
+						# print tmp
+						for k in range(0, len(tmp)):
+							if tmp[k] == '0' and tmp.count(tmp[k]) > 1:
+								tmp[k] = None
+						for k in range(0, tmp.count(None)):
+							tmp.remove(None)
+						# print tmp
+
 	def matrix_preparation(self):
 		self.create_matrix(self.B0, self.x, self.u)
 		self.fill_matrix(self.B0, self.parser.yaml.get_value(self.parser.content_yaml, 'input'))
@@ -119,6 +135,8 @@ class Worker(object):
 		self.fill_matrix(self.A1, prod_unit)
 		self.create_matrix(self.C, self.y, self.x)
 		self.fill_matrix(self.C, prod_unit)
+		for i in [self.A0, self.A1, self.B0, self.C]:
+			self.optimize_matrix(i)
 		return Err.NOOP
 
 	def show_details3(self):

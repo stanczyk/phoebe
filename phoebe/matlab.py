@@ -66,7 +66,7 @@ class Mat(object):
 
 	def get_matrix_value(self, tab):
 		if not tab:
-			return '-'
+			return '0'
 		if tab == '-':
 			return tab
 		odp = ''
