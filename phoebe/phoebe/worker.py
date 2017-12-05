@@ -110,6 +110,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def matrix_remove_repeated_zeros(self, matrix):
+		""" 0, 0, 0 -> 0 """
 		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
@@ -122,9 +123,18 @@ class Worker(object):
 						tmp.remove(None)
 
 	def matrix_remove_redundant_zeros(self, matrix):
-		pass
+		""" 0, d_1 -> d1 """
+		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
+		for i in range(0, w1):
+			for j in range(0, w2):
+				if matrix[i][j] != '-':
+					tmp = matrix[i][j]
+					if len(tmp) > 1 and tmp.count('0'):
+						tmp.remove('0')
 
 	def optimize_matrix(self, matrix):
+		if not matrix:
+			return
 		self.matrix_remove_repeated_zeros(matrix)
 		self.matrix_remove_redundant_zeros(matrix)
 

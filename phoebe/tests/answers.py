@@ -65,12 +65,14 @@ values: None\n'
 
 ANS_DET = '\
 == DETAILS 1 ===============\n\
-input: [{\'u\': {\'tr-time\': \'t_{0,1}\', \'connect\': \'M_1\'}}]\n\
+input: [\
+{\'u\': {\'op-time\': \'0\', \'tr-time\': \'t_{0,1}\', \'connect\': \'M_1\'}}]\n\
 prod-unit: [\
 {\'M_1\': {\'op-time\': \'d_1\', \'tr-time\': \'t_{1,2}\', \'connect\': \'M_2\'}}, \
 {\'M_2\': {\'op-time\': \'d_2\', \'tr-time\': \'t_{2,3}\', \'connect\': \'M_3\'}}, \
 {\'M_3\': {\'op-time\': \'d_3\', \'tr-time\': \'t_{3,4}\', \'connect\': \'y\'}}]\n\
-output: [{\'y\': {}}]\n\
+output: [\
+{\'y\': {}}]\n\
 values: %(values)s\n'
 
 ANS_VALU_5 = '\
@@ -85,15 +87,15 @@ input:\n\
 prod-unit:\n\
 output:\n\
   y_1\n\
-    op-time: --\n\
-    connect: --\n\
-    tr-time: --\n'
+    op-time: -\n\
+    connect: -\n\
+    tr-time: -\n'
 
 ANS_DET2 = '\
 == DETAILS 2 ===============\n\
 input:\n\
   u\n\
-    op-time: --\n\
+    op-time: 0\n\
     connect: M_1\n\
     tr-time: t_{0,1}\n\
 prod-unit:\n\
@@ -111,9 +113,9 @@ prod-unit:\n\
     tr-time: t_{3,4}\n\
 output:\n\
   y\n\
-    op-time: --\n\
-    connect: --\n\
-    tr-time: --\n\
+    op-time: -\n\
+    connect: -\n\
+    tr-time: -\n\
 %(values)s'
 
 ANS_DET2_4 = ANS_DET2 % {'values': ''}
