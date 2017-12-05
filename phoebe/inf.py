@@ -28,7 +28,7 @@ class Inf(object):
 	LICENSE = 'GNU Affero General Public License v3 or later (AGPLv3+)'
 	URL = 'http://gen.up.wroc.pl/stanczyk/'
 	# 'https://github.com/stanczyk/phoebe'
-	VERSION = '0.1'
+	VERSION = '0.2'
 
 	# used by phoebe
 	VER = '' + \
