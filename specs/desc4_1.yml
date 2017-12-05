@@ -7,9 +7,9 @@
 input:
 - u: {connect: M_1, tr-time: 't_{0,1}'}
 prod-unit:
-- M_1: {op-time: d_1, buf: 0, connect: M_2, tr-time: 't_{1,2}'}
-- M_2: {op-time: d_2, buf: 0, connect: M_3, tr-time: 't_{2,3}'}
-- M_3: {op-time: d_2, buf: 0, connect: y, tr-time: 't_{3,4}'}
+- M_1: {op-time: d_1, buffers: 0, connect: M_2, tr-time: 't_{1,2}'}
+- M_2: {op-time: d_2, buffers: 0, connect: M_3, tr-time: 't_{2,3}'}
+- M_3: {op-time: d_2, buffers: 0, connect: y, tr-time: 't_{3,4}'}
 output:
 - y: {}
 values: {

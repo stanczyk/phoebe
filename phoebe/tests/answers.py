@@ -66,11 +66,11 @@ values: None\n'
 ANS_DET = '\
 == DETAILS 1 ===============\n\
 input: [\
-{\'u\': {\'op-time\': \'0\', \'tr-time\': \'t_{0,1}\', \'connect\': \'M_1\'}}]\n\
+{\'u\': {\'op-time\': \'0\', \'tr-time\': \'t_{0,1}\', \'connect\': \'M_1\', \'buffers\': \'-\'}}]\n\
 prod-unit: [\
-{\'M_1\': {\'op-time\': \'d_1\', \'tr-time\': \'t_{1,2}\', \'connect\': \'M_2\'}}, \
-{\'M_2\': {\'op-time\': \'d_2\', \'tr-time\': \'t_{2,3}\', \'connect\': \'M_3\'}}, \
-{\'M_3\': {\'op-time\': \'d_3\', \'tr-time\': \'t_{3,4}\', \'connect\': \'y\'}}]\n\
+{\'M_1\': {\'op-time\': \'d_1\', \'tr-time\': \'t_{1,2}\', \'connect\': \'M_2\', \'buffers\': \'-\'}}, \
+{\'M_2\': {\'op-time\': \'d_2\', \'tr-time\': \'t_{2,3}\', \'connect\': \'M_3\', \'buffers\': \'-\'}}, \
+{\'M_3\': {\'op-time\': \'d_3\', \'tr-time\': \'t_{3,4}\', \'connect\': \'y\', \'buffers\': \'-\'}}]\n\
 output: [\
 {\'y\': {}}]\n\
 values: %(values)s\n'
@@ -89,7 +89,8 @@ output:\n\
   y_1\n\
     op-time: -\n\
     connect: -\n\
-    tr-time: -\n'
+    tr-time: -\n\
+    buffers: -\n'
 
 ANS_DET2 = '\
 == DETAILS 2 ===============\n\
@@ -98,24 +99,29 @@ input:\n\
     op-time: 0\n\
     connect: M_1\n\
     tr-time: t_{0,1}\n\
+    buffers: -\n\
 prod-unit:\n\
   M_1\n\
     op-time: d_1\n\
     connect: M_2\n\
     tr-time: t_{1,2}\n\
+    buffers: -\n\
   M_2\n\
     op-time: d_2\n\
     connect: M_3\n\
     tr-time: t_{2,3}\n\
+    buffers: -\n\
   M_3\n\
     op-time: d_3\n\
     connect: y\n\
     tr-time: t_{3,4}\n\
+    buffers: -\n\
 output:\n\
   y\n\
     op-time: -\n\
     connect: -\n\
     tr-time: -\n\
+    buffers: -\n\
 %(values)s'
 
 ANS_DET2_4 = ANS_DET2 % {'values': ''}
