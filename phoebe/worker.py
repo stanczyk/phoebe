@@ -19,7 +19,7 @@ from matlab import Mat
 
 class Worker(object):
 	"""Worker class"""
-	# pylint: disable=invalid-name, too-many-instance-attributes
+	# pylint: disable=invalid-name, too-many-instance-attributes, too-many-branches
 	def __init__(self):
 		self.parser = None
 		self.u = []
@@ -91,16 +91,26 @@ class Worker(object):
 			tmp = []
 			if op_time:
 				tmp.append(op_time)
+
 			if matrix in [self.A0, self.B0]:
 				if connect and connect[0] != 'y':
 					if tr_time:
 						tmp.append(tr_time)
 					j = self.mapping[connect]
 					matrix[j][i] = tmp
+
 			if matrix in [self.A1]:
 				if op_time:
 					j = self.mapping[key]
 					matrix[j][i] = tmp
+				if buffers == '0':
+					if connect and connect[0] != 'y':
+						j = self.mapping[connect]
+						if tr_time == '0':
+							matrix[i][j] = ['0']
+						else:
+							matrix[i][j] = ['-' + tr_time]
+
 			if matrix in [self.C]:
 				if connect and connect[0] == 'y':
 					if tr_time:
@@ -139,15 +149,19 @@ class Worker(object):
 		self.matrix_remove_redundant_zeros(matrix)
 
 	def matrix_preparation(self):
+		# matrix B0
 		self.create_matrix(self.B0, self.x, self.u)
 		self.fill_matrix(self.B0, self.parser.yaml.get_value(self.parser.content_yaml, 'input'))
+		# matrix A0 and A1
 		prod_unit = self.parser.yaml.get_value(self.parser.content_yaml, 'prod-unit')
 		self.create_matrix(self.A0, self.x, self.x)
 		self.fill_matrix(self.A0, prod_unit)
 		self.create_matrix(self.A1, self.x, self.x)
 		self.fill_matrix(self.A1, prod_unit)
+		# matrix C
 		self.create_matrix(self.C, self.y, self.x)
 		self.fill_matrix(self.C, prod_unit)
+		# polishing
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			self.optimize_matrix(i)
 		return Err.NOOP

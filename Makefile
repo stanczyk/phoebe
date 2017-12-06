@@ -114,6 +114,12 @@ build:
 		$(MAKE) $@
 	$(end)
 
+.PHONY: matlab
+matlab:
+	$(begin)
+	cd .. ; \
+		$(MAKE) $@
+	$(end)
 
 include ./../../tex/make2.mk
 # eof.
