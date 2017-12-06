@@ -3,6 +3,8 @@
 # (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 
+2017.12.06 - v0.3
+	modeling of no-buffers
 
 2017.12.05 - v0.2
 	remove redundant zeros in description
