@@ -9,7 +9,6 @@ in the module:
 
 Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
-# pylama: ignore=C901
 import sys
 from err import Err
 from parser import Parser
@@ -19,7 +18,7 @@ from matlab import Mat
 
 class Worker(object):
 	"""Worker class"""
-	# pylint: disable=invalid-name, too-many-instance-attributes, too-many-branches
+	# pylint: disable=invalid-name, too-many-instance-attributes, too-many-branches, too-many-nested-blocks
 	def __init__(self):
 		self.parser = None
 		self.u = []
@@ -84,39 +83,45 @@ class Worker(object):
 			matrix.append(tmp)
 		return Err.NOOP
 
-	def fill_matrix(self, matrix, my_dic):
+	def fill_matrix(self, matrix, my_dic):  # noqa: C901
 		for i in range(0, self.parser.yaml.get_len(my_dic)):
 			key = self.parser.yaml.get_key(my_dic[i])
-			op_time, connect, tr_time, buffers = self.parser.get_details(self.parser.yaml.get_value(my_dic[i], key))
+			op_time, connect = self.parser.get_det1(self.parser.yaml.get_value(my_dic[i], key))
 			tmp = []
 			if op_time:
 				tmp.append(op_time)
-
 			if matrix in [self.A0, self.B0]:
-				if connect and connect[0] != 'y':
-					if tr_time:
-						tmp.append(tr_time)
-					j = self.mapping[connect]
-					matrix[j][i] = tmp
-
+				if connect:
+					for key in connect:
+						if key[0] != 'y':
+							tr_time, buffers = self.parser.get_det2(connect[key])
+							if tr_time:
+								tmp.append(tr_time)
+							j = self.mapping[key]
+							matrix[j][i] = tmp
 			if matrix in [self.A1]:
 				if op_time:
 					j = self.mapping[key]
 					matrix[j][i] = tmp
-				if buffers == '0':
-					if connect and connect[0] != 'y':
-						j = self.mapping[connect]
-						if tr_time == '0':
-							matrix[i][j] = ['0']
-						else:
-							matrix[i][j] = ['-' + tr_time]
-
+				if connect:
+					for key in connect:
+						if key[0] != 'y':
+							tr_time, buffers = self.parser.get_det2(connect[key])
+							if buffers == '0':
+								j = self.mapping[key]
+								if tr_time == '0':
+									matrix[i][j] = ['0']
+								else:
+									matrix[i][j] = ['-' + tr_time]
 			if matrix in [self.C]:
-				if connect and connect[0] == 'y':
-					if tr_time:
-						tmp.append(tr_time)
-					j = self.mapping[connect]
-					matrix[j][i] = tmp
+				if connect:
+					for key in connect:
+						tr_time, buffers = self.parser.get_det2(connect[key])
+						if key[0] == 'y':
+							if tr_time:
+								tmp.append(tr_time)
+							j = self.mapping[key]
+							matrix[j][i] = tmp
 		return Err.NOOP
 
 	def matrix_remove_repeated_zeros(self, matrix):
@@ -166,13 +171,23 @@ class Worker(object):
 			self.optimize_matrix(i)
 		return Err.NOOP
 
-	def show_details3(self):
+	def show_det3(self):
 		print '== DETAILS 3 ==============='
 		print 'mapping:'
 		print self.mapping
 		print self.values
 		self.show_matrices()
 		return Err.NOOP
+
+	@staticmethod
+	def prn_matrix(matrix):
+		if matrix:
+			print '['
+			for i in range(0, len(matrix)):
+				print matrix[i]
+			print ']'
+		else:
+			print '[]'
 
 	def show_matrices(self):
 		print '== MATRICES ================'
@@ -185,7 +200,7 @@ class Worker(object):
 				print 'B0 =',
 			if i == self.C:
 				print 'C  =',
-			print i
+			self.prn_matrix(i)
 		return Err.NOOP
 
 	def desc_vector(self, obj):
@@ -253,7 +268,7 @@ class Worker(object):
 		self.prepare_mapping()
 		self.matrix_preparation()
 		if self.parser.args['--det3']:
-			self.show_details3()
+			self.show_det3()
 		if self.parser.args['--no-desc']:
 			return Err.NOOP
 		ans = self.generatable()

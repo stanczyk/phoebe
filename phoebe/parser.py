@@ -19,6 +19,7 @@ from yml import Yml
 
 class Parser(object):
 	"""Parser class"""
+	# pylint: disable=too-many-branches, too-many-nested-blocks
 	def __init__(self):
 		self.args = None
 		self.file_name = None
@@ -64,51 +65,87 @@ class Parser(object):
 		print self.yaml.show(self.content_yaml)
 		return Err.NOOP
 
-	def add_defaults(self):
-		for i in ['input', 'prod-unit']:
-			my_dic = self.yaml.get_value(self.content_yaml, i)
-			for j in range(0, self.yaml.get_len(my_dic)):
-				key = self.yaml.get_key(my_dic[j])
-				my_internal_dic = self.yaml.get_value(my_dic[j], key)
-				op_time, _, tr_time, buffers = self.get_details(my_internal_dic)
+	def add_defaults(self):  # noqa: C901
+		for i in ['input', 'prod-unit', 'output']:
+			dic1 = self.yaml.get_value(self.content_yaml, i)
+			for j in range(0, self.yaml.get_len(dic1)):
+				key = self.yaml.get_key(dic1[j])
+				dic2 = self.yaml.get_value(dic1[j], key)
+				op_time, connect = self.get_det1(dic2)
+				if not connect:
+					continue
 				if not op_time:
-					my_internal_dic['op-time'] = '0'
-				if not tr_time:
-					my_internal_dic['tr-time'] = '0'
-				if buffers is None:
-					my_internal_dic['buffers'] = '-'
-				elif buffers == 0:
-					my_internal_dic['buffers'] = '0'
+					dic2['op-time'] = '0'
+				# if type(connect) is dict:
+				if isinstance(connect, dict):
+					for key in connect:
+						dic3 = connect[key]
+						if dic3:
+							tr_time, buffers = self.get_det2(dic3)
+							if not tr_time:
+								dic3['tr-time'] = '0'
+							if buffers is None:
+								dic3['buffers'] = '-'
+							elif buffers == 0:
+								dic3['buffers'] = '0'
+						else:
+							connect[key] = {'tr-time': '0', 'buffers': '-'}
+				else:
+					tr_time, buffers = self.get_det2(dic2)
+					if tr_time or tr_time == 0:
+						del dic2['tr-time']
+					if not tr_time:
+						tr_time = '0'
+					if buffers or buffers == 0:
+						del dic2['buffers']
+					if buffers is None:
+						buffers = '-'
+					elif buffers == 0:
+						buffers = '0'
+					dic2['connect'] = {connect: {'tr-time': tr_time, 'buffers': buffers}}
 		return Err.NOOP
 
-	def show_details1(self):
+	def show_det1(self):
 		print '== DETAILS 1 ==============='
 		for i in ['input', 'prod-unit', 'output', 'values']:
 			print i + ':',
 			print self.yaml.get_value(self.content_yaml, i)
+
 		return Err.NOOP
 
-	def get_details(self, int_dic):
+	def get_det1(self, int_dic):
 		op_time = self.yaml.get_value(int_dic, 'op-time')
 		connect = self.yaml.get_value(int_dic, 'connect')
+		return op_time, connect
+
+	def get_det2(self, int_dic):
 		tr_time = self.yaml.get_value(int_dic, 'tr-time')
 		buffers = self.yaml.get_value(int_dic, 'buffers')
-		return op_time, connect, tr_time, buffers
+		return tr_time, buffers
 
-	def show_details2(self):
+	def show_det2(self):
 		print '== DETAILS 2 ==============='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':'
-			my_dic = self.yaml.get_value(self.content_yaml, i)
-			for j in range(0, self.yaml.get_len(my_dic)):
-				key = self.yaml.get_key(my_dic[j])
+			dic1 = self.yaml.get_value(self.content_yaml, i)
+			for j in range(0, self.yaml.get_len(dic1)):
+				key = self.yaml.get_key(dic1[j])
 				print '  ' + key
-				int_dic = self.yaml.get_value(my_dic[j], key)
-				op_time, connect, tr_time, buffers = self.get_details(int_dic)
+				dic2 = self.yaml.get_value(dic1[j], key)
+				op_time, connect = self.get_det1(dic2)
 				print '    op-time: ' + (op_time if op_time else '-')
-				print '    connect: ' + (connect if connect else '-')
-				print '    tr-time: ' + (tr_time if tr_time else '-')
-				print '    buffers: ' + (buffers if buffers else '-')
+				print '    connect:',
+				if connect:
+					print
+					for key in connect:
+						print '     ', key
+						dic3 = connect[key]
+						if dic3:
+							tr_time, buffers = self.get_det2(dic3)
+							print '        tr-time: ' + (tr_time if tr_time else '-')
+							print '        buffers: ' + (buffers if buffers else '-')
+				else:
+					print '-'
 		i = 'values'
 		my_dic = self.yaml.get_value(self.content_yaml, i)
 		if my_dic:
@@ -124,9 +161,9 @@ class Parser(object):
 			self.show_file_content()
 		self.add_defaults()
 		if self.args['--det1']:
-			self.show_details1()
+			self.show_det1()
 		if self.args['--det2']:
-			self.show_details2()
+			self.show_det2()
 		return Err.NOOP
 
 	def main_cli(self):
