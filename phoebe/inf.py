@@ -43,9 +43,9 @@ class Inf(object):
 	DOC = '' + \
 		'Usage:' + \
 		'\t' + NAME + ' [--file] ' + \
-		'[--details1] ' + \
-		'[--details2] ' + \
-		'[--details3] ' + \
+		'[--det1] ' + \
+		'[--det2] ' + \
+		'[--det3] ' + \
 		'[--vectors] ' + \
 		'[--latex | --no-desc] ' + \
 		'<desc_file>\n' + \
@@ -53,9 +53,9 @@ class Inf(object):
 		'\t' + NAME + ' -v | --version\n' + \
 		'\nOptions:\n' + \
 		'\t--file\t\tshow information from desc_file\n' + \
-		'\t--details1\tshow parsed information (1) from desc_file\n' + \
-		'\t--details2\tshow parsed information (2) from desc_file\n' + \
-		'\t--details3\tshow mapping and parsed matrices\n' + \
+		'\t--det1\t\tshow parsed information (1) from desc_file\n' + \
+		'\t--det2\t\tshow parsed information (2) from desc_file\n' + \
+		'\t--det3\t\tshow mapping and parsed matrices\n' + \
 		'\t--vectors\tshow vectors: u(k), x(k) and y(k)\n' + \
 		'\t--latex\t\tgenerate description for latex, default is matlab description\n' + \
 		'\t--no-desc\tno description generated\n' + \
