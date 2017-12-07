@@ -37,9 +37,9 @@ class TestWorker(unittest.TestCase):
 			'values': None
 		}
 		self.args = {
-			'--details1': False,
-			'--details2': False,
-			'--details3': False,
+			'--det1': False,
+			'--det2': False,
+			'--det3': False,
 			'--file': False,
 			'--help': False,
 			'--vectors': False,
@@ -82,9 +82,9 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_VEC4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details2(self, mock_docopt):
+	def test_get_det2(self, mock_docopt):
 		args = self.args
-		args['--details3'] = True
+		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -94,9 +94,9 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_2)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details4(self, mock_docopt):
+	def test_get_det4(self, mock_docopt):
 		args = self.args
-		args['--details3'] = True
+		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -106,9 +106,9 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details5(self, mock_docopt):
+	def test_get_det5(self, mock_docopt):
 		args = self.args
-		args['--details3'] = True
+		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -118,7 +118,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_5)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_desc1(self, mock_docopt):
+	def test_no_desc1(self, mock_docopt):
 		args = self.args
 		args['--no-desc'] = False
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f1.yml'
@@ -128,7 +128,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_DATA)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_desc2(self, mock_docopt):
+	def test_no_desc2(self, mock_docopt):
 		args = self.args
 		args['--no-desc'] = False
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
@@ -138,7 +138,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.ERR_NO_DATA)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_desc3(self, mock_docopt):
+	def test_no_desc3(self, mock_docopt):
 		args = self.args
 		args['--no-desc'] = False
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f3.yml'
