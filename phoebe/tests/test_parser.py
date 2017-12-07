@@ -23,9 +23,9 @@ class TestParser(unittest.TestCase):
 	def setUp(self):
 		self.par = phoebe.parser.Parser()
 		self.args = {
-			'--details1': False,
-			'--details2': False,
-			'--details3': False,
+			'--det1': False,
+			'--det2': False,
+			'--det3': False,
 			'--file': False,
 			'--help': False,
 			'--vectors': False,
@@ -105,9 +105,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_FILE)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details1_2(self, mock_docopt):
+	def test_get_det1_2(self, mock_docopt):
 		args = self.args
-		args['--details1'] = True
+		args['--det1'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -115,9 +115,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET1_2)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details1_4(self, mock_docopt):
+	def test_get_det1_4(self, mock_docopt):
 		args = self.args
-		args['--details1'] = True
+		args['--det1'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -125,9 +125,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET1_4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details1_5(self, mock_docopt):
+	def test_get_det1_5(self, mock_docopt):
 		args = self.args
-		args['--details1'] = True
+		args['--det1'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -135,9 +135,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET1_5)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details2_2(self, mock_docopt):
+	def test_get_det2_2(self, mock_docopt):
 		args = self.args
-		args['--details2'] = True
+		args['--det2'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -145,9 +145,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET2_2)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details2_4(self, mock_docopt):
+	def test_get_det2_4(self, mock_docopt):
 		args = self.args
-		args['--details2'] = True
+		args['--det2'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -155,9 +155,9 @@ class TestParser(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET2_4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_details2_5(self, mock_docopt):
+	def test_get_det2_5(self, mock_docopt):
 		args = self.args
-		args['--details2'] = True
+		args['--det2'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
 		mock_docopt.return_value = args
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

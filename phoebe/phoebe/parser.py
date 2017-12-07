@@ -123,9 +123,9 @@ class Parser(object):
 		if self.args['--file']:
 			self.show_file_content()
 		self.add_defaults()
-		if self.args['--details1']:
+		if self.args['--det1']:
 			self.show_details1()
-		if self.args['--details2']:
+		if self.args['--det2']:
 			self.show_details2()
 		return Err.NOOP
 

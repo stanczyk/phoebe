@@ -54,7 +54,7 @@ poszczególne etapy programowania (python)
 	- sprawdzanie, czy opis jest zgodny ze schematem?
 
 2017.12.06 DONE
-	- modelowanie braku buforów
+	- modelowanie braku buforów (i pojemności buforów za pomocą pojedynczych maszyn)
 
 2017.12.07
 	- modelowanie pojemności buforów

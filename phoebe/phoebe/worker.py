@@ -252,7 +252,7 @@ class Worker(object):
 			self.show_vectors()
 		self.prepare_mapping()
 		self.matrix_preparation()
-		if self.parser.args['--details3']:
+		if self.parser.args['--det3']:
 			self.show_details3()
 		if self.parser.args['--no-desc']:
 			return Err.NOOP
