@@ -54,11 +54,15 @@ poszczególne etapy programowania (python)
 	- sprawdzanie, czy opis jest zgodny ze schematem?
 
 2017.12.06 DONE
+	- v0.3
 	- modelowanie braku buforów (i pojemności buforów za pomocą pojedynczych maszyn)
 
-2017.12.07
+2017.12.08 DONE
+	- v0.4
+	- połączenie z więcej niż jednym elementem
+
+2017.12.08
 	- modelowanie pojemności buforów
 	- modelowanie pętli zwrotnych (czy podawać w którym takcie mają powrócić?)
-	- połączenie z więcej niż jednym elementem
 
 # eof.
