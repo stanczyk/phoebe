@@ -82,7 +82,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_VEC4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_det2(self, mock_docopt):
+	def test_get_det3_2(self, mock_docopt):
 		args = self.args
 		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f2.yml'
@@ -94,7 +94,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_2)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_det4(self, mock_docopt):
+	def test_get_det3_4(self, mock_docopt):
 		args = self.args
 		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
@@ -106,7 +106,7 @@ class TestWorker(unittest.TestCase):
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET3_4)
 
 	@mock.patch('phoebe.parser.docopt.docopt')
-	def test_get_det5(self, mock_docopt):
+	def test_get_det3_5(self, mock_docopt):
 		args = self.args
 		args['--det3'] = True
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
