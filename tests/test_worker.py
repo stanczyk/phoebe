@@ -17,7 +17,8 @@ import mock
 from answers import ANS_VEC2, ANS_VEC4,\
 	ANS_DET3_2, ANS_DET3_4, ANS_DET3_5,\
 	ANS_MAT4, ANS_MAT5,\
-	ANS_LAT4, ANS_LAT5
+	ANS_LAT4, ANS_LAT5,\
+	GEN_TIME
 
 
 class TestWorker(unittest.TestCase):
@@ -150,7 +151,7 @@ class TestWorker(unittest.TestCase):
 	@mock.patch('phoebe.parser.docopt.docopt')
 	@mock.patch('phoebe.parser.Inf.get_time')
 	def test_get_matlab_desc4(self, mock_time, mock_docopt):
-		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		mock_time.return_value = GEN_TIME
 		args = self.args
 		args['--no-desc'] = False
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f4.yml'
@@ -164,7 +165,7 @@ class TestWorker(unittest.TestCase):
 	@mock.patch('phoebe.parser.docopt.docopt')
 	@mock.patch('phoebe.parser.Inf.get_time')
 	def test_get_matlab_desc5(self, mock_time, mock_docopt):
-		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		mock_time.return_value = GEN_TIME
 		args = self.args
 		args['--no-desc'] = False
 		args['<desc_file>'] = os.getcwd() + '/tests/samples/f5.yml'
@@ -178,7 +179,7 @@ class TestWorker(unittest.TestCase):
 	@mock.patch('phoebe.parser.docopt.docopt')
 	@mock.patch('phoebe.parser.Inf.get_time')
 	def test_get_latex_desc4(self, mock_time, mock_docopt):
-		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		mock_time.return_value = GEN_TIME
 		args = self.args
 		args['--latex'] = True
 		args['--no-desc'] = False
@@ -193,7 +194,7 @@ class TestWorker(unittest.TestCase):
 	@mock.patch('phoebe.parser.docopt.docopt')
 	@mock.patch('phoebe.parser.Inf.get_time')
 	def test_get_latex_desc5(self, mock_time, mock_docopt):
-		mock_time.return_value = '2017-12-04 08:30:33 CET'
+		mock_time.return_value = GEN_TIME
 		args = self.args
 		args['--latex'] = True
 		args['--no-desc'] = False
