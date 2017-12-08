@@ -3,6 +3,9 @@
 # (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 
+2017.12.08 - v0.4
+	connection with more than one item
+
 2017.12.06 - v0.3
 	modeling of no-buffers
 
