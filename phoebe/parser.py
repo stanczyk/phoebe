@@ -25,7 +25,7 @@ class Parser(object):
 		self.file_name = None
 		self.file_handler = None
 		self.content_yaml = None
-		self.yaml = None
+		self.yml = None
 
 	def set_up_argv(self):
 		self.args = docopt.docopt(Inf().DOC, version=Inf().get_version())
@@ -52,9 +52,9 @@ class Parser(object):
 		return Err.NOOP
 
 	def read_file(self):
-		self.yaml = Yml()
+		self.yml = Yml()
 		try:
-			self.content_yaml = self.yaml.load(self.file_handler)
+			self.content_yaml = self.yml.load(self.file_handler)
 		except yaml.YAMLError as exc:
 			print >> sys.stderr, Err().value_to_name(Err.ERR_YAML) + ': ' + str(exc)
 			return Err.ERR_YAML
@@ -62,15 +62,15 @@ class Parser(object):
 
 	def show_file_content(self):
 		print '== INPUT FILE =============='
-		print self.yaml.show(self.content_yaml)
+		print self.yml.show(self.content_yaml)
 		return Err.NOOP
 
 	def add_defaults(self):  # noqa: C901
 		for i in ['input', 'prod-unit', 'output']:
-			dic1 = self.yaml.get_value(self.content_yaml, i)
-			for j in range(0, self.yaml.get_len(dic1)):
-				key = self.yaml.get_key(dic1[j])
-				dic2 = self.yaml.get_value(dic1[j], key)
+			dic1 = self.yml.get_value(self.content_yaml, i)
+			for j in range(0, self.yml.get_len(dic1)):
+				key = self.yml.get_key(dic1[j])
+				dic2 = self.yml.get_value(dic1[j], key)
 				op_time, connect = self.get_det1(dic2)
 				if not connect:
 					continue
@@ -109,29 +109,29 @@ class Parser(object):
 		print '== DETAILS 1 ==============='
 		for i in ['input', 'prod-unit', 'output', 'values']:
 			print i + ':',
-			print self.yaml.get_value(self.content_yaml, i)
+			print self.yml.get_value(self.content_yaml, i)
 
 		return Err.NOOP
 
 	def get_det1(self, int_dic):
-		op_time = self.yaml.get_value(int_dic, 'op-time')
-		connect = self.yaml.get_value(int_dic, 'connect')
+		op_time = self.yml.get_value(int_dic, 'op-time')
+		connect = self.yml.get_value(int_dic, 'connect')
 		return op_time, connect
 
 	def get_det2(self, int_dic):
-		tr_time = self.yaml.get_value(int_dic, 'tr-time')
-		buffers = self.yaml.get_value(int_dic, 'buffers')
+		tr_time = self.yml.get_value(int_dic, 'tr-time')
+		buffers = self.yml.get_value(int_dic, 'buffers')
 		return tr_time, buffers
 
 	def show_det2(self):
 		print '== DETAILS 2 ==============='
 		for i in ['input', 'prod-unit', 'output']:
 			print i + ':'
-			dic1 = self.yaml.get_value(self.content_yaml, i)
-			for j in range(0, self.yaml.get_len(dic1)):
-				key = self.yaml.get_key(dic1[j])
+			dic1 = self.yml.get_value(self.content_yaml, i)
+			for j in range(0, self.yml.get_len(dic1)):
+				key = self.yml.get_key(dic1[j])
 				print '  ' + key
-				dic2 = self.yaml.get_value(dic1[j], key)
+				dic2 = self.yml.get_value(dic1[j], key)
 				op_time, connect = self.get_det1(dic2)
 				print '    op-time: ' + (op_time if op_time else '-')
 				print '    connect:',
@@ -147,7 +147,7 @@ class Parser(object):
 				else:
 					print '-'
 		i = 'values'
-		my_dic = self.yaml.get_value(self.content_yaml, i)
+		my_dic = self.yml.get_value(self.content_yaml, i)
 		if my_dic:
 			print i + ':'
 			for key in sorted(my_dic):
