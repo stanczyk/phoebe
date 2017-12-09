@@ -62,7 +62,11 @@ poszczególne etapy programowania (python)
 	- połączenie z więcej niż jednym elementem
 
 2017.12.08
+	- v0.5
+	- modelowanie pętli zwrotnych (w następnym takcie)
+
+2017.12.08
 	- modelowanie pojemności buforów
-	- modelowanie pętli zwrotnych (czy podawać w którym takcie mają powrócić?)
+	- modelowanie pętli zwrotnych (z podaniem taktu, w którym mają powrócić)
 
 # eof.

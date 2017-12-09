@@ -13,16 +13,20 @@ from StringIO import StringIO
 import unittest
 import phoebe.err
 import phoebe.worker
+import phoebe.yml
 import mock
 from answers import ANS_VEC2, ANS_VEC4,\
 	ANS_DET3_2, ANS_DET3_4, ANS_DET3_5,\
 	ANS_MAT4, ANS_MAT5,\
 	ANS_LAT4, ANS_LAT5,\
-	GEN_TIME
+	GEN_TIME,\
+	ANS_INPUT, ANS_SYSTEM, ANS_OUTPUT, ANS_MAPPING,\
+	ANS_MX0, ANS_MX1, ANS_MX2, ANS_MX3, ANS_MX4, ANS_MX5, ANS_MX6, ANS_MX7, ANS_MX8
 
 
 class TestWorker(unittest.TestCase):
 	""" class for testing *Generator* """
+	# pylint: disable=invalid-name, too-many-public-methods
 	def setUp(self):
 		self.worker = phoebe.worker.Worker()
 		self.var = {
@@ -205,6 +209,57 @@ class TestWorker(unittest.TestCase):
 				self.worker.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
 		self.assertEqual(mock_stdout.getvalue(), ANS_LAT5)
+
+	def test_create_matrix(self):
+		# example of build matrix B0 according to specs/desc1_3.yml
+		matrix = []
+		vect_x = ['x_1', 'x_2', 'x_3', 'x_4', 'x_5', 'x_6', 'x_7']
+		vect_y = ['y_1', 'y_2', 'y_3', 'y_4', 'y_5', 'y_6']
+		self.assertEqual(self.worker.create_matrix(matrix, vect_x, vect_y), ANS_MX0)
+
+	def test_fill_(self):
+		self.worker.B0 = ANS_MX0
+		self.worker.A0 = self.worker.A1 = self.worker.C = []
+		con = {'X_1': {'tr-time': '0', 'buffers': '-'}}
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.worker.mapping = ANS_MAPPING
+		self.assertEqual(self.worker.fill_(self.worker.B0, 0, con, ['0']), ANS_MX1)
+
+	def test_fill_matrix(self):
+		# example of filling matrix B0 according to specs/desc1_3.yml
+		self.worker.B0 = ANS_MX0
+		self.worker.A0 = self.worker.A1 = self.worker.C = []
+		we = ANS_INPUT
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.worker.mapping = ANS_MAPPING
+		self.assertEqual(self.worker.fill_matrix(self.worker.B0, we), ANS_MX2)
+
+	def test_add_feedback_x(self):
+		# example of filling matrix A1 from specs/desc1_3.yml
+		self.worker.A1 = ANS_MX3
+		sy = ANS_SYSTEM
+		wy = ANS_OUTPUT
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.worker.mapping = ANS_MAPPING
+		self.assertEqual(self.worker.add_feedback_x(self.worker.A1, sy, wy), ANS_MX4)
+
+	def test_optimize_matrix(self):
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.assertEqual(self.worker.optimize_matrix(ANS_MX4), ANS_MX5)
+
+	def test_rm_repeated_zeros(self):
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.assertEqual(self.worker.rm_repeated_zeros(ANS_MX6), [['-', ['d_6', '0'], ['d_7', '0']]])
+
+	def test_rm_redundant_zeros(self):
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.assertEqual(self.worker.rm_redundant_zeros(ANS_MX7), ANS_MX8)
 
 
 def main():

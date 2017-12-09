@@ -14,6 +14,7 @@ from StringIO import StringIO
 import unittest
 import phoebe.parser
 import phoebe.err
+import phoebe.yml
 import mock
 from answers import ANS_FILE, ANS_DET1_2, ANS_DET1_4, ANS_DET1_5, ANS_DET2_2, ANS_DET2_4, ANS_DET2_5
 
@@ -46,7 +47,7 @@ class TestParser(unittest.TestCase):
 			'content_yaml': None,
 			'file_handler': None,
 			'file_name': None,
-			'yaml': None
+			'yml': None
 		}
 		phe = phoebe.parser.Parser()
 		self.assertEqual(phe.__dict__, ans)
@@ -163,6 +164,15 @@ class TestParser(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.par.main()
 		self.assertEqual(mock_stdout.getvalue(), ANS_DET2_5)
+
+	def test_get_det2(self):
+		con = {'X_1': {'tr-time': '0', 'buffers': '-'}}
+		self.par.yml = phoebe.yml.Yml()
+		for key in con:
+			tr_time, buffers = self.par.get_det2(con[key])
+			self.assertEqual(tr_time, '0')
+			self.assertEqual(buffers, '-')
+			self.assertEqual(key, 'X_1')
 
 
 def main():

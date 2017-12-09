@@ -33,42 +33,12 @@ DANE = {
 						# transport time from input to system item
 					}
 			},
-			{
-				'M_2':
-					{
-						'op-time': 'd_2',
-						'connect': 'M_3',
-						'tr-time': 't_{2,3}'
-					}
-			},
-			{
-				'M_3':
-					{
-						'op-time': 'd_3',
-						'connect': 'y_1',
-						'tr-time': 't_{3,4}'
-					}
-			}
+			{'M_2': {'op-time': 'd_2', 'connect': 'M_3', 'tr-time': 't_{2,3}'}},
+			{'M_3': {'op-time': 'd_3', 'connect': 'y_1', 'tr-time': 't_{3,4}'}}
 		],
 	# output definition
-	'output':
-		[
-			{
-				'y_1':
-					{
-					}
-			}
-		],
+	'output': [{'y_1': {}}],
 	# times def.
-	'values':
-		{
-			'd_1': 3,
-			'd_2': 2,
-			'd_3': 6,
-			't_{0,1}': 1,
-			't_{1,2}': 2,
-			't_{2,3}': 0,
-			't_{3,4}': 1
-		}
+	'values': {'d_1': 3, 'd_2': 2, 'd_3': 6, 't_{0,1}': 1, 't_{1,2}': 2, 't_{2,3}': 0, 't_{3,4}': 1}
 }
 # end.

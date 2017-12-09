@@ -18,7 +18,10 @@ from matlab import Mat
 
 class Worker(object):
 	"""Worker class"""
-	# pylint: disable=invalid-name, too-many-instance-attributes, too-many-branches, too-many-nested-blocks
+	# pylint: disable=invalid-name
+	# pylint: disable=too-many-instance-attributes
+	# pylint: disable=too-many-nested-blocks
+	# pylint: disable=too-many-public-methods
 	def __init__(self):
 		self.parser = None
 		self.u = []
@@ -31,19 +34,22 @@ class Worker(object):
 		self.mapping = {}
 		self.values = None
 
+	def init_parser(self):
+		self.parser = Parser()
+
 	def prepare_vectors(self):
 		vec = []
 		tmp = []
 		for i in ['input', 'prod-unit', 'output']:
-			my_dic = self.parser.yaml.get_value(self.parser.content_yaml, i)
+			my_dic = self.parser.yml.get_value(self.parser.content_yaml, i)
 			if i == 'input':
 				vec = self.u
 			if i == 'prod-unit':
 				vec = tmp
 			if i == 'output':
 				vec = self.y
-			for j in range(0, self.parser.yaml.get_len(my_dic)):
-				vec.append(self.parser.yaml.get_key(my_dic[j]))
+			for j in range(0, self.parser.yml.get_len(my_dic)):
+				vec.append(self.parser.yml.get_key(my_dic[j]))
 		for i in range(0, len(tmp)):
 			self.x.append('x_' + str(i + 1))
 		return Err.NOOP
@@ -65,68 +71,97 @@ class Worker(object):
 
 	def prepare_mapping(self):
 		for i in ['input', 'prod-unit', 'output']:
-			my_dic = self.parser.yaml.get_value(self.parser.content_yaml, i)
-			for j in range(0, self.parser.yaml.get_len(my_dic)):
-				name = self.parser.yaml.get_key(my_dic[j])
+			my_dic = self.parser.yml.get_value(self.parser.content_yaml, i)
+			for j in range(0, self.parser.yml.get_len(my_dic)):
+				name = self.parser.yml.get_key(my_dic[j])
 				self.mapping[name] = j
 		i = 'values'
-		my_dic = self.parser.yaml.get_value(self.parser.content_yaml, i)
+		my_dic = self.parser.yml.get_value(self.parser.content_yaml, i)
 		if my_dic:
 			self.values = my_dic
 		return Err.NOOP
 
-	def create_matrix(self, matrix, v1, v2):
-		for _ in range(0, self.parser.yaml.get_len(v1)):
+	@staticmethod
+	def create_matrix(matrix, v1, v2):
+		for _ in range(0, len(v1)):
 			tmp = []
-			for __ in range(0, self.parser.yaml.get_len(v2)):
+			for __ in range(0, len(v2)):
 				tmp.append('-')
 			matrix.append(tmp)
-		return Err.NOOP
+		return matrix
 
-	def fill_matrix(self, matrix, my_dic):  # noqa: C901
-		for i in range(0, self.parser.yaml.get_len(my_dic)):
-			key = self.parser.yaml.get_key(my_dic[i])
-			op_time, connect = self.parser.get_det1(self.parser.yaml.get_value(my_dic[i], key))
+	def fill_(self, matrix, iteration, con, val):  # noqa: C901
+		if con:
+			for key in con:
+				tr_time, buffers = self.parser.get_det2(con[key])
+				j = self.mapping[key]
+				if key[0] != 'y':
+					if matrix in [self.A0, self.B0]:
+						if tr_time:
+							val.append(tr_time)
+						matrix[j][iteration] = val
+					if matrix in [self.A1]:
+						if buffers == '0':
+							if tr_time == '0':
+								matrix[iteration][j] = ['0']
+							else:
+								matrix[iteration][j] = ['-' + tr_time]
+				else:
+					if matrix in [self.C]:
+						if tr_time:
+							val.append(tr_time)
+						matrix[j][iteration] = val
+		return matrix
+
+	def fill_matrix(self, matrix, my_dic):
+		for i in range(0, self.parser.yml.get_len(my_dic)):
+			key = self.parser.yml.get_key(my_dic[i])
+			op_time, connect = self.parser.get_det1(self.parser.yml.get_value(my_dic[i], key))
 			tmp = []
 			if op_time:
 				tmp.append(op_time)
-			if matrix in [self.A0, self.B0]:
-				if connect:
-					for key in connect:
-						if key[0] != 'y':
-							tr_time, buffers = self.parser.get_det2(connect[key])
-							if tr_time:
-								tmp.append(tr_time)
-							j = self.mapping[key]
-							matrix[j][i] = tmp
-			if matrix in [self.A1]:
+			self.fill_(matrix, i, connect, tmp)
+			if matrix == self.A1:
 				if op_time:
 					j = self.mapping[key]
 					matrix[j][i] = tmp
-				if connect:
-					for key in connect:
-						if key[0] != 'y':
-							tr_time, buffers = self.parser.get_det2(connect[key])
-							if buffers == '0':
-								j = self.mapping[key]
-								if tr_time == '0':
-									matrix[i][j] = ['0']
-								else:
-									matrix[i][j] = ['-' + tr_time]
-			if matrix in [self.C]:
-				if connect:
-					for key in connect:
-						tr_time, buffers = self.parser.get_det2(connect[key])
-						if key[0] == 'y':
-							if tr_time:
-								tmp.append(tr_time)
-							j = self.mapping[key]
-							matrix[j][i] = tmp
-		return Err.NOOP
+				self.fill_(matrix, i, connect, tmp)
+		return matrix
 
-	def matrix_remove_repeated_zeros(self, matrix):
+	def add_feedback_x(self, matrix, system, output):
+		for i in range(0, self.parser.yml.get_len(output)):
+			key1 = self.parser.yml.get_key(output[i])
+			op_time, connect = self.parser.get_det1(self.parser.yml.get_value(output[i], key1))
+			tmp = []
+			if op_time:
+				tmp.append(op_time)
+			if connect:
+				for key in connect:
+					if key[0].upper() != 'U':
+						# tr_time, buffers = self.parser.get_det2(connect[key])
+						j = self.mapping[key]
+						# print key, '(', j, ',', key1, ')'
+						_, idx, time = self.get_x_value(key1, system)
+						# print key1, key, key2
+						tmp.append(time)
+						val = matrix[j][idx]
+						if val != '-':
+							tmp.append(val)
+						matrix[j][idx] = tmp
+		return matrix
+
+	def get_x_value(self, key, my_dic):
+		for i in range(0, self.parser.yml.get_len(my_dic)):
+			key1 = self.parser.yml.get_key(my_dic[i])
+			op_time, connect = self.parser.get_det1(self.parser.yml.get_value(my_dic[i], key1))
+			if connect:
+				for key2 in connect:
+					if key2 == key:
+						return key1, i, op_time
+
+	def rm_repeated_zeros(self, matrix):
 		""" 0, 0, 0 -> 0 """
-		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
+		w1, w2 = self.parser.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
 				if matrix[i][j] != '-':
@@ -136,36 +171,43 @@ class Worker(object):
 							tmp[k] = None
 					for k in range(0, tmp.count(None)):
 						tmp.remove(None)
+		return matrix
 
-	def matrix_remove_redundant_zeros(self, matrix):
+	def rm_redundant_zeros(self, matrix):
 		""" 0, d_1 -> d1 """
-		w1, w2 = self.parser.yaml.get_matrix_size(matrix)
+		w1, w2 = self.parser.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
 				if matrix[i][j] != '-':
 					tmp = matrix[i][j]
 					if len(tmp) > 1 and tmp.count('0'):
 						tmp.remove('0')
+		return matrix
 
 	def optimize_matrix(self, matrix):
 		if not matrix:
-			return
-		self.matrix_remove_repeated_zeros(matrix)
-		self.matrix_remove_redundant_zeros(matrix)
+			return matrix
+		self.rm_repeated_zeros(matrix)
+		self.rm_redundant_zeros(matrix)
+		return matrix
 
 	def matrix_preparation(self):
+		we = self.parser.yml.get_value(self.parser.content_yaml, 'input')
+		sy = self.parser.yml.get_value(self.parser.content_yaml, 'prod-unit')
+		wy = self.parser.yml.get_value(self.parser.content_yaml, 'output')
 		# matrix B0
 		self.create_matrix(self.B0, self.x, self.u)
-		self.fill_matrix(self.B0, self.parser.yaml.get_value(self.parser.content_yaml, 'input'))
+		self.fill_matrix(self.B0, we)
 		# matrix A0 and A1
-		prod_unit = self.parser.yaml.get_value(self.parser.content_yaml, 'prod-unit')
-		self.create_matrix(self.A0, self.x, self.x)
-		self.fill_matrix(self.A0, prod_unit)
-		self.create_matrix(self.A1, self.x, self.x)
-		self.fill_matrix(self.A1, prod_unit)
+		for i in [self.A0, self.A1]:
+			self.create_matrix(i, self.x, self.x)
+			self.fill_matrix(i, sy)
+		# self.add_feedback()
+		self.add_feedback_x(self.A1, sy, wy)
+		# self.add_feedback_y(self.A1, prod_unit)
 		# matrix C
 		self.create_matrix(self.C, self.y, self.x)
-		self.fill_matrix(self.C, prod_unit)
+		self.fill_matrix(self.C, sy)
 		# polishing
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			self.optimize_matrix(i)
@@ -284,7 +326,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def main(self):
-		self.parser = Parser()
+		self.init_parser()
 		self.parser.main()
 		sys.exit(self.main_work())
 
