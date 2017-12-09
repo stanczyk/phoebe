@@ -418,7 +418,19 @@ ANS_MX6 = [
 ANS_MX7 = [['-', ['d_6', '0'], ['d_7', '0']]]
 ANS_MX8 = [['-', ['d_6'], ['d_7']]]
 
-ANS_INPUT = [
+ANS_MX9 = [
+	[['d_1'], '-', '-'],
+	['-', ['d_2'], '-'],
+	['-', '-', ['d_3']]
+]
+
+ANS_MX10 = [
+	[['d_1'], '-', ['0', '0', '0', 't_{0,1}', 'd_3']],
+	['-', ['d_2'], ['0', '0', '0', 't_{0,2}', 'd_3']],
+	['-', '-', ['d_3']]
+]
+
+ANS_INP1 = [
 	{'u_1': {'op-time': '0', 'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}}},
 	{'u_2': {'op-time': '0', 'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}}},
 	{'u_3': {'op-time': '0', 'connect': {'X_6': {'tr-time': '0', 'buffers': '-'}}}},
@@ -427,7 +439,12 @@ ANS_INPUT = [
 	{'u_6': {'op-time': '0', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}}}}
 ]
 
-ANS_SYSTEM = [
+ANS_INP2 = [
+	{'u_1': {'op-time': '0', 'connect': {'M_1': {'tr-time': 't_{0,1}', 'buffers': '-'}}}},
+	{'u_2': {'op-time': '0', 'connect': {'M_2': {'tr-time': 't_{0,2}', 'buffers': '-'}}}}
+]
+
+ANS_SYS1 = [
 	{'X_1': {'op-time': 'd_1', 'connect': {
 		'X_4': {'tr-time': '0', 'buffers': '-'},
 		'X_2': {'tr-time': '0', 'buffers': '-'}}}},
@@ -451,7 +468,13 @@ ANS_SYSTEM = [
 		'y_3': {'tr-time': '0', 'buffers': '-'}}}}
 ]
 
-ANS_OUTPUT = [
+ANS_SYS2 = [
+	{'M_1': {'op-time': 'd_1', 'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}}},
+	{'M_2': {'op-time': 'd_2', 'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}}},
+	{'M_3': {'op-time': 'd_3', 'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}}}
+]
+
+ANS_OUT1 = [
 	{'y_1': {'op-time': '0', 'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}}},
 	{'y_2': {'op-time': '0', 'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}}},
 	{'y_3': {'op-time': '0', 'connect': {'X_6': {'tr-time': '0', 'buffers': '-'}}}},
@@ -460,10 +483,19 @@ ANS_OUTPUT = [
 	{'y_6': {'op-time': '0', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}}}}
 ]
 
-ANS_MAPPING = {
+ANS_OUT2 = [
+	{'y': {'op-time': '0', 'connect': {
+		'u_2': {'tr-time': '0', 'buffers': '-'},
+		'u_1': {'tr-time': '0', 'buffers': '-'}
+	}}}]
+
+ANS_MAP1 = {
 	'u_1': 0, 'u_2': 1, 'u_3': 2, 'u_4': 3, 'u_5': 4, 'u_6': 5,
 	'X_1': 0, 'X_2': 1, 'X_3': 2, 'X_4': 3, 'X_5': 4, 'X_6': 5, 'X_7': 6,
 	'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5
 }
+
+ANS_MAP2 = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+
 
 # end.

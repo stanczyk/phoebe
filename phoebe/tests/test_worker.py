@@ -20,8 +20,8 @@ from answers import ANS_VEC2, ANS_VEC4,\
 	ANS_MAT4, ANS_MAT5,\
 	ANS_LAT4, ANS_LAT5,\
 	GEN_TIME,\
-	ANS_INPUT, ANS_SYSTEM, ANS_OUTPUT, ANS_MAPPING,\
-	ANS_MX0, ANS_MX1, ANS_MX2, ANS_MX3, ANS_MX4, ANS_MX5, ANS_MX6, ANS_MX7, ANS_MX8
+	ANS_INP1, ANS_INP2, ANS_SYS1, ANS_SYS2, ANS_OUT1, ANS_OUT2, ANS_MAP1, ANS_MAP2,\
+	ANS_MX0, ANS_MX1, ANS_MX2, ANS_MX3, ANS_MX4, ANS_MX5, ANS_MX6, ANS_MX7, ANS_MX8, ANS_MX9, ANS_MX10
 
 
 class TestWorker(unittest.TestCase):
@@ -223,27 +223,37 @@ class TestWorker(unittest.TestCase):
 		con = {'X_1': {'tr-time': '0', 'buffers': '-'}}
 		self.worker.init_parser()
 		self.worker.parser.yml = phoebe.yml.Yml()
-		self.worker.mapping = ANS_MAPPING
+		self.worker.mapping = ANS_MAP1
 		self.assertEqual(self.worker.fill_(self.worker.B0, 0, con, ['0']), ANS_MX1)
 
 	def test_fill_matrix(self):
 		# example of filling matrix B0 according to specs/desc1_3.yml
 		self.worker.B0 = ANS_MX0
 		self.worker.A0 = self.worker.A1 = self.worker.C = []
-		we = ANS_INPUT
+		we = ANS_INP1
 		self.worker.init_parser()
 		self.worker.parser.yml = phoebe.yml.Yml()
-		self.worker.mapping = ANS_MAPPING
+		self.worker.mapping = ANS_MAP1
 		self.assertEqual(self.worker.fill_matrix(self.worker.B0, we), ANS_MX2)
+
+	def test_add_feedback_u(self):
+		we = ANS_INP2
+		sy = ANS_SYS2
+		wy = ANS_OUT2
+		self.worker.A1 = ANS_MX9
+		self.worker.mapping = ANS_MAP2
+		self.worker.init_parser()
+		self.worker.parser.yml = phoebe.yml.Yml()
+		self.assertEqual(self.worker.add_feedback_u(self.worker.A1, we, sy, wy), ANS_MX10)
 
 	def test_add_feedback_x(self):
 		# example of filling matrix A1 from specs/desc1_3.yml
 		self.worker.A1 = ANS_MX3
-		sy = ANS_SYSTEM
-		wy = ANS_OUTPUT
+		sy = ANS_SYS1
+		wy = ANS_OUT1
 		self.worker.init_parser()
 		self.worker.parser.yml = phoebe.yml.Yml()
-		self.worker.mapping = ANS_MAPPING
+		self.worker.mapping = ANS_MAP1
 		self.assertEqual(self.worker.add_feedback_x(self.worker.A1, sy, wy), ANS_MX4)
 
 	def test_optimize_matrix(self):

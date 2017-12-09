@@ -132,12 +132,12 @@ class Worker(object):
 		for i in range(0, self.parser.yml.get_len(output)):
 			key1 = self.parser.yml.get_key(output[i])
 			op_time, connect = self.parser.get_det1(self.parser.yml.get_value(output[i], key1))
-			tmp = []
-			if op_time:
-				tmp.append(op_time)
 			if connect:
 				for key in connect:
 					if key[0].upper() != 'U':
+						tmp = []
+						if op_time:
+							tmp.append(op_time)
 						# tr_time, buffers = self.parser.get_det2(connect[key])
 						j = self.mapping[key]
 						# print key, '(', j, ',', key1, ')'
@@ -148,6 +148,37 @@ class Worker(object):
 						if val != '-':
 							tmp.append(val)
 						matrix[j][idx] = tmp
+		return matrix
+
+	def add_feedback_u(self, matrix, we, sy, wy):  # noqa: C901
+		# pylint: disable=too-many-locals
+		for i in range(0, self.parser.yml.get_len(wy)):
+			key1 = self.parser.yml.get_key(wy[i])
+			key0, opt = self.parser.get_det3(sy, key1)
+			op_time, con1 = self.parser.get_det1(self.parser.yml.get_value(wy[i], key1))
+			if con1:
+				for key2 in con1:
+					if key2[0].upper() == 'U':
+						tmp = []
+						if op_time:
+							tmp.append(op_time)
+						tr_time, _ = self.parser.get_det2(con1[key2])
+						if tr_time:
+							tmp.append(tr_time)
+						for j in range(0, self.parser.yml.get_len(we)):
+							key3 = self.parser.yml.get_key(we[j])
+							if key3 == key2:
+								op_time, con2 = self.parser.get_det1(self.parser.yml.get_value(we[j], key2))
+								if op_time:
+									tmp.append(op_time)
+								for key4 in con2:
+									tr_time, _ = self.parser.get_det2(con2[key4])
+									if tr_time:
+										tmp.append(tr_time)
+									idx1 = self.mapping[key4]
+									tmp.append(opt)
+									idx2 = self.mapping[key0]
+									matrix[idx1][idx2] = tmp
 		return matrix
 
 	def get_x_value(self, key, my_dic):
@@ -204,6 +235,7 @@ class Worker(object):
 			self.fill_matrix(i, sy)
 		# self.add_feedback()
 		self.add_feedback_x(self.A1, sy, wy)
+		self.add_feedback_u(self.A1, we, sy, wy)
 		# self.add_feedback_y(self.A1, prod_unit)
 		# matrix C
 		self.create_matrix(self.C, self.y, self.x)
