@@ -61,11 +61,11 @@ poszczególne etapy programowania (python)
 	- v0.4
 	- połączenie z więcej niż jednym elementem
 
-2017.12.08
+2017.12.09
 	- v0.5
 	- modelowanie pętli zwrotnych (w następnym takcie)
 
-2017.12.08
+2017.12.09
 	- modelowanie pojemności buforów
 	- modelowanie pętli zwrotnych (z podaniem taktu, w którym mają powrócić)
 

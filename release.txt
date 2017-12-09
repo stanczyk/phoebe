@@ -3,7 +3,7 @@
 # (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 
-2017.12.08 - v0.5
+2017.12.09 - v0.5
 	feedbacks added
 
 2017.12.08 - v0.4
