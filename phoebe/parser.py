@@ -123,6 +123,16 @@ class Parser(object):
 		buffers = self.yml.get_value(int_dic, 'buffers')
 		return tr_time, buffers
 
+	def get_det3(self, system, key):
+		for i in range(0, self.yml.get_len(system)):
+			key1 = self.yml.get_key(system[i])
+			op_time, con1 = self.get_det1(self.yml.get_value(system[i], key1))
+			if con1:
+				for key2 in con1:
+					if key == key2:
+						return key1, op_time
+		return None, None
+
 	def show_det2(self):
 		print '== DETAILS 2 ==============='
 		for i in ['input', 'prod-unit', 'output']:
