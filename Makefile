@@ -2,7 +2,7 @@
 # Makefile for phoebe project
 # (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
-include ./../../tex/make1.mk
+include ./make/make1.mk
 
 BIN=bin
 SRC=phoebe
@@ -59,6 +59,8 @@ is_virtenv:
 	@if ./bin/is_venv.py ; then \
 		echo "$(red)run it in virtualenv!$(reset)"; \
 		echo " -> source .venv/bin/activate"; \
+		echo " or"; \
+		echo " -> virtualenv .venv and install all requirements"; \
 		# echo " -> deactivate"; \
 		exit 1; \
 	fi
@@ -121,5 +123,5 @@ matlab:
 		$(MAKE) $@
 	$(end)
 
-include ./../../tex/make2.mk
+include ./make/make2.mk
 # eof.

@@ -1,7 +1,7 @@
 repo:
 	phoebe
 version:
-	17-18-sem1
+	v2017
 
 (c) 2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
 
