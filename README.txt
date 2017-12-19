@@ -69,4 +69,8 @@ poszczególne etapy programowania (python)
 	- modelowanie pojemności buforów
 	- modelowanie pętli zwrotnych (z podaniem taktu, w którym mają powrócić)
 
+2017.12.19
+	splitting a subfolder out into a new repository
+	- https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
+
 # eof.

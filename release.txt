@@ -4,7 +4,7 @@
 #
 
 2017.12.09 - v0.5
-	feedbacks added
+	feedback added
 
 2017.12.08 - v0.4
 	connection with more than one item
