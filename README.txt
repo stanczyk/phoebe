@@ -1,10 +1,9 @@
 repo:
-	max
+	phoebe
 version:
-	17-18-sem1
+	master
 
-(c) 2002--2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
+(c) 2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
 
 =================================
-moje wypociny dot. algebry (max, +) itp.
 
