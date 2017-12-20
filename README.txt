@@ -1,7 +1,14 @@
-#
-# README.txt
-# (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
-#
+=======
+repo:
+	phoebe
+version:
+	v2017
+
+(c) 2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
+
+=================================
+moje wypociny dot. generatora opisu systemów w algebrze (max, +)
+
 
 2017.11.22 DONE
 automatyczne modelowanie linii produkcyjnej bazującej na opisie json lub yaml
