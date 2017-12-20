@@ -10,8 +10,8 @@
 """
 import unittest
 from StringIO import StringIO
-import phoebe.inf
 import mock
+import phoebe.inf
 from answers import INF_ANS, INF_VER
 
 

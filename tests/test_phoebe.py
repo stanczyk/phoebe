@@ -10,9 +10,9 @@
 """
 import os
 import unittest
+import mock
 import phoebe.err
 import phoebe.worker
-import mock
 
 
 class TestPhoebe(unittest.TestCase):

@@ -11,10 +11,10 @@
 import os
 from StringIO import StringIO
 import unittest
+import mock
 import phoebe.err
 import phoebe.worker
 import phoebe.yml
-import mock
 from answers import ANS_VEC2, ANS_VEC4,\
 	ANS_DET3_2, ANS_DET3_4, ANS_DET3_5,\
 	ANS_MAT4, ANS_MAT5,\

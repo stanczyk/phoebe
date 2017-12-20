@@ -44,7 +44,7 @@ class Mat(object):
 	@staticmethod
 	def clean_value(value):
 		ans = ''
-		for i in range(0, len(value)):
+		for i, _ in enumerate(value):
 			if value[i] not in ['{', '}', '_', ',']:
 				ans += value[i]
 		return ans
@@ -59,7 +59,7 @@ class Mat(object):
 	@staticmethod
 	def vector(name, vector):
 		print 'disp(\'{0}(k) = ['.format(name),
-		for i in range(0, len(vector)):
+		for i, _ in enumerate(vector):
 			print '{0}(k);'.format(vector[i]),
 		print ']\');'
 		return Err.NOOP
@@ -71,7 +71,7 @@ class Mat(object):
 			return tab
 		odp = ''
 		tmp = ''
-		for i in range(0, len(tab)):
+		for i, _ in enumerate(tab):
 			if len(tab) > 1 and i > 0:
 				odp = 'mp_multi({0}, '.format(tmp)
 			tmp = str(self.clean_value(tab[i]))

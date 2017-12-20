@@ -53,7 +53,7 @@ class Lat(object):
 		print '\\begin{equation*}'
 		print '\\mathbf{%s}(k) = ' % name
 		print '\\left[\\begin{array}{*{20}c}'
-		for i in range(0, len(vector)):
+		for i, _ in enumerate(vector):
 			print '  {0}(k) \\\\'.format(vector[i])
 		print '\\end{array}\\right]'
 		print '\\end{equation*}\n'
@@ -66,7 +66,7 @@ class Lat(object):
 		if tab == '-':
 			return tab
 		odp = ''
-		for i in range(0, len(tab)):
+		for i, _ in enumerate(tab):
 			odp += str(tab[i])
 		return odp
 
@@ -75,7 +75,7 @@ class Lat(object):
 		print '\\begin{equation*}'
 		print '\\mathbf{%s}_%s = ' % (name, idx_name)
 		print '\\left[\\begin{array}{*{20}c}'
-		for i in range(0, len(matrix)):
+		for i, _ in enumerate(matrix):
 			for j in range(0, len(matrix[i])):
 				if j > 0:
 					print '\t&',

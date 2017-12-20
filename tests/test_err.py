@@ -10,8 +10,8 @@
 """
 import unittest
 from StringIO import StringIO
-import phoebe.err
 import mock
+import phoebe.err
 from answers import ERR_ANS
 
 

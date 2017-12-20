@@ -64,8 +64,8 @@ class Worker(object):
 	@staticmethod
 	def print_vector(name, vector):
 		print name + ' = [',
-		for i in range(0, len(vector)):
-			print '{0}(k)'.format(vector[i]),
+		for _, j in enumerate(vector):
+			print '{0}(k)'.format(j),
 		print ']\'' if len(vector) > 1 else ']'
 		return Err.NOOP
 
@@ -189,9 +189,11 @@ class Worker(object):
 				for key2 in connect:
 					if key2 == key:
 						return key1, i, op_time
+		return None, None, None
 
 	def rm_repeated_zeros(self, matrix):
 		""" 0, 0, 0 -> 0 """
+		# pylint: disable=consider-using-enumerate
 		w1, w2 = self.parser.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
@@ -257,8 +259,8 @@ class Worker(object):
 	def prn_matrix(matrix):
 		if matrix:
 			print '['
-			for i in range(0, len(matrix)):
-				print matrix[i]
+			for _, j in enumerate(matrix):
+				print j
 			print ']'
 		else:
 			print '[]'
