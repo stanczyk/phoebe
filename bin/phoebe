@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+"""
+	**./bin/phoebe**
+	phoebe launcher (and wrapper)
+
+	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+"""
+
+if __name__ == '__main__':
+	from src.worker import Worker
+	Worker().main()
+
+# eof.

@@ -1,0 +1,15 @@
+#
+# .gitignore for my (max,+) projects
+# (c) 2017 Jaroslaw Stańczyk, e-mail: j.stanczyk@hotmail.com
+#
+
+# for python projects
+.idea/
+.venv/
+.cache/
+.eggs/
+*.egg-info/
+*.pyc
+tests/__pycache__
+
+# eof.
