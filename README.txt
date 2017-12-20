@@ -1,9 +1,9 @@
 repo:
 	phoebe
 version:
-	master
+	v0.6
 
-(c) 2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
+(c) 2017, 2018 Jarek Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 
 =================================
 
