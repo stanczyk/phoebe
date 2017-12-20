@@ -1,0 +1,17 @@
+#
+# spec.01.yaml
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# this spec is valid for numerical as well as general (text) values
+---
+input
+  name
+    connect transport-time
+production-unit
+  name
+    operation-time time
+    connect transport-time
+output
+  name
+
+# eof.

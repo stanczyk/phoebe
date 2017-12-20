@@ -1,0 +1,28 @@
+#
+# 02.sspl-txt.yaml
+# (c) 2017 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# a simple serial production line (figF23) described in details in 02/Ex.1.1
+
+---
+input
+  name u
+    connect M_1
+      tr-time t_{0,1}
+production-unit
+  - name M_1
+    op-time d_1
+    connect M_2
+      tr-time t_{1,2}
+  - name M_2
+    op-time d_2
+    connect M_3
+      tr-time t_{2,3}
+  - name M_3
+    op-time d_3
+    connect y
+      tr-time t_{3,4}
+output
+  name y
+
+# eof.
