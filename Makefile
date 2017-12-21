@@ -30,8 +30,8 @@ pdf-one: $(main)
 	$(MAKE) pdf-once SRC:=$(MAIN)
 	$(end)
 
-.PHONY: build
-build:
+.PHONY: build_latex
+build_latex:
 	$(begin)
 	./phoebe/bin/phoebe --latex $(DESC) | tee tmp.tex
 	$(MAKE) pdf-one
