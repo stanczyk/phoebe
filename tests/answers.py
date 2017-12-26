@@ -208,25 +208,24 @@ X0 = mp_zeros(3, 1)\n\
 A0 = mp_zeros(3, 3);\n\
    A0(2, 1) = mp_multi(d1, t12);\n\
    A0(3, 2) = mp_multi(d2, t23);\n\
+   A0\n\
 \n\
 % matrix A1\n\
 A1 = mp_zeros(3, 3);\n\
    A1(1, 1) = d1;\n\
    A1(2, 2) = d2;\n\
    A1(3, 3) = d3;\n\
+   A1\n\
 \n\
 % matrix B0\n\
 B0 = mp_zeros(3, 1);\n\
    B0(1, 1) = t01;\n\
+   B0\n\
 \n\
 % matrix C\n\
 C = mp_zeros(1, 3);\n\
    C(1, 3) = mp_multi(d3, t34);\n\
-\n\
-A0\n\
-A1\n\
-B0\n\
-C\n\
+   C\n\
 \n\
 As = mp_star(A0)\n\
 A = mp_multi(As, A1)\n\

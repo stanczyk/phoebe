@@ -90,6 +90,7 @@ class Mat(object):
 					print '   {0}{1}({2}, {3}) = {4};'.format(
 						name, idx_name, i + 1, j + 1, self.get_matrix_value(matrix[i][j])
 					)
+		print '   {0}{1}'.format(name, idx_name)
 		print
 		return Err.NOOP
 
@@ -110,11 +111,6 @@ class Mat(object):
 	@staticmethod
 	def adds():
 		print '' + \
-			'A0\n' + \
-			'A1\n' + \
-			'B0\n' + \
-			'C\n' + \
-			'\n' + \
 			'As = mp_star(A0)\n' + \
 			'A = mp_multi(As, A1)\n' + \
 			'B = mp_multi(As, B0)\n' + \
