@@ -1,6 +1,6 @@
 #
 # Makefile
-# (c) 2003-2005, 20015-2017 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
+# (c) 2003-2005, 20015-2018 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
 #
 include ./phoebe/make/make.mk
 include ./phoebe/make/make1.mk

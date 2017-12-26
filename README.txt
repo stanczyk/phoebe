@@ -2,9 +2,9 @@
 repo:
 	phoebe
 version:
-	v2017
+	v0.6
 
-(c) 2017 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
+(c) 2017, 2018 Jarek Stańczyk, e-mail: j.stanczyk@hotmail.com
 
 =================================
 moje wypociny dot. generatora opisu systemów w algebrze (max, +)
