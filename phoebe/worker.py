@@ -7,7 +7,7 @@ phoebe implementation
 in the module:
 * *class* **Worker**
 
-Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import sys
 from err import Err

@@ -7,7 +7,7 @@
 	in the module:
 	* *class* **Yml**
 
-	Copyright 2013--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright 2013--2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # pylint: disable=redefined-outer-name, invalid-name
 import yaml
