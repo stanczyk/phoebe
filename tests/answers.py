@@ -234,10 +234,10 @@ B = mp_multi(As, B0)\n\
 % number of iterations\n\
 k = 12;\n\
 X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n\
-Y(1) = mp_multi(C, X(:, 1));\n\
+Y(:, 1) = mp_multi(C, X(:, 1));\n\
 for i = 2:k\n\
     X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));\n\
-    Y(i) = mp_multi(C, X(:, i));\n\
+    Y(:, i) = mp_multi(C, X(:, i));\n\
 end\n\
 X\n\
 Y\n\
