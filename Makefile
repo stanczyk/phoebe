@@ -1,6 +1,6 @@
 #
 # Makefile for phoebe project
-# (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 include ./make/make1.mk
 

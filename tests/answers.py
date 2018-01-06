@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 # pylama: ignore=E101
+"""
+	**answers.py**
+
+	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+"""
 
 GEN_TIME = '2018-01-21 08:30:33 CET'
 

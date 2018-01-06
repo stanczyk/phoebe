@@ -6,7 +6,7 @@
 	in the module:
 	* *class* **TestYml**
 
-	Copyright 2015--2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright 2015--2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import os
 import unittest

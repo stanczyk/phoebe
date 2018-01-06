@@ -6,7 +6,7 @@
 	in the module:
 	* *class* **TestParser**
 
-	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 # pylama: ignore=E101
 import os
