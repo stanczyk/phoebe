@@ -1,9 +1,9 @@
 #
 # Makefile
-# (c) 2003-2005, 20015-2017 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
+# (c) 2003-2005, 20015-2018 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
 #
-include ./../tex/make.mk
-include ./../tex/make1.mk
+include ./phoebe/make/make.mk
+include ./phoebe/make/make1.mk
 
 # plik główny:
 MAIN=tmp
@@ -30,8 +30,8 @@ pdf-one: $(main)
 	$(MAKE) pdf-once SRC:=$(MAIN)
 	$(end)
 
-.PHONY: build
-build:
+.PHONY: build_latex
+build_latex:
 	$(begin)
 	./phoebe/bin/phoebe --latex $(DESC) | tee tmp.tex
 	$(MAKE) pdf-one
@@ -43,5 +43,5 @@ matlab:
 	./phoebe/bin/phoebe $(DESC) | tee tmp.m
 	$(end)
 
-include ./../tex/make2.mk
+include ./phoebe/make/make2.mk
 # eof.

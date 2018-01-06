@@ -1,0 +1,11 @@
+#
+# .gitmodules for phoebe repo
+# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
+#
+
+[submodule "phoebe"]
+	path = phoebe
+	url = ../../prv/proxy/phoebe.git
+	branch = v0.6
+
+# eof.

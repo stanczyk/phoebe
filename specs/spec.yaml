@@ -1,0 +1,36 @@
+#
+# spec.yaml
+# phoebe input specification v0.2
+# (c) 2017, 2018 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+#
+# this spec is valid for numerical as well as general (text) values
+# http://www.yaml.org/spec/1.2/spec.html
+---
+input:
+- _input-name_: {
+    connect: _prod-unit-nane_ | _output-nane_,
+    tr-time: _time-name_ | _time_
+}
+prod-unit:
+- _prod-unit-name_: {
+    op-time: _time-name_ | _time_,
+    connect: _prod-unit-nane_ | _output-nane_,
+    tr-time: _time-name_ | _time_,
+    buffers: _buffer_
+}
+output:
+- _output-name_: {
+    connect: _input-name_ | _prod-unit-nane_
+}
+values: {
+_time-name_: _time_
+}
+
+# eof.
+
+# opisać jeszcze:
+- y: {connect: {u_1, u_2}}
+
+connect: {'tr-time': tr_time, 'buffers': buffers}
+
+jeśli buffers: to _buffer_ tylko 0
