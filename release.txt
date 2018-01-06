@@ -3,6 +3,9 @@
 # (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 
+2017.01.06 - v0.6
+	fixes of some bugs in matlab description
+
 2017.12.09 - v0.5
 	feedback added
 
