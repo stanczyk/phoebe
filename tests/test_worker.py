@@ -6,7 +6,7 @@
 	in the module:
 	* *class* **TestWorker**
 
-	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import os
 from StringIO import StringIO

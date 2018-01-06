@@ -1,6 +1,6 @@
 #
 # make1.mk
-# (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 # 2017.08.06
 #
 

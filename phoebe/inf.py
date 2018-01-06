@@ -8,7 +8,7 @@ in the module:
 
 * *class* **Info**
 
-Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import time
 
@@ -38,7 +38,7 @@ class Inf(object):
 	WRITTEN = '' + \
 		'author: ' + AUTHOR + '\n' + \
 		'e-mail: ' + AUTHOR_EMAIL + '\n' + \
-		'copyright: (c) 2018 ' + AUTHOR
+		'copyright: (c) 2017, 2018 ' + AUTHOR
 
 	DOC = '' + \
 		'Usage:' + \

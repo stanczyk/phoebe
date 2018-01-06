@@ -7,7 +7,7 @@ phoebe implementation
 in the module:
 * *class* **Worker**
 
-Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 import sys
 from err import Err
@@ -352,11 +352,10 @@ class Worker(object):
 			print >> sys.stderr, Err().value_to_name(ans) + ': not enough data to generate description'
 			return Err.ERR_NO_DATA
 		if self.parser.args['--latex']:
-			lat = Lat()
-			self.description(lat)
+			des = Lat()
 		else:
-			mat = Mat()
-			self.description(mat)
+			des = Mat()
+		self.description(des)
 		return Err.NOOP
 
 	def main(self):

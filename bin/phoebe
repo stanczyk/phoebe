@@ -3,7 +3,7 @@
 	**./bin/phoebe**
 	phoebe launcher (and wrapper)
 
-	Copyright 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 """
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 #
 # Makefile for phoebe project
-# (c) 2017 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
 #
 include ./make/make1.mk
 
@@ -41,8 +41,8 @@ clean-all: clean
 	$(RM) -r .venv
 	$(end)
 
-.PHONY: init
-init:
+.PHONY: init_virtualenv
+init_virtualenv:
 	$(begin)
 	virtualenv .venv
 	(\
@@ -109,8 +109,8 @@ unit-test: is_virtenv
 .PHONY: test
 test: src-test unit-test
 
-.PHONY: build
-build:
+.PHONY: build_latex
+build_latex:
 	$(begin)
 	cd .. ; \
 		$(MAKE) $@
