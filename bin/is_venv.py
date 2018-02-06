@@ -4,7 +4,7 @@
 	**./bin/is_venv**
 	checks whether virtualenv is turned on
 
-	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 # pylint: disable=no-member
 import sys

@@ -2,7 +2,7 @@
 """
 unit tests
 
-.. moduleauthor:: Jarosław Stańczyk  <jaroslaw.stanczyk@upwr.edu.pl>
+.. moduleauthor:: Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 
 """
 # eof.

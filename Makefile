@@ -1,6 +1,6 @@
 #
 # Makefile for phoebe project
-# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
 include ./make/make1.mk
 
@@ -39,6 +39,7 @@ clean:
 clean-all: clean
 	$(begin)
 	$(RM) -r .venv
+	$(RM) -r .pytest_cache
 	$(end)
 
 .PHONY: init_virtualenv

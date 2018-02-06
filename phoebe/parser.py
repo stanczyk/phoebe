@@ -7,7 +7,7 @@ phoebe implementation
 in the module:
 * *class* **Parser**
 
-Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 import sys
 import docopt  # https://pypi.python.org/pypi/docopt/
