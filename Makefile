@@ -8,7 +8,7 @@ BIN=bin
 SRC=phoebe
 TST=tests
 CFG=code_audit.cfg
-BUILD=.cache .eggs phoebe.egg-info dist build
+BUILD=.cache .eggs phoebe.egg-info dist build .pytest_cache
 LSBIN=$(shell ls $(BIN) | sed -e 's:^:./$(BIN)/:')
 
 .PHONY: all
@@ -39,7 +39,6 @@ clean:
 clean-all: clean
 	$(begin)
 	$(RM) -r .venv
-	$(RM) -r .pytest_cache
 	$(end)
 
 .PHONY: init_virtualenv

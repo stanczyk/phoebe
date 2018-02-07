@@ -28,7 +28,7 @@ class Inf(object):
 	LICENSE = 'GNU Affero General Public License v3 or later (AGPLv3+)'
 	URL = 'http://gen.up.wroc.pl/stanczyk/'
 	# 'https://github.com/stanczyk/phoebe'
-	VERSION = '0.6'
+	VERSION = '0.7'
 
 	# used by phoebe
 	VER = '' + \
@@ -36,9 +36,8 @@ class Inf(object):
 		'  v.' + \
 		VERSION
 	WRITTEN = '' + \
-		'author: ' + AUTHOR + '\n' + \
-		'e-mail: ' + AUTHOR_EMAIL + '\n' + \
-		'copyright: (c) 2017, 2018 ' + AUTHOR
+		'Author: ' + AUTHOR + ' <' + AUTHOR_EMAIL + '>\n' + \
+		'Copyright: (c) 2017-2018 ' + AUTHOR
 
 	DOC = '' + \
 		'Usage:' + \
@@ -52,18 +51,20 @@ class Inf(object):
 		'\t' + NAME + ' -h | --help\n' + \
 		'\t' + NAME + ' -v | --version\n' + \
 		'\nOptions:\n' + \
-		'\t--file\t\tshow information from desc_file\n' + \
-		'\t--det1\t\tshow parsed information (1) from desc_file\n' + \
-		'\t--det2\t\tshow parsed information (2) from desc_file\n' + \
-		'\t--det3\t\tshow mapping and parsed matrices\n' + \
-		'\t--vectors\tshow vectors: u(k), x(k) and y(k)\n' + \
-		'\t--latex\t\tgenerate description for latex, default is matlab description\n' + \
-		'\t--no-desc\tno description generated\n' + \
-		'\t-h, --help\tshows this help message and exit\n' + \
-		'\t-v, --version\tshow version information and exit'
+		'  useful during debuging or learning:\n' + \
+		'\t--file\t\tshows information from desc_file\n' + \
+		'\t--det1\t\tshows parsed information (1) from desc_file\n' + \
+		'\t--det2\t\tshows parsed information (2) from desc_file\n' + \
+		'\t--det3\t\tshows mapping and parsed matrices\n' + \
+		'\t--vectors\tshows vectors: u(k), x(k) and y(k)\n' + \
+		'\t--no-desc\tdescription not generated\n' + \
+		'  in everyday use:\n' + \
+		'\t--latex\t\tgenerate description for latex (by default matlab model is generated)\n' + \
+		'\t-h, --help\tdisplays this help message and exit\n' + \
+		'\t-v, --version\tdisplays version information and exit'
 
 	def get_version(self):
-		return self.VER + '\n' + self.WRITTEN
+		return self.VER + '\n\n' + self.WRITTEN + '\n'
 
 	@staticmethod
 	def get_time():

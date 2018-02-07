@@ -293,6 +293,7 @@ class Worker(object):
 
 	def desc_matrix(self, obj):
 		tmp1 = tmp2 = None
+		obj.matrix_desc()
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			if i == self.A0:
 				tmp1 = 'A'

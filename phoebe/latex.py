@@ -70,6 +70,10 @@ class Lat(object):
 			odp += str(tab[i])
 		return odp
 
+	@staticmethod
+	def matrix_desc():
+		return Err.NOOP
+
 	def matrix(self, name, idx_name, matrix):
 		print '% matrix {0}_{1}'.format(name, idx_name)
 		print '\\begin{equation*}'

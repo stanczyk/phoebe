@@ -51,6 +51,7 @@ class Mat(object):
 
 	def values(self, values):
 		if values:
+			print 'disp(\'times:\');'
 			for key in sorted(values):
 				print '%s = %s' % (self.clean_value(key), values[key])
 			print
@@ -80,6 +81,11 @@ class Mat(object):
 				odp += ')'
 		return odp
 
+	@staticmethod
+	def matrix_desc():
+		print 'disp(\'matrices:\');'
+		return Err.NOOP
+
 	def matrix(self, name, idx_name, matrix):
 		print '% matrix {0}{1}'.format(name, idx_name)
 		w1, w2 = self.yam.get_matrix_size(matrix)
@@ -96,9 +102,8 @@ class Mat(object):
 
 	@staticmethod
 	def input_vec(vec):
-		print 'disp(\'---------------------------------\');'
+		print 'disp(\'---------------------------------\');\n'
 		print 'disp(\'initial vectors:\');'
-		print 'disp(\'\');\n'
 		print 'U  = mp_ones({0}, {1})'.format(len(vec), 1)
 		return Err.NOOP
 
@@ -111,10 +116,12 @@ class Mat(object):
 	@staticmethod
 	def adds():
 		print '' + \
+			'disp(\'model:\');\n' + \
 			'As = mp_star(A0)\n' + \
 			'A = mp_multi(As, A1)\n' + \
 			'B = mp_multi(As, B0)\n' + \
 			'\n' + \
+			'disp(\'state vector and output:\');\n' + \
 			'% number of iterations\n' + \
 			'k = 12;\n' + \
 			'X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n' + \
