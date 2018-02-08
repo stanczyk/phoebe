@@ -1,7 +1,7 @@
 #
 # spec.yaml
 # phoebe input specification v0.2
-# (c) 2017, 2018 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 # this spec is valid for numerical as well as general (text) values
 # http://www.yaml.org/spec/1.2/spec.html
