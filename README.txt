@@ -2,7 +2,7 @@
 repo:
 	phoebe
 version:
-	v0.7
+	v0.8
 
 Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
@@ -12,6 +12,7 @@ moje wypociny dot. generatora opisu systemów w algebrze (max, +)
 	splitting a subfolder out into a new repository
 	- https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
 
+2018.02.08 DONE v0.7
 2018.01.06 DONE v0.6
 
 2017.12.28
