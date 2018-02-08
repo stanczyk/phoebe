@@ -1,6 +1,6 @@
 #
 # Makefile for phoebe project
-# (c) 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
 include ./make/make1.mk
 
@@ -8,7 +8,7 @@ BIN=bin
 SRC=phoebe
 TST=tests
 CFG=code_audit.cfg
-BUILD=.cache .eggs phoebe.egg-info dist build
+BUILD=.cache .eggs phoebe.egg-info dist build .pytest_cache
 LSBIN=$(shell ls $(BIN) | sed -e 's:^:./$(BIN)/:')
 
 .PHONY: all

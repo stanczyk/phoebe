@@ -1,6 +1,6 @@
 #
 # requirements-dev.txt for phoebe project
-# (c) 2017, 2018 Jaroslaw Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
 
 -r requirements.txt

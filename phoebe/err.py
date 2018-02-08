@@ -7,7 +7,7 @@ error messages and values
 in the module:
 * *class* **Err**
 
-Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 # one more then last ERR
 ERR_MAX_NUMBER = 10

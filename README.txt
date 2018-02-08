@@ -1,10 +1,12 @@
 repo:
 	phoebe
 version:
-	v0.6
+	v0.7
 
-(c) 2017, 2018 Jarosław Stańczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 
 =================================
+
+The max-plus algebraic state space model generator
 
 # eof.

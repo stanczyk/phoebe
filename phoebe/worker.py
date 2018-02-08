@@ -7,7 +7,7 @@ phoebe implementation
 in the module:
 * *class* **Worker**
 
-Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 import sys
 from err import Err
@@ -293,6 +293,7 @@ class Worker(object):
 
 	def desc_matrix(self, obj):
 		tmp1 = tmp2 = None
+		obj.matrix_desc()
 		for i in [self.A0, self.A1, self.B0, self.C]:
 			if i == self.A0:
 				tmp1 = 'A'

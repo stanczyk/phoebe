@@ -1,6 +1,6 @@
 #
 # make.mk - wzorzec do kompilacji moich tekstów
-# (c) 2003-2005, 2015-2018 Jaroslaw Stanczyk, e-mail: j.stanczyk@hotmail.com
+# Copyright (c) 2003-2005, 2015-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
 
 # SRC=max-plus

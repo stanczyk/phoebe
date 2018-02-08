@@ -4,7 +4,7 @@
 	**setup.py**
 	installer, uninstaller, tarball preparer and test runner for phoebe
 
-	Copyright 2017, 2018 Jaroslaw Stanczyk, e-mail: jaroslaw.stanczyk@upwr.edu.pl
+	Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 
 	for more details regarding setup and setuptools let's have a look at:
 		https://setuptools.readthedocs.io/en/latest/setuptools.html
