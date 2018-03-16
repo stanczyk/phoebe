@@ -12,6 +12,16 @@ moje wypociny dot. generatora opisu systemów w algebrze (max, +)
 	splitting a subfolder out into a new repository
 	- https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
 
+=================================
+
+2018.03.15
+	dorobić (luźne pomysły):
+		- dodać możliwość dołączenia własnego skryptu na koniec generowanego opisu
+	przyjęta konwencja
+		- wejścia muszą nazywać się u_
+		- wyjścia y_
+		- a elementy opisujące wektor stanów x_
+
 2018.02.08 DONE v0.7
 2018.01.06 DONE v0.6
 
