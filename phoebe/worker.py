@@ -180,7 +180,7 @@ class Worker(object):
 									if tr_time:
 										tmp.append(tr_time)
 									idx1 = self.mapping[key4]
-									tmp.append(opt)
+									tmp.extend(opt)
 									idx2 = self.mapping[key0]
 									matrix[idx1][idx2] = tmp
 		return matrix

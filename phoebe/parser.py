@@ -135,7 +135,7 @@ class Parser(object):
 					if key == key2:
 						tmp.append(op_time)
 						tr_time, _ = self.get_det2(self.yml.get_value(con1, key))
-						if tr_time != 0:
+						if tr_time != '0':
 							tmp.append(tr_time)
 						return key1, tmp
 		return None, None
