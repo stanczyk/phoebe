@@ -154,8 +154,12 @@ class Worker(object):
 		# pylint: disable=too-many-locals
 		for i in range(0, self.parser.yml.get_len(wy)):
 			key1 = self.parser.yml.get_key(wy[i])
+			# print 'key1:', key1
+			# print sy
 			key0, opt = self.parser.get_det3(sy, key1)
+			# print 'key0, opt:', key0, opt
 			op_time, con1 = self.parser.get_det1(self.parser.yml.get_value(wy[i], key1))
+			# print op_time, con1
 			if con1:
 				for key2 in con1:
 					if key2[0].upper() == 'U':
