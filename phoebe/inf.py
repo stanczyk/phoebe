@@ -45,6 +45,7 @@ class Inf(object):
 		'[--det1] ' + \
 		'[--det2] ' + \
 		'[--det3] ' + \
+		'[--matrices] ' + \
 		'[--vectors] ' + \
 		'[--latex | --no-desc] ' + \
 		'<desc_file>\n' + \
@@ -56,6 +57,7 @@ class Inf(object):
 		'\t--det1\t\tshows parsed information (1) from desc_file\n' + \
 		'\t--det2\t\tshows parsed information (2) from desc_file\n' + \
 		'\t--det3\t\tshows mapping and parsed matrices\n' + \
+		'\t--matrices\tshows max-plus matrices\n' + \
 		'\t--vectors\tshows vectors: u(k), x(k) and y(k)\n' + \
 		'\t--no-desc\tdescription not generated\n' + \
 		'  in everyday use:\n' + \

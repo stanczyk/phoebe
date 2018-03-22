@@ -25,7 +25,7 @@ Inf.VER:\n\
 phoebe  v.0.8\n\
 \n\
 Inf.DOC:\n\
-Usage:\tphoebe [--file] [--det1] [--det2] [--det3] [--vectors] [--latex | --no-desc] <desc_file>\n\
+Usage:\tphoebe [--file] [--det1] [--det2] [--det3] [--matrices] [--vectors] [--latex | --no-desc] <desc_file>\n\
 \tphoebe -h | --help\n\
 \tphoebe -v | --version\n\
 \n\
@@ -35,6 +35,7 @@ Options:\n\
 \t--det1\t\tshows parsed information (1) from desc_file\n\
 \t--det2\t\tshows parsed information (2) from desc_file\n\
 \t--det3\t\tshows mapping and parsed matrices\n\
+\t--matrices\tshows max-plus matrices\n\
 \t--vectors\tshows vectors: u(k), x(k) and y(k)\n\
 \t--no-desc\tdescription not generated\n\
   in everyday use:\n\
@@ -521,7 +522,7 @@ prod-unit: [\
 output: [\
 {\'y_1\': {\'op-time\': \'0\', \'connect\': {\'u_1\': {\'tr-time\': \'0\', \'buffers\': \'-\'}}}}, \
 {\'y_2\': {\'op-time\': \'0\', \'connect\': {\'u_2\': {\'tr-time\': \'0\', \'buffers\': \'-\'}}}}]\n\
-values: {\'o_{1,2}\': 2, \'o_{2,4}\': 2}\n'
+values: {\'o_{1,2}\': 1, \'o_{2,4}\': 2}\n'
 
 ANS_F7_DET3 = '\
 == DETAILS 3 ===============\n\

@@ -97,9 +97,10 @@ class Worker(object):
 				j = self.mapping[key]
 				if key[0] != 'y':
 					if matrix in [self.A0, self.B0]:
+						cell = val[:]
 						if tr_time:
-							val.append(tr_time)
-						matrix[j][iteration] = val
+							cell.append(tr_time)
+						matrix[j][iteration] = cell
 					if matrix in [self.A1]:
 						if buffers == '0':
 							if tr_time == '0':
@@ -350,6 +351,8 @@ class Worker(object):
 		self.matrix_preparation()
 		if self.parser.args['--det3']:
 			self.show_det3()
+		if self.parser.args['--matrices']:
+			self.show_matrices()
 		if self.parser.args['--no-desc']:
 			return Err.NOOP
 		ans = self.generatable()

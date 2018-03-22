@@ -27,6 +27,7 @@ class TestPhoebe(unittest.TestCase):
 			'--det3': False,
 			'--file': False,
 			'--help': False,
+			'--matrices': False,
 			'--vectors': False,
 			'--version': False,
 			'--latex': False,
