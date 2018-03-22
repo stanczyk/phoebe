@@ -14,7 +14,7 @@ output:
 - y_1: {connect: u_1}
 - y_2: {connect: u_2}
 values: {
-'o_{1,2}': 2,
+'o_{1,2}': 1,
 'o_{2,4}': 2
 }
 
