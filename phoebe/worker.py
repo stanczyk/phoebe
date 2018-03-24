@@ -51,7 +51,7 @@ class Worker(object):
 			for j in range(0, self.parser.yml.get_len(my_dic)):
 				vec.append(self.parser.yml.get_key(my_dic[j]))
 		for i in range(0, len(tmp)):
-			self.x.append('x_' + str(i + 1))
+			self.x.append('x_{' + str(i + 1) + '}')
 		return Err.NOOP
 
 	def show_vectors(self):
