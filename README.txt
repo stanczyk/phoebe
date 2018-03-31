@@ -2,7 +2,7 @@
 repo:
 	phoebe
 version:
-	v0.8
+	v0.9
 
 Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
@@ -14,10 +14,12 @@ moje wypociny dot. generatora opisu systemów w algebrze (max, +)
 
 =================================
 
+2018.03.31 DONE v0.8
+
 2018.03.15
-	dorobić (luźne pomysły):
+	- dorobić (luźne pomysły):
 		- dodać możliwość dołączenia własnego skryptu na koniec generowanego opisu
-	przyjęta konwencja
+	- przyjęta konwencja
 		- wejścia muszą nazywać się u_
 		- wyjścia y_
 		- a elementy opisujące wektor stanów x_
