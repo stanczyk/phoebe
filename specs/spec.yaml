@@ -10,27 +10,37 @@ input:
 - _input-name_: {
     connect: _prod-unit-nane_ | _output-nane_,
     tr-time: _time-name_ | _time_
-}
+  }
+  ...
 prod-unit:
 - _prod-unit-name_: {
     op-time: _time-name_ | _time_,
     connect: _prod-unit-nane_ | _output-nane_,
     tr-time: _time-name_ | _time_,
     buffers: _buffer_
-}
+  },
+  ...
 output:
 - _output-name_: {
-    connect: _input-name_ | _prod-unit-nane_
-}
+    connect: _input-name_ | _prod-unit-nane_,
+  }
+  ...
 values: {
-_time-name_: _time_
+_time-name_: _time_,
+...
 }
 
 # eof.
 
 # opisać jeszcze:
-- y: {connect: {u_1, u_2}}
+- _output-name_: {connect: {_input-name_ | _prod-unit-nane_, ...}}
 
-connect: {'tr-time': tr_time, 'buffers': buffers}
+connect: {'tr-time': _time-name_ | _time_ , 'buffers': _buffer_}
+connect: {_prod-unit-name_ | _output-name_: {'tr-time': _time-name_ | _time_ , 'buffers': _buffer_}, ...}
 
-jeśli buffers: to _buffer_ tylko 0
+jeśli buffers: to _buffer_ może być tylko 0
+- innych wartości jeszcze nie zaimplementowano
+w przeciwnym razie bufory są "wystarczające" (nieskończone)
+
+# dodać też przykłady
+
