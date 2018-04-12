@@ -61,6 +61,7 @@ class Parser(object):
 		return Err.NOOP
 
 	def show_file_content(self):
+		print 'file name: ', self.file_name
 		print '== INPUT FILE =============='
 		print self.yml.show(self.content_yaml)
 		return Err.NOOP

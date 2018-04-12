@@ -9,6 +9,7 @@ in the module:
 
 Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
+import os
 import sys
 from err import Err
 from parser import Parser
@@ -318,7 +319,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def description(self, obj):
-		obj.begin()
+		obj.begin(os.path.splitext(os.path.basename(self.parser.file_name))[0])
 		obj.equation()
 		self. desc_vector(obj)
 		if obj.__class__.__name__ == 'Mat':

@@ -33,7 +33,7 @@ class Inf(object):
 	# used by phoebe
 	VER = '' + \
 		NAME + \
-		'  v.' + \
+		' v.' + \
 		VERSION
 	WRITTEN = '' + \
 		'Author: ' + AUTHOR + ' <' + AUTHOR_EMAIL + '>\n' + \
