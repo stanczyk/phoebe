@@ -112,13 +112,13 @@ test: src-test unit-test
 .PHONY: build_latex
 build_latex:
 	$(begin)
-	./bin/phoebe --latex $(FILE).yml | tee $(FILE).tex
+	./bin/phoebe --latex "$(FILE).yml" | tee "$(FILE).tex"
 	$(end)
 
 .PHONY: build_matlab
 build_matlab:
 	$(begin)
-	./bin/phoebe $(FILE).yml | tee $(FILE).m
+	./bin/phoebe "$(FILE).yml" | tee "$(FILE).m"
 	$(end)
 
 .PHONY: phoebe
