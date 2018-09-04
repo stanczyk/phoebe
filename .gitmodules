@@ -5,7 +5,7 @@
 
 [submodule "phoebe"]
 	path = phoebe
-	url = ../../prj/proxy/phoebe.git
+	url = ../../proxy/phoebe.git
 	branch = v0.9
 
 # eof.
