@@ -1,6 +1,6 @@
 #
 # Makefile
-# Copyright (c) 2003-2005, 2015-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+# Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 include ./phoebe/make/make.mk
 include ./phoebe/make/make1.mk
@@ -44,4 +44,5 @@ matlab:
 	$(end)
 
 include ./phoebe/make/make2.mk
-# eof.
+
+# eof
