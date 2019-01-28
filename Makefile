@@ -1,6 +1,6 @@
 #
-# Makefile for phoebe project
-# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+# Makefile
+# Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 include ./make/make1.mk
 
@@ -125,4 +125,5 @@ build_matlab:
 phoebe: is_virtenv build_latex build_matlab
 
 include ./make/make2.mk
-# eof.
+
+# eof
