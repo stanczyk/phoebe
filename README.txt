@@ -1,6 +1,6 @@
-=======
 repo:
-	phoebe
+	prj/soft/phoebe
+	sw_phoebe.git
 version:
 	v0.9
 
@@ -58,4 +58,5 @@ moje wypociny dot. generatora opisu systemów w algebrze (max, +)
 		sudo apt-get install yamllint
 		yamllint opis.yaml
 
+=================================
 # eof.
