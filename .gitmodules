@@ -3,3 +3,9 @@
 # Copyright (c) 2014-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 
+[submodule "phoebe"]
+	path = phoebe
+	url = git@github.com:stanczyk/phoebe.git
+	branch = v0.9
+
+# eof
