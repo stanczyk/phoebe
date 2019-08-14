@@ -6,6 +6,25 @@ include tools/make/make1b.mk
 
 all: info
 
+.PHONY: clean
+clean: doc-clean
+
+.PHONY: doc
+doc:
+	$(begin)
+	cd docs; \
+		$(MAKE) html
+	$(end)
+
+.PHONY: doc-clean
+doc-clean:
+	$(begin)
+	@if [ -d docs/build ]; then \
+		echo "$(RM) -r docs/build"; \
+		$(RM) -r docs/build; \
+	fi
+	$(end)
+
 # plik główny:
 # MAIN=tmp
 # STY=$(shell pwd)/../../sty
