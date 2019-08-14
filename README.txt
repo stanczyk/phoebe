@@ -2,13 +2,22 @@ repo:
 	prj/soft/phoebe
 	sw_phoebe.git
 version:
-	v0.9
+	v1.0
 
-Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
 =================================
 moje wypociny dot. generatora opisu systemów w algebrze (max, +)
 =================================
+
+2019.08.14 DONE
+	przełączam się z v0.9 i zaczynam prace nad nową wersją 1.0
+	DO ZROBIENIA:
+		Makefile - jakiś dziwny jest
+		dokumentacja - koniecznie
+		specs - przejżeć, wrzucic do old, a tu zostawić tylko ważne
+
+2019.08.14 DONE v0.9
 
 2018.03.31 DONE v0.8
 
