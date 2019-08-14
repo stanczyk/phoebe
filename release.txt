@@ -1,7 +1,13 @@
 #
 # release.txt
-# Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+# Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
+
+2019.08.14 - v1.0
+	start working on v1.0
+
+2019.08.14 - v0.9
+	small fixes and then switch to version 1.0
 
 2017.03.31 - v0.8
 

@@ -6,6 +6,6 @@
 [submodule "phoebe"]
 	path = phoebe
 	url = git@github.com:stanczyk/phoebe.git
-	branch = v0.9
+	branch = v1.0
 
 # eof
