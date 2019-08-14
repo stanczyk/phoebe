@@ -8,10 +8,6 @@ Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
 =================================
 moje wypociny dot. generatora opisu systemów w algebrze (max, +)
-
-	splitting a subfolder out into a new repository
-	- https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
-
 =================================
 
 2018.03.31 DONE v0.8
