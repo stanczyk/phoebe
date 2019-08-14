@@ -61,6 +61,7 @@ class Parser(object):
 		return Err.NOOP
 
 	def show_file_content(self):
+		print 'file name: ', self.file_name
 		print '== INPUT FILE =============='
 		print self.yml.show(self.content_yaml)
 		return Err.NOOP
@@ -127,10 +128,17 @@ class Parser(object):
 		for i in range(0, self.yml.get_len(system)):
 			key1 = self.yml.get_key(system[i])
 			op_time, con1 = self.get_det1(self.yml.get_value(system[i], key1))
+			# print op_time, con1, key
 			if con1:
+				tmp = []
+				# print con1
 				for key2 in con1:
 					if key == key2:
-						return key1, op_time
+						tmp.append(op_time)
+						tr_time, _ = self.get_det2(self.yml.get_value(con1, key))
+						if tr_time != '0':
+							tmp.append(tr_time)
+						return key1, tmp
 		return None, None
 
 	def show_det2(self):

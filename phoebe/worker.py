@@ -9,6 +9,7 @@ in the module:
 
 Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
+import os
 import sys
 from err import Err
 from parser import Parser
@@ -51,7 +52,7 @@ class Worker(object):
 			for j in range(0, self.parser.yml.get_len(my_dic)):
 				vec.append(self.parser.yml.get_key(my_dic[j]))
 		for i in range(0, len(tmp)):
-			self.x.append('x_' + str(i + 1))
+			self.x.append('x_{' + str(i + 1) + '}')
 		return Err.NOOP
 
 	def show_vectors(self):
@@ -97,9 +98,10 @@ class Worker(object):
 				j = self.mapping[key]
 				if key[0] != 'y':
 					if matrix in [self.A0, self.B0]:
+						cell = val[:]
 						if tr_time:
-							val.append(tr_time)
-						matrix[j][iteration] = val
+							cell.append(tr_time)
+						matrix[j][iteration] = cell
 					if matrix in [self.A1]:
 						if buffers == '0':
 							if tr_time == '0':
@@ -154,8 +156,12 @@ class Worker(object):
 		# pylint: disable=too-many-locals
 		for i in range(0, self.parser.yml.get_len(wy)):
 			key1 = self.parser.yml.get_key(wy[i])
+			# print 'key1:', key1
+			# print sy
 			key0, opt = self.parser.get_det3(sy, key1)
+			# print 'key0, opt:', key0, opt
 			op_time, con1 = self.parser.get_det1(self.parser.yml.get_value(wy[i], key1))
+			# print op_time, con1
 			if con1:
 				for key2 in con1:
 					if key2[0].upper() == 'U':
@@ -176,7 +182,7 @@ class Worker(object):
 									if tr_time:
 										tmp.append(tr_time)
 									idx1 = self.mapping[key4]
-									tmp.append(opt)
+									tmp.extend(opt)
 									idx2 = self.mapping[key0]
 									matrix[idx1][idx2] = tmp
 		return matrix
@@ -313,7 +319,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def description(self, obj):
-		obj.begin()
+		obj.begin(os.path.splitext(os.path.basename(self.parser.file_name))[0])
 		obj.equation()
 		self. desc_vector(obj)
 		if obj.__class__.__name__ == 'Mat':
@@ -346,6 +352,8 @@ class Worker(object):
 		self.matrix_preparation()
 		if self.parser.args['--det3']:
 			self.show_det3()
+		if self.parser.args['--matrices']:
+			self.show_matrices()
 		if self.parser.args['--no-desc']:
 			return Err.NOOP
 		ans = self.generatable()

@@ -21,9 +21,10 @@ class Mat(object):
 		self.yam = Yml()
 
 	@staticmethod
-	def begin():
+	def begin(filename):
 		info = inf.Inf()
 		print '%'
+		print '% {0}.m'.format(filename)
 		print '% (max, +) system description'
 		print '% Copyright (c) 2017-2018 {0} <{1}>'.format(info.AUTHOR, info.AUTHOR_EMAIL)
 		print '%'

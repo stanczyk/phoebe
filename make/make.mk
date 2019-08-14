@@ -1,5 +1,5 @@
 #
-# make.mk - wzorzec do kompilacji moich tekstów
+# make.mk
 # Copyright (c) 2003-2005, 2015-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
 

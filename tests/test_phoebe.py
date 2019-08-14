@@ -9,10 +9,12 @@
 	Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 import os
+from StringIO import StringIO
 import unittest
 import mock
 import phoebe.err
 import phoebe.worker
+from answers import ANS_F7_DET1, ANS_F7_DET3
 
 
 class TestPhoebe(unittest.TestCase):
@@ -25,6 +27,7 @@ class TestPhoebe(unittest.TestCase):
 			'--det3': False,
 			'--file': False,
 			'--help': False,
+			'--matrices': False,
 			'--vectors': False,
 			'--version': False,
 			'--latex': False,
@@ -55,6 +58,32 @@ class TestPhoebe(unittest.TestCase):
 		with self.assertRaises(SystemExit) as system_exit:
 			self.work.main()
 		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_phoebe_f7_det1(self, mock_docopt):
+		args = self.args
+		args['--det1'] = True
+		args['--no-desc'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f7.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.work.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_F7_DET1)
+
+	@mock.patch('phoebe.parser.docopt.docopt')
+	def test_phoebe_f7_det3(self, mock_docopt):
+		args = self.args
+		args['--det3'] = True
+		args['--no-desc'] = True
+		args['<desc_file>'] = os.getcwd() + '/tests/samples/f7.yml'
+		mock_docopt.return_value = args
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			with self.assertRaises(SystemExit) as system_exit:
+				self.work.main()
+		self.assertEqual(system_exit.exception.code, phoebe.err.Err.NOOP)
+		self.assertEqual(mock_stdout.getvalue(), ANS_F7_DET3)
 
 
 def main():

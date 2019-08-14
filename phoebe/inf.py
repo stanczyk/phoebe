@@ -8,7 +8,7 @@ in the module:
 
 * *class* **Info**
 
-Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+Copyright (c) 2017-2019 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 """
 import time
 
@@ -28,16 +28,16 @@ class Inf(object):
 	LICENSE = 'GNU Affero General Public License v3 or later (AGPLv3+)'
 	URL = 'http://gen.up.wroc.pl/stanczyk/'
 	# 'https://github.com/stanczyk/phoebe'
-	VERSION = '0.7'
+	VERSION = '0.9.1'
 
 	# used by phoebe
 	VER = '' + \
 		NAME + \
-		'  v.' + \
+		' v.' + \
 		VERSION
 	WRITTEN = '' + \
 		'Author: ' + AUTHOR + ' <' + AUTHOR_EMAIL + '>\n' + \
-		'Copyright: (c) 2017-2018 ' + AUTHOR
+		'Copyright: (c) 2017-2019 ' + AUTHOR
 
 	DOC = '' + \
 		'Usage:' + \
@@ -45,6 +45,7 @@ class Inf(object):
 		'[--det1] ' + \
 		'[--det2] ' + \
 		'[--det3] ' + \
+		'[--matrices] ' + \
 		'[--vectors] ' + \
 		'[--latex | --no-desc] ' + \
 		'<desc_file>\n' + \
@@ -56,6 +57,7 @@ class Inf(object):
 		'\t--det1\t\tshows parsed information (1) from desc_file\n' + \
 		'\t--det2\t\tshows parsed information (2) from desc_file\n' + \
 		'\t--det3\t\tshows mapping and parsed matrices\n' + \
+		'\t--matrices\tshows max-plus matrices\n' + \
 		'\t--vectors\tshows vectors: u(k), x(k) and y(k)\n' + \
 		'\t--no-desc\tdescription not generated\n' + \
 		'  in everyday use:\n' + \

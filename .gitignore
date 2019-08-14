@@ -1,6 +1,6 @@
 #
-# .gitignore for my (max,+) projects
-# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+# .gitignore
+# Copyright (c) 2013-2019 Jarosław Stanczyk <j.stanczyk@hotmail.com>
 #
 
 # for python projects
@@ -11,5 +11,6 @@
 *.egg-info/
 *.pyc
 tests/__pycache__
+.pytest_cache/
 
 # eof.

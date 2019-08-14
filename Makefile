@@ -1,6 +1,6 @@
 #
-# Makefile for phoebe project
-# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+# Makefile
+# Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 include ./make/make1.mk
 
@@ -112,16 +112,18 @@ test: src-test unit-test
 .PHONY: build_latex
 build_latex:
 	$(begin)
-	cd .. ; \
-		$(MAKE) $@
+	./bin/phoebe --latex "$(FILE).yml" | tee "$(FILE).tex"
 	$(end)
 
-.PHONY: matlab
-matlab:
+.PHONY: build_matlab
+build_matlab:
 	$(begin)
-	cd .. ; \
-		$(MAKE) $@
+	./bin/phoebe "$(FILE).yml" | tee "$(FILE).m"
 	$(end)
+
+.PHONY: phoebe
+phoebe: is_virtenv build_latex build_matlab
 
 include ./make/make2.mk
-# eof.
+
+# eof
