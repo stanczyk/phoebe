@@ -1,13 +1,14 @@
 repo:
 	prj/soft/phoebe
 	sw_phoebe.git
-	Phoebe project. Python sources from phoebe directory are at git@github.com:stanczyk/phoebe.git
+	git@github.com:stanczyk/phoebe.git
 version:
 	v1.0
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 =================================
-moje wypociny dot. generatora opisu systemów w algebrze (max, +)
+The max-plus algebraic state space model generator
+
 =================================
 	projekt prowadzony w pythonie
 		- https://docs.python-guide.org/
