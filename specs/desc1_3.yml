@@ -1,0 +1,38 @@
+#
+# desc1_3.yml
+# Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+#
+# a multi production system (fig5, fig6) described in 01/Ex.2.1
+---
+input:
+- u_1: {connect: X_1}
+- u_2: {connect: X_3}
+- u_3: {connect: X_6}
+- u_4: {connect: X_3}
+- u_5: {connect: X_1}
+- u_6: {connect: X_2}
+prod-unit:
+- X_1: {op-time: d_1, connect: {X_2, X_4}}
+- X_2: {op-time: d_2, connect: {y_1, X_5}}
+- X_3: {op-time: d_3, connect: {X_4, X_6}}
+- X_4: {op-time: d_4, connect: {X_5, X_7}}
+- X_5: {op-time: d_5, connect: {y_2, y_6}}
+- X_6: {op-time: d_6, connect: {X_7, y_4}}
+- X_7: {op-time: d_7, connect: {y_3, y_5}}
+output:
+- y_1: {connect: X_1}
+- y_2: {connect: X_3}
+- y_3: {connect: X_6}
+- y_4: {connect: X_3}
+- y_5: {connect: X_1}
+- y_6: {connect: X_2}
+values: {
+d_1: 1,
+d_2: 5,
+d_3: 3,
+d_4: 2,
+d_5: 3,
+d_6: 4,
+d_7: 3,
+}
+# eof.

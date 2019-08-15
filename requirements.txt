@@ -1,0 +1,21 @@
+#
+# requirements.txt for phoebe project
+# Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+#
+
+# prerequisites:
+# - pip (sudo apt-get install python-pip)
+#
+# and then
+# sudo pip install -r requirements.txt
+#
+# package version:
+# pip show pyyaml
+#   or
+# pip freeze | grep pyyaml
+
+# pakiety niezbędne do generowania dokumentacji
+sphinx>=1.8.5
+sphinx-rtd-theme>=0.4.3
+
+# eof.

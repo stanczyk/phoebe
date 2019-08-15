@@ -1,0 +1,37 @@
+#
+# release.txt
+# Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+#
+
+2019.08.14 - v1.0
+	start working on v1.0
+
+2019.08.14 - v0.9
+	small fixes and then switch to version 1.0
+
+2017.03.31 - v0.8
+
+2017.02.08 - v0.7
+	fixes of another some bugs in matlab description :)
+
+2017.01.06 - v0.6
+	fixes of some bugs in matlab description
+
+2017.12.09 - v0.5
+	feedback added
+
+2017.12.08 - v0.4
+	connection with more than one item
+
+2017.12.06 - v0.3
+	modeling of no-buffers
+
+2017.12.05 - v0.2
+	remove redundant zeros in description
+
+2017.12.04 - v0.1
+	modeling of:
+	- simple production system
+	- merging line
+
+# eof.
