@@ -8,31 +8,23 @@ include tools/make/make1b.mk
 all: info
 	$(begin)
 	@echo "development:"
-	@echo "  documentation:"
-	@echo "      doc-build doc-clean doc-serve"
+	@# echo "  documentation:"
+	@# echo "      doc-build doc-clean doc-serve"
 	@echo "  virtualenv:"
 	@echo "      venv-init venv-check venv-clean"
-	@echo "  static code analysis:"
-	@echo "      check-flake8 check-pylama check-pylint"
-	@echo "  unit tests:"
-	@echo "      unittests"
-	@echo "      py.test tests/test_file.py"
-	@echo "  clean-up:"
-	@echo "      clean doc-clean venv-clean clean-all"
-	@echo
-	@echo "other:"
-	@echo "  virtualenv:  source .venv/bin/activate  deactivate"
+	@# echo "  static code analysis:"
+	@# echo "      check-flake8 check-pylama check-pylint"
+	@# echo "  unit tests:"
+	@# echo "      unittests"
+	@# echo "      py.test tests/test_file.py"
+	@# echo "  clean-up:"
+	@# echo "      clean doc-clean venv-clean clean-all"
+	@echo "  other:"
+	@echo "      virtualenv:  source .venv/bin/activate  deactivate"
 	$(end)
 
 # .PHONY: clean
 # clean: doc-clean
-#
-# .PHONY: doc
-# doc:
-# 	$(begin)
-# 	cd docs; \
-# 		$(MAKE) html
-# 	$(end)
 
 # .PHONY: doc-clean
 # doc-clean:

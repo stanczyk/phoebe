@@ -4,15 +4,15 @@
 #
 
 # prerequisites:
-# - pip (sudo apt-get install python-pip)
-#
+# 	pip (sudo apt-get install python-pip)
+
 # and then
-# sudo pip install -r requirements.txt
-#
+# 	sudo pip install -r requirements.txt
+
 # package version:
-# pip show pyyaml
-#   or
-# pip freeze | grep pyyaml
+# 	pip show pyyaml
+# 	or
+# 	pip freeze | grep pyyaml
 
 # pakiety niezbędne do generowania dokumentacji
 sphinx>=1.8.5

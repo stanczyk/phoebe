@@ -2,6 +2,15 @@
 # requirements-dev.txt for phoebe project
 # Copyright (c) 2017-2019 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
 #
+
+# prerequisites for development:
+# 	virtualenv (sudo pip install virtualenv)
+#
+# virtualenv .venv
+# 	. .venv/bin/activate
+# 	...
+# 	deactivate
+
 -r requirements.txt
 
 #flake8>=3.3.0

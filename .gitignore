@@ -3,6 +3,10 @@
 # Copyright (c) 2013-2019 Jarosław Stanczyk <j.stanczyk@hotmail.com>
 #
 
+# dokumetacja
 docs/build/
+
+# DEVELOPMENT
+.venv/
 
 # eof.
