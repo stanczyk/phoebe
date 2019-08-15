@@ -1,0 +1,14 @@
+#
+# requirements-dev.txt for phoebe project
+# Copyright (c) 2017-2019 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+#
+-r requirements.txt
+
+#flake8>=3.3.0
+#pylama>=7.3.3
+#pylint>=1.7.1
+#mock>=2.0.0
+#pytest>=3.0.7
+#ruamel.yaml>=0.15.34
+
+# eof.
