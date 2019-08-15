@@ -4,6 +4,7 @@
 #
 include tools/make/make1b.mk
 
+.PHONY: all
 all: info
 
 .PHONY: clean
