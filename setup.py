@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	**setup.py**
-	installer, uninstaller, tarball preparer and test runner for phoebe
+**setup.py**
+installer, uninstaller, tarball preparer and test runner for phoebe
 
-	Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
-	for more details regarding setup and setuptools let's have a look at:
-		https://setuptools.readthedocs.io/en/latest/setuptools.html
+for more details regarding setup and setuptools let's have a look at:
+	https://setuptools.readthedocs.io/en/latest/setuptools.html
 """
 # pylint: disable=no-name-in-module, import-error, bad-continuation
 import errno
@@ -59,7 +59,7 @@ class Uninstall(build_py):
 			record_list = record_list.split('\n')
 			for recorded_line in record_list:
 				if recorded_line:
-					print 'removing: %s' % recorded_line
+					print('removing: %s' % recorded_line)
 					try:
 						os.unlink(recorded_line)
 					except OSError as error:
@@ -67,7 +67,7 @@ class Uninstall(build_py):
 							raise
 			os.unlink(tmp)
 		else:
-			print >> sys.stderr, 'error: nothing to uninstall?'
+			print('error: nothing to uninstall?', file=sys.stderr)
 
 
 def run_setup():

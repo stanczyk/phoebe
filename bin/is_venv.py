@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	**./bin/is_venv**
-	checks whether virtualenv is turned on
+**./bin/is_venv**
+checks whether virtualenv is turned on
 
-	Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=no-member
 import sys

@@ -3,37 +3,35 @@
 # Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 include tools/make/make1b.mk
+CHECK_CFG = setup.cfg
+CHECK_DIR = bin/ phoebe/ tests/ setup.py
 
 .PHONY: all
 all: info
 	$(begin)
+	@echo "use:"
+	@echo "  documentation:"
+	@echo "      doc doc-build doc-clean doc-serve"
+	@echo
 	@echo "development:"
-	@# echo "  documentation:"
-	@# echo "      doc-build doc-clean doc-serve"
 	@echo "  virtualenv:"
 	@echo "      venv-init venv-check venv-clean"
-	@# echo "  static code analysis:"
-	@# echo "      check-flake8 check-pylama check-pylint"
+	@echo "  static code analysis:"
+	@echo "      check-flake8 check-pylama check-pylint"
 	@# echo "  unit tests:"
 	@# echo "      unittests"
 	@# echo "      py.test tests/test_file.py"
 	@# echo "  clean-up:"
 	@# echo "      clean doc-clean venv-clean clean-all"
-	@echo "  other:"
-	@echo "      virtualenv:  source .venv/bin/activate  deactivate"
+	@echo
+	@echo "other:"
+	@echo "  virtualenv:"
+	@echo -e "      $(white)source .venv/bin/activate$(reset)  deactivate"
 	$(end)
+
 
 # .PHONY: clean
 # clean: doc-clean
-
-# .PHONY: doc-clean
-# doc-clean:
-# 	$(begin)
-# 	@if [ -d docs/build ]; then \
-# 		echo "$(RM) -r docs/build"; \
-# 		$(RM) -r docs/build; \
-# 	fi
-# 	$(end)
 
 # plik główny:
 # MAIN=tmp
