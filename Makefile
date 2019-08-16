@@ -4,7 +4,8 @@
 #
 include tools/make/make1b.mk
 CHECK_CFG = setup.cfg
-CHECK_DIR = bin/ phoebe/ tests/ setup.py
+CHECK_DIR = setup.py bin/
+	# phoebe/ tests/ setup.py
 
 .PHONY: all
 all: info

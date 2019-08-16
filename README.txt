@@ -21,7 +21,7 @@ v1.0
 		git@github.com:stanczyk/phoebe.git
 	- nowa obsługa paramterów
 		wcześniej docopt>=0.6.2
-		teraz click
+		teraz click - https://click.palletsprojects.com
 
 2019.08.14
 	przełączam się z v0.9 i zaczynam prace nad wersją 1.0
