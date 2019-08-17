@@ -7,34 +7,47 @@ phoebe implementation
 in the module:
 * *class* **Worker**
 
-Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+"""
+
+import click
 """
 import os
 import sys
+
 from err import Err
 from parser import Parser
 from latex import Lat
 from matlab import Mat
+"""
 
 
 class Worker(object):
 	"""Worker class"""
-	# pylint: disable=invalid-name
-	# pylint: disable=too-many-instance-attributes
-	# pylint: disable=too-many-nested-blocks
-	# pylint: disable=too-many-public-methods
 	def __init__(self):
-		self.parser = None
-		self.u = []
-		self.x = []
-		self.y = []
-		self.A0 = []
-		self.A1 = []
-		self.B0 = []
-		self.C = []
-		self.mapping = {}
-		self.values = None
+		# self.parser = None
+		# self.u = []
+		# self.x = []
+		# self.y = []
+		# self.A0 = []
+		# self.A1 = []
+		# self.B0 = []
+		# self.C = []
+		# self.mapping = {}
+		# self.values = None
+		pass
 
+	@click.command()
+	@click.argument('filename')
+	@click.option('--file', is_flag=True, help='Show information from FILENAME.')
+	@click.option('--dont', is_flag=True, help='State space model is not generated.')
+	def get_cmdline_params(filename, file, dont):
+		"""The max-plus algebraic state space model generator."""
+		print("filename ", filename)
+		print("file ", file)
+		print("gen ", dont)
+
+	"""
 	def init_parser(self):
 		self.parser = Parser()
 
@@ -198,7 +211,7 @@ class Worker(object):
 		return None, None, None
 
 	def rm_repeated_zeros(self, matrix):
-		""" 0, 0, 0 -> 0 """
+		# 0, 0, 0 -> 0
 		# pylint: disable=consider-using-enumerate
 		w1, w2 = self.parser.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
@@ -213,7 +226,7 @@ class Worker(object):
 		return matrix
 
 	def rm_redundant_zeros(self, matrix):
-		""" 0, d_1 -> d1 """
+		# 0, d_1 -> d1
 		w1, w2 = self.parser.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
@@ -335,7 +348,7 @@ class Worker(object):
 		return Err.NOOP
 
 	def generatable(self):
-		""" return Err.NOOP if it is possible to generate a description """
+		# return Err.NOOP if it is possible to generate a description
 		if not self.u:
 			return Err.ERR_NO_INPUT
 		if not self.y:
@@ -366,14 +379,19 @@ class Worker(object):
 			des = Mat()
 		self.description(des)
 		return Err.NOOP
+	"""
 
-	def main(self):
-		self.init_parser()
-		self.parser.main()
-		sys.exit(self.main_work())
+
+def main():
+	proces = Worker()
+	proces.get_cmdline_params()
+	# proces.init_parser()
+	# proces.parser.main()
+	# sys.exit(proces.main_work())
+	pass
 
 
 if __name__ == '__main__':
-	Worker().main()
+	main()
 
 # eof.

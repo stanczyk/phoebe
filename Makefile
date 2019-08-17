@@ -3,9 +3,15 @@
 # Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 include tools/make/make1b.mk
+
+# static code analysis
 CHECK_CFG = setup.cfg
 CHECK_DIR = setup.py bin/
 	# phoebe/ tests/ setup.py
+
+# housekeeping
+CLEAN = doc-clean
+CLEAN-ALL = venv-clean
 
 .PHONY: all
 all: info
@@ -13,6 +19,8 @@ all: info
 	@echo "use:"
 	@echo "  documentation:"
 	@echo "      doc doc-build doc-clean doc-serve"
+	@echo "  housekeeping:"
+	@echo "      clean doc-clean venv-clean clean-all"
 	@echo
 	@echo "development:"
 	@echo "  virtualenv:"
@@ -22,17 +30,11 @@ all: info
 	@# echo "  unit tests:"
 	@# echo "      unittests"
 	@# echo "      py.test tests/test_file.py"
-	@# echo "  clean-up:"
-	@# echo "      clean doc-clean venv-clean clean-all"
 	@echo
 	@echo "other:"
 	@echo "  virtualenv:"
 	@echo -e "      $(white)source .venv/bin/activate$(reset)  deactivate"
 	$(end)
-
-
-# .PHONY: clean
-# clean: doc-clean
 
 # plik główny:
 # MAIN=tmp
@@ -69,6 +71,7 @@ all: info
 # 	./phoebe/bin/phoebe $(DESC) | tee tmp.m
 # 	$(end)
 
+include tools/make/make_clean.mk
 include tools/make/make_py.mk
 include tools/make/make2b.mk
 # eof
