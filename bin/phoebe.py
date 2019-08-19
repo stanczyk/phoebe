@@ -18,7 +18,7 @@ def set_path():
 
 
 def start():
-	lib = importlib.import_module('cli-parser')
+	lib = importlib.import_module('cli')
 	lib.main()
 
 
