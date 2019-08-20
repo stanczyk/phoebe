@@ -1,40 +1,41 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-**cli-parser.py**
-phoebe implementation
+**cli.py**
+phoebe implementation: command line interface
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 
 import click
+from pre import Preparer
+from err import Err
 
 
-@click.group(context_settings={'help_option_names': ['-h', '--help']})
-# @click.option('--file', is_flag=True, help='Show information from FILENAME.')
+@click.group(context_settings={'help_option_names': ['-h', '--help']}, invoke_without_command=True)
+@click.option('--showfile', is_flag=True, help='Show information from FILENAME.')
 # @click.option('--dont', is_flag=True, help='State space model is not generated.')
-# @click.argument('filename')
-# def get_cmdline_params(version, file, dont, filename):
-# 	"""
-# 	The max-plus algebraic state space model generator.\n
-# 	Copyright: (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
-# 	"""
-# 	if version:
-# 		click.echo("We are in the verbose mode.")
-# 	print("filename ", filename)
-# 	print("file ", file)
-# 	print("gen ", dont)
-
-
-def cli():
-	"""My very cool command-line tool"""
-	pass
+@click.argument('filename')
+@click.pass_context
+def cli(ctx, showfile, filename):
+	"""
+	The max-plus algebraic state space model generator. Version 1.0.
+	Copyright: (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+	"""
+	ctx.obj = Preparer()
+	if ctx.obj.set_file_handler(filename) == Err().NOOP:
+		ctx.obj.read_file(ctx.obj.file_handler)
+		ctx.obj.close_file()
+	if showfile:
+		ctx.obj.show_file_content(filename)
 
 
 @click.command()
-def dosomething():
+@click.pass_obj
+def dosomething(prep):
 	"""Do Something."""
-	dosomething()
+	print('hej hopla')
+	prep.tada()
 
 
 cli.add_command(dosomething)

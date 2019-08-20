@@ -6,8 +6,7 @@ include tools/make/make1b.mk
 
 # static code analysis
 CHECK_CFG = setup.cfg
-CHECK_DIR = setup.py bin/
-	# phoebe/ tests/ setup.py
+CHECK_DIR = setup.py bin/ phoebe/ tests/
 
 # housekeeping
 CLEAN = doc-clean py-clean

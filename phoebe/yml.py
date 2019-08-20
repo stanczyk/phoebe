@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 	**yml.py**
@@ -7,12 +7,10 @@
 	in the module:
 	* *class* **Yml**
 
-	Copyright (c) 2013-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+	Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmil.com>
 """
-# pylint: disable=redefined-outer-name, invalid-name
 import yaml
 from yml_data import DANE
-# from ruamel.yaml import YAML
 
 
 class Yml(object):
@@ -109,7 +107,7 @@ class Yml(object):
 def self_test():
 	"""self tests"""
 	yaml = Yml()
-	print yaml.dump(DANE)
+	print(yaml.dump(DANE))
 
 
 if __name__ == '__main__':

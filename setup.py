@@ -9,13 +9,11 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 for more details regarding setup and setuptools let's have a look at:
 	https://setuptools.readthedocs.io/en/latest/setuptools.html
 """
-# pylint: disable=no-name-in-module, import-error, bad-continuation
 import errno
 import os
 import sys
 from subprocess import call, PIPE
 from distutils.command.build_py import build_py
-# from distutils.core import setup
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 from phoebe.inf import Inf
@@ -25,16 +23,12 @@ class PyTest(TestCommand):
 	"""
 	PyTest class to run my unit tests
 	"""
-	# pylint: disable=attribute-defined-outside-init
-	# user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
 	def initialize_options(self):
 		TestCommand.initialize_options(self)
 		self.pytest_args = ['--verbose']
 
 	def run(self):
-		# import shlex
 		import pytest
-		# err = pytest.main(shlex.split(self.pytest_args))
 		err = pytest.main(self.pytest_args)
 		sys.exit(err)
 
@@ -47,7 +41,6 @@ class Uninstall(build_py):
 		python setup.py install --record files.txt
 		cat files.txt | xargs rm -rf
 	"""
-	# pylint: disable=missing-docstring, too-few-public-methods, no-self-use
 	def run(self):
 		tmp = '/tmp/phoebe_install_list'
 		call(['python', 'setup.py', 'install', '--record', tmp], stdout=PIPE)
@@ -88,13 +81,13 @@ def run_setup():
 		contact=Inf.AUTHOR,
 		contact_email=Inf.AUTHOR_EMAIL,
 		description=Inf.DESC,
-		url=Inf.URL,
+		# url=Inf.URL,
 		license=Inf.LICENSE,
 		# platforms
 		# keywords
 		# provides
-		requires=['docopt'],
-		install_requires=['docopt>=0.6.2'],
+		requires=['click', 'pyyaml'],
+		install_requires=['click>=7.0', 'pyyaml>=5.1.2'],
 		packages=['phoebe'],
 		scripts=['bin/phoebe'],
 		# entry_points={'console_scripts': ['vcf_parser=vcm.command_line:main'], },

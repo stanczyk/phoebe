@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 **err.py**
@@ -7,16 +7,15 @@ error messages and values
 in the module:
 * *class* **Err**
 
-Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
+Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+
 # one more then last ERR
 ERR_MAX_NUMBER = 10
 
 
 class Err(object):
 	"""Errors code and description"""
-	# pylint: disable=too-few-public-methods
-
 	def __init__(self):
 		pass
 
@@ -41,7 +40,7 @@ class Err(object):
 		:param value: value to convert
 		:return: name of the value as a string
 		"""
-		for name, val in self.__class__.__dict__.iteritems():
+		for name, val in self.__class__.__dict__.items():
 			if val == value:
 				return name
 		raise ValueError('Unknown value: %r' % value)
@@ -49,15 +48,14 @@ class Err(object):
 	def get_err_description(self, error_code):
 		return self.value_to_name(error_code)
 
-
-def self_test():
-	"""self test for Err class"""
-	err = Err()
-	for i in range(ERR_MAX_NUMBER):
-		print '%d: %s' % (i, err.value_to_name(i))
+	def self_test(self):
+		"""self test for Err class"""
+		for i in range(ERR_MAX_NUMBER):
+			print('%d: %s' % (i, self.value_to_name(i)))
 
 
 if __name__ == '__main__':
-	self_test()
+	err = Err()
+	err.self_test()
 
 # eof.
