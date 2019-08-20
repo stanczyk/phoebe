@@ -6,15 +6,17 @@ phoebe launcher (and wrapper)
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+# pylint: disable=missing-docstring
+
 import os
 import sys
 import importlib
 
 
 def set_path():
-	LIB_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
-	if LIB_PATH not in sys.path:
-		sys.path.append(LIB_PATH)
+	lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
+	if lib_path not in sys.path:
+		sys.path.append(lib_path)
 
 
 def start():

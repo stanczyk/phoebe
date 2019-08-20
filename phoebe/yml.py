@@ -9,11 +9,13 @@
 
 	Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmil.com>
 """
+# pylint: disable=import-error
+
 import yaml
 from yml_data import DANE
 
 
-class Yml(object):
+class Yml():
 	"""
 	class to read, parse and store data
 	from config file and/or command line interface
@@ -96,6 +98,7 @@ class Yml(object):
 
 	@staticmethod
 	def get_matrix_size(matrix):
+		# pylint: disable=missing-docstring, invalid-name
 		if not matrix:
 			return None, None
 		w1 = len(matrix)
@@ -106,8 +109,8 @@ class Yml(object):
 
 def self_test():
 	"""self tests"""
-	yaml = Yml()
-	print(yaml.dump(DANE))
+	myyaml = Yml()
+	print(myyaml.dump(DANE))
 
 
 if __name__ == '__main__':

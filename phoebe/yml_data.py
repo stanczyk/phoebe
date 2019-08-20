@@ -4,6 +4,8 @@ yml_data
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+# pylint: disable=bad-continuation
+
 
 DANE = {
 	# input definition

@@ -9,14 +9,18 @@ in the module:
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+# pylint: disable=import-error
+
 import sys
 import yaml
 from err import Err
 from yml import Yml
 
 
-class Preparer(object):
+class Preparer():
 	"""Preparer class"""
+	# pylint: disable=missing-docstring
+
 	def __init__(self):
 		self.file_handler = None
 		self.content_yaml = None

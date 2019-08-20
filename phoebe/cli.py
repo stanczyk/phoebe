@@ -6,6 +6,7 @@ phoebe implementation: command line interface
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+# pylint: disable=import-error
 
 import click
 from pre import Preparer
@@ -44,10 +45,12 @@ cli.add_command(dosomething)
 @click.command()
 @click.pass_context
 def help(ctx):
+	# pylint: disable=missing-docstring, redefined-builtin
 	print(ctx.parent.get_help())
 
 
 def main():
+	# pylint: disable=missing-docstring, no-value-for-parameter
 	cli()
 
 

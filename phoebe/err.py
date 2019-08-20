@@ -14,8 +14,10 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 ERR_MAX_NUMBER = 10
 
 
-class Err(object):
+class Err():
 	"""Errors code and description"""
+	# pylint: disable=bad-continuation
+
 	def __init__(self):
 		pass
 
@@ -46,6 +48,7 @@ class Err(object):
 		raise ValueError('Unknown value: %r' % value)
 
 	def get_err_description(self, error_code):
+		# pylint: disable=missing-docstring
 		return self.value_to_name(error_code)
 
 	def self_test(self):
@@ -55,7 +58,7 @@ class Err(object):
 
 
 if __name__ == '__main__':
-	err = Err()
-	err.self_test()
+	ERR = Err()
+	ERR.self_test()
 
 # eof.
