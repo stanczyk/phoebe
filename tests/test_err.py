@@ -9,10 +9,10 @@
 	Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 import unittest
-from StringIO import StringIO
+from io import StringIO
 import mock
 import phoebe.err
-from answers import ERR_ANS
+from tests.ans_err import ERR_ANS
 
 
 class TesErr(unittest.TestCase):
@@ -33,7 +33,7 @@ class TesErr(unittest.TestCase):
 
 	def test_self_test(self):
 		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:
-			phoebe.err.self_test()
+			phoebe.err.Err().self_test()
 			self.assertEqual(fake_stdout.getvalue(), ERR_ANS)
 
 
