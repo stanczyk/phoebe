@@ -26,9 +26,9 @@ all: info
 	@echo "      venv-init venv-check venv-clean"
 	@echo "  static code analysis:"
 	@echo "      check-flake8 check-pylama check-pylint"
-	@# echo "  unit tests:"
-	@# echo "      unittests"
-	@# echo "      py.test tests/test_file.py"
+	@echo "  unit tests:"
+	@echo "      unittests"
+	@echo "      py.test tests/test_file.py"
 	@echo
 	@echo "other:"
 	@echo "  virtualenv:"
