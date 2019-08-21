@@ -12,7 +12,6 @@
 # pylint: disable=import-error
 
 import yaml
-from yml_data import DANE
 
 
 class Yml():
@@ -79,7 +78,7 @@ class Yml():
 		if not my_dict:
 			return default
 		try:
-			for key, _ in my_dict.iteritems():
+			for key, _ in my_dict.items():
 				return key
 		except AttributeError:
 			return default
@@ -109,8 +108,15 @@ class Yml():
 
 def self_test():
 	"""self tests"""
+	import os
+	import sys
+	lib_path = os.path.dirname(os.path.realpath(__file__))
+	if lib_path not in sys.path:
+		sys.path.append(lib_path)
+
+	import yml_data
 	myyaml = Yml()
-	print(myyaml.dump(DANE))
+	print(myyaml.dump(yml_data.DANE))
 
 
 if __name__ == '__main__':
