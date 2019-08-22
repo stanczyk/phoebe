@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-	**ans_err.py**
+	**answers.err.py**
 
 	Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """

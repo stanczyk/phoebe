@@ -12,7 +12,7 @@ import unittest
 from io import StringIO
 import mock
 import phoebe.err
-from tests.ans_err import ERR_ANS
+from tests.answers.ans_err import ERR_ANS
 
 # pylint: disable=missing-docstring
 

@@ -14,7 +14,7 @@ from io import StringIO
 import mock
 import yaml
 import phoebe.yml
-from tests.ans_yml import YML_ANS
+from tests.answers.ans_yml import YML_ANS
 
 
 class TestYml(unittest.TestCase):
