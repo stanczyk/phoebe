@@ -14,7 +14,7 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 ERR_MAX_NUMBER = 10
 
 
-class Err():
+class Err:
 	"""Errors code and description"""
 	# pylint: disable=bad-continuation
 

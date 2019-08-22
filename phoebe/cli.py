@@ -24,8 +24,7 @@ def cli(ctx, showfile, filename):
 	"""
 	ctx.obj = Preparer()
 	if ctx.obj.set_file_handler(filename) == Err().NOOP:
-		ctx.obj.read_file(ctx.obj.file_handler)
-		ctx.obj.close_file()
+		ctx.obj.read_file()
 	if showfile:
 		ctx.obj.show_file_content(filename)
 

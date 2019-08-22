@@ -31,17 +31,17 @@ class TestYml(unittest.TestCase):
 		""" test method for *load* """
 		# pylint: disable=redundant-unittest-assert
 		# empty file - OK
-		file_name = os.getcwd() + '/tests/samples/f1.yml'
+		file_name = os.getcwd() + '/tests/samples/yml1.yml'
 		with open(file_name, 'r') as tmp:
 			content = self.yml.load(tmp)
 		self.assertEqual(content, None)
 		# proper file - OK
-		file_name = os.getcwd() + '/tests/samples/f2.yml'
+		file_name = os.getcwd() + '/tests/samples/yml2.yml'
 		with open(file_name, 'r') as tmp:
 			content = self.yml.load(tmp)
 		self.assertEqual(content, self.cont1)
 		# not yaml file - error
-		file_name = os.getcwd() + '/tests/samples/f3.yml'
+		file_name = os.getcwd() + '/tests/samples/yml3.yml'
 		with open(file_name, 'r') as tmp:
 			try:
 				self.yml.load(tmp)
@@ -57,7 +57,7 @@ class TestYml(unittest.TestCase):
 
 	def test_show(self):
 		""" test method for *show* """
-		file_name = os.getcwd() + '/tests/samples/f2.yml'
+		file_name = os.getcwd() + '/tests/samples/yml2.yml'
 		with open(file_name, 'r') as tmp:
 			content = self.yml.load(tmp)
 		with mock.patch('sys.stdout', new=StringIO()) as fake_stdout:

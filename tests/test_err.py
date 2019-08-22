@@ -17,7 +17,7 @@ from tests.answers.ans_err import ERR_ANS
 # pylint: disable=missing-docstring
 
 
-class TesErr(unittest.TestCase):
+class TestErr(unittest.TestCase):
 	""" class for testing *Generator* """
 	def setUp(self):
 		self.err = phoebe.err.Err()

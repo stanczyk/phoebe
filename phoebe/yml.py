@@ -14,7 +14,7 @@
 import yaml
 
 
-class Yml():
+class Yml:
 	"""
 	class to read, parse and store data
 	from config file and/or command line interface

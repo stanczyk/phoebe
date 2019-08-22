@@ -1,29 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-	**answers.ans_cli.py**
+	**answers.ans_pre.py**
 
-	Copyright (c) 2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+	Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # flake8: noqa
 # pylama: ignore=E101
 
-ANS_HLP = '\
-Usage: cli [OPTIONS] FILENAME COMMAND [ARGS]...\n\
-\n\
-  The max-plus algebraic state space model generator. Version 1.0. Copyright:\n\
-  (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>\n\
-\n\
-Options:\n\
-  --showfile  Show information from FILENAME.\n\
-  -h, --help  Show this message and exit.\n\
-\n\
-Commands:\n\
-  dosomething  Do Something.\n\
-'
-
 ANS_FILE = '\
 == INPUT FILE ==============\n\
-file_name: tests/samples/cli1.yml\n\
+file_name: tests/samples/pre2.yml\n\
 input:\n\
 - u_1:\n\
     connect: M_1\n\

@@ -1,8 +1,0 @@
-#
-# f2.yml - test file
-# Copyright (c) 2017-2018 Jarosław Stańczyk <jaroslaw.stanczyk@upwr.edu.pl>
-#
----
-output:
-- y_1: {}
-# eof.

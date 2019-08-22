@@ -22,7 +22,7 @@ from tests.answers.ans_cli import ANS_HLP, ANS_FILE
 # https://stackoverflow.com/questions/53203500/unittest-for-click-module
 
 
-class TesCli(unittest.TestCase):
+class TestCli(unittest.TestCase):
 	""" class for testing *Generator* """
 
 	def setUp(self):
@@ -54,7 +54,7 @@ class TesCli(unittest.TestCase):
 		self.assertEqual(result.exit_code, 2)
 		result = runner.invoke(phoebe.cli.cli, ['--showfile', 'tests/samples/cli1.yml'])
 		self.assertEqual(result.exit_code, 0)
-		print(result.output)
+		# print(result.output)
 		self.assertEqual(result.output, ANS_FILE)
 
 
