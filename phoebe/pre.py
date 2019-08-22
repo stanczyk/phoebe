@@ -46,8 +46,8 @@ class Preparer():
 	def read_file(self, file_handler):
 		try:
 			self.content_yaml = self.yml.load(file_handler)
-		except yaml.YAMLError as exc:
-			print(Err().value_to_name(Err.ERR_YAML) + ': ' + str(exc), file=sys.stderr)
+		except yaml.YAMLError as err:
+			print(Err().value_to_name(Err.ERR_YAML) + ': ' + str(err), file=sys.stderr)
 			return Err.ERR_YAML
 		return Err.NOOP
 

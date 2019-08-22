@@ -110,7 +110,8 @@ def self_test():
 	"""self tests"""
 	import os
 	import sys
-	lib_path = os.path.dirname(os.path.realpath(__file__))
+	lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../tests/samples')
+	# lib_path = os.path.dirname(os.path.realpath(__file__))
 	if lib_path not in sys.path:
 		sys.path.append(lib_path)
 

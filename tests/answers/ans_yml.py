@@ -11,7 +11,7 @@ YML_ANS = '\
 input:\n\
 - u_1:\n\
     connect: M_1\n\
-    op-time: t_u_1\n\
+    op-time: d_0\n\
     tr-time: t_{0,1}\n\
 output:\n\
 - y_1: {}\n\
@@ -29,6 +29,7 @@ prod-unit:\n\
     op-time: d_3\n\
     tr-time: t_{3,4}\n\
 values:\n\
+  d_0: 1\n\
   d_1: 3\n\
   d_2: 2\n\
   d_3: 6\n\
