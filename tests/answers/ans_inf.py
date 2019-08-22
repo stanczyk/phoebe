@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-	**answers.inf.py**
+	**answers.ans_inf.py**
 
 	Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """

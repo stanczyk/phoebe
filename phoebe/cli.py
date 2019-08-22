@@ -15,7 +15,6 @@ from err import Err
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']}, invoke_without_command=True)
 @click.option('--showfile', is_flag=True, help='Show information from FILENAME.')
-# @click.option('--dont', is_flag=True, help='State space model is not generated.')
 @click.argument('filename')
 @click.pass_context
 def cli(ctx, showfile, filename):
