@@ -4,7 +4,7 @@
 #
 
 # dokumetacja
-docs/build/
+# docs/build/
 
 # DEVELOPMENT
 .idea/

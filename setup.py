@@ -9,8 +9,8 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 for more details regarding setup and setuptools let's have a look at:
 	https://setuptools.readthedocs.io/en/latest/setuptools.html
 """
-
 # pylint: disable=bad-continuation, no-name-in-module, import-error
+# https://setuptools.readthedocs.io/en/latest/setuptools.html
 
 import errno
 import os
@@ -20,6 +20,7 @@ from distutils.command.build_py import build_py
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 from phoebe.inf import Inf
+from sphinx.setup_command import BuildDoc
 
 
 class PyTest(TestCommand):
@@ -100,8 +101,9 @@ def run_setup():
 		# entry_points={'console_scripts': ['vcf_parser=vcm.command_line:main'], },
 		# dependency_links=['http://github.com/user/repo/tarball/master#egg=package-1.0'],
 		setup_requires=['pytest-runner'],
-		tests_require=['pytest'],
-		cmdclass=dict(test=PyTest, uninstall=Uninstall)
+		tests_require=['pytest>=5.1.0', 'mock>=3.0.5'],
+		command_options={'build_sphinx': {'source_dir': ('./docs/source/setup.py', './docs/source')}},
+		cmdclass=dict(test=PyTest, uninstall=Uninstall, build_sphinx=BuildDoc)
 		# zip_safe=True
 	)
 
