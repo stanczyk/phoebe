@@ -3,8 +3,15 @@
 # Copyright (c) 2013-2019 Jarosław Stanczyk <j.stanczyk@hotmail.com>
 #
 
+# budowa
+.eggs/
+phoebe/__pycache__/
+phoebe.egg-info/
+tests/__pycache__/
+tests/answers/__pycache__/
+
 # dokumetacja
-# docs/build/
+docs/build/sphinx/
 
 # DEVELOPMENT
 .idea/
