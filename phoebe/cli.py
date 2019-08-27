@@ -15,9 +15,14 @@ from err import Err
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']}, invoke_without_command=True)
 @click.option('--showfile', is_flag=True, help='Show information from FILENAME.')
+@click.option('--det1', is_flag=True, help='Show parsed information (1).')
+@click.option('--det2', is_flag=True, help='Show parsed information (2).')
+@click.option('--det3', is_flag=True, help='Show mapping and parsed matrices.')
+@click.option('--matrices', is_flag=True, help='Show max-plus matrices.')
+@click.option('--vectors', is_flag=True, help='Show vectors: u(k), x(k) and y(k)')
 @click.argument('filename')
 @click.pass_context
-def cli(ctx, showfile, filename):
+def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	"""
 	The max-plus algebraic state space model generator. Version 1.0.
 	Copyright: (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
