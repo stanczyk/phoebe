@@ -39,12 +39,11 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		return ans
 	if showfile:
 		ctx.obj.show_file_content(filename)
+	ctx.obj.add_defaults()
 	if det1:
-		# TODO
-		pass
+		ctx.obj.show_det1()
 	if det2:
-		# TODO
-		pass
+		ctx.obj.show_det2()
 	if det3:
 		# TODO
 		pass
