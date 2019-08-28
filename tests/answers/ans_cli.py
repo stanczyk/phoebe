@@ -14,11 +14,17 @@ Usage: cli [OPTIONS] FILENAME COMMAND [ARGS]...\n\
   (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>\n\
 \n\
 Options:\n\
-  --showfile  Show information from FILENAME.\n\
+  --showfile  Display yaml information from FILENAME.\n\
+  --det1      Show parsing information (1).\n\
+  --det2      Show parsing information (2).\n\
+  --det3      Show mapping and parsed matrices.\n\
+  --matrices  Show max-plus model matrices.\n\
+  --vectors   Show vectors: u(k), x(k) and y(k)\n\
   -h, --help  Show this message and exit.\n\
 \n\
 Commands:\n\
-  dosomething  Do Something.\n\
+  latex   Generate latex description.\n\
+  matlab  Generate max-plus matlab model.\n\
 '
 
 ANS_FILE = '\
