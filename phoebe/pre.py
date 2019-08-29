@@ -31,6 +31,8 @@ class Preparer:
 		self.A = [[], []] 	# [A0, A1]
 		self.B = [] 		# [B0]
 		self.C = [] 		# [C]
+		self.mapping = {}
+		self.values = None
 
 	def set_file_handler(self, filename):
 		if not filename:
@@ -205,7 +207,7 @@ class Preparer:
 				for j in range(0, len(self.A)):
 					name = 'A' + str(j) + ' = '
 					print(name, end='')
-					self.prn_matrix(j)
+					self.prn_matrix(self.A[j])
 			else:
 				if i == self.B:
 					name = 'B0 = '
@@ -218,11 +220,46 @@ class Preparer:
 	@staticmethod
 	def prn_matrix(matrix):
 		if matrix:
-			# print('[')
+			print('[')
 			for _, j in enumerate(matrix):
 				print(j)
-			# print(']')
+			print(']')
 		else:
 			print('[]')
+
+	def prepare_mapping(self):
+		for i in ['input', 'prod-unit', 'output']:
+			my_dic = self.yml.get_value(self.content_yaml, i)
+			for j in range(0, self.yml.get_len(my_dic)):
+				name = self.yml.get_key(my_dic[j])
+				self.mapping[name] = j
+		i = 'values'
+		my_dic = self.yml.get_value(self.content_yaml, i)
+		if my_dic:
+			self.values = my_dic
+		return Err.NOOP
+
+	def matrix_preparation(self):
+		we = self.yml.get_value(self.content_yaml, 'input')
+		sy = self.yml.get_value(self.content_yaml, 'prod-unit')
+		wy = self.yml.get_value(self.content_yaml, 'output')
+		# matrix B0
+		self.create_matrix(self.B, self.vector_x, self.vector_u)
+		self.fill_matrix(self.B, we)
+		# matrix A0 and A1
+		# for i in [self.A0, self.A1]:
+		# 	self.create_matrix(i, self.vector_x, self.vector_x)
+		# 	self.fill_matrix(i, sy)
+		# # self.add_feedback()
+		# self.add_feedback_x(self.A1, sy, wy)
+		# self.add_feedback_u(self.A1, we, sy, wy)
+		# # self.add_feedback_y(self.A1, prod_unit)
+		# matrix C
+		self.create_matrix(self.C, self.vector_y, self.vector_x)
+		self.fill_matrix(self.C, sy)
+		# polishing
+		# for i in [self.A0, self.A1, self.B0, self.C]:
+		# 	self.optimize_matrix(i)
+		return Err.NOOP
 
 # eof.

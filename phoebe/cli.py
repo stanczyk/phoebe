@@ -39,7 +39,12 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		return ans
 	if showfile:
 		ctx.obj.show_file_content(filename)
+
+	ctx.obj.prepare_vectors()
 	ctx.obj.add_defaults()
+	ctx.obj.prepare_mapping()
+	ctx.obj.matrix_preparation()
+
 	if det1:
 		ctx.obj.show_det1()
 	if det2:
@@ -50,11 +55,28 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	if matrices:
 		ctx.obj.show_matrices()
 	if vectors:
-		ctx.obj.prepare_vectors()
 		ctx.obj.show_vectors()
 	# default action
 	# if not ctx.invoked_subcommand:
 	# 	print('main stuff')
+
+	# self.matrix_preparation()
+	# if self.parser.args['--det3']:
+	# 	self.show_det3()
+	# if self.parser.args['--matrices']:
+	# 	self.show_matrices()
+	# if self.parser.args['--no-desc']:
+	# 	return Err.NOOP
+	# ans = self.generatable()
+	# if ans:
+		# 	print >> sys.stderr, Err().value_to_name(ans) + ': not enough data to generate description'
+	# 	return Err.ERR_NO_DATA
+	# if self.parser.args['--latex']:
+	# 	des = Lat()
+	# else:
+	# 	des = Mat()
+	# self.description(des)
+	# return Err.NOOP
 
 
 @click.command()

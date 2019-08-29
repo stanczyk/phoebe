@@ -19,6 +19,7 @@ pylama>=7.3.3
 pylint>=1.7.1
 
 # unittests
+freezegun>=0.3.12
 mock>=3.0.5
 pytest>=5.1.0
 
