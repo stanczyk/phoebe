@@ -28,6 +28,9 @@ class Preparer:
 		self.vector_u = []
 		self.vector_x = []
 		self.vector_y = []
+		self.A = [[], []] 	# [A0, A1]
+		self.B = [] 		# [B0]
+		self.C = [] 		# [C]
 
 	def set_file_handler(self, filename):
 		if not filename:
@@ -193,5 +196,33 @@ class Preparer:
 				print('  %s: %s' % (key, my_dic[key]))
 		print()
 		return Err.NOOP
+
+	def show_matrices(self):
+		name = ''
+		print('== MATRICES ================')
+		for i in [self.A, self.B, self.C]:
+			if i == self.A:
+				for j in range(0, len(self.A)):
+					name = 'A' + str(j) + ' = '
+					print(name, end='')
+					self.prn_matrix(j)
+			else:
+				if i == self.B:
+					name = 'B0 = '
+				if i == self.C:
+					name = 'C  = '
+				print(name, end='')
+				self.prn_matrix(i)
+		return Err.NOOP
+
+	@staticmethod
+	def prn_matrix(matrix):
+		if matrix:
+			# print('[')
+			for _, j in enumerate(matrix):
+				print(j)
+			# print(']')
+		else:
+			print('[]')
 
 # eof.

@@ -48,8 +48,7 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		# TODO
 		pass
 	if matrices:
-		# TODO
-		pass
+		ctx.obj.show_matrices()
 	if vectors:
 		ctx.obj.prepare_vectors()
 		ctx.obj.show_vectors()
