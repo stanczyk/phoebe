@@ -30,11 +30,11 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	"""
 	ctx.obj = Preparer()
 	ans = ctx.obj.set_file_handler(filename)
-	if ans != Err().NOOP:
+	if ans:
 		print('Input file error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
 		return ans
 	ans = ctx.obj.read_file()
-	if ans != Err().NOOP:
+	if ans:
 		print('Input file content error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
 		return ans
 	if showfile:
@@ -52,10 +52,10 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	if det3:
 		ctx.obj.show_det3()
 		pass
-	if matrices:
-		ctx.obj.show_matrices()
 	if vectors:
 		ctx.obj.show_vectors()
+	if matrices:
+		ctx.obj.show_matrices()
 	# default action
 	# if not ctx.invoked_subcommand:
 	# 	print('main stuff')

@@ -44,4 +44,29 @@ values:\n\
 \n\
 '
 
+PRE_IMP1 = {
+	'input': [{'u_1': {'connect': 'M_1', 'tr-time': 't_{0,1}'}}, {'u_2': {'connect': 'M_2', 'tr-time': 't_{0,2}'}}],
+	'prod-unit': [{'M_1': {'connect': 'M_3', 'op-time': 'd_1', 'tr-time': 't_{1,3}'}},
+				  {'M_2': {'connect': 'M_3', 'op-time': 'd_2', 'tr-time': 't_{2,3}'}},
+				  {'M_3': {'connect': 'y', 'op-time': 'd_3', 'tr-time': 't_{3,4}'}}],
+	'output': [{'y': {}}],
+	'values': {'t_{0,1}': 2, 't_{0,2}': 0, 't_{1,3}': 1, 't_{2,3}': 0, 't_{3,4}': 0, 'd_1': 5, 'd_2': 6, 'd_3': 3}
+}
+
+PRE_ANS1 = ['x_1', 'x_2', 'x_3']
+
+PRE_VEC1 = '\
+== VECTORS =================\n\
+u(k) = []\n\
+x(k) = []\n\
+y(k) = []\n\
+\n'
+
+PRE_VEC2 = '\
+== VECTORS =================\n\
+u(k) = [ u_1(k) u_2(k) ]\'\n\
+x(k) = [ x_1(k) x_2(k) x_3(k) ]\'\n\
+y(k) = [ y_1(k) ]\'\n\
+\n'
+
 # end.

@@ -15,7 +15,7 @@ import unittest
 # import mock
 from click.testing import CliRunner
 from tests.answers.ans_cli import ANS_HLP1, ANS_HLP2, ANS_FILE, ANS_VEC1, ANS_VEC2, \
-	ANS_DET1_1, ANS_DET1_2, ANS_DET2_1, ANS_DET2_2
+	ANS_DET1_1, ANS_DET1_2, ANS_DET2_1, ANS_DET2_2, ANS_DET3_1, ANS_DET3_2, ANS_MAT1, ANS_MAT2
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -38,7 +38,7 @@ class TestCli(unittest.TestCase):
 	def tearDown(self):
 		pass
 
-	def test_cli_help(self):
+	def test_help(self):
 		result = self.runner.invoke(phoebe.cli.cli, ['-h'])
 		self.assertEqual(result.exit_code, Err.NOOP)
 		# print(result.output)
@@ -53,18 +53,6 @@ class TestCli(unittest.TestCase):
 		self.assertEqual(result.exit_code, 0)
 		# print(result.output)
 		self.assertEqual(result.output, ANS_FILE)
-
-	def test_cli_vectors(self):
-		result = self.runner.invoke(phoebe.cli.cli, ['--vectors'])
-		self.assertEqual(result.exit_code, 2) 	# Error: Missing argument "FILENAME".
-		result = self.runner.invoke(phoebe.cli.cli, ['--vectors', 'tests/samples/cli1.yml'])
-		self.assertEqual(result.exit_code, Err.NOOP)
-		# print(result.output)
-		self.assertEqual(result.output, ANS_VEC1)
-		result = self.runner.invoke(phoebe.cli.cli, ['--vectors', 'tests/samples/cli2.yml'])
-		self.assertEqual(result.exit_code, Err.NOOP)
-		# print(result.output)
-		self.assertEqual(result.output, ANS_VEC2)
 
 	def test_cli_det1(self):
 		result = self.runner.invoke(phoebe.cli.cli, ['--det1', 'tests/samples/cli1.yml'])
@@ -85,6 +73,46 @@ class TestCli(unittest.TestCase):
 		self.assertEqual(result.exit_code, Err.NOOP)
 		# print(result.output)
 		self.assertEqual(result.output, ANS_DET2_2)
+
+	def test_cli_det3(self):
+		result = self.runner.invoke(phoebe.cli.cli, ['--det3', 'tests/samples/cli1.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_DET3_1)
+		result = self.runner.invoke(phoebe.cli.cli, ['--det3', 'tests/samples/cli2.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_DET3_2)
+
+	def test_cli_vectors(self):
+		result = self.runner.invoke(phoebe.cli.cli, ['--vectors'])
+		self.assertEqual(result.exit_code, 2) 	# Error: Missing argument "FILENAME".
+		result = self.runner.invoke(phoebe.cli.cli, ['--vectors', 'tests/samples/cli1.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_VEC1)
+		result = self.runner.invoke(phoebe.cli.cli, ['--vectors', 'tests/samples/cli2.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_VEC2)
+
+	def test_cli_matrices(self):
+		result = self.runner.invoke(phoebe.cli.cli, ['--matrices', 'tests/samples/cli1.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_MAT1)
+		result = self.runner.invoke(phoebe.cli.cli, ['--matrices', 'tests/samples/cli2.yml'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, ANS_MAT2)
+
+	@unittest.skip("not implemented yet")
+	def test_latex(self):
+		pass
+
+	@unittest.skip("not implemented yet")
+	def test_matlab(self):
+		pass
 
 
 def main():

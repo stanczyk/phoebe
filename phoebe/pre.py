@@ -65,32 +65,30 @@ class Preparer:
 
 	def prepare_vectors(self):
 		for i in ['input', 'prod-unit', 'output']:
-			self.prepare_vector(i)
+			if i == 'input':
+				vec = self.vector_u
+				name = 'u_'
+			if i == 'prod-unit':
+				vec = self.vector_x
+				name = 'x_'
+			if i == 'output':
+				vec = self.vector_y
+				name = 'y_'
+			self.prepare_vector(i, vec, name)
 		return Err.NOOP
 
-	def prepare_vector(self, select):
+	def prepare_vector(self, select, vec, name):
 		vec1 = []
-		vec2 = []
-		tmp = ''
 		my_dic = self.yml.get_value(self.content_yaml, select)
 		# print(my_dic)
 		for i in range(0, self.yml.get_len(my_dic)):
 			vec1.append(self.yml.get_key(my_dic[i]))
 		# print(vec)
-		if select == 'input':
-			vec2 = self.vector_u
-			tmp = 'u_'
-		if select == 'prod-unit':
-			vec2 = self.vector_x
-			tmp = 'x_'
-		if select == 'output':
-			vec2 = self.vector_y
-			tmp = 'y_'
 		for i in range(0, len(vec1)):
 			if len(vec1) < 10:
-				vec2.append(tmp + str(i + 1))
+				vec.append(name + str(i + 1))
 			else:
-				vec2.append(tmp + '{' + str(i + 1) + '}')
+				vec.append(name + '{' + str(i + 1) + '}')
 		return Err.NOOP
 
 	def show_vectors(self):
@@ -215,6 +213,7 @@ class Preparer:
 					name = 'C  = '
 				print(name, end='')
 				self.prn_matrix(i)
+		print()
 		return Err.NOOP
 
 	@staticmethod
