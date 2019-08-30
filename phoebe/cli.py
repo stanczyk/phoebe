@@ -43,7 +43,7 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	ctx.obj.prepare_vectors()
 	ctx.obj.add_defaults()
 	ctx.obj.prepare_mapping()
-	ctx.obj.matrix_preparation()
+	#.. ctx.obj.matrix_preparation()
 
 	if det1:
 		ctx.obj.show_det1()
@@ -59,6 +59,7 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	# default action
 	# if not ctx.invoked_subcommand:
 	# 	print('main stuff')
+	return Err.NOOP
 
 	# self.matrix_preparation()
 	# if self.parser.args['--det3']:
@@ -76,7 +77,6 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	# else:
 	# 	des = Mat()
 	# self.description(des)
-	# return Err.NOOP
 
 
 @click.command()

@@ -7,7 +7,7 @@
 # flake8: noqa
 # pylama: ignore=E101
 
-ANS_HLP = '\
+ANS_HLP1 = '\
 Usage: cli [OPTIONS] FILENAME COMMAND [ARGS]...\n\
 \n\
   The max-plus algebraic state space model generator. Version 1.0. Copyright:\n\
@@ -25,6 +25,12 @@ Options:\n\
 Commands:\n\
   latex   Generate latex description.\n\
   matlab  Generate max-plus matlab model.\n'
+
+ANS_HLP2 = '\
+Usage: cli [OPTIONS] FILENAME COMMAND [ARGS]...\n\
+Try \"cli -h\" for help.\n\
+\n\
+Error: Missing argument "FILENAME".\n'
 
 ANS_FILE = '\
 == INPUT FILE ==============\n\
