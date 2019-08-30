@@ -18,7 +18,7 @@ from err import Err
 @click.option('--showfile', is_flag=True, help='Display yaml information from FILENAME.')
 @click.option('--det1', is_flag=True, help='Show parsing information (1).')
 @click.option('--det2', is_flag=True, help='Show parsing information (2).')
-@click.option('--det3', is_flag=True, help='Show mapping and parsed matrices.')
+@click.option('--det3', is_flag=True, help='Show mapping and values for parsed matrices.')
 @click.option('--matrices', is_flag=True, help='Show max-plus model matrices.')
 @click.option('--vectors', is_flag=True, help='Show vectors: u(k), x(k) and y(k)')
 @click.argument('filename')
@@ -43,14 +43,14 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	ctx.obj.prepare_vectors()
 	ctx.obj.add_defaults()
 	ctx.obj.prepare_mapping()
-	#.. ctx.obj.matrix_preparation()
+	ctx.obj.matrix_preparation()
 
 	if det1:
 		ctx.obj.show_det1()
 	if det2:
 		ctx.obj.show_det2()
 	if det3:
-		# TODO
+		ctx.obj.show_det3()
 		pass
 	if matrices:
 		ctx.obj.show_matrices()
@@ -61,13 +61,6 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	# 	print('main stuff')
 	return Err.NOOP
 
-	# self.matrix_preparation()
-	# if self.parser.args['--det3']:
-	# 	self.show_det3()
-	# if self.parser.args['--matrices']:
-	# 	self.show_matrices()
-	# if self.parser.args['--no-desc']:
-	# 	return Err.NOOP
 	# ans = self.generatable()
 	# if ans:
 		# 	print >> sys.stderr, Err().value_to_name(ans) + ': not enough data to generate description'

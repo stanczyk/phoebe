@@ -17,7 +17,7 @@ Options:\n\
   --showfile  Display yaml information from FILENAME.\n\
   --det1      Show parsing information (1).\n\
   --det2      Show parsing information (2).\n\
-  --det3      Show mapping and parsed matrices.\n\
+  --det3      Show mapping and values for parsed matrices.\n\
   --matrices  Show max-plus model matrices.\n\
   --vectors   Show vectors: u(k), x(k) and y(k)\n\
   -h, --help  Show this message and exit.\n\

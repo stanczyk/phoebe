@@ -243,23 +243,195 @@ class Preparer:
 		we = self.yml.get_value(self.content_yaml, 'input')
 		sy = self.yml.get_value(self.content_yaml, 'prod-unit')
 		wy = self.yml.get_value(self.content_yaml, 'output')
-		# matrix B0
+
+		# matrix B
 		self.create_matrix(self.B, self.vector_x, self.vector_u)
 		self.fill_matrix(self.B, we)
-		# matrix A0 and A1
-		# for i in [self.A0, self.A1]:
-		# 	self.create_matrix(i, self.vector_x, self.vector_x)
-		# 	self.fill_matrix(i, sy)
-		# # self.add_feedback()
-		# self.add_feedback_x(self.A1, sy, wy)
-		# self.add_feedback_u(self.A1, we, sy, wy)
-		# # self.add_feedback_y(self.A1, prod_unit)
+
+		# matrix A
+		for i in range(0, len(self.A)):
+			self.create_matrix(self.A[i], self.vector_x, self.vector_x)
+			self.fill_matrix(self.A[i], sy)
+		# self.add_feedback()
+		self.add_feedback_x(self.A[1], sy, wy)
+		self.add_feedback_u(self.A[1], we, sy, wy)
+		# self.add_feedback_y(self.A1, prod_unit)
+
 		# matrix C
 		self.create_matrix(self.C, self.vector_y, self.vector_x)
 		self.fill_matrix(self.C, sy)
+
 		# polishing
-		# for i in [self.A0, self.A1, self.B0, self.C]:
-		# 	self.optimize_matrix(i)
+		for i in [self.A, self.B, self.C]:
+			if i == self.A:
+				for j in self.A: # range(0, len(self.A)):
+					self.optimize_matrix(j)
+			else:
+				self.optimize_matrix(i)
+		return Err.NOOP
+
+	@staticmethod
+	def create_matrix(matrix, v1, v2):
+		for _ in range(0, len(v1)):
+			tmp = []
+			for __ in range(0, len(v2)):
+				tmp.append('-')
+			matrix.append(tmp)
+		return matrix
+
+	def fill_matrix(self, matrix, my_dic):
+		for i in range(0, self.yml.get_len(my_dic)):
+			key = self.yml.get_key(my_dic[i])
+			op_time, connect = self.get_det1(self.yml.get_value(my_dic[i], key))
+			tmp = []
+			if op_time:
+				tmp.append(op_time)
+			self.fill_(matrix, i, connect, tmp)
+			if matrix == self.A[1]:
+				if op_time:
+					j = self.mapping[key]
+					matrix[j][i] = tmp
+				self.fill_(matrix, i, connect, tmp)
+		return matrix
+
+	def fill_(self, matrix, iteration, con, val):  # noqa: C901
+		if con:
+			for key in con:
+				tr_time, buffers = self.get_det2(con[key])
+				j = self.mapping[key]
+				if key[0] != 'y':
+					if matrix in [self.A[0], self.B]:
+						cell = val[:]
+						if tr_time:
+							cell.append(tr_time)
+						matrix[j][iteration] = cell
+					if matrix in [self.A[1]]:
+						if buffers == '0':
+							if tr_time == '0':
+								matrix[iteration][j] = ['0']
+							else:
+								matrix[iteration][j] = ['-' + tr_time]
+				else:
+					if matrix in [self.C]:
+						if tr_time:
+							val.append(tr_time)
+						matrix[j][iteration] = val
+		return matrix
+
+	def optimize_matrix(self, matrix):
+		if not matrix:
+			return matrix
+		self.rm_repeated_zeros(matrix)
+		self.rm_redundant_zeros(matrix)
+		return matrix
+
+	def rm_repeated_zeros(self, matrix):
+		""" 0, 0, 0 -> 0 """
+		# pylint: disable=consider-using-enumerate
+		w1, w2 = self.yml.get_matrix_size(matrix)
+		for i in range(0, w1):
+			for j in range(0, w2):
+				if matrix[i][j] != '-':
+					tmp = matrix[i][j]
+					for k in range(0, len(tmp)):
+						if tmp[k] == '0' and tmp.count(tmp[k]) > 1:
+							tmp[k] = None
+					for _ in range(0, tmp.count(None)):
+						tmp.remove(None)
+		return matrix
+
+	def rm_redundant_zeros(self, matrix):
+		""" 0, d_1 -> d1 """
+		w1, w2 = self.yml.get_matrix_size(matrix)
+		for i in range(0, w1):
+			for j in range(0, w2):
+				if matrix[i][j] != '-':
+					tmp = matrix[i][j]
+					if len(tmp) > 1 and tmp.count('0'):
+						tmp.remove('0')
+		return matrix
+
+	def add_feedback_x(self, matrix, system, output):
+		for i in range(0, self.yml.get_len(output)):
+			key1 = self.yml.get_key(output[i])
+			op_time, connect = self.get_det1(self.yml.get_value(output[i], key1))
+			if connect:
+				for key in connect:
+					if key[0].upper() != 'U':
+						tmp = []
+						if op_time:
+							tmp.append(op_time)
+						# tr_time, buffers = self.get_det2(connect[key])
+						j = self.mapping[key]
+						# print key, '(', j, ',', key1, ')'
+						_, idx, time = self.get_x_value(key1, system)
+						# print key1, key, key2
+						tmp.append(time)
+						val = matrix[j][idx]
+						if val != '-':
+							tmp.append(val)
+						matrix[j][idx] = tmp
+		return matrix
+
+	def add_feedback_u(self, matrix, we, sy, wy):  # noqa: C901
+		# pylint: disable=too-many-locals
+		for i in range(0, self.yml.get_len(wy)):
+			key1 = self.yml.get_key(wy[i])
+			# print 'key1:', key1
+			# print sy
+			key0, opt = self.get_det3(sy, key1)
+			# print 'key0, opt:', key0, opt
+			op_time, con1 = self.get_det1(self.yml.get_value(wy[i], key1))
+			# print op_time, con1
+			if con1:
+				for key2 in con1:
+					if key2[0].upper() == 'U':
+						tmp = []
+						if op_time:
+							tmp.append(op_time)
+						tr_time, _ = self.get_det2(con1[key2])
+						if tr_time:
+							tmp.append(tr_time)
+						for j in range(0, self.yml.get_len(we)):
+							key3 = self.yml.get_key(we[j])
+							if key3 == key2:
+								op_time, con2 = self.get_det1(self.yml.get_value(we[j], key2))
+								if op_time:
+									tmp.append(op_time)
+								for key4 in con2:
+									tr_time, _ = self.get_det2(con2[key4])
+									if tr_time:
+										tmp.append(tr_time)
+									idx1 = self.mapping[key4]
+									tmp.extend(opt)
+									idx2 = self.mapping[key0]
+									matrix[idx1][idx2] = tmp
+		return matrix
+
+	def get_det3(self, system, key):
+		for i in range(0, self.yml.get_len(system)):
+			key1 = self.yml.get_key(system[i])
+			op_time, con1 = self.get_det1(self.yml.get_value(system[i], key1))
+			# print op_time, con1, key
+			if con1:
+				tmp = []
+				# print con1
+				for key2 in con1:
+					if key == key2:
+						tmp.append(op_time)
+						tr_time, _ = self.get_det2(self.yml.get_value(con1, key))
+						if tr_time != '0':
+							tmp.append(tr_time)
+						return key1, tmp
+		return None, None
+
+	def show_det3(self):
+		print('== DETAILS 3 ===============')
+		print('mapping: ', end='')
+		print(self.mapping)
+		print('values: ', end='')
+		print(self.values)
+		print()
 		return Err.NOOP
 
 # eof.
