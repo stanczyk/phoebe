@@ -13,7 +13,9 @@ import sys
 import unittest
 from io import StringIO
 import mock
-from tests.answers.ans_pre import ANS_FILE, PRE_IMP1, PRE_ANS1, PRE_VEC1, PRE_VEC2
+from tests.answers.ans_pre import ANS_FILE, PRE_IMP1, PRE_ANS1, PRE_VEC1, PRE_VEC2, PRE_CONTENT1, PRE_CONTENT2, \
+	PRE_DET1_1, PRE_DET1_2, PRE_DET2_1, PRE_DET2_2, PRE_MAT1, PRE_MATA, PRE_MATB, PRE_MATC, PRE_MAT2, PRE_MATB2, \
+	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_A01, PRE_A02
 
 # pylint: disable=missing-docstring
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
@@ -94,49 +96,119 @@ class TestPre(unittest.TestCase):
 			self.pre.print_vector('x(k)', ['x_1', 'x_2', 'x_3'])
 			self.assertEqual(mock_stdout.getvalue(), 'x(k) = [ x_1(k) x_2(k) x_3(k) ]\'\n')
 
-	@unittest.skip("not implemented yet")
 	def test_add_defaults(self):
-		pass
+		self.pre.content_yaml = PRE_IMP1
+		self.pre.add_defaults()
+		self.assertEqual(self.pre.content_yaml, PRE_CONTENT2)
+		self.pre.content_yaml = PRE_CONTENT1
+		self.pre.add_defaults()
+		self.assertEqual(self.pre.content_yaml, PRE_CONTENT1)
 
-	@unittest.skip("not implemented yet")
 	def test_get_det1(self):
-		pass
+		op_time, connect = self.pre.get_det1({})
+		self.assertIsNone(op_time)
+		self.assertIsNone(connect)
+		dic = {'connect': 'y', 'op-time': 'd_3', 'tr-time': 't_{3,4}'}
+		op_time, connect = self.pre.get_det1(dic)
+		self.assertEqual(op_time, 'd_3')
+		self.assertEqual(connect, 'y')
+		dic = {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}
+		op_time, connect = self.pre.get_det1(dic)
+		self.assertEqual(op_time, 'd_1')
+		self.assertEqual(connect, {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}})
 
-	@unittest.skip("not implemented yet")
 	def test_get_det2(self):
-		pass
+		tr_time, buffers = self.pre.get_det2({})
+		self.assertIsNone(tr_time)
+		self.assertIsNone(buffers)
+		tr_time, buffers = self.pre.get_det2({'tr-time': 't_{0,1}', 'buffers': '-'})
+		self.assertEqual(tr_time, 't_{0,1}')
+		self.assertEqual(buffers, '-')
 
-	@unittest.skip("not implemented yet")
 	def test_show_det1(self):
-		pass
+		self.pre.content_yaml = PRE_CONTENT1
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det1()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET1_1)
+		self.pre.content_yaml = PRE_CONTENT2
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det1()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET1_2)
 
-	@unittest.skip("not implemented yet")
 	def test_show_det2(self):
-		pass
+		self.pre.content_yaml = PRE_CONTENT1
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det2()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET2_1)
+		self.pre.content_yaml = PRE_CONTENT2
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det2()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET2_2)
 
-	@unittest.skip("not implemented yet")
 	def test_show_matrices(self):
-		pass
+		self.pre.A = [[], []]
+		self.pre.B = []
+		self.pre.C = []
+		# print(self.pre.show_matrices())
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_matrices()
+			self.assertEqual(mock_stdout.getvalue(), PRE_MAT1)
+		self.pre.A = PRE_MATA
+		self.pre.B = PRE_MATB
+		self.pre.C = PRE_MATC
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_matrices()
+			self.assertEqual(mock_stdout.getvalue(), PRE_MAT2)
 
-	@unittest.skip("not implemented yet")
 	def test_prn_matrix(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.prn_matrix([])
+			self.assertEqual(mock_stdout.getvalue(), '[]\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.prn_matrix(PRE_MATB)
+			self.assertEqual(mock_stdout.getvalue(), PRE_MATB2)
 
-	@unittest.skip("not implemented yet")
 	def test_prepare_mapping(self):
-		pass
+		self.pre.content_yaml = PRE_CONTENT1
+		self.pre.prepare_mapping()
+		self.assertEqual(self.pre.mapping, {'y_1': 0})
+		self.assertEqual(self.pre.values, None)
+		self.pre.content_yaml = PRE_CONTENT2
+		self.pre.prepare_mapping()
+		self.assertEqual(self.pre.mapping, PRE_MAP1)
+		self.assertEqual(self.pre.values, PRE_MAP2)
 
-	@unittest.skip("not implemented yet")
 	def test_matrix_preparation(self):
-		pass
+		self.pre.content_yaml = PRE_CONTENT1
+		self.pre.matrix_preparation()
+		self.assertEqual(self.pre.A, [[], []])
+		self.assertEqual(self.pre.B, [])
+		self.assertEqual(self.pre.C, [])
+		self.pre.content_yaml = PRE_CONTENT2
+		self.pre.vector_u = ['u_1', 'u_2']
+		self.pre.vector_x = ['x_1', 'x_2', 'x_3']
+		self.pre.vector_y = ['y_1']
+		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+		self.pre.matrix_preparation()
+		self.assertEqual(self.pre.A, PRE_MATA)
+		self.assertEqual(self.pre.B, PRE_MATB)
+		self.assertEqual(self.pre.C, PRE_MATC)
 
-	@unittest.skip("not implemented yet")
 	def test_create_matrix(self):
-		pass
+		self.assertEqual(self.pre.create_matrix([], [], []), [])
+		vector_u = ['u_1', 'u_2']
+		vector_x = ['x_1', 'x_2', 'x_3']
+		self.assertEqual(self.pre.create_matrix([], vector_u, vector_x), [['-', '-', '-'], ['-', '-', '-']])
 
-	@unittest.skip("not implemented yet")
 	def test_fill_matrix(self):
-		pass
+		matrix = []
+		dic = {}
+		self.assertEqual(self.pre.fill_matrix(matrix, dic), [])
+		matrix = PRE_A01
+		dic = PRE_DICM
+		self.pre.A[0] = matrix
+		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+		self.assertEqual(self.pre.fill_matrix(matrix, dic), PRE_A02)
 
 	@unittest.skip("not implemented yet")
 	def test_fill_(self):
