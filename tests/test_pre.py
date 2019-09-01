@@ -15,7 +15,7 @@ from io import StringIO
 import mock
 from tests.answers.ans_pre import ANS_FILE, PRE_IMP1, PRE_ANS1, PRE_VEC1, PRE_VEC2, PRE_CONTENT1, PRE_CONTENT2, \
 	PRE_DET1_1, PRE_DET1_2, PRE_DET2_1, PRE_DET2_2, PRE_MAT1, PRE_MATA, PRE_MATB, PRE_MATC, PRE_MAT2, PRE_MATB2, \
-	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_A01, PRE_A02
+	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_A01, PRE_A02, PRE_A03, PRE_DET31, PRE_DET32
 
 # pylint: disable=missing-docstring
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
@@ -188,7 +188,7 @@ class TestPre(unittest.TestCase):
 		self.pre.vector_u = ['u_1', 'u_2']
 		self.pre.vector_x = ['x_1', 'x_2', 'x_3']
 		self.pre.vector_y = ['y_1']
-		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+		self.pre.mapping = PRE_MAP1
 		self.pre.matrix_preparation()
 		self.assertEqual(self.pre.A, PRE_MATA)
 		self.assertEqual(self.pre.B, PRE_MATB)
@@ -207,16 +207,26 @@ class TestPre(unittest.TestCase):
 		matrix = PRE_A01
 		dic = PRE_DICM
 		self.pre.A[0] = matrix
-		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+		self.pre.mapping = PRE_MAP1
 		self.assertEqual(self.pre.fill_matrix(matrix, dic), PRE_A02)
 
-	@unittest.skip("not implemented yet")
 	def test_fill_(self):
-		pass
+		self.pre.A[0] = PRE_A01
+		iteration = 0
+		con = {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}
+		val = ['d_1']
+		self.pre.mapping = PRE_MAP1
+		self.assertEqual(self.pre.fill_(self.pre.A[0], iteration, con, val), PRE_A03)
+		self.pre.A[0] = PRE_A03
+		iteration = 1
+		con = {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}
+		val = ['d_2']
+		self.assertEqual(self.pre.fill_(self.pre.A[0], iteration, con, val), PRE_A02)
 
-	@unittest.skip("not implemented yet")
 	def test_optimize_matrix(self):
-		pass
+		self.assertEqual(self.pre.optimize_matrix([]), [])
+		self.assertEqual(self.pre.optimize_matrix([[['0', 't_{0,1}'], '-'], ['-', ['0', 't_{0,2}']], ['-', '-']]),
+						 [[['t_{0,1}'], '-'], ['-', ['t_{0,2}']], ['-', '-']])
 
 	@unittest.skip("not implemented yet")
 	def test_rm_repeated_zeros(self):
@@ -238,9 +248,18 @@ class TestPre(unittest.TestCase):
 	def test_get_det3(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_show_det3(self):
-		pass
+		self.pre.mapping = {}
+		self.pre.values = {}
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det3()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET31)
+		self.pre.mapping = PRE_MAP1
+		self.pre.values = PRE_MAP2
+		self.pre.show_det3()
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.pre.show_det3()
+			self.assertEqual(mock_stdout.getvalue(), PRE_DET32)
 
 
 def main():
