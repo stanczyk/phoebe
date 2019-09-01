@@ -9,6 +9,7 @@ phoebe/__pycache__/
 phoebe.egg-info/
 tests/__pycache__/
 tests/answers/__pycache__/
+tests/samples/__pycache__/
 
 # dokumetacja
 docs/build/sphinx/
