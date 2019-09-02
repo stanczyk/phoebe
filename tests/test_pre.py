@@ -225,16 +225,51 @@ class TestPre(unittest.TestCase):
 
 	def test_optimize_matrix(self):
 		self.assertEqual(self.pre.optimize_matrix([]), [])
-		self.assertEqual(self.pre.optimize_matrix([[['0', 't_{0,1}'], '-'], ['-', ['0', 't_{0,2}']], ['-', '-']]),
-						 [[['t_{0,1}'], '-'], ['-', ['t_{0,2}']], ['-', '-']])
+		self.assertEqual(
+			self.pre.optimize_matrix([[['0', 't_{0,1}'], '-'], ['-', ['0', 't_{0,2}']], ['-', '-']]),
+			[[['t_{0,1}'], '-'], ['-', ['t_{0,2}']], ['-', '-']])
 
-	@unittest.skip("not implemented yet")
 	def test_rm_repeated_zeros(self):
-		pass
+		self.assertEqual(self.pre.rm_repeated_zeros([]), [])
+		self.assertEqual(self.pre.rm_repeated_zeros([[], []]), [[], []])
+		self.assertEqual(self.pre.rm_repeated_zeros(
+			[
+				[['0', '0', '0'], '-']
+			]),
+			[
+				[['0'], '-']
+			])
+		self.assertEqual(self.pre.rm_repeated_zeros(
+			[
+				[['d_1'], '-', ['0', '0', '0', 't_{0,1}', 'd_3', 't_{3,4}']],
+				['-', ['d_2'], ['t_{0,2}', 'd_3', 't_{3,4}', '0', '0', '0']],
+				['-', '-', ['d_3']]]),
+			[
+				[['d_1'], '-', ['0', 't_{0,1}', 'd_3', 't_{3,4}']],
+				['-', ['d_2'], ['t_{0,2}', 'd_3', 't_{3,4}', '0']],
+				['-', '-', ['d_3']]
+			])
 
-	@unittest.skip("not implemented yet")
 	def test_rm_redundant_zeros(self):
-		pass
+		self.assertEqual(self.pre.rm_redundant_zeros([]), [])
+		self.assertEqual(self.pre.rm_redundant_zeros([[], []]), [[], []])
+		self.assertEqual(self.pre.rm_redundant_zeros(
+			[
+				[['0', 'd_1'], '-']
+			]),
+			[
+				[['d_1'], '-']
+			])
+		self.assertEqual(self.pre.rm_redundant_zeros(
+			[
+				[['d_1'], '-', ['0', 't_{0,1}', 'd_3', 't_{3,4}']],
+				['-', ['d_2'], ['t_{0,2}', 'd_3', 't_{3,4}', '0']],
+				['-', '-', ['d_3']]]),
+			[
+				[['d_1'], '-', ['t_{0,1}', 'd_3', 't_{3,4}']],
+				['-', ['d_2'], ['t_{0,2}', 'd_3', 't_{3,4}']],
+				['-', '-', ['d_3']]
+			])
 
 	@unittest.skip("not implemented yet")
 	def test_add_feedback_x(self):

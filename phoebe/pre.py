@@ -327,6 +327,8 @@ class Preparer:
 	def rm_repeated_zeros(self, matrix):
 		""" 0, 0, 0 -> 0 """
 		# pylint: disable=consider-using-enumerate
+		if not matrix:
+			return matrix
 		w1, w2 = self.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
@@ -341,6 +343,8 @@ class Preparer:
 
 	def rm_redundant_zeros(self, matrix):
 		""" 0, d_1 -> d1 """
+		if not matrix:
+			return matrix
 		w1, w2 = self.yml.get_matrix_size(matrix)
 		for i in range(0, w1):
 			for j in range(0, w2):
