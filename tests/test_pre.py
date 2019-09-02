@@ -15,7 +15,7 @@ from io import StringIO
 import mock
 from tests.answers.ans_pre import ANS_FILE, PRE_IMP1, PRE_ANS1, PRE_VEC1, PRE_VEC2, PRE_CONTENT1, PRE_CONTENT2, \
 	PRE_DET1_1, PRE_DET1_2, PRE_DET2_1, PRE_DET2_2, PRE_MAT1, PRE_MATA, PRE_MATB, PRE_MATC, PRE_MAT2, PRE_MATB2, \
-	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_A01, PRE_A02, PRE_A03, PRE_DET31, PRE_DET32
+	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_DICM2, PRE_A01, PRE_A02, PRE_A03, PRE_DET31, PRE_DET32
 
 # pylint: disable=missing-docstring
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
@@ -234,6 +234,13 @@ class TestPre(unittest.TestCase):
 		self.assertEqual(self.pre.rm_repeated_zeros([[], []]), [[], []])
 		self.assertEqual(self.pre.rm_repeated_zeros(
 			[
+				[['0', '0', '0']]
+			]),
+			[
+				[['0']]
+			])
+		self.assertEqual(self.pre.rm_repeated_zeros(
+			[
 				[['0', '0', '0'], '-']
 			]),
 			[
@@ -251,8 +258,23 @@ class TestPre(unittest.TestCase):
 			])
 
 	def test_rm_redundant_zeros(self):
+
 		self.assertEqual(self.pre.rm_redundant_zeros([]), [])
 		self.assertEqual(self.pre.rm_redundant_zeros([[], []]), [[], []])
+		self.assertEqual(self.pre.rm_redundant_zeros(
+			[
+				[['d_1', '0']]
+			]),
+			[
+				[['d_1']]
+			])
+		self.assertEqual(self.pre.rm_redundant_zeros(
+			[
+				[['0', 'd_1', '0']]
+			]),
+			[
+				[['d_1', '0']]
+			])
 		self.assertEqual(self.pre.rm_redundant_zeros(
 			[
 				[['0', 'd_1'], '-']
@@ -279,9 +301,19 @@ class TestPre(unittest.TestCase):
 	def test_add_feedback_u(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_get_det3(self):
-		pass
+		pred, how = self.pre.get_det3(PRE_DICM, 'y')
+		self.assertEqual(pred, 'M_3')
+		self.assertEqual(how, ['d_3', 't_{3,4}'])
+		pred, how = self.pre.get_det3(PRE_DICM, 'M_3')
+		self.assertEqual(pred, 'M_1')
+		self.assertEqual(how, ['d_1', 't_{1,3}'])
+		# to nadaje się do poprawy, w poniższym przykładzie powinno raczej zwrócić:
+		# pred = ['X_2', 'X_4']
+		# how = [['d_2'], ['d_4']]
+		pred, how = self.pre.get_det3(PRE_DICM2, 'X_5')
+		self.assertEqual(pred, 'X_2')
+		self.assertEqual(how, ['d_2'])
 
 	def test_show_det3(self):
 		self.pre.mapping = {}

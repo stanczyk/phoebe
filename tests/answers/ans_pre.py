@@ -218,6 +218,14 @@ PRE_DICM = [
 	{'M_1': {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}},
 	{'M_2': {'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}, 'op-time': 'd_2'}},
 	{'M_3': {'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}, 'op-time': 'd_3'}}]
+PRE_DICM2 = [
+	{'X_1': {'op-time': 'd_1', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}, 'X_4': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_2': {'op-time': 'd_2', 'connect': {'y_1': {'tr-time': '0', 'buffers': '-'}, 'X_5': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_3': {'op-time': 'd_3', 'connect': {'X_4': {'tr-time': '0', 'buffers': '-'}, 'X_6': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_4': {'op-time': 'd_4', 'connect': {'X_5': {'tr-time': '0', 'buffers': '-'}, 'X_7': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_5': {'op-time': 'd_5', 'connect': {'y_2': {'tr-time': '0', 'buffers': '-'}, 'y_6': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_6': {'op-time': 'd_6', 'connect': {'X_7': {'tr-time': '0', 'buffers': '-'}, 'y_4': {'tr-time': '0', 'buffers': '-'}}}},
+	{'X_7': {'op-time': 'd_7', 'connect': {'y_3': {'tr-time': '0', 'buffers': '-'}, 'y_5': {'tr-time': '0', 'buffers': '-'}}}}]
 
 PRE_A01 = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
 PRE_A02 = [['-', '-', '-'], ['-', '-', '-'], [['d_1', 't_{1,3}'], ['d_2', 't_{2,3}'], '-']]
