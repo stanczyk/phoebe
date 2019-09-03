@@ -355,6 +355,12 @@ class Preparer:
 		return matrix
 
 	def add_feedback_x(self, matrix, system, output):
+		# print(matrix)
+		# print()
+		# print(system)
+		# print()
+		# print(output)
+		# print()
 		for i in range(0, self.yml.get_len(output)):
 			key1 = self.yml.get_key(output[i])
 			op_time, connect = self.get_det1(self.yml.get_value(output[i], key1))
@@ -374,6 +380,7 @@ class Preparer:
 						if val != '-':
 							tmp.append(val)
 						matrix[j][idx] = tmp
+		# print(matrix)
 		return matrix
 
 	def add_feedback_u(self, matrix, we, sy, wy):  # noqa: C901
@@ -436,5 +443,21 @@ class Preparer:
 		print(self.values)
 		print()
 		return Err.NOOP
+
+	def get_x_value(self, key, my_dic):
+		print(key)
+		print(my_dic)
+		for i in range(0, self.yml.get_len(my_dic)):
+			key1 = self.yml.get_key(my_dic[i])
+			op_time, connect = self.get_det1(self.yml.get_value(my_dic[i], key1))
+			if connect:
+				for key2 in connect:
+					if key2 == key:
+						print(key1)
+						print(i)
+						print(op_time)
+						print()
+						return key1, i, op_time
+		return None, None, None
 
 # eof.

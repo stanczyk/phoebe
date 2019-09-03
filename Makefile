@@ -29,6 +29,7 @@ all: info
 	@echo "  unit tests:"
 	@echo "      unittests"
 	@echo "      py.test tests/test_file.py"
+	@echo "      py.test tests/test_file.py::Class::method"
 	@echo
 	@echo "other:"
 	@echo "  virtualenv:"

@@ -93,6 +93,7 @@ class Yml:
 			return -1
 		# if not isinstance(my_dict, dict):
 		# if type(my_dict) is dict:
+		print(my_dict)
 		return len(my_dict)
 
 	@staticmethod

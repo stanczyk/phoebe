@@ -295,6 +295,17 @@ class TestPre(unittest.TestCase):
 
 	@unittest.skip("not implemented yet")
 	def test_add_feedback_x(self):
+		# matrix = [
+		# 	[['d_1'], '-', '-'],
+		# 	['-', ['d_2'], '-'],
+		# 	['-', '-', ['d_3']]]
+		# system = [
+		# 	{'M_1': {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}},
+		# 	{'M_2': {'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}, 'op-time': 'd_2'}},
+		# 	{'M_3': {'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}, 'op-time': 'd_3'}}]
+		# output = [
+		# 	{'y': {}}]
+		# self.assertEqual(self.pre.add_feedback_x(matrix, system, input), matrix)
 		pass
 
 	@unittest.skip("not implemented yet")
@@ -327,6 +338,15 @@ class TestPre(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.pre.show_det3()
 			self.assertEqual(mock_stdout.getvalue(), PRE_DET32)
+
+	def test_get_x_value(self):
+		key_in = 'y_3'
+		system = PRE_DET32
+		key_out = 'X_7'
+		op_time = 'd_7'
+		index = 6
+		out1, out2, out3 = self.pre.get_x_value(key_in, system)
+		self.assertEqual(out1, )
 
 
 def main():
