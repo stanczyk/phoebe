@@ -258,7 +258,6 @@ class TestPre(unittest.TestCase):
 			])
 
 	def test_rm_redundant_zeros(self):
-
 		self.assertEqual(self.pre.rm_redundant_zeros([]), [])
 		self.assertEqual(self.pre.rm_redundant_zeros([[], []]), [[], []])
 		self.assertEqual(self.pre.rm_redundant_zeros(
@@ -293,20 +292,51 @@ class TestPre(unittest.TestCase):
 				['-', '-', ['d_3']]
 			])
 
-	@unittest.skip("not implemented yet")
 	def test_add_feedback_x(self):
-		# matrix = [
-		# 	[['d_1'], '-', '-'],
-		# 	['-', ['d_2'], '-'],
-		# 	['-', '-', ['d_3']]]
-		# system = [
-		# 	{'M_1': {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}},
-		# 	{'M_2': {'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}, 'op-time': 'd_2'}},
-		# 	{'M_3': {'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}, 'op-time': 'd_3'}}]
-		# output = [
-		# 	{'y': {}}]
-		# self.assertEqual(self.pre.add_feedback_x(matrix, system, input), matrix)
-		pass
+		matrix = [
+			[['d_1'], '-', '-'],
+			['-', ['d_2'], '-'],
+			['-', '-', ['d_3']]]
+		system = [
+			{'M_1': {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}},
+			{'M_2': {'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}, 'op-time': 'd_2'}},
+			{'M_3': {'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}, 'op-time': 'd_3'}}]
+		output = [
+			{'y': {}}]
+		self.assertEqual(self.pre.add_feedback_x(matrix, system, output), matrix)
+		matrix = [
+			[['d_1'], '-', '-', '-', '-', '-', '-'],
+			['-', ['d_2'], '-', '-', '-', '-', '-'],
+			['-', '-', ['d_3'], '-', '-', '-', '-'],
+			['-', '-', '-', ['d_4'], '-', '-', '-'],
+			['-', '-', '-', '-', ['d_5'], '-', '-'],
+			['-', '-', '-', '-', '-', ['d_6'], '-'],
+			['-', '-', '-', '-', '-', '-', ['d_7']]]
+		system = [
+			{'X_1': {'op-time': 'd_1', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}, 'X_4': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_2': {'op-time': 'd_2', 'connect': {'y_1': {'tr-time': '0', 'buffers': '-'}, 'X_5': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_3': {'op-time': 'd_3', 'connect': {'X_4': {'tr-time': '0', 'buffers': '-'}, 'X_6': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_4': {'op-time': 'd_4', 'connect': {'X_5': {'tr-time': '0', 'buffers': '-'}, 'X_7': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_5': {'op-time': 'd_5', 'connect': {'y_2': {'tr-time': '0', 'buffers': '-'}, 'y_6': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_6': {'op-time': 'd_6', 'connect': {'X_7': {'tr-time': '0', 'buffers': '-'}, 'y_4': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_7': {'op-time': 'd_7', 'connect': {'y_3': {'tr-time': '0', 'buffers': '-'}, 'y_5': {'tr-time': '0', 'buffers': '-'}}}}]
+		output = [
+			{'y_1': {'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+			{'y_2': {'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+			{'y_3': {'connect': {'X_6': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+			{'y_4': {'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+			{'y_5': {'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+			{'y_6': {'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}}]
+		result = [
+			[['d_1'], ['0', 'd_2'], '-', '-', '-', '-', ['0', 'd_7']],
+			['-', ['d_2'], '-', '-', ['0', 'd_5'], '-', '-'],
+			['-', '-', ['d_3'], '-', ['0', 'd_5'], ['0', 'd_6'], '-'],
+			['-', '-', '-', ['d_4'], '-', '-', '-'],
+			['-', '-', '-', '-', ['d_5'], '-', '-'],
+			['-', '-', '-', '-', '-', ['d_6'], ['0', 'd_7']],
+			['-', '-', '-', '-', '-', '-', ['d_7']]]
+		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'u_3': 2, 'u_4': 3, 'u_5': 4, 'u_6': 5, 'X_1': 0, 'X_2': 1, 'X_3': 2, 'X_4': 3, 'X_5': 4, 'X_6': 5, 'X_7': 6, 'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5}
+		self.assertEqual(self.pre.add_feedback_x(matrix, system, output), result)
 
 	@unittest.skip("not implemented yet")
 	def test_add_feedback_u(self):
@@ -340,13 +370,18 @@ class TestPre(unittest.TestCase):
 			self.assertEqual(mock_stdout.getvalue(), PRE_DET32)
 
 	def test_get_x_value(self):
-		key_in = 'y_3'
-		system = PRE_DET32
-		key_out = 'X_7'
-		op_time = 'd_7'
-		index = 6
-		out1, out2, out3 = self.pre.get_x_value(key_in, system)
-		self.assertEqual(out1, )
+		key = 'y'
+		system = PRE_DICM
+		out1, out2, out3 = self.pre.get_x_value(key, system)
+		self.assertEqual(out1, 'M_3')
+		self.assertEqual(out3, 'd_3')
+		self.assertEqual(out2, 2)
+		key = 'y_3'
+		system = PRE_DICM2
+		out1, out2, out3 = self.pre.get_x_value(key, system)
+		self.assertEqual(out1, 'X_7')
+		self.assertEqual(out3, 'd_7')
+		self.assertEqual(out2, 6)
 
 
 def main():
