@@ -15,6 +15,9 @@ import sys
 import yaml
 from err import Err
 from yml import Yml
+from inf import DESC_LATEX, DESC_MATLAB
+from lat import Lat
+from mat import Mat
 
 
 class Preparer:
@@ -446,5 +449,41 @@ class Preparer:
 					if key2 == key:
 						return key1, i, op_time
 		return None, None, None
+
+	def generatable(self):
+		""" return Err.NOOP if it is possible to generate a description """
+		if not self.vector_u:
+			return Err.ERR_NO_INPUT
+		if not self.vector_y:
+			return Err.ERR_NO_OUTPUT
+		if not self.vector_x:
+			return Err.ERR_NO_STATE_VECT
+		return Err.NOOP
+
+	def description(self, desc):
+		if desc == DESC_MATLAB:
+			des = Mat()
+		elif desc == DESC_LATEX:
+			des = Lat()
+		else:
+			return Err.ERR_WRONG_DESC
+		return self.descript(des)
+
+	def descript(self, obj):
+		pass
+		#obj.begin(os.path.splitext(os.path.basename(self.parser.file_name))[0])
+		#obj.equation()
+		#self. desc_vector(obj)
+		#if obj.__class__.__name__ == 'Mat':
+		#	obj.input_vec(self.u)
+		#	obj.start_vec(self.x)
+		#	obj.values(self.values)
+		#self.desc_matrix(obj)
+		#if obj.__class__.__name__ == 'Lat':
+		#	obj.values(self.values)
+		#if obj.__class__.__name__ == 'Mat':
+		#	obj.adds()
+		#obj.end()
+		#return Err.NOOP
 
 # eof.

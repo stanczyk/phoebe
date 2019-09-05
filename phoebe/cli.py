@@ -12,6 +12,7 @@ import click
 import sys
 from pre import Preparer
 from err import Err
+from inf import DESC_LATEX, DESC_MATLAB
 
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']}, invoke_without_command=True)
@@ -61,31 +62,31 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	# 	print('main stuff')
 	return Err.NOOP
 
-	# ans = self.generatable()
-	# if ans:
-		# 	print >> sys.stderr, Err().value_to_name(ans) + ': not enough data to generate description'
-	# 	return Err.ERR_NO_DATA
-	# if self.parser.args['--latex']:
-	# 	des = Lat()
-	# else:
-	# 	des = Mat()
-	# self.description(des)
-
 
 @click.command()
 @click.pass_obj
 def latex(lat):
 	"""Generate latex description."""
-	# TODO
-	print('hej hopla i generuję opis dla latexa')
+	ctx = click.get_current_context()
+	ans = ctx.obj.generatable()
+	if ans:
+		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
+		return ans
+	ans = ctx.obj.description(DESC_LATEX)
+	return ans
 
 
 @click.command()
 @click.pass_obj
 def matlab(mat):
 	"""Generate max-plus matlab model."""
-	# TODO
-	print('hej hopla i generuję model dla matlaba')
+	ctx = click.get_current_context()
+	ans = ctx.obj.generatable()
+	if ans:
+		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
+		return ans
+	ans = ctx.obj.description(DESC_MATLAB)
+	return ans
 
 
 @click.command()

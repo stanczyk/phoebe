@@ -23,7 +23,6 @@ if lib_path not in sys.path:
 import phoebe.cli
 from phoebe.err import Err
 
-
 # pylint: disable=missing-docstring
 # https://click.palletsprojects.com/en/7.x/testing/
 # https://stackoverflow.com/questions/53203500/unittest-for-click-module

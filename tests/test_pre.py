@@ -313,13 +313,20 @@ class TestPre(unittest.TestCase):
 			['-', '-', '-', '-', '-', ['d_6'], '-'],
 			['-', '-', '-', '-', '-', '-', ['d_7']]]
 		system = [
-			{'X_1': {'op-time': 'd_1', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}, 'X_4': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_2': {'op-time': 'd_2', 'connect': {'y_1': {'tr-time': '0', 'buffers': '-'}, 'X_5': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_3': {'op-time': 'd_3', 'connect': {'X_4': {'tr-time': '0', 'buffers': '-'}, 'X_6': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_4': {'op-time': 'd_4', 'connect': {'X_5': {'tr-time': '0', 'buffers': '-'}, 'X_7': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_5': {'op-time': 'd_5', 'connect': {'y_2': {'tr-time': '0', 'buffers': '-'}, 'y_6': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_6': {'op-time': 'd_6', 'connect': {'X_7': {'tr-time': '0', 'buffers': '-'}, 'y_4': {'tr-time': '0', 'buffers': '-'}}}},
-			{'X_7': {'op-time': 'd_7', 'connect': {'y_3': {'tr-time': '0', 'buffers': '-'}, 'y_5': {'tr-time': '0', 'buffers': '-'}}}}]
+			{'X_1': {'op-time': 'd_1', 'connect':
+				{'X_2': {'tr-time': '0', 'buffers': '-'}, 'X_4': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_2': {'op-time': 'd_2', 'connect':
+				{'y_1': {'tr-time': '0', 'buffers': '-'}, 'X_5': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_3': {'op-time': 'd_3', 'connect':
+				{'X_4': {'tr-time': '0', 'buffers': '-'}, 'X_6': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_4': {'op-time': 'd_4', 'connect':
+				{'X_5': {'tr-time': '0', 'buffers': '-'}, 'X_7': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_5': {'op-time': 'd_5', 'connect':
+				{'y_2': {'tr-time': '0', 'buffers': '-'}, 'y_6': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_6': {'op-time': 'd_6', 'connect':
+				{'X_7': {'tr-time': '0', 'buffers': '-'}, 'y_4': {'tr-time': '0', 'buffers': '-'}}}},
+			{'X_7': {'op-time': 'd_7', 'connect':
+				{'y_3': {'tr-time': '0', 'buffers': '-'}, 'y_5': {'tr-time': '0', 'buffers': '-'}}}}]
 		output = [
 			{'y_1': {'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
 			{'y_2': {'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
@@ -335,12 +342,78 @@ class TestPre(unittest.TestCase):
 			['-', '-', '-', '-', ['d_5'], '-', '-'],
 			['-', '-', '-', '-', '-', ['d_6'], ['0', 'd_7']],
 			['-', '-', '-', '-', '-', '-', ['d_7']]]
-		self.pre.mapping = {'u_1': 0, 'u_2': 1, 'u_3': 2, 'u_4': 3, 'u_5': 4, 'u_6': 5, 'X_1': 0, 'X_2': 1, 'X_3': 2, 'X_4': 3, 'X_5': 4, 'X_6': 5, 'X_7': 6, 'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5}
+		self.pre.mapping = {
+			'u_1': 0, 'u_2': 1, 'u_3': 2, 'u_4': 3, 'u_5': 4, 'u_6': 5,
+			'X_1': 0, 'X_2': 1, 'X_3': 2, 'X_4': 3, 'X_5': 4, 'X_6': 5, 'X_7': 6,
+			'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5}
 		self.assertEqual(self.pre.add_feedback_x(matrix, system, output), result)
 
-	@unittest.skip("not implemented yet")
 	def test_add_feedback_u(self):
-		pass
+			matrix = [
+				[['d_1'], '-', '-'],
+				['-', ['d_2'], '-'],
+				['-', '-', ['d_3']]]
+			result = [
+				[['d_1'], '-', ['0', '0', '0', 't_{0,1}', 'd_3', 't_{3,4}']],
+				['-', ['d_2'], ['0', '0', '0', 't_{0,2}', 'd_3', 't_{3,4}']],
+				['-', '-', ['d_3']]]
+			input = [
+				{'u_1': {'connect': {'M_1': {'tr-time': 't_{0,1}', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_2': {'connect': {'M_2': {'tr-time': 't_{0,2}', 'buffers': '-'}}, 'op-time': '0'}}]
+			output = [
+				{'y': {'op-time': '0', 'connect': {
+					'u_1': {'tr-time': '0', 'buffers': '-'},
+					'u_2': {'tr-time': '0', 'buffers': '-'}}}}]
+			system = [
+				{'M_1': {'connect': {'M_3': {'tr-time': 't_{1,3}', 'buffers': '-'}}, 'op-time': 'd_1'}},
+				{'M_2': {'connect': {'M_3': {'tr-time': 't_{2,3}', 'buffers': '-'}}, 'op-time': 'd_2'}},
+				{'M_3': {'connect': {'y': {'tr-time': 't_{3,4}', 'buffers': '-'}}, 'op-time': 'd_3'}}]
+			self.pre.mapping = {'u_1': 0, 'u_2': 1, 'M_1': 0, 'M_2': 1, 'M_3': 2, 'y': 0}
+			self.assertEqual(self.pre.add_feedback_u(matrix, input, system, output), result)
+			matrix = [
+				[['d_1'], '-', '-', '-', '-', '-', '-'],
+				['-', ['d_2'], '-', '-', '-', '-', '-'],
+				['-', '-', ['d_3'], '-', '-', '-', '-'],
+				['-', '-', '-', ['d_4'], '-', '-', '-'],
+				['-', '-', '-', '-', ['d_5'], '-', '-'],
+				['-', '-', '-', '-', '-', ['d_6'], '-'],
+				['-', '-', '-', '-', '-', '-', ['d_7']]]
+			result = [
+				[['d_1'], ['0', '0', '0', '0', 'd_2'], '-', '-', '-', '-', '-'],
+				['-', ['d_2'], '-', '-', '-', '-', '-'],
+				['-', '-', ['d_3'], '-', ['0', '0', '0', '0', 'd_5'], '-', '-'],
+				['-', '-', '-', ['d_4'], '-', '-', '-'],
+				['-', '-', '-', '-', ['d_5'], '-', '-'],
+				['-', '-', '-', '-', '-', ['d_6'], ['0', '0', '0', '0', 'd_7']],
+				['-', '-', '-', '-', '-', '-', ['d_7']]]
+			input = [
+				{'u_1': {'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_2': {'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_3': {'connect': {'X_6': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_4': {'connect': {'X_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_5': {'connect': {'X_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'u_6': {'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}}]
+			output = [
+				{'y_1': {'connect': {'u_1': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'y_2': {'connect': {'u_2': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'y_3': {'connect': {'u_3': {'tr-time': '0', 'buffers': '-'}}, 'op-time': '0'}},
+				{'y_4': {}},
+				{'y_5': {}},
+				{'y_6': {}}]
+			system = [
+				{'X_1': {'op-time': 'd_1', 'connect': {'X_2': {'tr-time': '0', 'buffers': '-'}, 'X_4': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_2': {'op-time': 'd_2', 'connect': {'y_1': {'tr-time': '0', 'buffers': '-'}, 'X_5': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_3': {'op-time': 'd_3', 'connect': {'X_4': {'tr-time': '0', 'buffers': '-'}, 'X_6': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_4': {'op-time': 'd_4', 'connect': {'X_5': {'tr-time': '0', 'buffers': '-'}, 'X_7': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_5': {'op-time': 'd_5', 'connect': {'y_2': {'tr-time': '0', 'buffers': '-'}, 'y_6': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_6': {'op-time': 'd_6', 'connect': {'X_7': {'tr-time': '0', 'buffers': '-'}, 'y_4': {'tr-time': '0', 'buffers': '-'}}}},
+				{'X_7': {'op-time': 'd_7', 'connect': {'y_3': {'tr-time': '0', 'buffers': '-'}, 'y_5': {'tr-time': '0', 'buffers': '-'}}}}]
+			self.pre.mapping = {
+				'u_1': 0, 'u_2': 1, 'u_3': 2, 'u_4': 3, 'u_5': 4, 'u_6': 5,
+				'X_1': 0, 'X_2': 1, 'X_3': 2, 'X_4': 3, 'X_5': 4, 'X_6': 5, 'X_7': 6,
+				'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5}
+			self.assertEqual(self.pre.add_feedback_u(matrix, input, system, output), result)
+
 
 	def test_get_det3(self):
 		pred, how = self.pre.get_det3(PRE_DICM, 'y')

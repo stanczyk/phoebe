@@ -11,7 +11,7 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 
 # one more then last ERR
-ERR_MAX_NUMBER = 10
+ERR_MAX_NUMBER = 11
 
 
 class Err:
@@ -32,7 +32,8 @@ class Err:
 		ERR_NO_DATA,  # lack or not enough input data
 		ERR_NO_INPUT,
 		ERR_NO_OUTPUT,
-		ERR_NO_STATE_VECT
+		ERR_NO_STATE_VECT,
+		ERR_WRONG_DESC
 	] = range(ERR_MAX_NUMBER)
 
 	def value_to_name(self, value):
