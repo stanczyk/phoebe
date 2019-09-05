@@ -11,6 +11,7 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=import-error
 
+import os
 import sys
 import yaml
 from err import Err
@@ -26,6 +27,7 @@ class Preparer:
 
 	def __init__(self):
 		self.file_handler = None
+		self.file_name = ''
 		self.content_yaml = None
 		self.yml = Yml()
 		self.vector_u = []
@@ -34,12 +36,14 @@ class Preparer:
 		self.A = [[], []] 	# [A0, A1]
 		self.B = [] 		# [B0]
 		self.C = [] 		# [C]
+		self.D = []
 		self.mapping = {}
 		self.values = None
 
 	def set_file_handler(self, filename):
 		if not filename:
 			return Err.ERR_NO_INPUT_FILE
+		self.file_name = filename
 		try:
 			self.file_handler = open(filename, 'r')
 		except IOError as ioe:
@@ -60,9 +64,9 @@ class Preparer:
 		self.file_handler = None
 		return Err.NOOP
 
-	def show_file_content(self, file_name):
+	def show_file_content(self):
 		print('== INPUT FILE ==============')
-		print('file_name:', file_name)
+		print('file_name:', self.file_name)
 		print(self.yml.show(self.content_yaml))
 		return Err.NOOP
 
@@ -470,9 +474,8 @@ class Preparer:
 		return self.descript(des)
 
 	def descript(self, obj):
-		pass
-		#obj.begin(os.path.splitext(os.path.basename(self.parser.file_name))[0])
-		#obj.equation()
+		obj.begin(os.path.splitext(os.path.basename(self.file_name))[0])
+		obj.equation(self.A, self.B, self.C, self.D)
 		#self. desc_vector(obj)
 		#if obj.__class__.__name__ == 'Mat':
 		#	obj.input_vec(self.u)

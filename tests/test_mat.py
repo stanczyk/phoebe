@@ -11,34 +11,45 @@
 import os
 import sys
 import unittest
-# from io import StringIO
-# import mock
-from click.testing import CliRunner
-from tests.answers.ans_cli import ANS_HLP1, ANS_HLP2, ANS_FILE, ANS_VEC1, ANS_VEC2, \
-	ANS_DET1_1, ANS_DET1_2, ANS_DET2_1, ANS_DET2_2, ANS_DET3_1, ANS_DET3_2, ANS_MAT1, ANS_MAT2
+from freezegun import freeze_time  # https://github.com/spulec/freezegun
+from io import StringIO
+import mock
+from tests.answers.ans_mat import MAT_BEGIN, MAT_EQUEST1
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
 	sys.path.append(lib_path)
 import phoebe.mat
+from phoebe.err import Err
 
 
 class TestMat(unittest.TestCase):
 	""" class for testing *Generator* """
 
 	def setUp(self):
-		pass
+		self.mat = phoebe.mat.Mat()
 
 	def tearDown(self):
 		pass
 
-	@unittest.skip("not implemented yet")
+	@freeze_time("2019-09-06 14:48:05")
 	def test_begin(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.begin('nazwa-pliku'), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_BEGIN)
 
 	@unittest.skip("not implemented yet")
-	def test_equation(self):
+	def test_do_matrices(self):
 		pass
+
+	def test_equation(self):
+		mat_A = [['a_0'], ['a_1'], [], ['a_3']]
+		mat_B = [[], ['b_1']]
+		mat_C = [[], ['c_1']]
+		mat_D = [[], ['d_1']]
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.equation(mat_A, mat_B, mat_C, mat_D), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_EQUEST1)
 
 	@unittest.skip("not implemented yet")
 	def test_clean_value(self):
