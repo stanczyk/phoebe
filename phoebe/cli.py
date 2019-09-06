@@ -39,7 +39,7 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		print('Input file content error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
 		return ans
 	if showfile:
-		ctx.obj.show_file_content(filename)
+		ctx.obj.show_file_content()
 
 	ctx.obj.prepare_vectors()
 	ctx.obj.add_defaults()

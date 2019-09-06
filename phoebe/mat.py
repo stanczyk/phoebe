@@ -32,42 +32,53 @@ class Mat(object):
 		print()
 		return Err.NOOP
 
-	@staticmethod
-	def do_matrices(matrix, name, vec):
-		index = 1
-		mat = ''
-		for i in range(0, len(matrix)):
-			if matrix[i]:
-				if (len(mat)):
-					mat = mat + ' + '
-				index = index - i
-				tmp = ''
-				if index > 0:
-					tmp = '+{0}'.format(index)
-				elif index < 0:
-					tmp = '{0}'.format(index+1)
-				mat = mat + '{0}{1}{2}(k{3})'.format(name, i, vec, tmp)
-		return mat
+	# poniżej nowe metody, dla nowej formy macierzy opisu -> ale to już w następnej wersji
+	# @staticmethod
+	# def do_matrices(matrix, name, vec):
+		# 	index = 1
+		# mat = ''
+		# for i in range(0, len(matrix)):
+		# 	if matrix[i]:
+		# 		if (len(mat)):
+		# 			mat = mat + ' + '
+		# 		index = index - i
+		# 		tmp = ''
+		# 		if index > 0:
+		# 			tmp = '+{0}'.format(index)
+		# 		elif index < 0:
+		# 			tmp = '{0}'.format(index+1)
+		# 		mat = mat + '{0}{1}{2}(k{3})'.format(name, i, vec, tmp)
+		# return mat
 
-	def equation(self, mat_A, mat_B, mat_C, mat_D):
-		print('clear\n')
-		print('disp(\'x(k+1) = ', end='')
-		mat = self.do_matrices(mat_A, 'A', 'x')
-		if len(mat):
-			print(mat, end='')
-		mat = self.do_matrices(mat_B, 'B', 'u')
-		if len(mat):
-			print(' +', mat, end='')
-		print('\');')
-		print('disp(\'y(k) = ', end='')
-		mat = self.do_matrices(mat_C, 'C', 'x')
-		if len(mat):
-			print(mat, end='')
-		mat = self.do_matrices(mat_D, 'D', 'u')
-		if len(mat):
-			print(' +', mat, end='')
-		print('\');')
-		print('disp(\'---------------------------------\');')
+	# def equation(self, mat_A, mat_B, mat_C, mat_D):
+		# 	print('clear\n')
+		# print('disp(\'x(k+1) = ', end='')
+		# mat = self.do_matrices(mat_A, 'A', 'x')
+		# if len(mat):
+		# 	print(mat, end='')
+		# mat = self.do_matrices(mat_B, 'B', 'u')
+		# if len(mat):
+		# 	print(' +', mat, end='')
+		# print('\');')
+		# print('disp(\'y(k) = ', end='')
+		# mat = self.do_matrices(mat_C, 'C', 'x')
+		# if len(mat):
+		# 	print(mat, end='')
+		# mat = self.do_matrices(mat_D, 'D', 'u')
+		# if len(mat):
+		# 	print(' +', mat, end='')
+		# print('\');')
+		# print('disp(\'---------------------------------\');')
+		# return Err.NOOP
+
+	@staticmethod
+	def equation():
+		print('\
+			clear\n\
+			disp(\'\');\n\
+			disp(\'x(k) = A0x(k) + A1x(k-1) + B0u(k)\');\n\
+			disp(\'y(k) =  Cx(k)\');\n\
+			disp(\'---------------------------------\');')
 		return Err.NOOP
 
 	@staticmethod

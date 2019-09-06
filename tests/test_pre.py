@@ -49,17 +49,17 @@ class TestPre(unittest.TestCase):
 
 	def test_read_file(self):
 		# normal file
-		self.pre.set_file_handler('./tests/samples/pre2.yml')
+		self.pre.set_file_handler('tests/samples/pre2.yml')
 		self.assertEqual(self.pre.read_file(), Err.NOOP)
 		# wrong yaml file
-		self.pre.set_file_handler('./tests/samples/pre3.yml')
+		self.pre.set_file_handler('tests/samples/pre3.yml')
 		self.assertEqual(self.pre.read_file(), Err.ERR_YAML)
 
 	def test_show_file_content(self):
-		self.pre.set_file_handler('./tests/samples/pre2.yml')
+		self.pre.set_file_handler('tests/samples/pre2.yml')
 		self.pre.read_file()
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.pre.show_file_content('tests/samples/pre2.yml')
+			self.pre.show_file_content()
 			self.assertEqual(mock_stdout.getvalue(), ANS_FILE)
 
 	def test_prepare_vectors(self):
