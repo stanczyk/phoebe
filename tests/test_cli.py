@@ -54,13 +54,14 @@ class TestCli(unittest.TestCase):
 		self.assertEqual(result.output, ANS_FILE)
 
 	def test_cli_det1(self):
+		self.maxDiff = None
 		result = self.runner.invoke(phoebe.cli.cli, ['--det1', 'tests/samples/cli1.yml'])
 		self.assertEqual(result.exit_code, Err.NOOP)
-		# print(result.output)
+		print(result.output)
 		self.assertEqual(result.output, ANS_DET1_1)
 		result = self.runner.invoke(phoebe.cli.cli, ['--det1', 'tests/samples/cli2.yml'])
 		self.assertEqual(result.exit_code, Err.NOOP)
-		# print(result.output)
+		print(result.output)
 		self.assertEqual(result.output, ANS_DET1_2)
 
 	def test_cli_det2(self):

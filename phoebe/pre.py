@@ -30,13 +30,14 @@ class Preparer:
 		self.file_name = ''
 		self.content_yaml = None
 		self.yml = Yml()
+		self.prepared = False
 		self.vector_u = []
 		self.vector_x = []
 		self.vector_y = []
-		self.A = [[], []] 	# [A0, A1]
-		self.B = [] 		# [B0]
+		self.A = [[], []] 	# [[A0], [A1]]
+		self.B = [[]] 		# [[B0]]
 		self.C = [] 		# [C]
-		self.D = []
+		self.D = None 		# [D]
 		self.mapping = {}
 		self.values = None
 
@@ -69,6 +70,13 @@ class Preparer:
 		print('file_name:', self.file_name)
 		print(self.yml.show(self.content_yaml))
 		return Err.NOOP
+
+	def prepare(self):
+		self.prepare_vectors()
+		self.add_defaults()
+		self.prepare_mapping()
+		self.matrix_preparation()
+		self.prepared = True;
 
 	def prepare_vectors(self):
 		for i in ['input', 'prod-unit', 'output']:
@@ -207,17 +215,20 @@ class Preparer:
 	def show_matrices(self):
 		name = ''
 		print('== MATRICES ================')
-		for i in [self.A, self.B, self.C]:
-			if i == self.A:
-				for j in range(0, len(self.A)):
-					name = 'A' + str(j) + ' = '
+		for i in [self.A, self.B, self.C, self.D]:
+			if i in [self.A, self.B]:
+				for j in range(0, len(i)):
+					if i == self.A:
+						name = 'A' + str(j) + ' = '
+					else:
+						name = 'B' + str(j) + ' = '
 					print(name, end='')
 					self.prn_matrix(self.A[j])
 			else:
-				if i == self.B:
-					name = 'B0 = '
 				if i == self.C:
 					name = 'C  = '
+				if i == self.D:
+					name = 'D  = '
 				print(name, end='')
 				self.prn_matrix(i)
 		print()
