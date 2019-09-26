@@ -45,8 +45,8 @@ class TestMat(unittest.TestCase):
 	# def test_equation(self):
 		# 	mat_A = [['a_0'], ['a_1'], [], ['a_3']]
 		# mat_B = [[], ['b_1']]
-		# mat_C = [[], ['c_1']]
-		# mat_D = [[], ['d_1']]
+		# mat_C = ['c']
+		# mat_D = ['d']
 		# with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			# 	self.assertEqual(self.mat.equation(mat_A, mat_B, mat_C, mat_D), Err.NOOP)
 			# self.assertEqual(mock_stdout.getvalue(), MAT_EQUEST1)

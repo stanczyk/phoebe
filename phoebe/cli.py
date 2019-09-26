@@ -54,8 +54,15 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	if matrices:
 		ctx.obj.show_matrices()
 	# default action
+	# odp = Err.NOOP
 	# if not ctx.invoked_subcommand:
-	# 	print('main stuff')
+	#	# print('main stuff')
+	#	ans = ctx.obj.generatable()
+	#	if ans:
+	#		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
+	#		return ans
+	#	odp = ctx.obj.description(DESC_MATLAB)
+	# return odp
 	return Err.NOOP
 
 
@@ -75,7 +82,7 @@ def latex(lat):
 @click.command()
 @click.pass_obj
 def matlab(mat):
-	"""Generate max-plus matlab model."""
+	"""Max-plus matlab model, default action if no command is given."""
 	ctx = click.get_current_context()
 	ans = ctx.obj.generatable()
 	if ans:

@@ -13,6 +13,8 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
 import os
 import sys
+from builtins import IOError, str, range, len, enumerate, staticmethod, isinstance, sorted
+
 import yaml
 from err import Err
 from yml import Yml
@@ -74,7 +76,7 @@ class Preparer:
 		self.prepare_vectors()
 		self.add_defaults()
 		self.prepare_mapping()
-		# self.matrix_preparation()
+		self.matrix_preparation()
 
 	def prepare_vectors(self):
 		for i in ['input', 'prod-unit', 'output']:
@@ -259,10 +261,6 @@ class Preparer:
 		sy = self.yml.get_value(self.content_yaml, 'prod-unit')
 		wy = self.yml.get_value(self.content_yaml, 'output')
 
-		# matrix B
-		self.create_matrix(self.B, self.vector_x, self.vector_u)
-		self.fill_matrix(self.B, we)
-
 		# matrix A
 		for i in range(0, len(self.A)):
 			self.create_matrix(self.A[i], self.vector_x, self.vector_x)
@@ -272,14 +270,19 @@ class Preparer:
 		self.add_feedback_u(self.A[1], we, sy, wy)
 		# self.add_feedback_y(self.A1, prod_unit)
 
+		# matrix B
+		for i in range(0, len(self.B)):
+			self.create_matrix(self.B[i], self.vector_x, self.vector_u)
+			self.fill_matrix(self.B[i], we)
+
 		# matrix C
 		self.create_matrix(self.C, self.vector_y, self.vector_x)
 		self.fill_matrix(self.C, sy)
 
 		# polishing
 		for i in [self.A, self.B, self.C]:
-			if i == self.A:
-				for j in self.A: # range(0, len(self.A)):
+			if i == self.A or i == self.B:
+				for j in i: # range(0, len(self.A)):
 					self.optimize_matrix(j)
 			else:
 				self.optimize_matrix(i)
@@ -484,7 +487,7 @@ class Preparer:
 
 	def descript(self, obj):
 		obj.begin(os.path.splitext(os.path.basename(self.file_name))[0])
-		obj.equation(self.A, self.B, self.C, self.D)
+		# obj.equation(self.A, self.B, self.C, self.D)
 		#self. desc_vector(obj)
 		#if obj.__class__.__name__ == 'Mat':
 		#	obj.input_vec(self.u)
@@ -495,7 +498,7 @@ class Preparer:
 		#	obj.values(self.values)
 		#if obj.__class__.__name__ == 'Mat':
 		#	obj.adds()
-		#obj.end()
-		#return Err.NOOP
+		obj.end()
+		return Err.NOOP
 
 # eof.
