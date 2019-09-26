@@ -30,7 +30,6 @@ class Preparer:
 		self.file_name = ''
 		self.content_yaml = None
 		self.yml = Yml()
-		self.prepared = False
 		self.vector_u = []
 		self.vector_x = []
 		self.vector_y = []
@@ -75,8 +74,7 @@ class Preparer:
 		self.prepare_vectors()
 		self.add_defaults()
 		self.prepare_mapping()
-		self.matrix_preparation()
-		self.prepared = True;
+		# self.matrix_preparation()
 
 	def prepare_vectors(self):
 		for i in ['input', 'prod-unit', 'output']:

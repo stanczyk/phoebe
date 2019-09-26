@@ -40,27 +40,18 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		return ans
 	if showfile:
 		ctx.obj.show_file_content()
+	ctx.obj.prepare()
 
 	if det1:
-		if not ctx.obj.prepared:
-			ctx.obj.prepare()
 		ctx.obj.show_det1()
 	if det2:
-		if not ctx.obj.prepared:
-			ctx.obj.prepare()
 		ctx.obj.show_det2()
 	if det3:
-		if not ctx.obj.prepared:
-			ctx.obj.prepare()
 		ctx.obj.show_det3()
 		pass
 	if vectors:
-		if not ctx.obj.prepared:
-			ctx.obj.prepare()
 		ctx.obj.show_vectors()
 	if matrices:
-		if not ctx.obj.prepared:
-			ctx.obj.prepare()
 		ctx.obj.show_matrices()
 	# default action
 	# if not ctx.invoked_subcommand:
@@ -73,8 +64,6 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 def latex(lat):
 	"""Generate latex description."""
 	ctx = click.get_current_context()
-	if not ctx.obj.prepared:
-		ctx.obj.prepare()
 	ans = ctx.obj.generatable()
 	if ans:
 		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
@@ -88,8 +77,6 @@ def latex(lat):
 def matlab(mat):
 	"""Generate max-plus matlab model."""
 	ctx = click.get_current_context()
-	if not ctx.obj.prepared:
-		ctx.obj.prepare()
 	ans = ctx.obj.generatable()
 	if ans:
 		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
