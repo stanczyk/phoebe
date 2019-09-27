@@ -53,7 +53,7 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 		ctx.obj.show_vectors()
 	if matrices:
 		ctx.obj.show_matrices()
-	# default action
+	# default action - not used, because maybe we don't want a matlab or latex description
 	# odp = Err.NOOP
 	# if not ctx.invoked_subcommand:
 	#	# print('main stuff')

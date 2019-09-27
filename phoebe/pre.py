@@ -223,7 +223,7 @@ class Preparer:
 					else:
 						name = 'B' + str(j) + ' = '
 					print(name, end='')
-					self.prn_matrix(self.A[j])
+					self.prn_matrix(i[j])
 			else:
 				if i == self.C:
 					name = 'C  = '
@@ -279,8 +279,15 @@ class Preparer:
 		self.create_matrix(self.C, self.vector_y, self.vector_x)
 		self.fill_matrix(self.C, sy)
 
+		# matrix D
+		if self.D is None:
+			self.D = []
+		self.create_matrix(self.D, self.vector_y, self.vector_u)
+		# TODO tu jeszcze nie jest zrobione dla self.D
+		# self.fill_matrix(self.D, we)
+
 		# polishing
-		for i in [self.A, self.B, self.C]:
+		for i in [self.A, self.B, self.C, self.D]:
 			if i == self.A or i == self.B:
 				for j in i: # range(0, len(self.A)):
 					self.optimize_matrix(j)
@@ -295,6 +302,7 @@ class Preparer:
 			for __ in range(0, len(v2)):
 				tmp.append('-')
 			matrix.append(tmp)
+		# self.prn_matrix(matrix)
 		return matrix
 
 	def fill_matrix(self, matrix, my_dic):
@@ -318,7 +326,7 @@ class Preparer:
 				tr_time, buffers = self.get_det2(con[key])
 				j = self.mapping[key]
 				if key[0] != 'y':
-					if matrix in [self.A[0], self.B]:
+					if matrix in [self.A[0], self.B[0]]:
 						cell = val[:]
 						if tr_time:
 							cell.append(tr_time)
@@ -341,6 +349,7 @@ class Preparer:
 			return matrix
 		self.rm_repeated_zeros(matrix)
 		self.rm_redundant_zeros(matrix)
+		# TODO dodac usuwanie nadmiarowych '-' w tym samym polu macierzy
 		return matrix
 
 	def rm_repeated_zeros(self, matrix):
