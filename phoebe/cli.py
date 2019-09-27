@@ -7,6 +7,7 @@ phoebe implementation: command line interface
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=import-error
+from builtins import str
 
 import click
 import sys

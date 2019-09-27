@@ -11,6 +11,7 @@ in the module:
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 import time
+from builtins import staticmethod
 
 DESC_LATEX = 1
 DESC_MATLAB = 2

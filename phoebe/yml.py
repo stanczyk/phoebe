@@ -10,6 +10,7 @@
 	Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmil.com>
 """
 # pylint: disable=import-error
+from builtins import staticmethod, AttributeError, KeyError, len
 
 import yaml
 

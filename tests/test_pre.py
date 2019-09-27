@@ -14,8 +14,8 @@ import unittest
 from io import StringIO
 import mock
 from tests.answers.ans_pre import ANS_FILE, PRE_IMP1, PRE_ANS1, PRE_VEC1, PRE_VEC2, PRE_CONTENT1, PRE_CONTENT2, \
-	PRE_DET1_1, PRE_DET1_2, PRE_DET2_1, PRE_DET2_2, PRE_MAT1, PRE_MATA, PRE_MATB, PRE_MATC, PRE_MAT2, PRE_MATB2, \
-	PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_DICM2, PRE_A01, PRE_A02, PRE_A03, PRE_DET31, PRE_DET32
+	PRE_DET1_1, PRE_DET1_2, PRE_DET2_1, PRE_DET2_2, PRE_MAT1, PRE_MATA, PRE_MATB, PRE_MATC, PRE_MATD, PRE_MAT2, \
+	PRE_MATB2, PRE_MAP1, PRE_MAP2, PRE_DICM, PRE_DICM2, PRE_A01, PRE_A02, PRE_A03, PRE_DET31, PRE_DET32
 
 # pylint: disable=missing-docstring
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
@@ -157,6 +157,7 @@ class TestPre(unittest.TestCase):
 		self.pre.A = PRE_MATA
 		self.pre.B = PRE_MATB
 		self.pre.C = PRE_MATC
+		self.pre.D = PRE_MATD
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.pre.show_matrices()
 			self.assertEqual(mock_stdout.getvalue(), PRE_MAT2)
@@ -166,7 +167,7 @@ class TestPre(unittest.TestCase):
 			self.pre.prn_matrix([])
 			self.assertEqual(mock_stdout.getvalue(), '[]\n')
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.pre.prn_matrix(PRE_MATB)
+			self.pre.prn_matrix(PRE_MATB[0])
 			self.assertEqual(mock_stdout.getvalue(), PRE_MATB2)
 
 	def test_prepare_mapping(self):
@@ -183,8 +184,9 @@ class TestPre(unittest.TestCase):
 		self.pre.content_yaml = PRE_CONTENT1
 		self.pre.matrix_preparation()
 		self.assertEqual(self.pre.A, [[], []])
-		self.assertEqual(self.pre.B, [])
+		self.assertEqual(self.pre.B, [[]])
 		self.assertEqual(self.pre.C, [])
+		self.assertEqual(self.pre.D, [])
 		self.pre.content_yaml = PRE_CONTENT2
 		self.pre.vector_u = ['u_1', 'u_2']
 		self.pre.vector_x = ['x_1', 'x_2', 'x_3']

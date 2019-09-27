@@ -9,11 +9,13 @@ in the module:
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+from builtins import staticmethod, str, enumerate, range, len, IndexError, sorted
+
 import inf
 from err import Err
 
 
-class Lat(object):
+class Lat:
 	"""Lat class"""
 	def __init__(self):
 		pass

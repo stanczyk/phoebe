@@ -11,6 +11,8 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 
 # one more then last ERR
+from builtins import range, ValueError
+
 ERR_MAX_NUMBER = 11
 
 

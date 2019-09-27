@@ -10,7 +10,7 @@ in the module:
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=invalid-name
-from builtins import range, len, staticmethod
+from builtins import range, len, staticmethod, enumerate, sorted, str
 
 import inf
 from yml import Yml

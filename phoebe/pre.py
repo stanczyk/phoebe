@@ -79,6 +79,8 @@ class Preparer:
 		self.matrix_preparation()
 
 	def prepare_vectors(self):
+		vec = None
+		name = None
 		for i in ['input', 'prod-unit', 'output']:
 			if i == 'input':
 				vec = self.vector_u
