@@ -349,7 +349,6 @@ class Preparer:
 			return matrix
 		self.rm_repeated_zeros(matrix)
 		self.rm_redundant_zeros(matrix)
-		# TODO dodac usuwanie nadmiarowych '-' w tym samym polu macierzy
 		return matrix
 
 	def rm_repeated_zeros(self, matrix):

@@ -24,7 +24,7 @@ Options:\n\
 \n\
 Commands:\n\
   latex   Generate latex description.\n\
-  matlab  Generate max-plus matlab model.\n'
+  matlab  Max-plus matlab model, default action if no command is given.\n'
 
 ANS_HLP2 = '\
 Usage: cli [OPTIONS] FILENAME COMMAND [ARGS]...\n\
@@ -196,6 +196,9 @@ B0 = [\n\
 C  = [\n\
 [\'-\', \'-\', [\'d_3\', \'t_{3,4}\']]\n\
 ]\n\
+D  = [\n\
+[\'-\', \'-\']\n\
+]\n\
 \n'
 
 ANS_MAT2 = '\
@@ -203,9 +206,8 @@ ANS_MAT2 = '\
 A0 = []\n\
 A1 = []\n\
 B0 = []\n\
-C  = [\n\
-[]\n\
-]\n\
+B0 = []\n\
+B0 = []\n\
 \n'
 
 # end.

@@ -147,8 +147,9 @@ class TestPre(unittest.TestCase):
 
 	def test_show_matrices(self):
 		self.pre.A = [[], []]
-		self.pre.B = []
+		self.pre.B = [[]]
 		self.pre.C = []
+		self.pre.D = None
 		# print(self.pre.show_matrices())
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.pre.show_matrices()
