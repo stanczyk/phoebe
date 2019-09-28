@@ -10,7 +10,7 @@
 	Copyright (c) 2013-2019 Jarosław Stańczyk <j.stanczyk@hotmil.com>
 """
 # pylint: disable=import-error
-from builtins import staticmethod, AttributeError, KeyError, len
+from builtins import staticmethod, AttributeError, KeyError, len, range
 
 import yaml
 
@@ -106,6 +106,18 @@ class Yml:
 		tmp = matrix[0]
 		w2 = len(tmp)
 		return w1, w2
+
+	def empty_matrix(self, matrix):
+		w1, w2 = self.get_matrix_size(matrix)
+		if not w1:
+			return True
+		if not w2:
+			return True
+		for i in range(0, w1):
+			for j in range(0, w2):
+				if matrix[i][j] != '-':
+					return False
+		return True
 
 
 def self_test():

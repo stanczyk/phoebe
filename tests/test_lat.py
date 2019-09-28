@@ -39,13 +39,14 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.begin('nazwa-pliku'), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_BEGIN)
 
-	# @unittest.skip("not implemented yet")
-	# def test_do_matrices(self):
-	# 	pass
-	#
+
+	def test_do_matrices(self):
+		matrix = []
+
+
 	# def test_equation(self):
 		# 	mat_A = [['a_0'], ['a_1'], [], ['a_3']]
-		# mat_B = [[], ['b_1']]
+		# mat_B = [['b_0']]
 		# mat_C = [[], ['c_1']]
 		# mat_D = [[], ['d_1']]
 		# with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

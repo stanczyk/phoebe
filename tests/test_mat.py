@@ -38,10 +38,9 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.begin('nazwa-pliku'), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_BEGIN)
 
-	# @unittest.skip("not implemented yet")
-	# def test_do_matrices(self):
-	# 	pass
-	#
+	def test_do_matrices(self):
+		matrix = []
+
 	# def test_equation(self):
 		# 	mat_A = [['a_0'], ['a_1'], [], ['a_3']]
 		# mat_B = [[], ['b_1']]

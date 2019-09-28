@@ -13,7 +13,8 @@ import click
 import sys
 from pre import Preparer
 from err import Err
-from inf import DESC_LATEX, DESC_MATLAB
+from lat import Lat
+from mat import Mat
 
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']}, invoke_without_command=True)
@@ -76,7 +77,8 @@ def latex(lat):
 	if ans:
 		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
 		return ans
-	ans = ctx.obj.description(DESC_LATEX)
+	des = Lat()
+	ans = ctx.obj.description(des)
 	return ans
 
 
@@ -89,7 +91,8 @@ def matlab(mat):
 	if ans:
 		print('Description error (' + str(ans) + '): ' + Err().value_to_name(ans), file=sys.stderr)
 		return ans
-	ans = ctx.obj.description(DESC_MATLAB)
+	des = Mat()
+	ans = ctx.obj.description(des)
 	return ans
 
 
