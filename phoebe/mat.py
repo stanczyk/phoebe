@@ -119,10 +119,12 @@ class Mat(object):
 
 	@staticmethod
 	def matrix_desc():
-		print('disp(\'matrices:\');')
+		print('\ndisp(\'matrices:\');')
 		return Err.NOOP
 
 	def matrix(self, name, idx_name, matrix):
+		if self.yam.empty_matrix(matrix):
+			return Err.ERR_NO_MATRIX
 		print('% matrix {0}{1}'.format(name, idx_name))
 		w1, w2 = self.yam.get_matrix_size(matrix)
 		print('{0}{1} = mp_zeros({2}, {3});'.format(name, idx_name, w1, w2))
@@ -149,14 +151,14 @@ class Mat(object):
 	@staticmethod
 	def adds():
 		print('' + \
-			'disp(\'model:\');\n' + \
+			'disp(\'finally:\');\n' + \
 			'As = mp_star(A0)\n' + \
 			'A = mp_multi(As, A1)\n' + \
 			'B = mp_multi(As, B0)\n' + \
 			'\n' + \
 			'disp(\'state vector and output:\');\n' + \
-			'% number of iterations\n' + \
-			'k = 12;\n' + \
+			'% k - number of iterations\n' + \
+			'k = 12;\n\n' + \
 			'X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n' + \
 			'Y(:, 1) = mp_multi(C, X(:, 1));\n' + \
 			'for i = 2:k\n' + \
@@ -164,7 +166,7 @@ class Mat(object):
 			'    Y(:, i) = mp_multi(C, X(:, i));\n' + \
 			'end\n' + \
 			'X\n' + \
-			'Y\n')
+			'Y')
 		return Err.NOOP
 
 	@staticmethod

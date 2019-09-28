@@ -117,9 +117,14 @@ class Lat:
 
 	@staticmethod
 	def matrix_desc():
+		print('\\\\')
+		print('\\\\')
+		print('matrices:')
 		return Err.NOOP
 
 	def matrix(self, name, idx_name, matrix):
+		if self.yam.empty_matrix(matrix):
+			return Err.ERR_NO_MATRIX
 		try:
 			lan = len(matrix[1])
 		except IndexError:
@@ -141,16 +146,17 @@ class Lat:
 					print(self.get_matrix_value(matrix[i][j]), end='')
 			print('\\\\')
 		print('\\end{array}\\right]')
-		print('\\end{equation*}')
+		print('\\end{equation*}\n')
 		if lan > 20:
 			print('}')
-		print('\n')
 		return Err.NOOP
 
 	@staticmethod
 	def time_values(values):
 		first = True
 		if values:
+			print('\\noindent\\\\')
+			print('times:\\\\')
 			for key in sorted(values):
 				if first:
 					print('$%s = %s$' % (key, values[key]), end='')
@@ -175,6 +181,10 @@ class Lat:
 		self.vector('u', vec_u)
 		self.vector('x', vec_x)
 		self.vector('y', vec_y)
+		return Err.NOOP
+
+	@staticmethod
+	def adds():
 		return Err.NOOP
 
 # eof.

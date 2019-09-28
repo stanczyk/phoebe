@@ -13,7 +13,7 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 # one more then last ERR
 from builtins import range, ValueError
 
-ERR_MAX_NUMBER = 11
+ERR_MAX_NUMBER = 12
 
 
 class Err:
@@ -35,7 +35,8 @@ class Err:
 		ERR_NO_INPUT,
 		ERR_NO_OUTPUT,
 		ERR_NO_STATE_VECT,
-		ERR_WRONG_DESC
+		ERR_WRONG_DESC,
+		ERR_NO_MATRIX
 	] = range(ERR_MAX_NUMBER)
 
 	def value_to_name(self, value):

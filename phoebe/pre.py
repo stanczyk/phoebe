@@ -483,16 +483,38 @@ class Preparer:
 			return Err.ERR_NO_STATE_VECT
 		return Err.NOOP
 
+	def matrices_desc(self, obj):
+		matrix = name = index = None
+		obj.matrix_desc()
+		for i in [self.A, self.B, self.C, self.D]:
+			if i == self.A or i == self.B:
+				if i == self.A:
+					name = 'A'
+				else:
+					name = 'B'
+				for j in range(0, len(i)):
+					if i[j]:
+						index = str(j)
+						obj.matrix(name, index, i[j])
+			if i == self.C or i == self.D:
+				if i == self.C:
+					name = 'C'
+				else:
+					name = 'D'
+				index = ''
+				if obj.__class__.__name__ == 'Lat':
+					index = '{}'
+				obj.matrix(name, index, i)
+		return Err.NOOP
+
 	def description(self, obj):
 		obj.begin(os.path.splitext(os.path.basename(self.file_name))[0])
 		obj.equation(self.A, self.B, self.C, self.D)
 		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
 		obj.inits(self.vector_u, self.vector_x, self.values)
-		# self.desc_matrix()
-		#if obj.__class__.__name__ == 'Lat':
-		#	obj.values(self.values)
-		#if obj.__class__.__name__ == 'Mat':
-		#	obj.adds()
+		self.matrices_desc(obj)
+		# TODO obj.adds() jeszcze poprawić, jeśli będzie więcej macierzy A, macierz D, etc.
+		obj.adds()
 		obj.end()
 		return Err.NOOP
 
