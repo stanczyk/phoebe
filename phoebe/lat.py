@@ -12,13 +12,14 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 from builtins import staticmethod, str, enumerate, range, len, IndexError, sorted
 
 import inf
+from yml import Yml
 from err import Err
 
 
 class Lat:
 	"""Lat class"""
 	def __init__(self):
-		pass
+		self.yam = Yml()
 
 	@staticmethod
 	def begin(filename):
@@ -44,17 +45,51 @@ class Lat:
 		print()
 		return Err.NOOP
 
-	@staticmethod
-	def equation():
-		print('\\begin{align}\\begin{split}\n' + \
-			'% x(k) = A0x(k) + A1x(k-1) + B0u(k)\n' + \
-			'\\mathbf{x}(k) & \\, = \\; ' + \
-			'\\mathbf{A}_0\\mathbf{x}(k) \\oplus ' + \
-			'\\mathbf{A}_1\\mathbf{x}(k-1) \\oplus ' + \
-			'\\mathbf{B}_0\\mathbf{u}(k)\\\\\n' + \
-			'% y(k) = Cx(k)\n' + \
-			'\\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\\\\n' + \
-			'\\end{split}\\end{align}\n')
+	def do_matrices(self, matrix, name, vec, iter):
+		if iter:
+			index = iter
+		else:
+			index = 0
+		mat = ''
+		if not matrix:
+			return mat
+		if self.yam.empty_matrix(matrix):
+			return mat
+		for i in range(0, len(matrix)):
+			if matrix[i]:
+				if len(mat):
+					mat = mat + ' \\oplus '
+				index = index - i
+				tmp = ''
+				if index > 0:
+					tmp = '+{0}'.format(index)
+				elif index < 0:
+					tmp = '{0}'.format(index+1)
+				if iter is None:
+					mat = mat + '\\mathbf{' + name + vec + '}'
+				else:
+					mat = mat + '\\mathbf{' + name + '}_{' + str(i) + '}\\mathbf{' + vec + '}'
+				mat = mat + '(k{0})'.format(tmp)
+		return mat
+
+	def equation(self, mat_A, mat_B, mat_C, mat_D):
+		print('\\begin{align}\\begin{split}')
+		print('\\mathbf{x}(k+1) & \\, = \\; ', end='')
+		mat = self.do_matrices(mat_A, 'A', 'x', 1)
+		if len(mat):
+			print(mat, end='')
+			mat = self.do_matrices(mat_B, 'B', 'u', 0)
+			if len(mat):
+				print(' \\oplus', mat, end='')
+		print('\\\\')
+		print('\\mathbf{y}(k) & \\, = \\; ', end='')
+		mat = self.do_matrices(mat_C, 'C', 'x', None)
+		if len(mat):
+			print(mat, end='')
+		mat = self.do_matrices(mat_D, 'D', 'u', None)
+		if len(mat):
+			print(' \\oplus', mat, end='')
+		print('\\end{split}\\end{align}')
 		return Err.NOOP
 
 	@staticmethod
@@ -66,7 +101,7 @@ class Lat:
 		for i, _ in enumerate(vector):
 			print('  {0}(k) \\\\'.format(vector[i]))
 		print('\\end{array}\\right]')
-		print('\\end{equation*}\n')
+		print('\\end{equation*}')
 		return Err.NOOP
 
 	@staticmethod
@@ -113,17 +148,33 @@ class Lat:
 		return Err.NOOP
 
 	@staticmethod
-	def values(values):
+	def time_values(values):
+		first = True
 		if values:
-			print('\\noindent\\\\')
 			for key in sorted(values):
-				print('$%s = %s$,' % (key, values[key]))
-			print()
+				if first:
+					print('$%s = %s$' % (key, values[key]), end='')
+					first = False
+				else:
+					print(', $%s = %s$' % (key, values[key]), end='')
+			print('.', end='')
 		return Err.NOOP
 
 	@staticmethod
 	def end():
 		print('\\end{document}\n' + '% eof\n')
+		return Err.NOOP
+
+	def inits(self, vec_u, vec_x, values):
+		print('\\noindent\\\\')
+		self.time_values(values)
+		return Err.NOOP
+
+	def vectors(self, vec_u, vec_x, vec_y):
+		print()
+		self.vector('u', vec_u)
+		self.vector('x', vec_x)
+		self.vector('y', vec_y)
 		return Err.NOOP
 
 # eof.

@@ -486,13 +486,13 @@ class Preparer:
 	def description(self, obj):
 		obj.begin(os.path.splitext(os.path.basename(self.file_name))[0])
 		obj.equation(self.A, self.B, self.C, self.D)
-		#obj.vectors(self.vector_u, self.vector_x, self.vector_y)
-		#obj.inits(self.vector_u, self.vector_x, self.values)
-		## self.desc_matrix()
-		##if obj.__class__.__name__ == 'Lat':
-		##	obj.values(self.values)
-		##if obj.__class__.__name__ == 'Mat':
-		##	obj.adds()
+		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
+		obj.inits(self.vector_u, self.vector_x, self.values)
+		# self.desc_matrix()
+		#if obj.__class__.__name__ == 'Lat':
+		#	obj.values(self.values)
+		#if obj.__class__.__name__ == 'Mat':
+		#	obj.adds()
 		obj.end()
 		return Err.NOOP
 
