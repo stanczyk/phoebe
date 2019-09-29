@@ -14,7 +14,7 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_mat import MAT_BEGIN, MAT_EQUEST1
+from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -33,22 +33,21 @@ class TestMat(unittest.TestCase):
 		pass
 
 	@freeze_time("2019-09-06 14:48:05")
-	def test_begin(self):
+	def test_header(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.assertEqual(self.mat.begin('nazwa-pliku'), Err.NOOP)
-			self.assertEqual(mock_stdout.getvalue(), MAT_BEGIN)
+			self.assertEqual(self.mat.header('nazwa-pliku'), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_HEADER)
+
+	def test_preface(self):
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.preface(), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_PREFACE)
 
 	def test_do_matrices(self):
-		matrix = []
-
-	# def test_equation(self):
-		# 	mat_A = [['a_0'], ['a_1'], [], ['a_3']]
-		# mat_B = [[], ['b_1']]
-		# mat_C = ['c']
-		# mat_D = ['d']
-		# with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			# 	self.assertEqual(self.mat.equation(mat_A, mat_B, mat_C, mat_D), Err.NOOP)
-			# self.assertEqual(mock_stdout.getvalue(), MAT_EQUEST1)
+		self.assertEqual(self.mat.do_matrices([], 'A', 'x', None), '')
+		self.assertEqual(self.mat.do_matrices(['a'], 'A', 'x', None), 'Ax(k)')
+		self.assertEqual(self.mat.do_matrices(['a'], 'A', 'x', 1), 'A0x(k+1)')
+		self.assertEqual(self.mat.do_matrices(['a'], 'A', 'x', 0), 'A0x(k)')
 
 	@unittest.skip("not implemented yet")
 	def test_equation(self):
@@ -59,7 +58,7 @@ class TestMat(unittest.TestCase):
 		pass
 
 	@unittest.skip("not implemented yet")
-	def test_values(self):
+	def test_time_values(self):
 		pass
 
 	@unittest.skip("not implemented yet")
@@ -90,8 +89,18 @@ class TestMat(unittest.TestCase):
 	def test_adds(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_end(self):
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.end(), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_END)
+
+
+	@unittest.skip("not implemented yet")
+	def test_inits(self):
+		pass
+
+	@unittest.skip("not implemented yet")
+	def test_vectors(self):
 		pass
 
 
