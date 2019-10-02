@@ -22,4 +22,16 @@ MAT_END = '\
 % eof\n\
 \n'
 
+MAT_EQ1 = '\
+disp(\'x(k+1) = \');\n\
+disp(\'y(k) = \');\n'
+
+MAT_EQ2 = '\
+disp(\'x(k+1) = A0x(k+1) + B0u(k)\');\n\
+disp(\'y(k) = Cx(k) + Du(k)\');\n'
+
+MAT_EQ3 = '\
+disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B0u(k)\');\n\
+disp(\'y(k) = Cx(k) + Du(k)\');\n'
+
 # end.

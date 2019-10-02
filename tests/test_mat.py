@@ -14,7 +14,7 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END
+from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -49,9 +49,16 @@ class TestMat(unittest.TestCase):
 		self.assertEqual(self.mat.do_matrices(['a'], 'A', 'x', 1), 'A0x(k+1)')
 		self.assertEqual(self.mat.do_matrices(['a'], 'A', 'x', 0), 'A0x(k)')
 
-	@unittest.skip("not implemented yet")
 	def test_equation(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.equation(None, None, None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_EQ1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.equation(['a'], ['b'], ['c'], ['d']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_EQ2)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.equation([['a0'],['a1'], None, [], ['a4']], [['b0']], ['c'], ['d']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_EQ3)
 
 	@unittest.skip("not implemented yet")
 	def test_clean_value(self):
@@ -61,9 +68,11 @@ class TestMat(unittest.TestCase):
 	def test_time_values(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_vector(self):
-		pass
+		self.mat.vector(None, None)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.vector(None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), '')
 
 	@unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):
@@ -93,7 +102,6 @@ class TestMat(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.assertEqual(self.mat.end(), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_END)
-
 
 	@unittest.skip("not implemented yet")
 	def test_inits(self):

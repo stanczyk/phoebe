@@ -511,7 +511,7 @@ class Preparer:
 		obj.header(os.path.splitext(os.path.basename(self.file_name))[0])
 		obj.preface()
 		obj.equation(self.A, self.B, self.C, self.D)
-		# obj.vectors(self.vector_u, self.vector_x, self.vector_y)
+		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
 		# obj.inits(self.vector_u, self.vector_x, self.values)
 		# self.matrices_desc(obj)
 		# # TODO obj.adds() jeszcze poprawić, jeśli będzie więcej macierzy A, macierz D, etc.
