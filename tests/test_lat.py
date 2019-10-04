@@ -14,7 +14,7 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_lat import LAT_HEADER, LAT_PREFACE, LAT_END, LAT_EQ1, LAT_EQ2, LAT_EQ3
+from tests.answers.ans_lat import LAT_HEADER, LAT_PREFACE, LAT_END, LAT_EQ1, LAT_EQ2, LAT_EQ3, LAT_VEC1, LAT_VEC2
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -62,9 +62,14 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.equation([['a0'],['a1'], None, [], ['a4']], [['b0']], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_EQ3)
 
-	@unittest.skip("not implemented yet")
 	def test_vector(self):
-		pass
+		self.assertEqual(self.lat.vector(None, None), Err.ERR_NO_NAME)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.vector('a', None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_VEC1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.vector('b', ['b1', 'b_2', 'b_{3}']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_VEC2)
 
 	@unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):

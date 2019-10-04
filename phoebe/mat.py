@@ -100,9 +100,12 @@ class Mat(object):
 
 	@staticmethod
 	def vector(name, vector):
+		if not name:
+			return Err.ERR_NO_NAME
 		print('disp(\'{0}(k) = ['.format(name), end='')
-		for i, _ in enumerate(vector):
-			print(' {0}(k);'.format(vector[i]), end='')
+		if vector:
+			for i, _ in enumerate(vector):
+				print(' {0}(k);'.format(vector[i]), end='')
 		print(' ]\');')
 		return Err.NOOP
 

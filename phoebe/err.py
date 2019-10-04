@@ -13,7 +13,7 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 # one more then last ERR
 from builtins import range, ValueError
 
-ERR_MAX_NUMBER = 12
+ERR_MAX_NUMBER = 13
 
 
 class Err:
@@ -33,6 +33,7 @@ class Err:
 		ERR_YAML,  # error in yaml file
 		ERR_NO_DATA,  # lack or not enough input data
 		ERR_NO_INPUT,
+		ERR_NO_NAME,
 		ERR_NO_OUTPUT,
 		ERR_NO_STATE_VECT,
 		ERR_WRONG_DESC,

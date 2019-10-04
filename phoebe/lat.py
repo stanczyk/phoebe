@@ -98,12 +98,17 @@ class Lat:
 
 	@staticmethod
 	def vector(name, vector):
+		if not name:
+			return Err.ERR_NO_NAME
 		print('% vector {0}(k)'.format(name))
 		print('\\begin{equation*}')
 		print('\\mathbf{%s}(k) = ' % name)
 		print('\\left[\\begin{array}{*{20}c}')
-		for i, _ in enumerate(vector):
-			print('  {0}(k) \\\\'.format(vector[i]))
+		if vector:
+			for i, _ in enumerate(vector):
+				print('  {0}(k) \\\\'.format(vector[i]))
+		else:
+			print('\\\\')
 		print('\\end{array}\\right]')
 		print('\\end{equation*}')
 		return Err.NOOP

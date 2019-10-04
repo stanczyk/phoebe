@@ -53,4 +53,24 @@ LAT_EQ3 = '\n\
 \\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\oplus \\mathbf{Du}(k)\n\
 \\end{split}\\end{align}\n'
 
+LAT_VEC1 = '\
+% vector a(k)\n\
+\\begin{equation*}\n\
+\\mathbf{a}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n'
+
+LAT_VEC2 = '\
+% vector b(k)\n\
+\\begin{equation*}\n\
+\\mathbf{b}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  b1(k) \\\\\n\
+  b_2(k) \\\\\n\
+  b_{3}(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n'
+
 # end.

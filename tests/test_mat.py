@@ -69,10 +69,13 @@ class TestMat(unittest.TestCase):
 		pass
 
 	def test_vector(self):
-		self.mat.vector(None, None)
+		self.assertEqual(self.mat.vector(None, None), Err.ERR_NO_NAME)
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.assertEqual(self.mat.vector(None, None), Err.NOOP)
-			self.assertEqual(mock_stdout.getvalue(), '')
+			self.assertEqual(self.mat.vector('a', None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'disp(\'a(k) = [ ]\');\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.vector('b', ['b1', 'b_2', 'b_{3}']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'disp(\'b(k) = [ b1(k); b_2(k); b_{3}(k); ]\');\n')
 
 	@unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):
