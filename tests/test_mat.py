@@ -14,7 +14,7 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3
+from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3, MAT_VEC3, MAT_VEC4
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -64,9 +64,18 @@ class TestMat(unittest.TestCase):
 	def test_clean_value(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_time_values(self):
-		pass
+		self.assertEqual(self.mat.time_values(None), Err.ERR_NO_DATA)
+		self.assertEqual(self.mat.time_values({}), Err.ERR_NO_DATA)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.time_values({'t1': 1}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 't1 = 1\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.time_values({'t_{0,1}': 1}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 't01 = 1\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.time_values({'t_1': 1, 'd_2': 2}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'd2 = 2\nt1 = 1\n')
 
 	def test_vector(self):
 		self.assertEqual(self.mat.vector(None, None), Err.ERR_NO_NAME)
@@ -89,13 +98,25 @@ class TestMat(unittest.TestCase):
 	def test_matrix(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_input_vec(self):
-		pass
+		self.assertEqual(self.mat.input_vec(None), Err.ERR_NO_VECTOR)
+		self.assertEqual(self.mat.input_vec([]), Err.ERR_NO_VECTOR)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.input_vec(['1']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'U  = mp_ones(1, 1)\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.input_vec(['1', '2', '3', '4', '5']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'U  = mp_ones(5, 1)\n')
 
-	@unittest.skip("not implemented yet")
 	def test_start_vec(self):
-		pass
+		self.assertEqual(self.mat.input_vec(None), Err.ERR_NO_VECTOR)
+		self.assertEqual(self.mat.input_vec([]), Err.ERR_NO_VECTOR)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.start_vec(['1']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'X0 = mp_zeros(1, 1)\n')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.start_vec(['1', '2', '3', '4', '5']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), 'X0 = mp_zeros(5, 1)\n')
 
 	@unittest.skip("not implemented yet")
 	def test_adds(self):
@@ -110,9 +131,16 @@ class TestMat(unittest.TestCase):
 	def test_inits(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_vectors(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.vectors(None, None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_VEC3)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.vectors([], [], []), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_VEC3)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.vectors(['u1'], ['x1', 'x2'], ['y1', 'y2', 'y3']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_VEC4)
 
 
 def main():

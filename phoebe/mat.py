@@ -96,7 +96,8 @@ class Mat(object):
 		if values:
 			for key in sorted(values):
 				print('%s = %s' % (self.clean_value(key), values[key]))
-		return Err.NOOP
+			return Err.NOOP
+		return Err.ERR_NO_DATA
 
 	@staticmethod
 	def vector(name, vector):
@@ -148,11 +149,15 @@ class Mat(object):
 
 	@staticmethod
 	def input_vec(vec):
+		if not vec:
+			return Err.ERR_NO_VECTOR
 		print('U  = mp_ones({0}, {1})'.format(len(vec), 1))
 		return Err.NOOP
 
 	@staticmethod
 	def start_vec(vec):
+		if not vec:
+			return Err.ERR_NO_VECTOR
 		print('X0 = mp_zeros({0}, {1})'.format(len(vec), 1))
 		return Err.NOOP
 

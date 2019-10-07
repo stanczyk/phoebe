@@ -14,7 +14,8 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_lat import LAT_HEADER, LAT_PREFACE, LAT_END, LAT_EQ1, LAT_EQ2, LAT_EQ3, LAT_VEC1, LAT_VEC2
+from tests.answers.ans_lat import LAT_HEADER, LAT_PREFACE, LAT_END, LAT_EQ1, LAT_EQ2, LAT_EQ3, \
+	LAT_VEC1, LAT_VEC2, LAT_VEC3, LAT_VEC4, LAT_TV1, LAT_TV2, LAT_TV3
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -83,9 +84,18 @@ class TestLat(unittest.TestCase):
 	def test_matrix(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_time_values(self):
-		pass
+		self.assertEqual(self.lat.time_values(None), Err.ERR_NO_DATA)
+		self.assertEqual(self.lat.time_values({}), Err.ERR_NO_DATA)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.time_values({'t1': 1}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_TV1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.time_values({'t_{0,1}': 1}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_TV2)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.time_values({'t_1': 1, 'd_2': 2}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_TV3)
 
 	def test_end(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -96,9 +106,16 @@ class TestLat(unittest.TestCase):
 	def test_inits(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_vectors(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.vectors(None, None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_VEC3)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.vectors([], [], []), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_VEC3)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.vectors(['u1'], ['x1', 'x2'], ['y1', 'y2', 'y3']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_VEC4)
 
 
 def main():

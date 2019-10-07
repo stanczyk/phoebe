@@ -73,4 +73,68 @@ LAT_VEC2 = '\
 \\end{array}\\right]\n\
 \\end{equation*}\n'
 
+LAT_VEC3 = '\n\
+% vector u(k)\n\
+\\begin{equation*}\n\
+\\mathbf{u}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+% vector x(k)\n\
+\\begin{equation*}\n\
+\\mathbf{x}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+% vector y(k)\n\
+\\begin{equation*}\n\
+\\mathbf{y}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n'
+
+LAT_VEC4 = '\n\
+% vector u(k)\n\
+\\begin{equation*}\n\
+\\mathbf{u}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  u1(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+% vector x(k)\n\
+\\begin{equation*}\n\
+\\mathbf{x}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  x1(k) \\\\\n\
+  x2(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+% vector y(k)\n\
+\\begin{equation*}\n\
+\\mathbf{y}(k) = \n\
+\\left[\\begin{array}{*{20}c}\n\
+  y1(k) \\\\\n\
+  y2(k) \\\\\n\
+  y3(k) \\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n'
+
+LAT_TV1 = '\
+\\noindent\\\\\n\
+times:\\\\\n\
+$t1 = 1$.'
+
+LAT_TV2 = '\
+\\noindent\\\\\n\
+times:\\\\\n\
+$t_{0,1} = 1$.'
+
+LAT_TV3 = '\
+\\noindent\\\\\n\
+times:\\\\\n\
+$d_2 = 2$, $t_1 = 1$.'
+
 # end.

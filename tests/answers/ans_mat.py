@@ -34,4 +34,14 @@ MAT_EQ3 = '\
 disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B0u(k)\');\n\
 disp(\'y(k) = Cx(k) + Du(k)\');\n'
 
+MAT_VEC3 = '\n\
+disp(\'u(k) = [ ]\');\n\
+disp(\'x(k) = [ ]\');\n\
+disp(\'y(k) = [ ]\');\n'
+
+MAT_VEC4 = '\n\
+disp(\'u(k) = [ u1(k); ]\');\n\
+disp(\'x(k) = [ x1(k); x2(k); ]\');\n\
+disp(\'y(k) = [ y1(k); y2(k); y3(k); ]\');\n'
+
 # end.

@@ -162,8 +162,8 @@ class Lat:
 
 	@staticmethod
 	def time_values(values):
-		first = True
 		if values:
+			first = True
 			print('\\noindent\\\\')
 			print('times:\\\\')
 			for key in sorted(values):
@@ -173,7 +173,8 @@ class Lat:
 				else:
 					print(', $%s = %s$' % (key, values[key]), end='')
 			print('.', end='')
-		return Err.NOOP
+			return Err.NOOP
+		return Err.ERR_NO_DATA
 
 	@staticmethod
 	def end():
