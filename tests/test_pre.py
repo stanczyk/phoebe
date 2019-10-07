@@ -417,7 +417,6 @@ class TestPre(unittest.TestCase):
 				'y_1': 0, 'y_2': 1, 'y_3': 2, 'y_4': 3, 'y_5': 4, 'y_6': 5}
 			self.assertEqual(self.pre.add_feedback_u(matrix, input, system, output), result)
 
-
 	def test_get_det3(self):
 		pred, how = self.pre.get_det3(PRE_DICM, 'y')
 		self.assertEqual(pred, 'M_3')
@@ -458,6 +457,18 @@ class TestPre(unittest.TestCase):
 		self.assertEqual(out1, 'X_7')
 		self.assertEqual(out3, 'd_7')
 		self.assertEqual(out2, 6)
+
+	@unittest.skip("not implemented yet")
+	def test_generatable(self):
+		pass
+
+	@unittest.skip("not implemented yet")
+	def test_matrices_desc(self):
+		pass
+
+	@unittest.skip("not implemented yet")
+	def test_description(self):
+		pass
 
 
 def main():
