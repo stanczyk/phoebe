@@ -14,7 +14,8 @@ import unittest
 from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
-from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3, MAT_VEC3, MAT_VEC4
+from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3, MAT_VEC3, MAT_VEC4, \
+	MAT_INI1, MAT_INI2
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -90,9 +91,10 @@ class TestMat(unittest.TestCase):
 	def test_get_matrix_value(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_matrix_desc(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.matrix_desc(), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), '\ndisp(\'matrices:\');\n')
 
 	@unittest.skip("not implemented yet")
 	def test_matrix(self):
@@ -127,9 +129,16 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.end(), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_END)
 
-	@unittest.skip("not implemented yet")
 	def test_inits(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.inits(None, None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_INI1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.inits([], [], {}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_INI1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.inits(['u0'], ['x_1'], {'t_{0,1}': 0}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_INI2)
 
 	def test_vectors(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

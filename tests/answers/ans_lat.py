@@ -122,19 +122,8 @@ LAT_VEC4 = '\n\
 \\end{array}\\right]\n\
 \\end{equation*}\n'
 
-LAT_TV1 = '\
-\\noindent\\\\\n\
-times:\\\\\n\
-$t1 = 1$.'
-
-LAT_TV2 = '\
-\\noindent\\\\\n\
-times:\\\\\n\
-$t_{0,1} = 1$.'
-
-LAT_TV3 = '\
-\\noindent\\\\\n\
-times:\\\\\n\
-$d_2 = 2$, $t_1 = 1$.'
+LAT_TV1 = '\\noindent\\\\\ntimes:\\\\\n$t1 = 1$.'
+LAT_TV2 = '\\noindent\\\\\ntimes:\\\\\n$t_{0,1} = 1$.'
+LAT_TV3 = '\\noindent\\\\\ntimes:\\\\\n$d_2 = 2$, $t_1 = 1$.'
 
 # end.

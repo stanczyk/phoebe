@@ -186,7 +186,6 @@ class Lat:
 		return Err.NOOP
 
 	def inits(self, vec_u, vec_x, values):
-		print('\\noindent\\\\')
 		self.time_values(values)
 		return Err.NOOP
 

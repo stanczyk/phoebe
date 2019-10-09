@@ -76,9 +76,10 @@ class TestLat(unittest.TestCase):
 	def test_get_matrix_value(self):
 		pass
 
-	@unittest.skip("not implemented yet")
 	def test_matrix_desc(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.matrix_desc(), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), '\\\\\n\\\\\nmatrices:\n')
 
 	@unittest.skip("not implemented yet")
 	def test_matrix(self):
@@ -102,9 +103,16 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.end(), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_END)
 
-	@unittest.skip("not implemented yet")
 	def test_inits(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.inits(None, None, None), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), '')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.inits([], [], {}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), '')
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.inits(['u0'], ['x_1'], {'t_{0,1}': 1}), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_TV2)
 
 	def test_vectors(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
@@ -116,6 +124,9 @@ class TestLat(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.assertEqual(self.lat.vectors(['u1'], ['x1', 'x2'], ['y1', 'y2', 'y3']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_VEC4)
+
+	def test_adds(self):
+		self.assertEqual(self.lat.adds(), Err.NOOP)
 
 
 def main():

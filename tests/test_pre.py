@@ -458,9 +458,17 @@ class TestPre(unittest.TestCase):
 		self.assertEqual(out3, 'd_7')
 		self.assertEqual(out2, 6)
 
-	@unittest.skip("not implemented yet")
 	def test_generatable(self):
-		pass
+		self.pre.vector_u = None
+		self.pre.vector_y = None
+		self.pre.vector_x = None
+		self.assertEqual(self.pre.generatable(), Err.ERR_NO_INPUT)
+		self.pre.vector_u = ['u1']
+		self.assertEqual(self.pre.generatable(), Err.ERR_NO_OUTPUT)
+		self.pre.vector_y = ['y1']
+		self.assertEqual(self.pre.generatable(), Err.ERR_NO_STATE_VECT)
+		self.pre.vector_x = ['x1']
+		self.assertEqual(self.pre.generatable(), Err.NOOP)
 
 	@unittest.skip("not implemented yet")
 	def test_matrices_desc(self):

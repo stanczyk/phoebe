@@ -484,7 +484,6 @@ class Preparer:
 		return Err.NOOP
 
 	def matrices_desc(self, obj):
-		matrix = name = index = None
 		obj.matrix_desc()
 		for i in [self.A, self.B, self.C, self.D]:
 			if i == self.A or i == self.B:
@@ -513,9 +512,9 @@ class Preparer:
 		obj.equation(self.A, self.B, self.C, self.D)
 		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
 		obj.inits(self.vector_u, self.vector_x, self.values)
-		# self.matrices_desc(obj)
+		self.matrices_desc(obj)
 		# # TODO obj.adds() jeszcze poprawić, jeśli będzie więcej macierzy A, macierz D, etc.
-		# obj.adds()
+		obj.adds()
 		obj.end()
 		return Err.NOOP
 

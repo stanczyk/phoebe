@@ -44,4 +44,17 @@ disp(\'u(k) = [ u1(k); ]\');\n\
 disp(\'x(k) = [ x1(k); x2(k); ]\');\n\
 disp(\'y(k) = [ y1(k); y2(k); y3(k); ]\');\n'
 
+MAT_INI1 = '\n\
+disp(\'initial vectors:\');\n\
+\n\
+disp(\'times:\');\n'
+
+MAT_INI2 = '\n\
+disp(\'initial vectors:\');\n\
+U  = mp_ones(1, 1)\n\
+X0 = mp_zeros(1, 1)\n\
+\n\
+disp(\'times:\');\n\
+t01 = 0\n'
+
 # end.
