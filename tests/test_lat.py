@@ -72,9 +72,13 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.vector('b', ['b1', 'b_2', 'b_{3}']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_VEC2)
 
-	@unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):
-		pass
+		self.assertEqual(self.lat.get_matrix_value(None), '-')
+		self.assertEqual(self.lat.get_matrix_value([]), '-')
+		self.assertEqual(self.lat.get_matrix_value(['-']), '-')
+		self.assertEqual(self.lat.get_matrix_value(['-', 'd_1']), 'd_1')
+		self.assertEqual(self.lat.get_matrix_value(['d_1', 't_{1,2}']), 'd_1t_{1,2}')
+		self.assertEqual(self.lat.get_matrix_value(['d_1', 'd_2', 'd_3']), 'd_1d_2d_3')
 
 	def test_matrix_desc(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

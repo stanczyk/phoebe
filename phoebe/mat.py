@@ -110,6 +110,9 @@ class Mat(object):
 		print(' ]\');')
 		return Err.NOOP
 
+	# czy nie powinno być:
+	# 	dla '-' 					\varepsilon
+	# 	dla ['d_1', 'd_2', 'd_3'] 	mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
 	def get_matrix_value(self, tab):
 		if not tab:
 			return '0'
