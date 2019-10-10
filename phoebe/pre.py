@@ -513,7 +513,6 @@ class Preparer:
 		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
 		obj.inits(self.vector_u, self.vector_x, self.values)
 		self.matrices_desc(obj)
-		# # TODO obj.adds() jeszcze poprawić, jeśli będzie więcej macierzy A, macierz D, etc.
 		obj.adds()
 		obj.end()
 		return Err.NOOP

@@ -15,6 +15,20 @@ The max-plus algebraic state space model generator
 		- dokumentacja - sphinx with Read the Docs theme
 			https://github.com/readthedocs/sphinx_rtd_theme
 
+=================================
+DO ZROBIENIA (plan):
+	- testy jednostkowe (skończyć do konca w41 2019)
+	- jeśli już będzie działać, tzn. będzie pełna funkcjonalność z v0.9
+		- przygotować kilka wygenerowanych wyników, dla systemów opisanych już w moich publikacjach
+		- sprawdzić je w matlabie
+		- zapisać w testach
+		- RELEASE versji 1.0
+	- wstęp do v1.1:
+		- przygotować opis systemu wraz z macierzą D i sprawdzić wygenerowany wynik -> zapisać do testów
+		- co powinno znaleźć się w nowej wersji (lista pomysłów):
+			- xxx
+
+=================================
 v1.0
 	- połączenie dwóch repozytoriów:
 		ssh://APKARUXEKDS37YVBPJXF@git-codecommit.eu-central-1.amazonaws.com/v1/repos/sw_phoebe

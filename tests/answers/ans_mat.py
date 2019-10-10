@@ -57,4 +57,47 @@ X0 = mp_zeros(1, 1)\n\
 disp(\'times:\');\n\
 t01 = 0\n'
 
+MAT_ADDS = '\
+disp(\'finally:\');\n\
+As = mp_star(A0)\n\
+A = mp_multi(As, A1)\n\
+B = mp_multi(As, B0)\n\
+\n\
+disp(\'state vector and output:\');\n\
+% k - number of iterations\n\
+k = 12;\n\
+\n\
+X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n\
+Y(:, 1) = mp_multi(C, X(:, 1));\n\
+for i = 2:k\n\
+    X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));\n\
+    Y(:, i) = mp_multi(C, X(:, i));\n\
+end\n\
+X\n\
+Y\n'
+
+MAT_MAT1 = '\
+% matrix A\n\
+A = mp_zeros(1, 1);\n\
+   A(1, 1) = a;\n\
+   A\n\
+\n'
+
+MAT_MAT2 = '\
+% matrix A\n\
+A = mp_zeros(3, 3);\n\
+   A(1, 3) = d3;\n\
+   A(2, 1) = mp_multi(d1, d12);\n\
+   A(3, 2) = mp_multi(d2, d22);\n\
+   A\n\
+\n'
+
+MAT_MAT3 = '\
+% matrix A\n\
+A = mp_zeros(2, 3);\n\
+   A(2, 1) = d1;\n\
+   A(2, 2) = mp_multi(mp_multi(d21, d21), d23);\n\
+   A\n\
+\n'
+
 # end.

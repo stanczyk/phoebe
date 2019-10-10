@@ -84,9 +84,14 @@ class Mat(object):
 		print('\');')
 		return Err.NOOP
 
+	# czy nie powinno być:
+	# 	dla '-' 					0 \varepsilon albo ''???
+	# TODO clean_value() sprawdzić - czy działanie jest napewno OK
 	@staticmethod
 	def clean_value(value):
 		ans = ''
+		if not value:
+			return ans
 		for i, _ in enumerate(value):
 			if value[i] not in ['{', '}', '_', ',']:
 				ans += value[i]
@@ -111,8 +116,11 @@ class Mat(object):
 		return Err.NOOP
 
 	# czy nie powinno być:
-	# 	dla '-' 					\varepsilon
-	# 	dla ['d_1', 'd_2', 'd_3'] 	mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
+	# 	dla '-' -> \varepsilon
+	# 	dla ['d_1', 'd_2', 'd_3'] -> mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
+	# a co dla [], albo None ???
+	# patrz też tests/test_mat.py:test_get_matrix_value
+	# TODO get_matrix_value() do poprawy
 	def get_matrix_value(self, tab):
 		if not tab:
 			return '0'
@@ -135,6 +143,10 @@ class Mat(object):
 		return Err.NOOP
 
 	def matrix(self, name, idx_name, matrix):
+		if not name:
+			return Err.ERR_NO_NAME
+		if not idx_name:
+			idx_name = ''
 		if self.yam.empty_matrix(matrix):
 			return Err.ERR_NO_MATRIX
 		print('% matrix {0}{1}'.format(name, idx_name))
@@ -164,6 +176,7 @@ class Mat(object):
 		print('X0 = mp_zeros({0}, {1})'.format(len(vec), 1))
 		return Err.NOOP
 
+	# TODO adds() poprawić, tzn. jeśli będzie więcej macierzy A, macierz D, etc.
 	@staticmethod
 	def adds():
 		print('' + \

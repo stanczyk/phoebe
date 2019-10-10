@@ -8,6 +8,7 @@
 
 	Copyright (c) 2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+""" @unittest.skip("not implemented yet") """
 import os
 import sys
 import unittest
@@ -15,7 +16,7 @@ from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
 from tests.answers.ans_mat import MAT_HEADER, MAT_PREFACE, MAT_END, MAT_EQ1, MAT_EQ2, MAT_EQ3, MAT_VEC3, MAT_VEC4, \
-	MAT_INI1, MAT_INI2
+	MAT_INI1, MAT_INI2, MAT_ADDS, MAT_MAT1, MAT_MAT2, MAT_MAT3
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -61,9 +62,13 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.equation([['a0'],['a1'], None, [], ['a4']], [['b0']], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_EQ3)
 
-	@unittest.skip("not implemented yet")
 	def test_clean_value(self):
-		pass
+		self.assertEqual(self.mat.clean_value(None), '')
+		self.assertEqual(self.mat.clean_value('-'), '-')
+		self.assertEqual(self.mat.clean_value('d1'), 'd1')
+		self.assertEqual(self.mat.clean_value('d_1'), 'd1')
+		self.assertEqual(self.mat.clean_value('d_{1}'), 'd1')
+		self.assertEqual(self.mat.clean_value('d_{1,0}'), 'd10')
 
 	def test_time_values(self):
 		self.assertEqual(self.mat.time_values(None), Err.ERR_NO_DATA)
@@ -87,6 +92,11 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.vector('b', ['b1', 'b_2', 'b_{3}']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), 'disp(\'b(k) = [ b1(k); b_2(k); b_{3}(k); ]\');\n')
 
+	# czy nie powinno być:
+	# 	dla '-' 					\varepsilon
+	# 	dla ['d_1', 'd_2', 'd_3'] 	mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
+	# a co powinno być dla wartości None? '0', '', '-' czy \varepsilon ???
+	@unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):
 		self.assertEqual(self.mat.get_matrix_value(None), '0')
 		self.assertEqual(self.mat.get_matrix_value([]), '0')
@@ -100,9 +110,19 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.matrix_desc(), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), '\ndisp(\'matrices:\');\n')
 
-	@unittest.skip("not implemented yet")
 	def test_matrix(self):
-		pass
+		self.assertEqual(self.mat.matrix(None, None, None), Err.ERR_NO_NAME)
+		self.assertEqual(self.mat.matrix('A', None, None), Err.ERR_NO_MATRIX)
+		self.assertEqual(self.mat.matrix('A', None, []), Err.ERR_NO_MATRIX)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.matrix('A', None, ['a']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_MAT1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.matrix('A', None, [['-', '-', 'd_3'], [['d_1', 'd_{1,2}'], '-', '-'], ['-', ['d_2', 'd_{2,2}'], '-']]), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_MAT2)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.matrix('A', None, [['-', '-', '-'], ['d1', ['d_21', 'd_22', 'd_23'], '-']]), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_MAT3)
 
 	def test_input_vec(self):
 		self.assertEqual(self.mat.input_vec(None), Err.ERR_NO_VECTOR)
@@ -124,9 +144,10 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.start_vec(['1', '2', '3', '4', '5']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), 'X0 = mp_zeros(5, 1)\n')
 
-	@unittest.skip("not implemented yet")
 	def test_adds(self):
-		pass
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.mat.adds(), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), MAT_ADDS)
 
 	def test_end(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
