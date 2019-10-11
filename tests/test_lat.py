@@ -15,7 +15,7 @@ from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from io import StringIO
 import mock
 from tests.answers.ans_lat import LAT_HEADER, LAT_PREFACE, LAT_END, LAT_EQ1, LAT_EQ2, LAT_EQ3, \
-	LAT_VEC1, LAT_VEC2, LAT_VEC3, LAT_VEC4, LAT_TV1, LAT_TV2, LAT_TV3
+	LAT_VEC1, LAT_VEC2, LAT_VEC3, LAT_VEC4, LAT_TV1, LAT_TV2, LAT_TV3, LAT_MAT1, LAT_MAT2, LAT_MAT3
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -77,6 +77,7 @@ class TestLat(unittest.TestCase):
 		self.assertEqual(self.lat.get_matrix_value([]), '-')
 		self.assertEqual(self.lat.get_matrix_value(['-']), '-')
 		self.assertEqual(self.lat.get_matrix_value(['-', 'd_1']), 'd_1')
+		self.assertEqual(self.lat.get_matrix_value(['d_1', '-']), 'd_1')
 		self.assertEqual(self.lat.get_matrix_value(['d_1', 't_{1,2}']), 'd_1t_{1,2}')
 		self.assertEqual(self.lat.get_matrix_value(['d_1', 'd_2', 'd_3']), 'd_1d_2d_3')
 
@@ -85,9 +86,19 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.matrix_desc(), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), '\\\\\n\\\\\nmatrices:\n')
 
-	@unittest.skip("not implemented yet")
 	def test_matrix(self):
-		pass
+		self.assertEqual(self.lat.matrix(None, None, None), Err.ERR_NO_NAME)
+		self.assertEqual(self.lat.matrix('A', None, None), Err.ERR_NO_MATRIX)
+		self.assertEqual(self.lat.matrix('A', None, []), Err.ERR_NO_MATRIX)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.matrix('A', None, ['a']), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_MAT1)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.matrix('A', None, [['-', '-', 'd_3'], [['d_1', 'd_{1,2}'], '-', '-'], ['-', ['d_2', 'd_{2,2}'], '-']]), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_MAT2)
+		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
+			self.assertEqual(self.lat.matrix('A', '3', [['-', '-', '-'], ['d1', ['d_{21}', 'd_{22}', 'd_{23}'], '-']]), Err.NOOP)
+			self.assertEqual(mock_stdout.getvalue(), LAT_MAT3)
 
 	def test_time_values(self):
 		self.assertEqual(self.lat.time_values(None), Err.ERR_NO_DATA)

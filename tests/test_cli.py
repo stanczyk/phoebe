@@ -114,6 +114,11 @@ class TestCli(unittest.TestCase):
 	def test_matlab(self):
 		pass
 
+	# złożenie wszystkich opcji dla matlaba, latexa i bez tych komend
+	@unittest.skip("not implemented yet")
+	def test_cli(self):
+		pass
+
 
 def main():
 	unittest.main()

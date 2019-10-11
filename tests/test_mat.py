@@ -92,16 +92,18 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.vector('b', ['b1', 'b_2', 'b_{3}']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), 'disp(\'b(k) = [ b1(k); b_2(k); b_{3}(k); ]\');\n')
 
+	# TODO sprawdzic to
 	# czy nie powinno być:
 	# 	dla '-' 					\varepsilon
 	# 	dla ['d_1', 'd_2', 'd_3'] 	mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
 	# a co powinno być dla wartości None? '0', '', '-' czy \varepsilon ???
-	@unittest.skip("not implemented yet")
+	# @unittest.skip("not implemented yet")
 	def test_get_matrix_value(self):
 		self.assertEqual(self.mat.get_matrix_value(None), '0')
 		self.assertEqual(self.mat.get_matrix_value([]), '0')
 		self.assertEqual(self.mat.get_matrix_value(['-']), '-')
 		self.assertEqual(self.mat.get_matrix_value(['-', 'd_1']), 'd1')
+		self.assertEqual(self.mat.get_matrix_value(['d_1', '-']), 'd1')
 		self.assertEqual(self.mat.get_matrix_value(['d_1', 't_{1,2}']), 'mp_multi(d1, t12)')
 		self.assertEqual(self.mat.get_matrix_value(['d_1', 'd_2', 'd_3']), 'mp_multi(mp_multi(d1, d2), d3)')
 
@@ -121,7 +123,7 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.matrix('A', None, [['-', '-', 'd_3'], [['d_1', 'd_{1,2}'], '-', '-'], ['-', ['d_2', 'd_{2,2}'], '-']]), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_MAT2)
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.assertEqual(self.mat.matrix('A', None, [['-', '-', '-'], ['d1', ['d_21', 'd_22', 'd_23'], '-']]), Err.NOOP)
+			self.assertEqual(self.mat.matrix('A', '3', [['-', '-', '-'], ['d1', ['d_{21}', 'd_{22}', 'd_{23}'], '-']]), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_MAT3)
 
 	def test_input_vec(self):

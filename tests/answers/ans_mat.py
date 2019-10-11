@@ -93,11 +93,11 @@ A = mp_zeros(3, 3);\n\
 \n'
 
 MAT_MAT3 = '\
-% matrix A\n\
-A = mp_zeros(2, 3);\n\
-   A(2, 1) = d1;\n\
-   A(2, 2) = mp_multi(mp_multi(d21, d21), d23);\n\
-   A\n\
+% matrix A3\n\
+A3 = mp_zeros(2, 3);\n\
+   A3(2, 1) = d1;\n\
+   A3(2, 2) = mp_multi(mp_multi(d21, d21), d23);\n\
+   A3\n\
 \n'
 
 # end.

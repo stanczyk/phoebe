@@ -62,6 +62,10 @@ class TestPre(unittest.TestCase):
 			self.pre.show_file_content()
 			self.assertEqual(mock_stdout.getvalue(), ANS_FILE)
 
+	@unittest.skip("not implemented yet")
+	def test_prepare(self):
+		pass
+
 	def test_prepare_vectors(self):
 		self.assertEqual(self.pre.prepare_vectors(), Err.NOOP)
 
@@ -424,6 +428,7 @@ class TestPre(unittest.TestCase):
 		pred, how = self.pre.get_det3(PRE_DICM, 'M_3')
 		self.assertEqual(pred, 'M_1')
 		self.assertEqual(how, ['d_1', 't_{1,3}'])
+		# TODO do poprawy
 		# to nadaje się do poprawy, w poniższym przykładzie powinno raczej zwrócić:
 		# pred = ['X_2', 'X_4']
 		# how = [['d_2'], ['d_4']]

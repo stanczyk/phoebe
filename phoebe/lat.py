@@ -132,6 +132,13 @@ class Lat:
 		return Err.NOOP
 
 	def matrix(self, name, idx_name, matrix):
+		if not name:
+			return Err.ERR_NO_NAME
+		if not idx_name:
+			idx_name = ''
+		else:
+			tmp = '_{' + idx_name + '}'
+			idx_name = tmp
 		if self.yam.empty_matrix(matrix):
 			return Err.ERR_NO_MATRIX
 		try:
@@ -139,11 +146,11 @@ class Lat:
 		except IndexError:
 			lan = len(matrix[0])
 		str = 'c' * lan
-		print('% matrix {0}_{1}'.format(name, idx_name))
+		print('% matrix {0}{1}'.format(name, idx_name))
 		if lan > 20:
 			print('\\scalebox{.6}{')
 		print('\\begin{equation*}')
-		print('\\mathbf{%s}_%s = ' % (name, idx_name))
+		print('\\mathbf{%s}%s = ' % (name, idx_name))
 		print('\\left[\\begin{array}{', str, '}')
 		for i, _ in enumerate(matrix):
 			for j in range(0, len(matrix[i])):

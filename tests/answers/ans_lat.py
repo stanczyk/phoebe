@@ -126,4 +126,37 @@ LAT_TV1 = '\\noindent\\\\\ntimes:\\\\\n$t1 = 1$.'
 LAT_TV2 = '\\noindent\\\\\ntimes:\\\\\n$t_{0,1} = 1$.'
 LAT_TV3 = '\\noindent\\\\\ntimes:\\\\\n$d_2 = 2$, $t_1 = 1$.'
 
+LAT_MAT1 = '\
+% matrix A\n\
+\\begin{equation*}\n\
+\\mathbf{A} = \n\
+\\left[\\begin{array}{ c }\n\
+a\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n'
+
+LAT_MAT2 = '\
+% matrix A\n\
+\\begin{equation*}\n\
+\\mathbf{A} = \n\
+\\left[\\begin{array}{ ccc }\n\
+\\varepsilon\t&\\varepsilon\t&d_3\\\\\n\
+d_1d_{1,2}\t&\\varepsilon\t&\\varepsilon\\\\\n\
+\\varepsilon\t&d_2d_{2,2}\t&\\varepsilon\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n'
+
+LAT_MAT3 = '\
+% matrix A_{3}\n\
+\\begin{equation*}\n\
+\\mathbf{A}_{3} = \n\
+\\left[\\begin{array}{ ccc }\n\
+\\varepsilon	&\\varepsilon	&\\varepsilon\\\\\n\
+d1	&d_{21}d_{22}d_{23}	&\\varepsilon\\\\\n\
+\\end{array}\\right]\n\
+\\end{equation*}\n\
+\n'
+
 # end.
