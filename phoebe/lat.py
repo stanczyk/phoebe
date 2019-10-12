@@ -117,11 +117,12 @@ class Lat:
 	def get_matrix_value(tab):
 		if not tab:
 			return '-'
-		if tab == '-':
-			return tab
 		odp = ''
 		for i, _ in enumerate(tab):
-			odp += str(tab[i])
+			if str(tab[i]) is not '-':
+				odp += str(tab[i])
+		if odp == '':
+			return '-'
 		return odp
 
 	@staticmethod

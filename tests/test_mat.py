@@ -93,19 +93,20 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(mock_stdout.getvalue(), 'disp(\'b(k) = [ b1(k); b_2(k); b_{3}(k); ]\');\n')
 
 	# TODO sprawdzic to
-	# czy nie powinno być:
-	# 	dla '-' 					\varepsilon
-	# 	dla ['d_1', 'd_2', 'd_3'] 	mp_multi(d1, d2, d3) albo mp_multi(mp_multi(d1, d2), d3)
-	# a co powinno być dla wartości None? '0', '', '-' czy \varepsilon ???
-	# @unittest.skip("not implemented yet")
+	# co powinno być dla [], None lub '-'? -> teraz jest ''
 	def test_get_matrix_value(self):
-		self.assertEqual(self.mat.get_matrix_value(None), '0')
-		self.assertEqual(self.mat.get_matrix_value([]), '0')
-		self.assertEqual(self.mat.get_matrix_value(['-']), '-')
+		self.assertEqual(self.mat.get_matrix_value(None), '')
+		self.assertEqual(self.mat.get_matrix_value([]), '')
+		self.assertEqual(self.mat.get_matrix_value(['-']), '')
 		self.assertEqual(self.mat.get_matrix_value(['-', 'd_1']), 'd1')
 		self.assertEqual(self.mat.get_matrix_value(['d_1', '-']), 'd1')
+		self.assertEqual(self.mat.get_matrix_value(['-', '-', 'd_3']), 'd3')
 		self.assertEqual(self.mat.get_matrix_value(['d_1', 't_{1,2}']), 'mp_multi(d1, t12)')
 		self.assertEqual(self.mat.get_matrix_value(['d_1', 'd_2', 'd_3']), 'mp_multi(mp_multi(d1, d2), d3)')
+		self.assertEqual(self.mat.get_matrix_value(''), '')
+		self.assertEqual(self.mat.get_matrix_value('-'), '')
+		self.assertEqual(self.mat.get_matrix_value('d_3'), 'd3')
+		self.assertEqual(self.mat.get_matrix_value('d_{1,3}'), 'd13')
 
 	def test_matrix_desc(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

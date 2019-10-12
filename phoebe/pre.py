@@ -74,6 +74,7 @@ class Preparer:
 		self.add_defaults()
 		self.prepare_mapping()
 		self.matrix_preparation()
+		return Err.NOOP
 
 	def prepare_vectors(self):
 		vec = None
@@ -484,6 +485,8 @@ class Preparer:
 		return Err.NOOP
 
 	def matrices_desc(self, obj):
+		if not obj:
+			return Err.ERR_NO_DATA
 		obj.matrix_desc()
 		for i in [self.A, self.B, self.C, self.D]:
 			if i == self.A or i == self.B:
@@ -507,6 +510,8 @@ class Preparer:
 		return Err.NOOP
 
 	def description(self, obj):
+		if not obj:
+			return Err.ERR_NO_DATA
 		obj.header(os.path.splitext(os.path.basename(self.file_name))[0])
 		obj.preface()
 		obj.equation(self.A, self.B, self.C, self.D)

@@ -10,7 +10,7 @@ in the module:
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=invalid-name
-from builtins import range, len, staticmethod, enumerate, sorted, str
+from builtins import range, len, staticmethod, enumerate, sorted, str, isinstance, object
 
 import inf
 from yml import Yml
@@ -123,18 +123,24 @@ class Mat(object):
 	# TODO get_matrix_value() do poprawy
 	def get_matrix_value(self, tab):
 		if not tab:
-			return '0'
-		if tab == '-':
-			return tab
+			return ''
 		odp = ''
-		tmp = ''
-		for i, _ in enumerate(tab):
-			if len(tab) > 1 and i > 0:
-				odp = 'mp_multi({0}, '.format(tmp)
-			tmp = str(self.clean_value(tab[i]))
-			odp += tmp
-			if len(tab) > 1 and i > 0:
-				odp += ')'
+		if isinstance(tab, str):
+			tmp = str(self.clean_value(tab))
+			if tmp == '-':
+				return ''
+			return tmp
+		else:
+			for i, _ in enumerate(tab):
+				tmp = str(self.clean_value(tab[i]))
+				if tmp == '-':
+					tmp = ''
+				if tmp:
+					if odp:
+						tmp2 = 'mp_multi({0}, {1})'.format(odp, tmp)
+						odp = tmp2
+					else:
+						odp = tmp
 		return odp
 
 	@staticmethod
@@ -142,21 +148,21 @@ class Mat(object):
 		print('\ndisp(\'matrices:\');')
 		return Err.NOOP
 
-	def matrix(self, name, idx_name, matrix):
+	def matrix(self, name, idx_name, mat):
 		if not name:
 			return Err.ERR_NO_NAME
 		if not idx_name:
 			idx_name = ''
-		if self.yam.empty_matrix(matrix):
+		if self.yam.empty_matrix(mat):
 			return Err.ERR_NO_MATRIX
 		print('% matrix {0}{1}'.format(name, idx_name))
-		w1, w2 = self.yam.get_matrix_size(matrix)
+		w1, w2 = self.yam.get_matrix_size(mat)
 		print('{0}{1} = mp_zeros({2}, {3});'.format(name, idx_name, w1, w2))
 		for i in range(0, w1):
 			for j in range(0, w2):
-				if matrix[i][j] != '-':
+				if mat[i][j] != '-':
 					print('   {0}{1}({2}, {3}) = {4};'.format(
-						name, idx_name, i + 1, j + 1, self.get_matrix_value(matrix[i][j])
+						name, idx_name, i + 1, j + 1, self.get_matrix_value(mat[i][j])
 					))
 		print('   {0}{1}'.format(name, idx_name))
 		print()

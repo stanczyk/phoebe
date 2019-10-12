@@ -23,6 +23,8 @@ if lib_path not in sys.path:
 	sys.path.append(lib_path)
 import phoebe.pre
 from phoebe.err import Err
+from phoebe.lat import Lat
+from phoebe.mat import Mat
 
 
 class TestPre(unittest.TestCase):
@@ -62,10 +64,11 @@ class TestPre(unittest.TestCase):
 			self.pre.show_file_content()
 			self.assertEqual(mock_stdout.getvalue(), ANS_FILE)
 
-	@unittest.skip("not implemented yet")
+	# TODO rozwinąć to - jakie wektory dla jakich danych - ale niby to jest dalej
 	def test_prepare(self):
-		pass
+		self.assertEqual(self.pre.prepare(), Err.NOOP)
 
+	# TODO rozwinąć to - jakie wektory dla jakich danych - ale niby to jest dalej
 	def test_prepare_vectors(self):
 		self.assertEqual(self.pre.prepare_vectors(), Err.NOOP)
 
@@ -475,13 +478,21 @@ class TestPre(unittest.TestCase):
 		self.pre.vector_x = ['x1']
 		self.assertEqual(self.pre.generatable(), Err.NOOP)
 
-	@unittest.skip("not implemented yet")
+	# TODO jeszcze generowanie danych dla jakichś danych :) czy zadziałą
 	def test_matrices_desc(self):
-		pass
+		self.assertEqual(self.pre.matrices_desc(None), Err.ERR_NO_DATA)
+		obj = Mat()
+		self.assertEqual(self.pre.matrices_desc(obj), Err.NOOP)
+		obj = Lat()
+		self.assertEqual(self.pre.matrices_desc(obj), Err.NOOP)
 
-	@unittest.skip("not implemented yet")
+	# TODO jeszcze generowanie danych dla jakichś danych :) czy zadziałą
 	def test_description(self):
-		pass
+		self.assertEqual(self.pre.description(None), Err.ERR_NO_DATA)
+		obj = Mat()
+		self.assertEqual(self.pre.description(obj), Err.NOOP)
+		obj = Lat()
+		self.assertEqual(self.pre.description(obj), Err.NOOP)
 
 
 def main():

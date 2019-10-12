@@ -43,7 +43,6 @@ def cli(ctx, showfile, det1, det2, det3, matrices, vectors, filename):
 	if showfile:
 		ctx.obj.show_file_content()
 	ctx.obj.prepare()
-
 	if det1:
 		ctx.obj.show_det1()
 	if det2:
