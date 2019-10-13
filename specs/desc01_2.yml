@@ -1,8 +1,8 @@
 #
-# desc1_1.yml
-# Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+# desc1_2.yml
+# Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
-# a simple production system (fig2) described in 01/Ex.1.1
+# a simple production system (fig2) described in 01/Ex.1.2
 ---
 input:
 - u_1: {connect: M_1, tr-time: 't_{0,1}'}
@@ -12,7 +12,7 @@ prod-unit:
 - M_2: {connect: M_3, op-time: d_2, tr-time: 't_{2,3}'}
 - M_3: {connect: y, op-time: d_3, tr-time: 't_{3,4}'}
 output:
-- y: {}
+- y: {connect: {u_1, u_2}}
 values: {
 't_{0,1}': 2,
 't_{0,2}': 0,
