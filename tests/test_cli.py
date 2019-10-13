@@ -13,9 +13,11 @@ import sys
 import unittest
 # from io import StringIO
 # import mock
+from freezegun import freeze_time  # https://github.com/spulec/freezegun
 from click.testing import CliRunner
 from tests.answers.ans_cli import ANS_HLP1, ANS_HLP2, ANS_FILE, ANS_VEC1, ANS_VEC2, \
-	ANS_DET1_1, ANS_DET1_2, ANS_DET2_1, ANS_DET2_2, ANS_DET3_1, ANS_DET3_2, ANS_MAT1, ANS_MAT2
+	ANS_DET1_1, ANS_DET1_2, ANS_DET2_1, ANS_DET2_2, ANS_DET3_1, ANS_DET3_2, ANS_MAT1, ANS_MAT2, \
+	CLI_DESC2_LAT, CLI_DESC2_MAT
 
 lib_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../phoebe')
 if lib_path not in sys.path:
@@ -106,13 +108,19 @@ class TestCli(unittest.TestCase):
 		# print(result.output)
 		self.assertEqual(result.output, ANS_MAT2)
 
-	@unittest.skip("not implemented yet")
+	@freeze_time("2019-10-13 10:56:24")
 	def test_latex(self):
-		pass
+		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_2.yml', 'latex'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, CLI_DESC2_LAT)
 
-	@unittest.skip("not implemented yet")
+	@freeze_time("2019-10-13 10:56:24")
 	def test_matlab(self):
-		pass
+		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_2.yml', 'matlab'])
+		self.assertEqual(result.exit_code, Err.NOOP)
+		# print(result.output)
+		self.assertEqual(result.output, CLI_DESC2_MAT)
 
 	# złożenie wszystkich opcji dla matlaba, latexa i bez tych komend
 	@unittest.skip("not implemented yet")
