@@ -1,5 +1,5 @@
 #
-# desc1_2.yml
+# desc01_2.yml
 # Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 #
 # a simple production system (fig2) described in 01/Ex.1.2
@@ -10,7 +10,7 @@ input:
 prod-unit:
 - M_1: {connect: M_3, op-time: d_1, tr-time: 't_{1,3}'}
 - M_2: {connect: M_3, op-time: d_2, tr-time: 't_{2,3}'}
-- M_3: {connect: y, op-time: d_3, tr-time: 't_{3,4}'}
+- M_3: {connect: y,   op-time: d_3, tr-time: 't_{3,4}'}
 output:
 - y: {connect: {u_1, u_2}}
 values: {
