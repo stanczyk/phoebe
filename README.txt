@@ -35,6 +35,9 @@ WYKRYTE BŁĘDY I BRAKI
 		- bufory o skończonej pojemności modelowane jak w 04/Ex.1.2 - specs/old/desc04_2.yml
 		istnieje możliwość modelowania takich buforów ale, tak jak w 04/Ex.1.3
 		buffers - oznacza bufory wyjściowe (a powinno być, buf_in, buf_out) <-- pomysł do dorobienia
+	- 2019.10.14:
+		modelowanie przykładu z rys.3 z pracy 09 dla poszczególnych wariantów i konfiguracji (patrz tab.6)
+		i dalej od 8?
 
 =================================
 v1.0
