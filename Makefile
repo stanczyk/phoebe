@@ -36,6 +36,10 @@ all: info
 	@echo -e "      $(white)source .venv/bin/activate$(reset)  deactivate"
 	$(end)
 
+.PHONY: octave
+octave:
+	@octave --traditional
+
 include tools/make/make_clean.mk
 include tools/make/make_py.mk
 include tools/make/make2b.mk

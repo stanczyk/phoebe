@@ -17,7 +17,7 @@ The max-plus algebraic state space model generator
 
 =================================
 DO ZROBIENIA (plan):
-	- testy jednostkowe (skończyć do konca w41 2019)
+	- DONE: testy jednostkowe (skończyć do konca w41 2019)
 	- jeśli już będzie działać, tzn. będzie pełna funkcjonalność z v0.9
 		- przygotować kilka wygenerowanych wyników, dla systemów opisanych już w moich publikacjach
 		- sprawdzić je w matlabie
@@ -27,6 +27,14 @@ DO ZROBIENIA (plan):
 		- przygotować opis systemu wraz z macierzą D i sprawdzić wygenerowany wynik -> zapisać do testów
 		- co powinno znaleźć się w nowej wersji (lista pomysłów):
 			- xxx
+
+WYKRYTE BŁĘDY I BRAKI
+	- 2019.10.14: patrz specs/old/desc02_c.yml
+		- nie działa generowanie modelu dla matlaba, jeśli warości podawane są bezpośrednio, a nie poprzez sekcję values
+	- 2019.10.14: brak modelowania buforów o skończonej pojemności
+		- bufory o skończonej pojemności modelowane jak w 04/Ex.1.2 - specs/old/desc04_2.yml
+		istnieje możliwość modelowania takich buforów ale, tak jak w 04/Ex.1.3
+		buffers - oznacza bufory wyjściowe (a powinno być, buf_in, buf_out) <-- pomysł do dorobienia
 
 =================================
 v1.0

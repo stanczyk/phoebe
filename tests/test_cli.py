@@ -110,14 +110,14 @@ class TestCli(unittest.TestCase):
 
 	@freeze_time("2019-10-13 10:56:24")
 	def test_latex(self):
-		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_2.yml', 'latex'])
+		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_b.yml', 'latex'])
 		self.assertEqual(result.exit_code, Err.NOOP)
 		# print(result.output)
 		self.assertEqual(result.output, CLI_DESC2_LAT)
 
 	@freeze_time("2019-10-13 10:56:24")
 	def test_matlab(self):
-		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_2.yml', 'matlab'])
+		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_b.yml', 'matlab'])
 		self.assertEqual(result.exit_code, Err.NOOP)
 		# print(result.output)
 		self.assertEqual(result.output, CLI_DESC2_MAT)
