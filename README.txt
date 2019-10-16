@@ -36,8 +36,8 @@ WYKRYTE BŁĘDY I BRAKI
 		istnieje możliwość modelowania takich buforów ale, tak jak w 04/Ex.1.3
 		buffers - oznacza bufory wyjściowe (a powinno być, buf_in, buf_out) <-- pomysł do dorobienia
 	- 2019.10.14:
-		modelowanie przykładu z rys.3 z pracy 09 dla poszczególnych wariantów i konfiguracji (patrz tab.6)
-		i dalej od 8?
+		modelowanie przykładu z pracy 09 - rys.3 dla poszczególnych wariantów i konfiguracji (patrz tab.6)
+		i dalej od 9?
 
 =================================
 v1.0
