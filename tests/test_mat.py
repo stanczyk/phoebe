@@ -69,6 +69,7 @@ class TestMat(unittest.TestCase):
 		self.assertEqual(self.mat.clean_value('d_1'), 'd1')
 		self.assertEqual(self.mat.clean_value('d_{1}'), 'd1')
 		self.assertEqual(self.mat.clean_value('d_{1,0}'), 'd10')
+		self.assertEqual(self.mat.clean_value(12), 12)
 
 	def test_time_values(self):
 		self.assertEqual(self.mat.time_values(None), Err.ERR_NO_DATA)
@@ -107,6 +108,9 @@ class TestMat(unittest.TestCase):
 		self.assertEqual(self.mat.get_matrix_value('-'), '')
 		self.assertEqual(self.mat.get_matrix_value('d_3'), 'd3')
 		self.assertEqual(self.mat.get_matrix_value('d_{1,3}'), 'd13')
+		self.assertEqual(self.mat.get_matrix_value([1, 2]), 'mp_multi(1, 2)')
+		self.assertEqual(self.mat.get_matrix_value(['-', 12]), '12')
+		self.assertEqual(self.mat.get_matrix_value(0), '0')
 
 	def test_matrix_desc(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

@@ -80,6 +80,8 @@ class TestLat(unittest.TestCase):
 		self.assertEqual(self.lat.get_matrix_value(['d_1', '-']), 'd_1')
 		self.assertEqual(self.lat.get_matrix_value(['d_1', 't_{1,2}']), 'd_1t_{1,2}')
 		self.assertEqual(self.lat.get_matrix_value(['d_1', 'd_2', 'd_3']), 'd_1d_2d_3')
+		self.assertEqual(self.mat.get_matrix_value(0), 0)
+		self.assertEqual(self.mat.get_matrix_value(['-', 12]), 12)
 
 	def test_matrix_desc(self):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:

@@ -10,6 +10,7 @@ in the module:
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
 # pylint: disable=invalid-name
+import numbers
 from builtins import range, len, staticmethod, enumerate, sorted, str, isinstance, object
 
 import inf
@@ -92,6 +93,8 @@ class Mat(object):
 		ans = ''
 		if not value:
 			return ans
+		if isinstance(value, numbers.Number):
+			return value
 		for i, _ in enumerate(value):
 			if value[i] not in ['{', '}', '_', ',']:
 				ans += value[i]
@@ -122,7 +125,7 @@ class Mat(object):
 	# patrz też tests/test_mat.py:test_get_matrix_value
 	# TODO get_matrix_value() do poprawy
 	def get_matrix_value(self, tab):
-		if not tab:
+		if tab is None:
 			return ''
 		odp = ''
 		if isinstance(tab, str):
@@ -130,17 +133,18 @@ class Mat(object):
 			if tmp == '-':
 				return ''
 			return tmp
-		else:
-			for i, _ in enumerate(tab):
-				tmp = str(self.clean_value(tab[i]))
-				if tmp == '-':
-					tmp = ''
-				if tmp:
-					if odp:
-						tmp2 = 'mp_multi({0}, {1})'.format(odp, tmp)
-						odp = tmp2
-					else:
-						odp = tmp
+		if isinstance(tab, numbers.Number):
+			return str(tab)
+		for i, _ in enumerate(tab):
+			tmp = str(self.clean_value(tab[i]))
+			if tmp == '-':
+				tmp = ''
+			if tmp:
+				if odp:
+					tmp2 = 'mp_multi({0}, {1})'.format(odp, tmp)
+					odp = tmp2
+				else:
+					odp = tmp
 		return odp
 
 	@staticmethod
