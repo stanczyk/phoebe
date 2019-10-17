@@ -9,6 +9,7 @@ in the module:
 
 Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 """
+import numbers
 from builtins import staticmethod, str, enumerate, range, len, IndexError, sorted
 
 import inf
@@ -115,8 +116,10 @@ class Lat:
 
 	@staticmethod
 	def get_matrix_value(tab):
-		if not tab:
+		if tab is None:
 			return '-'
+		if isinstance(tab, numbers.Number):
+			return str(tab)
 		odp = ''
 		for i, _ in enumerate(tab):
 			if str(tab[i]) is not '-':

@@ -29,12 +29,17 @@ DO ZROBIENIA (plan):
 			- xxx
 
 WYKRYTE BŁĘDY I BRAKI
-	- 2019.10.14: patrz specs/old/desc02_c.yml
+	- 2019.10.14: DONE
+		- specs/desc02_c.yml
 		- nie działa generowanie modelu dla matlaba, jeśli warości podawane są bezpośrednio, a nie poprzez sekcję values
-	- 2019.10.14: brak modelowania buforów o skończonej pojemności
-		- bufory o skończonej pojemności modelowane jak w 04/Ex.1.2 - specs/old/desc04_2.yml
-		istnieje możliwość modelowania takich buforów ale, tak jak w 04/Ex.1.3
-		buffers - oznacza bufory wyjściowe (a powinno być, buf_in, buf_out) <-- pomysł do dorobienia
+	- 2019.10.14:
+		- brak modelowania buforów o skończonej pojemności
+		- specs/desc04_2.yml
+		- poprawić tests/answers/latex/desc04_2.tex i tests/answers/matlab/desc04_2.m
+	- 2019.10.17:
+		- buffers - oznacza bufory wyjściowe/wejściowe czy pomiędzy?
+		- (a powinno być, buf_in, buf_out) <-- pomysł do dorobienia
+		- jak zachowuje się system z buf. wyjściowym, czasem transportu i buforem wejściowym?
 	- 2019.10.14:
 		modelowanie przykładu z pracy 06/07 - rys.3 dla poszczególnych wariantów i konfiguracji (patrz tab.6)
 		i dalej od 9?
