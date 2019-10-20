@@ -494,6 +494,10 @@ class TestPre(unittest.TestCase):
 		obj = Lat()
 		self.assertEqual(self.pre.description(obj), Err.NOOP)
 
+	@unittest.skip("not implemented yet")
+	def test_add_buffers(self, matA, system):
+		pass
+
 
 def main():
 	unittest.main()

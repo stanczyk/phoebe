@@ -13,7 +13,8 @@ Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
 
 import os
 import sys
-from builtins import IOError, str, range, len, enumerate, staticmethod, isinstance, sorted
+import numbers
+from builtins import IOError, KeyError, str, range, len, enumerate, staticmethod, isinstance, sorted, int
 
 import yaml
 from err import Err
@@ -190,7 +191,7 @@ class Preparer:
 				print('  ' + key)
 				dic2 = self.yml.get_value(dic1[j], key)
 				op_time, connect = self.get_det1(dic2)
-				print('    op-time: ' + (op_time if op_time else '-'))
+				print('    op-time: ' + (str(op_time) if op_time else '-'))
 				print('    connect:', end='')
 				if connect:
 					print()
@@ -199,8 +200,8 @@ class Preparer:
 						dic3 = connect[key]
 						if dic3:
 							tr_time, buffers = self.get_det2(dic3)
-							print('        tr-time: ' + (tr_time if tr_time else '-'))
-							print('        buffers: ' + (buffers if buffers else '-'))
+							print('        tr-time: ' + (str(tr_time) if tr_time else '-'))
+							print('        buffers: ' + (str(buffers) if buffers else '-'))
 				else:
 					print(' -')
 		i = 'values'
@@ -265,10 +266,9 @@ class Preparer:
 		for i in range(0, len(self.A)):
 			self.create_matrix(self.A[i], self.vector_x, self.vector_x)
 			self.fill_matrix(self.A[i], sy)
-		# self.add_feedback()
 		self.add_feedback_x(self.A[1], sy, wy)
 		self.add_feedback_u(self.A[1], we, sy, wy)
-		# self.add_feedback_y(self.A1, prod_unit)
+		self.add_buffers(self.A, sy)
 
 		# matrix B
 		for i in range(0, len(self.B)):
@@ -329,18 +329,18 @@ class Preparer:
 					if matrix in [self.A[0], self.B[0]]:
 						cell = val[:]
 						if tr_time:
-							cell.append(tr_time)
+							cell.append(str(tr_time))
 						matrix[j][iteration] = cell
-					if matrix in [self.A[1]]:
-						if buffers == '0':
-							if tr_time == '0':
-								matrix[iteration][j] = ['0']
-							else:
-								matrix[iteration][j] = ['-' + tr_time]
+					#if matrix in [self.A[1]]:
+					#	if buffers == '0':
+					#		if tr_time == '0':
+					#			matrix[iteration][j] = ['0']
+					#		else:
+					#			matrix[iteration][j] = ['-' + tr_time]
 				else:
 					if matrix in [self.C]:
 						if tr_time:
-							val.append(tr_time)
+							val.append(str(tr_time))
 						matrix[j][iteration] = val
 		return matrix
 
@@ -361,6 +361,7 @@ class Preparer:
 			for j in range(0, w2):
 				if matrix[i][j] != '-':
 					tmp = matrix[i][j]
+					# print(tmp)
 					for k in range(0, len(tmp)):
 						if tmp[k] == '0' and tmp.count(tmp[k]) > 1:
 							tmp[k] = None
@@ -520,6 +521,44 @@ class Preparer:
 		self.matrices_desc(obj)
 		obj.adds()
 		obj.end()
+		return Err.NOOP
+
+	def add_buffers(self, matA, system):
+		if not matA:
+			return Err.ERR_NO_MATRIX
+		if not system:
+			return Err.ERR_NO_DATA
+		for i in range(0, self.yml.get_len(system)):
+			key1 = self.yml.get_key(system[i])
+			_, connect = self.get_det1(self.yml.get_value(system[i], key1))
+			if connect:
+				for key2 in connect:
+					tr_time, buffer = self.get_det2(connect[key2])
+					if buffer and buffer != '-':
+						# idx = numerical value of the buffer capacity
+						#if isinstance(buffer, numbers.Number):
+						#	idx = buffer
+						if isinstance(buffer, str):
+							try:
+								idx = self.values[buffer]
+							except KeyError:
+								idx = int(buffer)
+						else:
+							idx = buffer
+						# checking if an appropriate A matrix exists
+						for j in range(len(matA)-1, idx+1):
+							matA.append([])
+						if not matA[idx+1]:
+							self.create_matrix(matA[idx+1], self.vector_x, self.vector_x)
+						cell = matA[idx+1][self.mapping[key1]][self.mapping[key2]]
+						tmp = tr_time
+						if tr_time != '0':
+							tmp = '-' + str(tr_time)
+						if cell == '-':
+							cell = [tmp]
+						else:
+							cell.append(tmp)
+						matA[idx + 1][self.mapping[key1]][self.mapping[key2]] = cell
 		return Err.NOOP
 
 # eof.

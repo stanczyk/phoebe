@@ -1,0 +1,27 @@
+#
+# desc04_2.yml
+# Copyright (c) 2017-2018 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+#
+# buffers with limited capacity (figF41) described in 04/Ex.1.2
+---
+input:
+- u:   {connect: M_1, tr-time: 't_{0,1}'}
+prod-unit:
+- M_1: {op-time: d_1, buffers: b_1, connect: M_2, tr-time: 't_{1,2}'}
+- M_2: {op-time: d_2, buffers: b_2, connect: M_3, tr-time: 't_{2,3}'}
+- M_3: {op-time: d_3, buffers: b_0, connect: y,   tr-time: 't_{3,4}'}
+output:
+- y: {}
+values: {
+'t_{0,1}': 1,
+'t_{1,2}': 2,
+'t_{2,3}': 0,
+'t_{3,4}': 1,
+d_1: 3,
+d_2: 2,
+d_3: 6,
+b_0: 0,
+b_1: 1,
+b_2: 2
+}
+# eof.

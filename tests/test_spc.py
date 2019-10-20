@@ -43,9 +43,10 @@ class TestSpc(unittest.TestCase):
 	def test_specs(self):
 		for file in glob.glob('specs/desc*.yml'):
 			base = os.path.basename(os.path.splitext(file)[0])
-			print(base)
+			print(base, end='')
 			# matlab
 			result = self.runner.invoke(phoebe.cli.cli, [file, 'matlab'])
+			# print(result.output)
 			self.assertEqual(result.exit_code, Err.NOOP)
 			# print(result.output)
 			file_path = 'tests/answers/matlab/' + base + '.m'
@@ -60,6 +61,7 @@ class TestSpc(unittest.TestCase):
 			self.check_file(file_path, result.output)
 			with open(file_path) as reader:
 				self.assertEqual(result.output, reader.read())
+			print(' ok.')
 
 
 def main():

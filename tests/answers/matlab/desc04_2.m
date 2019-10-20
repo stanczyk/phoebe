@@ -6,7 +6,7 @@
 %
 
 clear
-disp('x(k+1) = A0x(k+1) + A1x(k) + B0u(k)');
+disp('x(k+1) = A0x(k+1) + A1x(k) + A2x(k-1) + A3x(k-4) + B0u(k)');
 disp('y(k) = Cx(k)');
 
 disp('u(k) = [ u_1(k); ]');
@@ -37,8 +37,19 @@ A0 = mp_zeros(3, 3);
 A1 = mp_zeros(3, 3);
    A1(1, 1) = d1;
    A1(2, 2) = d2;
+   A1(3, 1) = -t34;
    A1(3, 3) = d3;
    A1
+
+% matrix A2
+A2 = mp_zeros(3, 3);
+   A2(1, 2) = -t12;
+   A2
+
+% matrix A3
+A3 = mp_zeros(3, 3);
+   A3(2, 3) = -t23;
+   A3
 
 % matrix B0
 B0 = mp_zeros(3, 1);
