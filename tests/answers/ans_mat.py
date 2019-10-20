@@ -27,11 +27,11 @@ disp(\'x(k+1) = \');\n\
 disp(\'y(k) = \');\n'
 
 MAT_EQ2 = '\
-disp(\'x(k+1) = A0x(k+1) + B0u(k)\');\n\
+disp(\'x(k+1) = A0x(k+1) + B0u(k+1)\');\n\
 disp(\'y(k) = Cx(k) + Du(k)\');\n'
 
 MAT_EQ3 = '\
-disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B0u(k)\');\n\
+disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B1u(k)\');\n\
 disp(\'y(k) = Cx(k) + Du(k)\');\n'
 
 MAT_VEC3 = '\n\
@@ -61,7 +61,7 @@ MAT_ADDS = '\
 disp(\'finally:\');\n\
 As = mp_star(A0)\n\
 A = mp_multi(As, A1)\n\
-B = mp_multi(As, B0)\n\
+B = mp_multi(As, B1)\n\
 \n\
 disp(\'state vector and output:\');\n\
 % k - number of iterations\n\

@@ -51,19 +51,20 @@ class Mat(object):
 		if self.yam.empty_matrix(matrix):
 			return mat
 		for i in range(0, len(matrix)):
-			if matrix[i]:
-				if len(mat):
-					mat = mat + ' + '
-				index = index - i
-				tmp = ''
-				if index > 0:
-					tmp = '+{0}'.format(index)
-				elif index < 0:
-					tmp = '{0}'.format(index+1)
-				if iter is None:
-					mat = mat + '{0}{1}(k{2})'.format(name, vec, tmp)
-				else:
-					mat = mat + '{0}{1}{2}(k{3})'.format(name, i, vec, tmp)
+			if not self.yam.empty_matrix(matrix[i]):
+				if matrix[i]:
+					if len(mat):
+						mat = mat + ' + '
+					index = index - i
+					tmp = ''
+					if index > 0:
+						tmp = '+{0}'.format(index)
+					elif index < 0:
+						tmp = '{0}'.format(index+1)
+					if iter is None:
+						mat = mat + '{0}{1}(k{2})'.format(name, vec, tmp)
+					else:
+						mat = mat + '{0}{1}{2}(k{3})'.format(name, i, vec, tmp)
 		return mat
 
 	def equation(self, mat_A, mat_B, mat_C, mat_D):
@@ -71,7 +72,7 @@ class Mat(object):
 		mat = self.do_matrices(mat_A, 'A', 'x', 1)
 		if len(mat):
 			print(mat, end='')
-			mat = self.do_matrices(mat_B, 'B', 'u', 0)
+			mat = self.do_matrices(mat_B, 'B', 'u', 1)
 			if len(mat):
 				print(' +', mat, end='')
 		print('\');')
@@ -193,7 +194,7 @@ class Mat(object):
 			'disp(\'finally:\');\n' + \
 			'As = mp_star(A0)\n' + \
 			'A = mp_multi(As, A1)\n' + \
-			'B = mp_multi(As, B0)\n' + \
+			'B = mp_multi(As, B1)\n' + \
 			'\n' + \
 			'disp(\'state vector and output:\');\n' + \
 			'% k - number of iterations\n' + \

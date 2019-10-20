@@ -59,7 +59,7 @@ class TestMat(unittest.TestCase):
 			self.assertEqual(self.mat.equation(['a'], ['b'], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_EQ2)
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.assertEqual(self.mat.equation([['a0'],['a1'], None, [], ['a4']], [['b0']], ['c'], ['d']), Err.NOOP)
+			self.assertEqual(self.mat.equation([['a0'],['a1'], None, [], ['a4']], [[], ['b0']], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_EQ3)
 
 	def test_clean_value(self):

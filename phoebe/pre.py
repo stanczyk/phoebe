@@ -34,7 +34,7 @@ class Preparer:
 		self.vector_x = []
 		self.vector_y = []
 		self.A = [[], []] 	# [[A0], [A1]]
-		self.B = [[]] 		# [[B0]]
+		self.B = [[], []] 	# [[B0]]
 		self.C = [] 		# [C]
 		self.D = None 		# [D]
 		self.mapping = {}
@@ -271,7 +271,8 @@ class Preparer:
 		self.add_buffers(self.A, sy)
 
 		# matrix B
-		for i in range(0, len(self.B)):
+		self.create_matrix(self.B[0], self.vector_x, self.vector_u)
+		for i in range(1, len(self.B)):
 			self.create_matrix(self.B[i], self.vector_x, self.vector_u)
 			self.fill_matrix(self.B[i], we)
 
@@ -326,7 +327,7 @@ class Preparer:
 				tr_time, buffers = self.get_det2(con[key])
 				j = self.mapping[key]
 				if key[0] != 'y':
-					if matrix in [self.A[0], self.B[0]]:
+					if matrix in [self.A[0], self.B[1]]:
 						cell = val[:]
 						if tr_time:
 							cell.append(str(tr_time))

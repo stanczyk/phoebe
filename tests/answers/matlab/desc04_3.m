@@ -6,7 +6,7 @@
 %
 
 clear
-disp('x(k+1) = A0x(k+1) + A1x(k) + B0u(k)');
+disp('x(k+1) = A0x(k+1) + A1x(k) + B1u(k)');
 disp('y(k) = Cx(k)');
 
 disp('u(k) = [ u_1(k); ]');
@@ -52,10 +52,10 @@ A1 = mp_zeros(6, 6);
    A1(6, 6) = 0;
    A1
 
-% matrix B0
-B0 = mp_zeros(6, 1);
-   B0(1, 1) = t01;
-   B0
+% matrix B1
+B1 = mp_zeros(6, 1);
+   B1(1, 1) = t01;
+   B1
 
 % matrix C
 C = mp_zeros(1, 6);
@@ -65,7 +65,7 @@ C = mp_zeros(1, 6);
 disp('finally:');
 As = mp_star(A0)
 A = mp_multi(As, A1)
-B = mp_multi(As, B0)
+B = mp_multi(As, B1)
 
 disp('state vector and output:');
 % k - number of iterations

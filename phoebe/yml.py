@@ -112,6 +112,10 @@ class Yml:
 		if not w1:
 			return True
 		if not w2:
+			# return True
+			for i in range(0, w1):
+				if not self.empty_matrix(matrix[i]):
+					return False
 			return True
 		for i in range(0, w1):
 			for j in range(0, w2):

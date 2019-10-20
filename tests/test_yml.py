@@ -104,9 +104,12 @@ class TestYml(unittest.TestCase):
 		self.assertTrue(self.yml.empty_matrix(['-']))
 		self.assertTrue(self.yml.empty_matrix(['-', '-', '-']))
 		self.assertTrue(self.yml.empty_matrix([['-'], ['-'], ['-']]))
+		self.assertTrue(self.yml.empty_matrix([['-']]))
 		self.assertFalse(self.yml.empty_matrix(['-', '-', 'a']))
 		self.assertFalse(self.yml.empty_matrix([['-'], ['-'], ['a']]))
 		self.assertFalse(self.yml.empty_matrix([['-', '-', '-'], ['-', '-', '-'], ['-', '-', ['d_3']]]))
+		self.assertFalse(self.yml.empty_matrix([['-'], [[['t_{0,1}']], ['-'], ['-']]]))
+		self.assertFalse(self.yml.empty_matrix([[], [[['t_{0,1}']], ['-'], ['-']]]))
 
 	def test_self_test(self):
 		""" test method for *self_test* """

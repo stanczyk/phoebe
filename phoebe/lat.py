@@ -60,7 +60,7 @@ class Lat:
 		if self.yam.empty_matrix(matrix):
 			return mat
 		for i in range(0, len(matrix)):
-			if matrix[i]:
+			if not self.yam.empty_matrix(matrix[i]):
 				if len(mat):
 					mat = mat + ' \\oplus '
 				index = index - i
@@ -83,7 +83,7 @@ class Lat:
 		mat = self.do_matrices(mat_A, 'A', 'x', 1)
 		if len(mat):
 			print(mat, end='')
-			mat = self.do_matrices(mat_B, 'B', 'u', 0)
+			mat = self.do_matrices(mat_B, 'B', 'u', 1)
 			if len(mat):
 				print(' \\oplus', mat, end='')
 		print('\\\\')

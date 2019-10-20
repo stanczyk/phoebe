@@ -174,7 +174,7 @@ class TestPre(unittest.TestCase):
 			self.pre.prn_matrix([])
 			self.assertEqual(mock_stdout.getvalue(), '[]\n')
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.pre.prn_matrix(PRE_MATB[0])
+			self.pre.prn_matrix(PRE_MATB[1])
 			self.assertEqual(mock_stdout.getvalue(), PRE_MATB2)
 
 	def test_prepare_mapping(self):
@@ -191,7 +191,7 @@ class TestPre(unittest.TestCase):
 		self.pre.content_yaml = PRE_CONTENT1
 		self.pre.matrix_preparation()
 		self.assertEqual(self.pre.A, [[], []])
-		self.assertEqual(self.pre.B, [[]])
+		self.assertEqual(self.pre.B, [[], []])
 		self.assertEqual(self.pre.C, [])
 		self.assertEqual(self.pre.D, [])
 		self.pre.content_yaml = PRE_CONTENT2

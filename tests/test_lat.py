@@ -60,7 +60,7 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(self.lat.equation(['a'], ['b'], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_EQ2)
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
-			self.assertEqual(self.lat.equation([['a0'],['a1'], None, [], ['a4']], [['b0']], ['c'], ['d']), Err.NOOP)
+			self.assertEqual(self.lat.equation([['a0'],['a1'], None, [], ['a4']], [[], ['b0']], ['c'], ['d']), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), LAT_EQ3)
 
 	def test_vector(self):

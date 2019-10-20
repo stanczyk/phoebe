@@ -42,14 +42,14 @@ LAT_EQ1 = '\n\
 
 LAT_EQ2 = '\n\
 \\begin{align}\\begin{split}\n\
-\\mathbf{x}(k+1) & \\, = \\; \\mathbf{A}_{0}\\mathbf{x}(k+1) \\oplus \\mathbf{B}_{0}\\mathbf{u}(k)\\\\\n\
+\\mathbf{x}(k+1) & \\, = \\; \\mathbf{A}_{0}\\mathbf{x}(k+1) \\oplus \\mathbf{B}_{0}\\mathbf{u}(k+1)\\\\\n\
 \\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\oplus \\mathbf{Du}(k)\n\
 \\end{split}\\end{align}\n'
 
 LAT_EQ3 = '\n\
 \\begin{align}\\begin{split}\n\
 \\mathbf{x}(k+1) & \\, = \\; \\mathbf{A}_{0}\\mathbf{x}(k+1) \\oplus \\mathbf{A}_{1}\\mathbf{x}(k) \\oplus \
-\\mathbf{A}_{4}\\mathbf{x}(k-3) \\oplus \\mathbf{B}_{0}\\mathbf{u}(k)\\\\\n\
+\\mathbf{A}_{4}\\mathbf{x}(k-3) \\oplus \\mathbf{B}_{1}\\mathbf{u}(k)\\\\\n\
 \\mathbf{y}(k) & \\, = \\; \\mathbf{Cx}(k) \\oplus \\mathbf{Du}(k)\n\
 \\end{split}\\end{align}\n'
 
