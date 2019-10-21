@@ -72,11 +72,16 @@ class Mat(object):
 		mat = self.do_matrices(mat_A, 'A', 'x', 1)
 		if len(mat):
 			print(mat, end='')
-			mat = self.do_matrices(mat_B, 'B', 'u', 1)
-			if len(mat):
-				print(' +', mat, end='')
+			mat1 = self.do_matrices(mat_B, 'B', 'u', 1)
+			if len(mat1):
+				print(' +', mat1, end='')
 		print('\');')
-		print('disp(\'y(k) = ', end='')
+		if len(mat):
+			print('disp(\'       = Ax(k)', end='')
+			if len(mat1):
+				print(' + Bx(k)', end='')
+			print('\');')
+		print('disp(\'y(k)   = ', end='')
 		mat = self.do_matrices(mat_C, 'C', 'x', None)
 		if len(mat):
 			print(mat, end='')

@@ -24,15 +24,17 @@ MAT_END = '\
 
 MAT_EQ1 = '\
 disp(\'x(k+1) = \');\n\
-disp(\'y(k) = \');\n'
+disp(\'y(k)   = \');\n'
 
 MAT_EQ2 = '\
 disp(\'x(k+1) = A0x(k+1) + B0u(k+1)\');\n\
-disp(\'y(k) = Cx(k) + Du(k)\');\n'
+disp(\'       = Ax(k) + Bx(k)\');\n\
+disp(\'y(k)   = Cx(k) + Du(k)\');\n'
 
 MAT_EQ3 = '\
 disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B1u(k)\');\n\
-disp(\'y(k) = Cx(k) + Du(k)\');\n'
+disp(\'       = Ax(k) + Bx(k)\');\n\
+disp(\'y(k)   = Cx(k) + Du(k)\');\n'
 
 MAT_VEC3 = '\n\
 disp(\'u(k) = [ ]\');\n\

@@ -83,10 +83,15 @@ class Lat:
 		mat = self.do_matrices(mat_A, 'A', 'x', 1)
 		if len(mat):
 			print(mat, end='')
-			mat = self.do_matrices(mat_B, 'B', 'u', 1)
-			if len(mat):
-				print(' \\oplus', mat, end='')
+			mat1 = self.do_matrices(mat_B, 'B', 'u', 1)
+			if len(mat1):
+				print(' \\oplus', mat1, end='')
 		print('\\\\')
+		if len(mat):
+			print('& \\, = \\; \\mathbf{Ax}(k)', end='')
+			if len(mat1):
+				print(' \\oplus \\mathbf{Bu}(k)', end='')
+			print('\\\\')
 		print('\\mathbf{y}(k) & \\, = \\; ', end='')
 		mat = self.do_matrices(mat_C, 'C', 'x', None)
 		if len(mat):
