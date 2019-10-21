@@ -7,7 +7,8 @@
 
 clear
 disp('x(k+1) = A0x(k+1) + A1x(k) + A2x(k-1) + A3x(k-4) + B1u(k)');
-disp('y(k) = Cx(k)');
+disp('       = Ax(k) + Bx(k)');
+disp('y(k)   = Cx(k)');
 
 disp('u(k) = [ u_1(k); ]');
 disp('x(k) = [ x_1(k); x_2(k); x_3(k); ]');
