@@ -182,7 +182,7 @@ class Mat(object):
 	def input_vec(vec):
 		if not vec:
 			return Err.ERR_NO_VECTOR
-		print('U  = mp_ones({0}, {1})'.format(len(vec), 1))
+		print('U  = mp_ones({0}, 1)'.format(len(vec)))
 		return Err.NOOP
 
 	@staticmethod
@@ -192,15 +192,25 @@ class Mat(object):
 		print('X0 = mp_zeros({0}, {1})'.format(len(vec), 1))
 		return Err.NOOP
 
-	# TODO adds() poprawić, tzn. jeśli będzie więcej macierzy A, macierz D, etc.
-	@staticmethod
-	def adds():
+	def adds(self, matA, matB, matC, matD, vecX):
 		print('' + \
 			'disp(\'finally:\');\n' + \
-			'As = mp_star(A0)\n' + \
-			'A = mp_multi(As, A1)\n' + \
-			'B = mp_multi(As, B1)\n' + \
-			'\n' + \
+			'As  = mp_star(A0)')
+		licz_wmacA = len(matA)
+		licz_wier = len(matA[0])
+		self.print_mat(licz_wmacA, licz_wier, matA, 'A')
+		print()
+		licz_wmac = len(matB)
+		self.print_mat(licz_wmac, licz_wier, matB, 'B')
+		licz, licz_wmac = self.yam.get_matrix_size(matC)
+		if (licz_wmacA - 1) * licz_wier > licz_wmac:
+			print('TODO macierz C'
+			# self.print_mat(licz, licz_wmacA, matC, 'C')
+		if (licz_wmacA - 1) * licz_wier > len(vecX):
+			print()
+			print('% modification of init vector')
+			print('X0 = mp_zeros({0}, 1)'.format((licz_wmac - 1) * licz_wier))
+		print('\n' + \
 			'disp(\'state vector and output:\');\n' + \
 			'% k - number of iterations\n' + \
 			'k = 12;\n\n' + \
@@ -235,5 +245,29 @@ class Mat(object):
 		self.vector('x', vec_x)
 		self.vector('y', vec_y)
 		return Err.NOOP
+
+	def print_mat(self, dl, sz, matirces, first_letter):
+		for i in range(1, dl):
+			if not self.yam.empty_matrix(matirces[i]):
+				print(first_letter + 's' + str(i) + ' = mp_multi(As, ' + first_letter + str(i) + ');')
+		tmp = '      '
+		print(first_letter + '   = [')
+		print(tmp, end='')
+		for i in range(1, dl):
+			if not self.yam.empty_matrix(matirces[i]):
+				print(' ' + first_letter + 's' + str(i), end='')
+		print(';')
+		for i in range(1, sz):
+			print(tmp, end='')
+			for j in range(1, dl):
+				if first_letter == 'A':
+					if i == j:
+						print(' mp_eye(size(As1))', end='')
+					else:
+						print(' mp_zeros(size(As1))', end='')
+				else:
+					print(' mp_zeros(size(' + first_letter + 's1))', end='')
+			print(';')
+		print(tmp + ']')
 
 # eof.

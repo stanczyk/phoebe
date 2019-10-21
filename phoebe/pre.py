@@ -520,7 +520,7 @@ class Preparer:
 		obj.vectors(self.vector_u, self.vector_x, self.vector_y)
 		obj.inits(self.vector_u, self.vector_x, self.values)
 		self.matrices_desc(obj)
-		obj.adds()
+		obj.adds(self.A, self.B, self.C, self.D, self.vector_x)
 		obj.end()
 		return Err.NOOP
 
