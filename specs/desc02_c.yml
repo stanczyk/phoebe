@@ -10,7 +10,7 @@ input:
 - u:   {connect: M_1, tr-time: 1}
 prod-unit:
 - M_1: {connect: M_2, op-time: 3, tr-time: 2}
-- M_2: {connect: M_3, op-time: 2, tr-time: 2}
+- M_2: {connect: M_3, op-time: 2, tr-time: 0}
 - M_3: {connect: y,   op-time: 6, tr-time: 1}
 output:
 - y: {}

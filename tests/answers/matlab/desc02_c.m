@@ -23,7 +23,7 @@ disp('matrices:');
 % matrix A0
 A0 = mp_zeros(3, 3);
    A0(2, 1) = mp_multi(3, 2);
-   A0(3, 2) = mp_multi(2, 2);
+   A0(3, 2) = 2;
    A0
 
 % matrix A1
