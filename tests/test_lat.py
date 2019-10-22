@@ -143,7 +143,7 @@ class TestLat(unittest.TestCase):
 			self.assertEqual(mock_stdout.getvalue(), LAT_VEC4)
 
 	def test_adds(self):
-		self.assertEqual(self.lat.adds(), Err.NOOP)
+		self.assertEqual(self.lat.adds(None, None, None, None, None), Err.NOOP)
 
 
 def main():

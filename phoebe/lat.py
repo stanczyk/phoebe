@@ -213,7 +213,7 @@ class Lat:
 		return Err.NOOP
 
 	@staticmethod
-	def adds():
+	def adds(matA, matB, matC, matD, vecX):
 		return Err.NOOP
 
 # eof.

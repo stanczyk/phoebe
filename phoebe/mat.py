@@ -191,43 +191,55 @@ class Mat(object):
 		return Err.NOOP
 
 	def adds(self, matA, matB, matC, matD, vecX):
+		if not matA:
+			return Err.ERR_NO_MATRIX
 		print('disp(\'finally:\');')
 		if len(matA):
 			print('disp(\'x(k+1) = Ax(k)', end='')
-			if len(matB):
-				print(' + Bx(k)', end='')
+			if matB:
+				if len(matB):
+					print(' + Bx(k)', end='')
 			print('\');')
 		print('disp(\'where:\');')
 		print('As  = mp_star(A0)')
 		licz_wmacA = len(matA)
 		licz_wier = len(matA[0])
 		self.print_matAB(licz_wmacA, licz_wier, matA, 'A')
-
-		licz_wmac = len(matB)
-		self.print_matAB(licz_wmac, licz_wier, matB, 'B')
-
-		licz, licz_wmac = self.yam.get_matrix_size(matC)
-		if (licz_wmacA - 1) * licz_wier > licz_wmac:
-			print()
-			self.matrix('C', '', matC, (licz_wmacA - 1) * licz_wier)
-
-		if (licz_wmacA - 1) * licz_wier > len(vecX):
-			print('% modification of init vector')
-			print('X0 = mp_zeros({0}, 1)'.format((licz_wmacA - 1) * licz_wier))
-			print()
-
+		if matB:
+			licz_wmac = len(matB)
+			self.print_matAB(licz_wmac, licz_wier, matB, 'B')
+		if matC:
+			licz, licz_wmac = self.yam.get_matrix_size(matC)
+			if (licz_wmacA - 1) * licz_wier > licz_wmac:
+				print()
+				self.matrix('C', '', matC, (licz_wmacA - 1) * licz_wier)
+		if vecX:
+			if (licz_wmacA - 1) * licz_wier > len(vecX):
+				print('% modification of init vector')
+				print('X0 = mp_zeros({0}, 1)'.format((licz_wmacA - 1) * licz_wier))
+				print()
 		print('' + \
 			'disp(\'state vector and output:\');\n' + \
 			'% k - number of iterations\n' + \
 			'k = 12;\n\n' + \
-			'X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n' + \
-			'Y(:, 1) = mp_multi(C, X(:, 1));\n' + \
-			'for i = 2:k\n' + \
-			'    X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));\n' + \
-			'    Y(:, i) = mp_multi(C, X(:, i));\n' + \
-			'end\n' + \
-			'X\n' + \
-			'Y')
+			'X(:, 1) = ', end='')
+		if matB:
+			print('mp_add(mp_multi(A, X0), mp_multi(B, U));')
+		else:
+			print('mp_multi(A, X0);')
+		if matC:
+			print('Y(:, 1) = mp_multi(C, X(:, 1));')
+		print('for i = 2:k\n' + \
+			'    X(:, i) = ', end='')
+		if matB:
+			print('mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));')
+		else:
+			print('mp_multi(A, X(:, i - 1));')
+		if matC:
+			print('    Y(:, i) = mp_multi(C, X(:, i));')
+		print('end\nX')
+		if matC:
+			print('Y')
 		return Err.NOOP
 
 	@staticmethod

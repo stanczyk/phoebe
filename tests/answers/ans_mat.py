@@ -23,25 +23,28 @@ MAT_END = '\
 \n'
 
 MAT_EQ1 = '\
+disp(\'equations:\');\n\
 disp(\'x(k+1) = \');\n\
 disp(\'y(k)   = \');\n'
 
 MAT_EQ2 = '\
+disp(\'equations:\');\n\
 disp(\'x(k+1) = A0x(k+1) + B0u(k+1)\');\n\
-disp(\'       = Ax(k) + Bx(k)\');\n\
 disp(\'y(k)   = Cx(k) + Du(k)\');\n'
 
 MAT_EQ3 = '\
+disp(\'equations:\');\n\
 disp(\'x(k+1) = A0x(k+1) + A1x(k) + A4x(k-3) + B1u(k)\');\n\
-disp(\'       = Ax(k) + Bx(k)\');\n\
 disp(\'y(k)   = Cx(k) + Du(k)\');\n'
 
 MAT_VEC3 = '\n\
+disp(\'where:\');\n\
 disp(\'u(k) = [ ]\');\n\
 disp(\'x(k) = [ ]\');\n\
 disp(\'y(k) = [ ]\');\n'
 
 MAT_VEC4 = '\n\
+disp(\'where:\');\n\
 disp(\'u(k) = [ u1(k); ]\');\n\
 disp(\'x(k) = [ x1(k); x2(k); ]\');\n\
 disp(\'y(k) = [ y1(k); y2(k); y3(k); ]\');\n'
@@ -59,11 +62,58 @@ X0 = mp_zeros(1, 1)\n\
 disp(\'times:\');\n\
 t01 = 0\n'
 
-MAT_ADDS = '\
+MAT_ADDS1 = '\
 disp(\'finally:\');\n\
-As = mp_star(A0)\n\
-A = mp_multi(As, A1)\n\
-B = mp_multi(As, B1)\n\
+disp(\'x(k+1) = Ax(k)\');\n\
+disp(\'where:\');\n\
+As  = mp_star(A0)\n\
+\n\
+% matrix A\n\
+As1 = mp_multi(As, A1);\n\
+A   = [\n\
+       As1;\n\
+      ]\n\
+disp(\'state vector and output:\');\n\
+% k - number of iterations\n\
+k = 12;\n\
+\n\
+X(:, 1) = mp_multi(A, X0);\n\
+for i = 2:k\n\
+    X(:, i) = mp_multi(A, X(:, i - 1));\n\
+end\n\
+X\n'
+
+MAT_ADDS2 = '\
+disp(\'finally:\');\n\
+disp(\'x(k+1) = Ax(k) + Bx(k)\');\n\
+disp(\'where:\');\n\
+As  = mp_star(A0)\n\
+\n\
+% matrix A\n\
+As1 = mp_multi(As, A1);\n\
+As2 = mp_multi(As, A2);\n\
+As3 = mp_multi(As, A3);\n\
+A   = [\n\
+       As1 As2 As3;\n\
+       mp_eye(size(As1)) mp_zeros(size(As1)) mp_zeros(size(As1));\n\
+       mp_zeros(size(As1)) mp_eye(size(As1)) mp_zeros(size(As1));\n\
+      ]\n\
+\n\
+% matrix B\n\
+Bs1 = mp_multi(As, B1);\n\
+B   = [\n\
+       Bs1;\n\
+       mp_zeros(size(Bs1));\n\
+       mp_zeros(size(Bs1));\n\
+      ]\n\
+\n\
+% matrix C\n\
+C = mp_zeros(1, 9);\n\
+   C(1, 3) = mp_multi(d3, t34);\n\
+   C\n\
+\n\
+% modification of init vector\n\
+X0 = mp_zeros(9, 1)\n\
 \n\
 disp(\'state vector and output:\');\n\
 % k - number of iterations\n\
@@ -77,6 +127,33 @@ for i = 2:k\n\
 end\n\
 X\n\
 Y\n'
+
+MAT_ADDS3 = '\
+disp(\'finally:\');\n\
+disp(\'x(k+1) = Ax(k) + Bx(k)\');\n\
+disp(\'where:\');\n\
+As  = mp_star(A0)\n\
+\n\
+% matrix A\n\
+As1 = mp_multi(As, A1);\n\
+A   = [\n\
+       As1;\n\
+      ]\n\
+\n\
+% matrix B\n\
+Bs1 = mp_multi(As, B1);\n\
+B   = [\n\
+       Bs1;\n\
+      ]\n\
+disp(\'state vector and output:\');\n\
+% k - number of iterations\n\
+k = 12;\n\
+\n\
+X(:, 1) = mp_add(mp_multi(A, X0), mp_multi(B, U));\n\
+for i = 2:k\n\
+    X(:, i) = mp_add(mp_multi(A, X(:, i - 1)), mp_multi(B, U));\n\
+end\n\
+X\n'
 
 MAT_MAT1 = '\
 % matrix A\n\
