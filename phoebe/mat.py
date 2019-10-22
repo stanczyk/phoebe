@@ -158,7 +158,7 @@ class Mat(object):
 		print('\ndisp(\'matrices:\');')
 		return Err.NOOP
 
-	def matrix(self, name, idx_name, mat):
+	def matrix(self, name, idx_name, mat, dl=None):
 		if not name:
 			return Err.ERR_NO_NAME
 		if not idx_name:
@@ -167,7 +167,9 @@ class Mat(object):
 			return Err.ERR_NO_MATRIX
 		print('% matrix {0}{1}'.format(name, idx_name))
 		w1, w2 = self.yam.get_matrix_size(mat)
-		print('{0}{1} = mp_zeros({2}, {3});'.format(name, idx_name, w1, w2))
+		if not dl:
+			dl = w2
+		print('{0}{1} = mp_zeros({2}, {3});'.format(name, idx_name, w1, dl))
 		for i in range(0, w1):
 			for j in range(0, w2):
 				if mat[i][j] != '-':
@@ -198,19 +200,22 @@ class Mat(object):
 			'As  = mp_star(A0)')
 		licz_wmacA = len(matA)
 		licz_wier = len(matA[0])
-		self.print_mat(licz_wmacA, licz_wier, matA, 'A')
-		print()
+		self.print_matAB(licz_wmacA, licz_wier, matA, 'A')
+
 		licz_wmac = len(matB)
-		self.print_mat(licz_wmac, licz_wier, matB, 'B')
+		self.print_matAB(licz_wmac, licz_wier, matB, 'B')
+
 		licz, licz_wmac = self.yam.get_matrix_size(matC)
 		if (licz_wmacA - 1) * licz_wier > licz_wmac:
-			print('TODO macierz C'
-			# self.print_mat(licz, licz_wmacA, matC, 'C')
-		if (licz_wmacA - 1) * licz_wier > len(vecX):
 			print()
+			self.matrix('C', '', matC, (licz_wmacA - 1) * licz_wier)
+
+		if (licz_wmacA - 1) * licz_wier > len(vecX):
 			print('% modification of init vector')
 			print('X0 = mp_zeros({0}, 1)'.format((licz_wmac - 1) * licz_wier))
-		print('\n' + \
+			print()
+
+		print('' + \
 			'disp(\'state vector and output:\');\n' + \
 			'% k - number of iterations\n' + \
 			'k = 12;\n\n' + \
@@ -246,7 +251,8 @@ class Mat(object):
 		self.vector('y', vec_y)
 		return Err.NOOP
 
-	def print_mat(self, dl, sz, matirces, first_letter):
+	def print_matAB(self, dl, sz, matirces, first_letter):
+		print('\n% matrix ' + first_letter)
 		for i in range(1, dl):
 			if not self.yam.empty_matrix(matirces[i]):
 				print(first_letter + 's' + str(i) + ' = mp_multi(As, ' + first_letter + str(i) + ');')
@@ -269,5 +275,6 @@ class Mat(object):
 					print(' mp_zeros(size(' + first_letter + 's1))', end='')
 			print(';')
 		print(tmp + ']')
+		return Err.NOOP
 
 # eof.
