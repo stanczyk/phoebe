@@ -212,7 +212,7 @@ class Mat(object):
 
 		if (licz_wmacA - 1) * licz_wier > len(vecX):
 			print('% modification of init vector')
-			print('X0 = mp_zeros({0}, 1)'.format((licz_wmac - 1) * licz_wier))
+			print('X0 = mp_zeros({0}, 1)'.format((licz_wmacA - 1) * licz_wier))
 			print()
 
 		print('' + \
