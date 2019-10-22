@@ -68,6 +68,7 @@ class Mat(object):
 		return mat
 
 	def equation(self, mat_A, mat_B, mat_C, mat_D):
+		print('disp(\'equations:\');')
 		print('disp(\'x(k+1) = ', end='')
 		mat = self.do_matrices(mat_A, 'A', 'x', 1)
 		if len(mat):
@@ -76,11 +77,6 @@ class Mat(object):
 			if len(mat1):
 				print(' +', mat1, end='')
 		print('\');')
-		if len(mat):
-			print('disp(\'       = Ax(k)', end='')
-			if len(mat1):
-				print(' + Bx(k)', end='')
-			print('\');')
 		print('disp(\'y(k)   = ', end='')
 		mat = self.do_matrices(mat_C, 'C', 'x', None)
 		if len(mat):
@@ -195,9 +191,14 @@ class Mat(object):
 		return Err.NOOP
 
 	def adds(self, matA, matB, matC, matD, vecX):
-		print('' + \
-			'disp(\'finally:\');\n' + \
-			'As  = mp_star(A0)')
+		print('disp(\'finally:\');')
+		if len(matA):
+			print('disp(\'x(k+1) = Ax(k)', end='')
+			if len(matB):
+				print(' + Bx(k)', end='')
+			print('\');')
+		print('disp(\'where:\');')
+		print('As  = mp_star(A0)')
 		licz_wmacA = len(matA)
 		licz_wier = len(matA[0])
 		self.print_matAB(licz_wmacA, licz_wier, matA, 'A')
@@ -245,7 +246,7 @@ class Mat(object):
 		return Err.NOOP
 
 	def vectors(self, vec_u, vec_x, vec_y):
-		print()
+		print('\ndisp(\'where:\');')
 		self.vector('u', vec_u)
 		self.vector('x', vec_x)
 		self.vector('y', vec_y)
