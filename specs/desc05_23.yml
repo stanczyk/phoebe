@@ -1,0 +1,34 @@
+#
+# desc05_23.yml
+# Copyright (c) 2017-2019 Jarosław Stańczyk <j.stanczyk@hotmail.com>
+#
+# max/sec/05 config.2 buf = 1
+---
+input:
+- u_1: {connect: M_1}
+- u_2: {connect: M_1}
+- u_3: {connect: M_2}
+- u_4: {connect: M_2}
+- u_5: {connect: M_4}
+- u_6: {connect: M_3}
+- u_7: {connect: M_3}
+- u_8: {connect: M_8}
+prod-unit:
+- M_1: {connect: M_7, op-time: d_1, buffers: b_1}
+- M_2: {connect: M_4, op-time: d_2, buffers: b_1}
+- M_3: {connect: M_8, op-time: d_3, buffers: b_1}
+- M_4: {connect: M_8, op-time: d_4, buffers: b_1}
+- M_7: {connect: y,   op-time: d_7, buffers: b_1}
+- M_8: {connect: M_7, op-time: d_8, buffers: b_1}
+output:
+- y: {}
+values: {
+d_1: 43,
+d_2: 20,
+d_3: 15,
+d_4:  6,
+d_7: 21,
+d_8: 25,
+b_1:  1
+}
+# eof.

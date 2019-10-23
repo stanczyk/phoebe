@@ -68,6 +68,13 @@ zrobione przykłady:
 		desc05_11 - ok - 05/config 1, infinite buffers
 		desc05_12 - ok - 05/config 1, no buffers (buf = 0)
 		desc05_13 - ok - 05/config 1, buffers capacity 1 (buf = 1)
+		desc05_21 - ok - 05/cfg 2, buf = inf
+		desc05_22 - ok - 05/cfg 2, buf = 0
+		desc05_23 - ok - 05/cfg 2, buf = 1
+		desc05_31 - ok - 05/cfg 3, buf = inf
+		desc05_32 - ok - 05/cfg 3, buf = 0
+		desc05_33 - ok - 05/cfg 3, buf = 1
+
 	08:
 		desc08_41
 		desc08_42
