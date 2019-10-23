@@ -276,6 +276,8 @@ class Mat(object):
 		for i in range(1, length):
 			if not self.yam.empty_matrix(matirces[i]):
 				print(' ' + first_letter + 's' + str(i), end='')
+			else:
+				print(' mp_zeros(size(As1))', end='')
 		print(';')
 		for i in range(2, dl):
 			print(tmp, end='')

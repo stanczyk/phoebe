@@ -74,10 +74,18 @@ zrobione przykłady:
 		desc05_31 - ok - 05/cfg 3, buf = inf
 		desc05_32 - ok - 05/cfg 3, buf = 0
 		desc05_33 - ok - 05/cfg 3, buf = 1
-
+	06:
+		desc06_14 - ok - 05/cfg 1, buf = 10
+		desc06_24 - ok - 05/cfg 2, buf = 10
+		desc06_34 - ok - 05/cfg 3, buf = 10
+	07:
+		desc07_41 - ok - 07 ex.4.1 - modification of desc02_b
+		desc07_42 - ok - 07 ex.4.2 - the same like desc03
+		desc07_43 - ok - 07 ex.4.3 - ex.4.1 with no buffers
+		desc07_44 - ok - 07 ex.4.2 - ex.4.1 with finite buffers
 	08:
-		desc08_41
-		desc08_42
+		desc08_41 - ok - desc02_b
+		desc08_42 - ok - desc01_3
 
 =================================
 v1.0
