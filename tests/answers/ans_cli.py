@@ -382,16 +382,12 @@ As  = mp_star(A0)\n\
 As1 = mp_multi(As, A1);\n\
 A   = [\n\
        As1;\n\
-       mp_eye(size(As1));\n\
-       mp_zeros(size(As1));\n\
       ]\n\
 \n\
 % matrix B\n\
 Bs1 = mp_multi(As, B1);\n\
 B   = [\n\
        Bs1;\n\
-       mp_zeros(size(Bs1));\n\
-       mp_zeros(size(Bs1));\n\
       ]\n\
 disp(\'state vector and output:\');\n\
 % k - number of iterations\n\

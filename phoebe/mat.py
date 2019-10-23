@@ -202,21 +202,21 @@ class Mat(object):
 			print('\');')
 		print('disp(\'where:\');')
 		print('As  = mp_star(A0)')
-		licz_wmacA = len(matA)
-		licz_wier = len(matA[0])
-		self.print_matAB(licz_wmacA, licz_wier, matA, 'A')
+		wmacA = len(matA) 		# (4)
+		licz_wier = len(matA[0]) 	# (3)
+		self.print_matAB(wmacA, wmacA - 1, matA, 'A')
 		if matB:
-			licz_wmac = len(matB)
-			self.print_matAB(licz_wmac, licz_wier, matB, 'B')
+			wmacB = len(matB) 	# (2)
+			self.print_matAB(wmacA, wmacB - 1, matB, 'B')
 		if matC:
-			licz, licz_wmac = self.yam.get_matrix_size(matC)
-			if (licz_wmacA - 1) * licz_wier > licz_wmac:
+			_, wmac = self.yam.get_matrix_size(matC)
+			if (wmacA - 1) * licz_wier > wmac:
 				print()
-				self.matrix('C', '', matC, (licz_wmacA - 1) * licz_wier)
+				self.matrix('C', '', matC, (wmacA - 1) * licz_wier)
 		if vecX:
-			if (licz_wmacA - 1) * licz_wier > len(vecX):
+			if (wmacA - 1) * licz_wier > len(vecX):
 				print('% modification of init vector')
-				print('X0 = mp_zeros({0}, 1)'.format((licz_wmacA - 1) * licz_wier))
+				print('X0 = mp_zeros({0}, 1)'.format((wmacA - 1) * licz_wier))
 				print()
 		print('' + \
 			'disp(\'state vector and output:\');\n' + \
@@ -266,24 +266,22 @@ class Mat(object):
 
 	def print_matAB(self, dl, sz, matirces, first_letter):
 		print('\n% matrix ' + first_letter)
-		for i in range(1, dl):
+		length = len(matirces)
+		for i in range(1, length):
 			if not self.yam.empty_matrix(matirces[i]):
 				print(first_letter + 's' + str(i) + ' = mp_multi(As, ' + first_letter + str(i) + ');')
 		tmp = '      '
 		print(first_letter + '   = [')
 		print(tmp, end='')
-		for i in range(1, dl):
+		for i in range(1, length):
 			if not self.yam.empty_matrix(matirces[i]):
 				print(' ' + first_letter + 's' + str(i), end='')
 		print(';')
-		for i in range(1, sz):
+		for i in range(2, dl):
 			print(tmp, end='')
-			for j in range(1, dl):
-				if first_letter == 'A':
-					if i == j:
-						print(' mp_eye(size(As1))', end='')
-					else:
-						print(' mp_zeros(size(As1))', end='')
+			for j in range(0, sz):
+				if i == (j + 2) and first_letter == 'A':
+					print(' mp_eye(size(As1))', end='')
 				else:
 					print(' mp_zeros(size(' + first_letter + 's1))', end='')
 			print(';')

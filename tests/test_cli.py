@@ -119,7 +119,7 @@ class TestCli(unittest.TestCase):
 	def test_matlab(self):
 		result = self.runner.invoke(phoebe.cli.cli, ['specs/desc02_b.yml', 'matlab'])
 		self.assertEqual(result.exit_code, Err.NOOP)
-		# print(result.output)
+		print(result.output)
 		self.assertEqual(result.output, CLI_DESC2_MAT)
 
 	# złożenie wszystkich opcji dla matlaba, latexa i bez tych komend

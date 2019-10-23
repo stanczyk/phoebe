@@ -6,10 +6,11 @@
 %
 
 clear
+disp('equations:');
 disp('x(k+1) = A0x(k+1) + A1x(k) + B1u(k)');
-disp('       = Ax(k) + Bx(k)');
 disp('y(k)   = Cx(k) + Cx(k0) + Cx(k-2) + Cx(k-5) + Cx(k-9) + Cx(k-14)');
 
+disp('where:');
 disp('u(k) = [ u_1(k); u_2(k); u_3(k); u_4(k); u_5(k); u_6(k); ]');
 disp('x(k) = [ x_1(k); x_2(k); x_3(k); x_4(k); x_5(k); x_6(k); x_7(k); ]');
 disp('y(k) = [ y_1(k); y_2(k); y_3(k); y_4(k); y_5(k); y_6(k); ]');
@@ -78,10 +79,21 @@ C = mp_zeros(6, 7);
    C
 
 disp('finally:');
-As = mp_star(A0)
-A = mp_multi(As, A1)
-B = mp_multi(As, B1)
+disp('x(k+1) = Ax(k) + Bx(k)');
+disp('where:');
+As  = mp_star(A0)
 
+% matrix A
+As1 = mp_multi(As, A1);
+A   = [
+       As1;
+      ]
+
+% matrix B
+Bs1 = mp_multi(As, B1);
+B   = [
+       Bs1;
+      ]
 disp('state vector and output:');
 % k - number of iterations
 k = 12;

@@ -156,6 +156,7 @@ class TestMat(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.assertEqual(self.mat.adds([['a1'], ['a2']], None, None, None, None), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_ADDS1)
+		# specs/desc04_2
 		matA = [
 			[['-', '-', '-'], [['d_1', 't_{1,2}'], '-', '-'], ['-', ['d_2', 't_{2,3}'], '-']],
 			[[['d_1'], '-', '-'], ['-', ['d_2'], '-'], [['-t_{3,4}'], '-', ['d_3']]],
@@ -171,6 +172,7 @@ class TestMat(unittest.TestCase):
 		with mock.patch('sys.stdout', new=StringIO()) as mock_stdout:
 			self.assertEqual(self.mat.adds(matA, matB, matC, None, vecX), Err.NOOP)
 			self.assertEqual(mock_stdout.getvalue(), MAT_ADDS2)
+		# specs/desc01_1
 		matA = [
 			[['-', '-', '-'], ['-', '-', '-'], [['d_1', 't_{1,3}'], ['d_2', 't_{2,3}'], '-']],
 			[[['d_1'], '-', '-'], ['-', ['d_2'], '-'], ['-', '-', ['d_3']]]
