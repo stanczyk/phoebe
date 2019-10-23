@@ -50,20 +50,24 @@ WYKRYTE BŁĘDY I BRAKI
 =================================
 zrobione przykłady:
 	01:
-		desc01_1 - ok - a simple production system (fig1 and fig2) described in 01/Ex.1.1
-		desc01_2 - ok - modification of desc01_1 described in 01/Ex.1.2
-		desc01_3 - ok - a multi production system (fig5 and fig6) described in 01/Ex.2.1
+		desc01_1  - ok - a simple production system (fig1 and fig2) described in 01/Ex.1.1
+		desc01_2  - ok - modification of desc01_1 described in 01/Ex.1.2
+		desc01_3  - ok - a multi production system (fig5 and fig6) described in 01/Ex.2.1
 	02:
-		desc02_a - ko - a simple serial production line (figF23) described in 02/Ex.1.1 - without time values
-		desc02_b - ok - desc02_a with time values
-		desc02_c - ok - desc02_b with time values directly in system description
+		desc02_a  - ko - a simple serial production line (figF23) described in 02/Ex.1.1 - without time values
+		desc02_b  - ok - desc02_a with time values
+		desc02_c  - ok - desc02_b with time values directly in system description
 	03:
-		desc03   - ok - a merging/assembly line (figF32) described in 03/Ex.1.1
+		desc03    - ok - a merging/assembly line (figF32) described in 03/Ex.1.1
 	04:
-		desc04_1 - ok - a simple production line without buffers (figF23) described in 04/Ex.1.1
->>>		desc04_2 - ko - desc04_1 with finite buffers capacity 04/Ex.1.2 - the calculations do not take into account A2 and A3
->>>		desc04_2b- ko - desc04_2 with buffers capacity given directly in the system description
-		desc04_3 - ok - desc04_1 with buffers as additional OU - 04/Ex.1.3
+		desc04_1  - ok - a simple production line without buffers (figF23) described in 04/Ex.1.1
+		desc04_2  - ok - desc04_1 with finite buffers capacity 04/Ex.1.2 - the calculations do not take into account A2 and A3
+		desc04_2b - ok - desc04_2 with buffers capacity given directly in the system description
+		desc04_3  - ok - desc04_1 with buffers as additional OU - 04/Ex.1.3
+	05:
+		desc05_11 - ok - 05/config 1, infinite buffers
+		desc05_12 - ok - 05/config 1, no buffers (buf = 0)
+		desc05_13 - ok - 05/config 1, buffers capacity 1 (buf = 1)
 	08:
 		desc08_41
 		desc08_42
