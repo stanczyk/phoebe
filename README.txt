@@ -90,7 +90,7 @@ zrobione przykłady:
 =================================
 v1.0
 	- połączenie dwóch repozytoriów:
-		ssh://APKARUXEKDS37YVBPJXF@git-codecommit.eu-central-1.amazonaws.com/v1/repos/sw_phoebe
+		git-codecommit.eu-central-1.amazonaws.com/v1/repos/sw_phoebe
 		git@github.com:stanczyk/phoebe.git
 	- nowa obsługa paramterów
 		wcześniej docopt>=0.6.2
